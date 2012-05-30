@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		   http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 	
+	       http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+           
+
+  <!-- 
+   				*************************************************************************************************************************
+   				Con questa configurazione Spring utilizza il suo supporto per Hibernate per la connessione al db,
+   				 e carica le classi nel classico modo. 
+   				   				
+   				*************************************************************************************************************************
+   	-->
+ 
+	<!-- *** Set the Spring ApplicationContext inside the ApplicationContextProvider class *** -->
+   <bean id="springHelper" class="com.progetto.SpringHelper" lazy-init="false"/>
+                  
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	<!-- Session Factory da utilizzare per mapping attraverso JPA Annotations-->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="annotatedClasses">
+			<list>
+				<value>com.progetto.domain.Nation</value>
+				<value>com.progetto.domain.Position</value>
+				<value>com.progetto.domain.Team</value>
+				<value>com.progetto.domain.Player</value>
+				<value>com.progetto.domain.Division</value>
+				<value>com.progetto.domain.Career</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>		
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>	
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+	   
+  	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    	<property name="sessionFactory" ref="sessionFactory" />
+    </bean>	
+				
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!--  
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	-->
+	<!--  
+	<bean id="txManager" class="org.springframework.transaction.jta.JtaTransactionManager" />
+	-->
+	<!--  
+	<bean id="txManager" class="org.springframework.orm.hibernate.HibernateTransactionManager">
+	  <property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+	-->
+
+	
+	<!--         DAOs         -->
+	
+	<!-- This DAOs are used as Spring (Hibernate) implementation -->
+	<bean name="teamDAO" class="com.progetto.dao.hibernate.TeamDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean name="playerDAO" class="com.progetto.dao.hibernate.PlayerDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean name="careerDAO" class="com.progetto.dao.hibernate.CareerDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean name="nationDAO" class="com.progetto.dao.hibernate.NationDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean name="positionDAO" class="com.progetto.dao.hibernate.PositionDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	 
+	<!--         MANAGERs         -->
+	
+    <bean id="careerManager" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager">
+            <ref bean="transactionManager"/>
+        </property>
+        <property name="target">
+            <ref bean="targetManager"/>
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="batchCareer">PROPAGATION_REQUIRED</prop>
+            </props>    
+        </property>
+    </bean>	
+
+	<bean name="teamManager" class="com.progetto.manager.impl.TeamManagerImpl">
+		<property name="teamDAO" ref="teamDAO" />
+	</bean>
+	
+	<bean name="playerManager" class="com.progetto.manager.impl.PlayerManagerImpl">
+		<property name="playerDAO" ref="playerDAO" />
+	</bean>	
+	
+	<bean name="targetManager" class="com.progetto.manager.impl.CareerManagerImpl">
+		<property name="careerDAO" ref="careerDAO" />
+		<property name="teamDAO" ref="teamDAO" />
+	</bean>	
+	
+	<bean name="nationManager" class="com.progetto.manager.impl.NationManagerImpl">
+		<property name="nationDAO" ref="nationDAO" />
+	</bean>	
+	
+	<bean name="positionManager" class="com.progetto.manager.impl.PositionManagerImpl">
+		<property name="positionDAO" ref="positionDAO" />
+	</bean>	
+	
+    <bean class="com.progetto.LoggingAspect">
+    	<property name="beforeMsg" value="Before %s %s" />
+    	<property name="afterMsg" value="After %s %s" />
+    </bean> 
+    
+    <aop:aspectj-autoproxy />	    
+    
+    <context:property-placeholder location="classpath:jdbc.properties" />
+</beans>
