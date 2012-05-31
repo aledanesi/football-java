@@ -50,7 +50,7 @@ Inserisci anno di carriera
 </tr> 
 <tr> 
 <s:if test="%{image != null}"> 
-<td colspan="2" style="text-align: center"><img src="<s:url action="getDynamicImageCareer"><s:param name="id">${id}</s:param></s:url>"></td> 
+<td colspan="2" style="text-align: center"><img src="<s:url action="getDynamicImageCareer"><s:param name="id">${career.id}</s:param></s:url>"></td> 
 </s:if> 
 <s:if test="%{image == null}"> 
 <td colspan="2" style="text-align: center"> 
