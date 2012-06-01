@@ -120,17 +120,15 @@ public class CareerAction extends FileUploadAction implements ServletRequestAwar
 
 	)
 	public String save() {
-		Long idPlayer = Long.parseLong(request.getParameter("player.id"));
-		Player player = playerManager.getPlayerById(idPlayer);
 		Team team = teamManager.getTeamById(Long.parseLong(request.getParameter("team.id")));
 		career.setTeam(team);
 		
 		if (userImage != null) {
 			byte[] image = getFileBytes();
 			career.setImage(image);
-		} /*else if (player.getId() != null) {
+		} else if (career.getId() != null) {
 			career.setImage(careerManager.getCareerById(career.getId()).getImage());
-		}	*/
+		}	
 
 		careerManager.saveOrUpdateCareer(career);
 		return SUCCESS;
