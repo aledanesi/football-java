@@ -5,7 +5,8 @@
     <!-- Spring -->
     <context-param id="ContextParam_contextConfigLocation">
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring.xml</param-value>
+        <!-- <param-value>/WEB-INF/spring.xml</param-value> -->
+        <param-value>/WEB-INF/config/web-application-config.xml</param-value>
    	</context-param>
   
     <!-- Filters -->
