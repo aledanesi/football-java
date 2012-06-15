@@ -40,17 +40,6 @@ import com.progetto.domain.Position;
 @Repository("positionDAO")
 public class PositionDaoImpl extends HibernateDaoSupport implements PositionDao {
 
-	/***************************************************************************
-	 * 
-	 * FIELDS
-	 * 
-	 **************************************************************************/
-
-	@SessionTarget
-	Session session;
-
-	@TransactionTarget
-	Transaction transaction;
 
 	/***************************************************************************
 	 * 
@@ -64,6 +53,7 @@ public class PositionDaoImpl extends HibernateDaoSupport implements PositionDao 
 	 * @param nation
 	 *            the nation to save
 	 */
+	@Override
 	public void saveOrUpdatePosition(Position position) {
 		getHibernateTemplate().saveOrUpdate(position);
 	}
@@ -100,8 +90,7 @@ public class PositionDaoImpl extends HibernateDaoSupport implements PositionDao 
 	 */
 	@Override
 	public void deletePosition(Long positionId) {
-		Position position = (Position) getHibernateTemplate().get(
-				Position.class, positionId);
+		Position position = (Position) getHibernateTemplate().get(Position.class, positionId);
 		getHibernateTemplate().delete(position);
 	}
 
