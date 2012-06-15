@@ -42,17 +42,6 @@ import com.progetto.domain.Career;
 @Repository("careerDAO")
 public class CareerDaoImpl extends HibernateDaoSupport implements CareerDao {
 
-	/***************************************************************************
-	 * 
-	 * FIELDS
-	 * 
-	 **************************************************************************/
-
-	@SessionTarget
-	Session session;
-
-	@TransactionTarget
-	Transaction transaction;
 
 	/***************************************************************************
 	 * 
@@ -68,7 +57,6 @@ public class CareerDaoImpl extends HibernateDaoSupport implements CareerDao {
 	 * 
 	 */
 	@Override
-	@Transactional
 	public void saveOrUpdateCareer(Career career) {
 		getHibernateTemplate().saveOrUpdate(career);
 	}
