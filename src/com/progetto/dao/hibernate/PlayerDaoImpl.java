@@ -41,18 +41,8 @@ import com.progetto.domain.Player;
 @Repository("playerDAO")
 public class PlayerDaoImpl extends HibernateDaoSupport implements PlayerDao {
 
-	/***************************************************************************
-	 * 
-	 * FIELDS
-	 * 
-	 **************************************************************************/
-
-	@SessionTarget
-	Session session;
-
-	@TransactionTarget
-	Transaction transaction;
-
+ 
+ 
 	/***************************************************************************
 	 * 
 	 * METHODS
@@ -66,7 +56,6 @@ public class PlayerDaoImpl extends HibernateDaoSupport implements PlayerDao {
 	 *            the player to save
 	 */
 	@Override
-	@Transactional
 	public void saveOrUpdatePlayer(Player player) {
 		getHibernateTemplate().saveOrUpdate(player);
 	}
@@ -132,8 +121,7 @@ public class PlayerDaoImpl extends HibernateDaoSupport implements PlayerDao {
 	 */
 	@Override
 	public void deletePlayer(Long playerId) {
-		Player player = (Player) getHibernateTemplate().get(Player.class,
-				playerId);
+		Player player = (Player) getHibernateTemplate().get(Player.class, playerId);
 		getHibernateTemplate().delete(player);
 	}
 }
