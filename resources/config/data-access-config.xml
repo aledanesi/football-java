@@ -75,6 +75,9 @@
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+   
+	<!-- enable the configuration of transactional behavior based on annotations -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>   
 	
 	<!-- Transaction manager for a single Hibernate SessionFactory &#40;alternative to JTA&#41; -->
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
