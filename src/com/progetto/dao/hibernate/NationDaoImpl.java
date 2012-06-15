@@ -41,17 +41,6 @@ import com.progetto.domain.Nation;
 @Repository("nationDAO")
 public class NationDaoImpl extends HibernateDaoSupport implements NationDao {
 
-	/***************************************************************************
-	 * 
-	 * FIELDS
-	 * 
-	 **************************************************************************/
-
-	@SessionTarget
-	Session session;
-
-	@TransactionTarget
-	Transaction transaction;
 
 	/***************************************************************************
 	 * 
@@ -65,6 +54,7 @@ public class NationDaoImpl extends HibernateDaoSupport implements NationDao {
 	 * @param nation
 	 *            the nation to save
 	 */
+  @Override  
 	public void saveOrUpdateNation(Nation nation) {
 		getHibernateTemplate().saveOrUpdate(nation);
 	}
@@ -100,8 +90,7 @@ public class NationDaoImpl extends HibernateDaoSupport implements NationDao {
 	 */
 	@Override
 	public void deleteNation(Long nationId) {
-		Nation nation = (Nation) getHibernateTemplate().get(Nation.class,
-				nationId);
+		Nation nation = (Nation) getHibernateTemplate().get(Nation.class, nationId);
 		getHibernateTemplate().delete(nation);
 	}
 }
