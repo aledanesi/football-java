@@ -45,49 +45,49 @@ import com.progetto.manager.CareerManager;
 @Transactional(readOnly = true)
 public class CareerManagerImpl implements CareerManager
 {
-	@Autowired
-	private CareerDao careerDAO;
+  @Autowired
+  private CareerDao careerDAO;
 	
-	@Autowired
-	private TeamDao teamDAO;	
+  @Autowired
+  private TeamDao teamDAO;	
 
 	
-	public Career getCareerById(long idCareer)
-	{
-		return careerDAO.getCareerById(idCareer);
-	}
+  public Career getCareerById(long idCareer)
+  {
+    return careerDAO.getCareerById(idCareer);
+  }
 	
-	public List<Career> listCareer(long idPlayer)
-	{
-		return careerDAO.listCareer(idPlayer);
-	}	
+  public List<Career> listCareer(long idPlayer)
+  {
+    return careerDAO.listCareer(idPlayer);
+  }	
 	
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void saveOrUpdateCareer(Career career)
-	{
-		careerDAO.saveOrUpdateCareer(career);	
-	}
+  @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+  public void saveOrUpdateCareer(Career career)
+  {
+    careerDAO.saveOrUpdateCareer(career);	
+  }
 	
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-    public void batchCareer(Player player)
-    {
-    	Team team = teamDAO.getTeamById(player.getTeamId());
-    	Career career = new Career();
-    	career.setPlayer(player);
-    	career.setSerie("SERIE A");
-    	career.setStagione("2011-2012");
-    	career.setTeam(team);
-    	//career.setImage(player.getImage());?  
-    	careerDAO.saveOrUpdateCareer(career);
-    	System.out.println("ANNO CARRIERA SALVATO...");
-    }	
+  @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+  public void batchCareer(Player player)
+  {
+    Team team = teamDAO.getTeamById(player.getTeamId());
+    Career career = new Career();
+    career.setPlayer(player);
+    career.setSerie("SERIE A");
+    career.setStagione("2011-2012");
+    career.setTeam(team);
+    //career.setImage(player.getImage());?  
+    careerDAO.saveOrUpdateCareer(career);
+    System.out.println("ANNO CARRIERA SALVATO...");
+  }	
     
-    public void setCareerDAO(CareerDao careerDAO) {
-		this.careerDAO = careerDAO;
-	}
+  public void setCareerDAO(CareerDao careerDAO) {
+    this.careerDAO = careerDAO;
+  }
 	
-    public void setTeamDAO(TeamDao teamDAO) {
-    	this.teamDAO = teamDAO;
-	}
+  public void setTeamDAO(TeamDao teamDAO) {
+    this.teamDAO = teamDAO;
+  }
 
 }
