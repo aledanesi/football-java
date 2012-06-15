@@ -38,12 +38,14 @@ import com.progetto.manager.PlayerManager;
  *
  */
 @Service("playerManager")
+ @Transactional(readOnly = true)
 public class PlayerManagerImpl implements PlayerManager
 {
 	@Autowired
 	private PlayerDao playerDAO;
 	
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void saveOrUpdatePlayer(Player player)
 	{
 		playerDAO.saveOrUpdatePlayer(player);
@@ -78,6 +80,7 @@ public class PlayerManagerImpl implements PlayerManager
 		return playerDAO.listPlayers();
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void deletePlayer(long idPlayer)
 	{
 		playerDAO.deletePlayer(idPlayer);
@@ -88,7 +91,8 @@ public class PlayerManagerImpl implements PlayerManager
 		return playerDAO.getPlayerById(idPlayer);
 	}
 	
-	public void updateTeam(long idPlayer, long idTeam)
+ 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+  public void updateTeam(long idPlayer, long idTeam)
 	{
 		Player player = getPlayerById(idPlayer);
 		player.setTeamId(idTeam);
