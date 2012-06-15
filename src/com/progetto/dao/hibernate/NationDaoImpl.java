@@ -54,8 +54,8 @@ public class NationDaoImpl extends HibernateDaoSupport implements NationDao {
 	 * @param nation
 	 *            the nation to save
 	 */
-  @Override  
-	public void saveOrUpdateNation(Nation nation) {
+	@Override  
+  public void saveOrUpdateNation(Nation nation) {
 		getHibernateTemplate().saveOrUpdate(nation);
 	}
 
