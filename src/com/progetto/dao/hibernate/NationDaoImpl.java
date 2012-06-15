@@ -24,12 +24,10 @@
 package com.progetto.dao.hibernate;
 
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
-import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
-import com.googlecode.s2hibernate.struts2.plugin.annotations.TransactionTarget;
+
 import com.progetto.dao.NationDao;
 import com.progetto.domain.Nation;
 
@@ -39,58 +37,60 @@ import com.progetto.domain.Nation;
  * @author Alessandro Danesi
  */
 @Repository("nationDAO")
-public class NationDaoImpl extends HibernateDaoSupport implements NationDao {
-
-
-	/***************************************************************************
-	 * 
-	 * METHODS
-	 * 
-	 **************************************************************************/
-
+public class NationDaoImpl extends HibernateDaoSupport implements NationDao
+{
+	
+	
+	/*************************************************
+	  
+	  METHODS
+	  
+	 **************************************************/	
+	
 	/**
 	 * Method to save nation
 	 * 
-	 * @param nation
-	 *            the nation to save
-	 */
-	@Override  
-  public void saveOrUpdateNation(Nation nation) {
-		getHibernateTemplate().saveOrUpdate(nation);
+	 * @param nation the nation to save
+	 */	
+	@Override
+	public void saveOrUpdateNation(Nation nation)
+	{
+		getHibernateTemplate().saveOrUpdate(nation);				
 	}
-
+	
 	/**
 	 * Method to list nations
 	 * 
 	 * @return the nations found
-	 */
+	 */	
 	@SuppressWarnings("unchecked")
-	@Override
-	public List<Nation> listNations() {
+	@Override	
+	public List<Nation> listNations()
+	{
 		return getHibernateTemplate().find("from Nation n order by n.name");
 	}
-
+	
 	/**
-	 * Method to get a Nation
+	 * Method to get a Nation 
 	 * 
-	 * @param nationId
-	 *            the nation id
+	 * @param nationId the nation id
 	 * @return the nations found
-	 */
+	 */	
 	@Override
-	public Nation getNationById(Long nationId) {
-		return (Nation) getHibernateTemplate().get(Nation.class, nationId);
+	public Nation getNationById(Long nationId)
+	{
+		return (Nation)getHibernateTemplate().get(Nation.class, nationId);
 	}
-
+	
 	/**
 	 * Method to delete a nation
 	 * 
-	 * @param nationId
-	 *            the nation id
+	 * @param nationId the nation id
 	 */
 	@Override
-	public void deleteNation(Long nationId) {
-		Nation nation = (Nation) getHibernateTemplate().get(Nation.class, nationId);
+	public void deleteNation(Long nationId)
+	{
+		Nation nation = (Nation)getHibernateTemplate().get(Nation.class, nationId);
 		getHibernateTemplate().delete(nation);
 	}
 }
