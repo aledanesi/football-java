@@ -90,7 +90,7 @@ public class NationDaoImpl extends HibernateDaoSupport implements NationDao
 	@Override
 	public void deleteNation(Long nationId)
 	{
-		Nation nation = (Nation)getHibernateTemplate().get(Nation.class, nationId);
+		Nation nation = getNationById(nationId);
 		getHibernateTemplate().delete(nation);
 	}
 }
