@@ -44,17 +44,6 @@ import com.progetto.domain.Team;
 @Repository("teamDAO")
 public class TeamDaoImpl extends HibernateDaoSupport implements TeamDao {
 
-	/***************************************************************************
-	 * 
-	 * FIELDS
-	 * 
-	 **************************************************************************/
-
-	@SessionTarget
-	Session session;
-
-	@TransactionTarget
-	Transaction transaction;
 
 	/***************************************************************************
 	 * 
@@ -69,20 +58,8 @@ public class TeamDaoImpl extends HibernateDaoSupport implements TeamDao {
 	 *            the team to save
 	 */
 	@Override
-	@Transactional
 	public void saveOrUpdateTeam(Team team) {
-		try {
-			getHibernateTemplate().saveOrUpdate(team);
-		} catch (InvalidStateException e) {
-			for (InvalidValue invalidValue : e.getInvalidValues()) {
-				System.out.println("Instance of bean class: "
-						+ invalidValue.getBeanClass().getSimpleName()
-						+ " has an invalid property: "
-						+ invalidValue.getPropertyName() + " with message: "
-						+ invalidValue.getMessage());
-			}
-		}
-
+ 		getHibernateTemplate().saveOrUpdate(team);
 	}
 
 	/**
@@ -143,7 +120,6 @@ public class TeamDaoImpl extends HibernateDaoSupport implements TeamDao {
 	 *            the team id
 	 */
 	@Override
-	@Transactional
 	public void deleteTeam(Long teamId) {
 		Team team = (Team) getHibernateTemplate().get(Team.class, teamId);
 		getHibernateTemplate().delete(team);
