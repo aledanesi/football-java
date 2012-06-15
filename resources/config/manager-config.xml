@@ -23,6 +23,7 @@
 	<!-- ========================= MANAGERs ========================= -->
 
 	<!-- This bean inherits from the parentTransProxy bean -->
+   <!--
 	<bean id="teamManager" parent="parentTransProxy">
 		<property name="target"><ref bean="teamManagerTarget"/></property>
 	</bean>
@@ -34,7 +35,9 @@
 	<bean id="careerManager" parent="parentTransProxy">
 		<property name="target"><ref bean="careerManagerTarget"/></property>
 	</bean>
+   -->
 
+   <!--  Explicit transaction  -->
 	<bean id="nationManager" parent="parentTransProxy">
 		<property name="target"><ref bean="nationManagerTarget"/></property>
 	</bean>
@@ -42,20 +45,7 @@
 	<bean id="positionManager" parent="parentTransProxy">
 		<property name="target"><ref bean="positionManagerTarget"/></property>
 	</bean>
-
-
-	<bean name="teamManagerTarget" class="com.progetto.manager.impl.TeamManagerImpl">
-		<property name="teamDAO" ref="teamDAO" />
-	</bean>
-	
-	<bean name="playerManagerTarget" class="com.progetto.manager.impl.PlayerManagerImpl">
-		<property name="playerDAO" ref="playerDAO" />
-	</bean>	
-	
-	<bean name="careerManagerTarget" class="com.progetto.manager.impl.CareerManagerImpl">
-		<property name="careerDAO" ref="careerDAO" />
-	</bean>	
-	
+   
 	<bean name="nationManagerTarget" class="com.progetto.manager.impl.NationManagerImpl">
 		<property name="nationDAO" ref="nationDAO" />
 	</bean>	
@@ -63,5 +53,20 @@
 	<bean name="positionManagerTarget" class="com.progetto.manager.impl.PositionManagerImpl">
 		<property name="positionDAO" ref="positionDAO" />
 	</bean>	
+   
+
+   <!--  Implicit transaction (Annotation) -->
+	<bean name="teamManager" class="com.progetto.manager.impl.TeamManagerImpl">
+		<property name="teamDAO" ref="teamDAO" />
+	</bean>
+	
+	<bean name="playerManager" class="com.progetto.manager.impl.PlayerManagerImpl">
+		<property name="playerDAO" ref="playerDAO" />
+	</bean>	
+	
+	<bean name="careerManager" class="com.progetto.manager.impl.CareerManagerImpl">
+		<property name="careerDAO" ref="careerDAO" />
+	</bean>	
+	
 	
 </beans>
