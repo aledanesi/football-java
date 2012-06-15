@@ -39,11 +39,13 @@ import com.progetto.manager.TeamManager;
  *
  */
 @Service("teamManager")
+@Transactional(readOnly = true)
 public class TeamManagerImpl implements TeamManager
 {
 	@Autowired
 	private TeamDao teamDAO;
 	
+ 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void saveOrUpdateTeam(Team team)
 	{
 		teamDAO.saveOrUpdateTeam(team);
@@ -64,7 +66,8 @@ public class TeamManagerImpl implements TeamManager
 		return teamDAO.listDivisions();
 	}	
 	
-	public void deleteTeam(long idTeam)
+ 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+  public void deleteTeam(long idTeam)
 	{
 		teamDAO.deleteTeam(idTeam);
 	}
