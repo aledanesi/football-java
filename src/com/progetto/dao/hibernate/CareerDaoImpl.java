@@ -71,8 +71,7 @@ public class CareerDaoImpl extends HibernateDaoSupport implements CareerDao {
 	@Override
 	public List<Career> listCareer(Long idPlayer) {
 		return getHibernateTemplate().find(
-				"from Career c where c.player.id = " + idPlayer
-						+ " order by stagione desc");
+				"from Career c where c.player.id = ? order by stagione desc", idPlayer);
 	}
 
 	/**
