@@ -40,6 +40,7 @@ import com.progetto.manager.CareerManager;
  *
  */
 @Service("careerManager")
+@Transactional(readOnly = true)
 public class CareerManagerImpl implements CareerManager
 {
 	@Autowired
@@ -53,6 +54,7 @@ public class CareerManagerImpl implements CareerManager
 		return careerDAO.getCareerById(idCareer);
 	}
 	
+  @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void saveOrUpdateCareer(Career career)
 	{
 		careerDAO.saveOrUpdateCareer(career);
@@ -63,6 +65,7 @@ public class CareerManagerImpl implements CareerManager
 		return careerDAO.listCareer(idPlayer);
 	}
 	
+  @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW) 
 	public void batchCareer(Player player)
 	{
 
