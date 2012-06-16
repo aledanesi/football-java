@@ -22,21 +22,7 @@
 	
 	<!-- ========================= MANAGERs ========================= -->
 
-	<!-- This bean inherits from the parentTransProxy bean -->
-   <!--
-	<bean id="teamManager" parent="parentTransProxy">
-		<property name="target"><ref bean="teamManagerTarget"/></property>
-	</bean>
-
-	<bean id="playerManager" parent="parentTransProxy">
-		<property name="target"><ref bean="playerManagerTarget"/></property>
-	</bean>
-
-	<bean id="careerManager" parent="parentTransProxy">
-		<property name="target"><ref bean="careerManagerTarget"/></property>
-	</bean>
-   -->
-
+ 
    <!--  Explicit transaction  -->
 	<bean id="nationManager" parent="parentTransProxy">
 		<property name="target"><ref bean="nationManagerTarget"/></property>
@@ -46,27 +32,16 @@
 		<property name="target"><ref bean="positionManagerTarget"/></property>
 	</bean>
    
-	<bean name="nationManagerTarget" class="com.progetto.manager.impl.NationManagerImpl">
-		<property name="nationDAO" ref="nationDAO" />
-	</bean>	
+  <bean name="nationManagerTarget" class="com.progetto.manager.impl.NationManagerImpl"/>
 	
-	<bean name="positionManagerTarget" class="com.progetto.manager.impl.PositionManagerImpl">
-		<property name="positionDAO" ref="positionDAO" />
-	</bean>	
-   
+  <bean name="positionManagerTarget" class="com.progetto.manager.impl.PositionManagerImpl" />
+  
 
    <!--  Implicit transaction (Annotation) -->
-	<bean name="teamManager" class="com.progetto.manager.impl.TeamManagerImpl">
-		<property name="teamDAO" ref="teamDAO" />
-	</bean>
-	
-	<bean name="playerManager" class="com.progetto.manager.impl.PlayerManagerImpl">
-		<property name="playerDAO" ref="playerDAO" />
-	</bean>	
-	
-	<bean name="careerManager" class="com.progetto.manager.impl.CareerManagerImpl">
-		<property name="careerDAO" ref="careerDAO" />
-	</bean>	
-	
+     <bean name="teamManager" class="com.progetto.manager.impl.TeamManagerImpl" />
+
+     <bean name="playerManager" class="com.progetto.manager.impl.PlayerManagerImpl" />
+
+     <bean name="careerManager" class="com.progetto.manager.impl.CareerManagerImpl" />	
 	
 </beans>
