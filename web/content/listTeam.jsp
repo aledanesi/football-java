@@ -68,7 +68,6 @@ ${row.id}
 <s:param name="teamId">
 ${row.id}
 </s:param> 
-<s:param name="division.id">${divisionId}</s:param> 
 </s:url> 
 <s:a href="%{viewURL}">
 <img src="${pageContext.request.contextPath}/images/view.png" alt="<s:text name="view"/>" />
