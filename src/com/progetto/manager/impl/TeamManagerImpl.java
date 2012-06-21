@@ -27,10 +27,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.progetto.dao.TeamDao;
-import com.progetto.domain.Division;
 import com.progetto.domain.Team;
 import com.progetto.manager.TeamManager;
 
@@ -43,43 +43,40 @@ import com.progetto.manager.TeamManager;
 public class TeamManagerImpl implements TeamManager
 {
 	@Autowired
-	private TeamDao teamDAO;
+	public TeamDao teamDAO;
 	
- 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void saveOrUpdateTeam(Team team)
-	{
-		teamDAO.saveOrUpdateTeam(team);
-	}
 	
 	public List<Team> listTeamsByDivision(long idDivision)
 	{
 		return teamDAO.listTeamsByDivision(idDivision);
 	}
 	
-	public List<Team> listTeams()
+	public List<Team> getTeams()
 	{
 		return teamDAO.listTeams();
 	}		
 	
-	public List<Division> listDivisions()
-	{
-		return teamDAO.listDivisions();
-	}	
-	
- 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-  public void deleteTeam(long idTeam)
-	{
-		teamDAO.deleteTeam(idTeam);
-	}
+
 	
 	public Team getTeamById(long idTeam)
 	{
 		return teamDAO.getTeamById(idTeam);
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public void saveOrUpdateTeam(Team team)
+	{
+		teamDAO.saveOrUpdateTeam(team);
+	}
+	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public void deleteTeam(long idTeam)
+	{
+		teamDAO.deleteTeam(idTeam);
+	}
+	
+
 	public void setTeamDAO(TeamDao teamDAO) {
 		this.teamDAO = teamDAO;
 	}
-	
-	
 }
