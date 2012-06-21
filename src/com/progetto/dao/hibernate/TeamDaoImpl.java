@@ -25,8 +25,6 @@ package com.progetto.dao.hibernate;
 
 import java.util.List;
 
-import org.hibernate.validator.InvalidStateException;
-import org.hibernate.validator.InvalidValue;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,19 +55,7 @@ public class TeamDaoImpl extends HibernateDaoSupport implements TeamDao
 	@Override
 	public void saveOrUpdateTeam(Team team) 
 	{
-		try 
-		{
-			getHibernateTemplate().saveOrUpdate(team);	
-		}
-		catch(InvalidStateException e)
-		{
-			 for (InvalidValue invalidValue : e.getInvalidValues()) 
-			 {         
-				 System.out.println("Instance of bean class: " + invalidValue.getBeanClass().getSimpleName() + " has an invalid property: " + invalidValue.getPropertyName() + " with message: " + invalidValue.getMessage());     
-			 } 			
-		}
-		
-		
+		getHibernateTemplate().saveOrUpdate(team);			
 	}
 	
 	/**
