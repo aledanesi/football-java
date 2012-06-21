@@ -25,7 +25,6 @@ package com.progetto.dao;
 
 import java.util.List;
 
-import com.progetto.domain.Division;
 import com.progetto.domain.Team;
 
 /**
@@ -57,13 +56,6 @@ public interface TeamDao
 	 */	
 	public List<Team> listTeamsByDivision(Long divisionId);
 	
-	/**
-	 * Method to list divisions
-	 * 
-	 * @return the divisions found
-	 */			
-	public List<Division> listDivisions();
-
 	/**
 	 * Method to get team by id
 	 * 
