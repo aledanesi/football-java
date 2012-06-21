@@ -25,7 +25,6 @@ package com.progetto.manager;
 
 import java.util.List;
 
-import com.progetto.domain.Division;
 import com.progetto.domain.Team;
 
 /**
@@ -38,9 +37,7 @@ public interface TeamManager
 
 	public List<Team> listTeamsByDivision(long idDivision);
 
-	public List<Team> listTeams();
-	
-	public List<Division> listDivisions();
+	public List<Team> getTeams();
 
 	public void deleteTeam(long idTeam);
 
