@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+<web-app 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	id="WebApp_ID" version="2.5">
   
     <!-- Context parameters -->
     <!-- Spring -->
     <context-param id="ContextParam_contextConfigLocation">
         <param-name>contextConfigLocation</param-name>
-        <!-- <param-value>/WEB-INF/spring.xml</param-value> -->
         <param-value>/WEB-INF/config/web-application-config.xml</param-value>
    	</context-param>
   
@@ -27,11 +31,12 @@
     <listener id="Listener_SpringStartup">
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-	
+    
 	<listener>
 		<listener-class>org.zkoss.zk.ui.http.HttpSessionListener</listener-class>
 	</listener>
 	
+	<!-- ZK -->
 	<servlet>
 		<servlet-name>zkLoader</servlet-name>
 		<servlet-class>org.zkoss.zk.ui.http.DHtmlLayoutServlet</servlet-class>
@@ -45,6 +50,18 @@
 		<servlet-name>auEngine</servlet-name>
 		<servlet-class>org.zkoss.zk.au.http.DHtmlUpdateServlet</servlet-class>
 	</servlet>
+    
+    <!-- DWR -->
+    <servlet id="Servlet_DwrServlet">
+        <servlet-name>DwrServlet</servlet-name>
+        <servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
+        <init-param id="InitParam_DwrDebug">
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>	
+    
+    <!-- ZK -->
 	<servlet-mapping>
 		<servlet-name>zkLoader</servlet-name>
 		<url-pattern>*.zul</url-pattern>
@@ -56,7 +73,13 @@
 	<servlet-mapping>
 		<servlet-name>auEngine</servlet-name>
 		<url-pattern>/zkau/*</url-pattern>
-	</servlet-mapping>	    
+	</servlet-mapping>	  
+	
+    <!-- DWR -->
+    <servlet-mapping id="ServletMapping_DwrServlet">
+        <servlet-name>DwrServlet</servlet-name>
+        <url-pattern>/dwr/*</url-pattern>
+    </servlet-mapping>	  
     
 	<!-- Welcome file list -->
 	<welcome-file-list>
@@ -70,6 +93,6 @@
     <error-page id="ExceptionTypeErrorPage_Exception">
         <exception-type>java.lang.Exception</exception-type>
         <location>/error.jsp</location>
-    </error-page>
-
+    </error-page>	
+	
 </web-app>
