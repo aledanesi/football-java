@@ -53,11 +53,14 @@ function resultDivision(data)
 }
 </script>
 
+<s:head />
 </head>
 
 <body>
+<s:actionerror />
+<s:fielderror  />
 
-<s:form action="changeTeamPlayer" cssClass="cmxform" id="teamForm" enctype="multipart/form-data" method="POST">
+<s:form action="saveChangeTeamPlayer" cssClass="cmxform" id="teamForm" enctype="multipart/form-data" method="POST">
 
 
 <s:push value="player">
@@ -107,9 +110,15 @@ function resultDivision(data)
 	    <td style="text-align: left;"><s:text name="birthDate"/></td>
 	    <td style="text-align: left;"><s:date name="birthDate" format="dd/MM/yyyy" /></td>
 	    <td rowspan=8>
-	       <img src="<s:url action="getDynamicImagePlayer">  
-				<s:param name="id" value="%{id}"></s:param>  
-				</s:url>"> 			
+						<s:if test="%{image != null}">
+				        	<img src="<s:url action="getDynamicImagePlayer">
+				        		<s:param name="id" value="%{id}"></s:param>
+				        		<s:param name="teamId" value="%{teamId}"></s:param>
+				        	</s:url>"> 			
+						</s:if>	
+						<s:if test="%{image == null}">
+				    		<img src="${pageContext.request.contextPath}/images/players/notFound.jpg" alt="Foto di ${lastName}" />
+						</s:if>	 			
 	    </td>
 	</tr>
         <tr class="bg2">
