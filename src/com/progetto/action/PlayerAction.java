@@ -102,12 +102,19 @@ public class PlayerAction extends FileUploadAction implements
 	public void validate() {
 		if (player.getFirstName() != null
 				&& StringUtils.isEmpty(player.getFirstName())) {
-			addActionError("Il nome è obbligatorio.");
+			addActionError("Il nome Ã¨ obbligatorio.");
 		}
 		if (player.getLastName() != null
 				&& StringUtils.isEmpty(player.getLastName())) {
-			addFieldError("player.lastName", "Il cognome è obbligatorio.");
+			addFieldError("player.lastName", "Il cognome Ã¨ obbligatorio.");
 		}
+    if (player.getTeamId() == null){
+			addFieldError("player.teamId", "La squadra Ã¨ obbligatoria.");
+			
+			player = playerManager.getPlayerById(player.getId());
+			Team team = teamManager.getTeamById(player.getTeamId());
+			divisionList = divisionManager.listDivisionsByNation(team.getNation().getId());    
+    }
 	}
 
 	/*
@@ -207,14 +214,17 @@ public class PlayerAction extends FileUploadAction implements
 		return ProjectUtil.VIEW_PLAYER;
 	}
 
-	@Action(value = "/changeTeamPlayer", results = { @Result(name = "success", location = "/content/listPlayer.jsp") })
-	public String changeTeam() {
+	@Action(value = "/saveChangeTeamPlayer", results = { 
+                   @Result(name = "success", type = "redirect", location = "/listByTeamPlayer.action?teamId=${player.teamId}"),
+                   @Result(name = "input", location = "/content/changeTeam.jsp") 
+          })
+	public String saveChangeTeam() {
 		Player bean = playerManager.getPlayerById(player.getId());
 
 		playerManager.updateTeam(player.getId(), player.getTeamId());
 		player.setTeamId(bean.getTeamId());
 
-		return listByTeam();
+		return SUCCESS;
 	}
 
 	/**
@@ -288,7 +298,7 @@ public class PlayerAction extends FileUploadAction implements
 		ServletOutputStream out = null;
 		try {
 			HttpServletResponse response = ServletActionContext.getResponse();
-			response.setContentType("multipart/form-data");
+			response.setContentType("image/jpeg");
 			out = response.getOutputStream();
 			player = playerManager.getPlayerById(Long.parseLong(request
 					.getParameter("id")));
