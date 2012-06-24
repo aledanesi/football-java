@@ -35,5 +35,8 @@
 	<bean name="positionDAO" class="com.progetto.dao.hibernate.PositionDaoImpl">
 		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
+  <bean name="divisionDAO" class="com.progetto.dao.hibernate.DivisionDaoImpl">
+    <property name="hibernateTemplate" ref="hibernateTemplate" />
+  </bean>    
 
 </beans>
