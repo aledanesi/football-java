@@ -98,6 +98,8 @@
 			</value>
 		</property>
 	</bean>	
+   
+   <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 	
 	<bean id="loggerListener" class="org.springframework.security.access.event.LoggerListener" />
 		
