@@ -17,7 +17,7 @@
    				*************************************************************************************************************************
    	-->
    	 
-   	 
+  <import resource="security-config.xml" /> 	 
 	<import resource="data-access-config.xml" />
 	<import resource="dao-config.xml" />
 	<import resource="manager-config.xml" />
