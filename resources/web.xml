@@ -8,18 +8,30 @@
   
     <!-- Context parameters -->
     <!-- Spring -->
-    <context-param id="ContextParam_contextConfigLocation">
+    <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/config/web-application-config.xml</param-value>
    	</context-param>
   
     <!-- Filters -->
+  <filter>
+	<filter-name>securityFilter</filter-name>
+	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	<init-param>
+		<param-name>targetBeanName</param-name>
+		<param-value>filterChainProxy</param-value>
+	</init-param>
+  </filter>    
+    
   	<filter>
 		<filter-name>struts2</filter-name>
-		<filter-class>
-			org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
-		</filter-class>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 	</filter>
+   
+  <filter-mapping>
+    <filter-name>securityFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>   
 	
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
@@ -28,15 +40,18 @@
 	
     <!-- Listeners -->
     <!-- Spring context listener -->
-    <listener id="Listener_SpringStartup">
+    <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    
+ 
+<!-- 
 	<listener>
 		<listener-class>org.zkoss.zk.ui.http.HttpSessionListener</listener-class>
 	</listener>
+-->   
 	
 	<!-- ZK -->
+<!--   
 	<servlet>
 		<servlet-name>zkLoader</servlet-name>
 		<servlet-class>org.zkoss.zk.ui.http.DHtmlLayoutServlet</servlet-class>
@@ -50,6 +65,7 @@
 		<servlet-name>auEngine</servlet-name>
 		<servlet-class>org.zkoss.zk.au.http.DHtmlUpdateServlet</servlet-class>
 	</servlet>
+-->   
     
     <!-- DWR -->
     <servlet id="Servlet_DwrServlet">
@@ -62,7 +78,8 @@
     </servlet>	
     
     <!-- ZK -->
-	<servlet-mapping>
+ <!--
+  <servlet-mapping>
 		<servlet-name>zkLoader</servlet-name>
 		<url-pattern>*.zul</url-pattern>
 	</servlet-mapping>
@@ -73,10 +90,11 @@
 	<servlet-mapping>
 		<servlet-name>auEngine</servlet-name>
 		<url-pattern>/zkau/*</url-pattern>
-	</servlet-mapping>	  
+	</servlet-mapping>	 
+-->   
 	
     <!-- DWR -->
-    <servlet-mapping id="ServletMapping_DwrServlet">
+    <servlet-mapping>
         <servlet-name>DwrServlet</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
     </servlet-mapping>	  
@@ -86,11 +104,11 @@
 		<welcome-file>login.zul</welcome-file>
 	</welcome-file-list>
 	
-    <error-page id="ErrorCodeErrorPage_500">
+    <error-page>
         <error-code>500</error-code>
         <location>/error.jsp</location>
     </error-page>
-    <error-page id="ExceptionTypeErrorPage_Exception">
+    <error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/error.jsp</location>
     </error-page>	
