@@ -8,6 +8,7 @@
     http://www.springframework.org/schema/security/spring-security-3.1.xsd"> 
     
     
+	
 	<bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">     
 		<s:filter-chain-map path-type="ant">         
 			<s:filter-chain pattern="/**" filters="securityContextPersistenceFilter,logoutFilter,authenticationProcessingFilter,securityContextHolderAwareRequestFilter,anonymousAuthenticationFilter,exceptionTranslationFilter,filterSecurityInterceptor"/>			
@@ -63,14 +64,14 @@
       <s:filter-security-metadata-source>
         <s:intercept-url pattern="/styles/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <s:intercept-url pattern="/images/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <s:intercept-url pattern="/login.jsp*" access="ROLE_ANONYMOUS,ROLE_USER"/>
-        <s:intercept-url pattern="/**" access="ROLE_USER"/>
+        <s:intercept-url pattern="/login.jsp*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
+        <s:intercept-url pattern="/**" access="ROLE_ADMIN,ROLE_USER"/>
 			</s:filter-security-metadata-source>        
     </property>
 	</bean>	
 	
 	<bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
-   <property name="eraseCredentialsAfterAuthentication" value="false"/>
+		<property name="eraseCredentialsAfterAuthentication" value="false"/>
 		<property name="providers">
 			<list>
 				<ref local="daoAuthenticationProvider" />
@@ -96,12 +97,13 @@
 		<property name="userMap">
 			<value>
 				tom=tom,ROLE_USER
+				admin=admin,ROLE_ADMIN
 			</value>
 		</property>
 	</bean>	
-   
-   <bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
+	
+	<bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
 	
 	<bean id="loggerListener" class="org.springframework.security.access.event.LoggerListener" />
 		
-</beans> 
+</beans>		
