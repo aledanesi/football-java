@@ -70,6 +70,7 @@
 	</bean>	
 	
 	<bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
+   <property name="eraseCredentialsAfterAuthentication" value="false"/>
 		<property name="providers">
 			<list>
 				<ref local="daoAuthenticationProvider" />
