@@ -13,15 +13,31 @@
 <title><s:text name="title"/> <s:property value="firstName" /> <s:property value="lastName" /> - a cura di Football.it</title>
 
 <%-- CSS --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css" />
+<link rel="stylesheet" href="styles/Envision.css" type="text/css" />
 
 </head>
-
 <body>
+	
+<div id="wrap"><!--header -->
+<div id="header">
 
+<h1 id="logo-text">Football Java <sup style="font: Verdana, Tahoma, arial, sans-serif;"><small style="font-size: 20px">beta</small></sup></h1>
+<!-- <h2 id="slogan">put your site slogan here...</h2> -->
+
+<s:url id="logoutURL" value="j_spring_security_logout" />
+
+<div id="header-links">
+<p><a href="index.jsp">Home</a> | <a href="index.html">Contact</a> | <a href="index.html">Site Map</a> | <s:a href="%{logoutURL}">Logout</s:a></p>
+</div>
+
+</div>
+
+<!-- content-wrap starts here -->
+<div id="content-wrap">
+	
 <s:push value="player">
 	
-<div id="header">
+<div id="header2">
     <div id="menutop">
         <ul>
             <li>
@@ -127,7 +143,7 @@
     <h1><s:text name="title3"/></h1>
 </div>
 
-    <table style="width: 900px;">
+    <table style="width: 750px;">
 	    <tr class="thead1 tcharw">
 		    <th>Stagione </th>
 		    <th>Squadra </th>
@@ -199,14 +215,20 @@
 
 	<br /><br />
 	
-
-	<div id="footer">
-	    Dati a cura di <a rel="nofollow" href="http://www.football.it/" title="Football.it - classifiche calcio, campionato italiano, serie A">Football.it</a>
-	</div>
-
 </div>
 
 </s:push>
+
+</div>
+
+<!--footer starts here-->
+<div id="footer">
+
+<p>&copy; 2012 <strong>Football Java</strong> | Design by: <a href="#">aledanesi</a></p>
+
+</div>
+
+<!-- wrap ends here --></div>
 
 </body>
 </html>
