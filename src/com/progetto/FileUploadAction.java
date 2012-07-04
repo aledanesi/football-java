@@ -1,7 +1,13 @@
 package com.progetto;
 
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+import javax.imageio.ImageIO;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -13,15 +19,25 @@ public class FileUploadAction extends ActionSupport
 	private String userImageFileName;
 
 	public byte[] getFileBytes() {
-	
-		byte[] bFile = new byte[(int) userImage.length()];
-		 
+		
+		byte[] bFile = new byte[0];
         try 
-        {
-		    FileInputStream fileInputStream = new FileInputStream(userImage);
-		    //convert file into array of bytes
-		    fileInputStream.read(bFile);
-		    fileInputStream.close();
+        {	    
+			BufferedImage bsrc = ImageIO.read(userImage);
+			BufferedImage bdest = new BufferedImage(160, 226, BufferedImage.TYPE_INT_RGB);
+			Graphics2D g = bdest.createGraphics();
+			AffineTransform at = AffineTransform.getScaleInstance((double) 160 / bsrc.getWidth(), (double) 226 / bsrc.getHeight());
+			g.drawRenderedImage(bsrc, at);			
+			
+			ImageIO.write(bdest, "JPG", userImage);	
+
+			FileInputStream fileInputStream = new FileInputStream(userImage);
+			bFile = new byte[(int) userImage.length()];
+
+			//convert file into array of bytes
+			fileInputStream.read(bFile);
+			fileInputStream.close();
+		    
         } 
         catch (Exception e) 
         {
