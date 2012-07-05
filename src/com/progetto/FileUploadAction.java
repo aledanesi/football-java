@@ -22,8 +22,8 @@ public class FileUploadAction extends ActionSupport
 	final int RESIZED_WIDTH = 160;
 	final int RESIZED_HEIGHT = 226;
 	
-	final int MIN_WIDTH = 160;
-	final int MIN_HEIGHT = 226;
+	public final int MIN_WIDTH = 130;
+	public final int MIN_HEIGHT = 184;
 	
 
 	public byte[] getFileBytes() {
@@ -52,23 +52,26 @@ public class FileUploadAction extends ActionSupport
 	{		
 		BufferedImage bsrc = ImageIO.read(userImage);
 		
-		if (bsrc.getWidth() > MIN_WIDTH && bsrc.getHeight() > MIN_HEIGHT)
+		if (bsrc.getWidth() < MIN_WIDTH && bsrc.getHeight() < MIN_HEIGHT)
 		{
-			BufferedImage bdest = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
-			Graphics2D g = bdest.createGraphics();
-			g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-			
-			double scalex = (double) targetWidth / bsrc.getWidth();
-			double scaley = (double) targetHeight / bsrc.getHeight();
-			
-			AffineTransform at = AffineTransform.getScaleInstance(scalex, scaley);
-			g.drawRenderedImage(bsrc, at);
-			g.dispose();
-			
-			ImageIO.write(bdest, "JPG", userImage);			
-		}
-					
-	}
+			targetWidth = MIN_WIDTH;
+			targetHeight = MIN_HEIGHT;
+		}					
+		
+		BufferedImage bdest = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = bdest.createGraphics();
+		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+		
+		double scalex = (double) targetWidth / bsrc.getWidth();
+		double scaley = (double) targetHeight / bsrc.getHeight();
+		
+		AffineTransform at = AffineTransform.getScaleInstance(scalex, scaley);
+		g.drawRenderedImage(bsrc, at);
+		g.dispose();
+		
+		ImageIO.write(bdest, "JPG", userImage);			
+
+	}	
 
 	public File getUserImage() {
 		return userImage;
