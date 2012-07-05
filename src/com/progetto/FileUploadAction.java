@@ -1,11 +1,12 @@
 package com.progetto;
 
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -18,32 +19,46 @@ public class FileUploadAction extends ActionSupport
 	private String userImageContentType;
 	private String userImageFileName;
 
+	final int targetWidth = 160;
+	final int targetHeight = 226;
+
 	public byte[] getFileBytes() {
 		
-		byte[] bFile = new byte[0];
+		byte[] bFile = new byte[0];		
+		
         try 
         {	    
-			BufferedImage bsrc = ImageIO.read(userImage);
-			BufferedImage bdest = new BufferedImage(160, 226, BufferedImage.TYPE_INT_RGB);
-			Graphics2D g = bdest.createGraphics();
-			AffineTransform at = AffineTransform.getScaleInstance((double) 160 / bsrc.getWidth(), (double) 226 / bsrc.getHeight());
-			g.drawRenderedImage(bsrc, at);			
-			
-			ImageIO.write(bdest, "JPG", userImage);	
-
+        	resizeImage(targetWidth, targetHeight);
+        	
 			FileInputStream fileInputStream = new FileInputStream(userImage);
 			bFile = new byte[(int) userImage.length()];
 
 			//convert file into array of bytes
 			fileInputStream.read(bFile);
-			fileInputStream.close();
-		    
+			fileInputStream.close();		    
         } 
         catch (Exception e) 
         {
         	e.printStackTrace();
         }	
 		return bFile;
+	}
+	
+	private void resizeImage(int targetWidth, int targetHeight) throws IOException
+	{		
+		BufferedImage bsrc = ImageIO.read(userImage);
+		BufferedImage bdest = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = bdest.createGraphics();
+		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+		
+		double scalex = (double) targetWidth / bsrc.getWidth();
+		double scaley = (double) targetHeight / bsrc.getHeight();
+		
+		AffineTransform at = AffineTransform.getScaleInstance(scalex, scaley);
+		g.drawRenderedImage(bsrc, at);
+		g.dispose();
+		
+		ImageIO.write(bdest, "JPG", userImage);			
 	}
 
 	public File getUserImage() {
