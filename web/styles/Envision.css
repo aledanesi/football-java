@@ -50,17 +50,8 @@ h3 {
 	color: #666666; 
 }
 
-/* images */
 img {
-	background: #FAFAFA;
-   border: 1px solid #E5E5E5;
-	padding: 5px;
-}
-img.float-right {
-  margin: 5px 0px 10px 10px;  
-}
-img.float-left {
-  margin: 5px 10px 10px 0px;
+	border: 0px;    
 }
 
 h1, h2, h3, p {
@@ -79,39 +70,34 @@ acronym {
 
 /* start - table */
 table {
-	border-collapse: collapse;
-	margin: 10px;	
+    border-collapse: collapse;
+    //width: 750px;
 }
-th strong {
-	color: #fff;
+
+table,
+tr,
+td,
+th
+{
+    border-top: 1px #000000 solid; 
+    padding: 2px 2px 2px 2px;
 }
+
+table
+{
+    border: 1px #000000 solid; 
+}
+
 th {
-	background: #93BC0C;
-	height: 29px;
-	padding-left: 12px;
-	padding-right: 12px;
-	color: #FFF;
-	text-align: left;
-	border-left: 1px solid #B6D59A;
-	border-bottom: solid 2px #FFF;
+    font-weight: bold;
+    text-align: center; 
 }
-tr {
-	height: 30px;
-}
+
 td {
-	padding-left: 11px;
-	padding-right: 11px;
-	border-left: 1px solid #FFF;
-	border-bottom: solid 1px #ffffff;
-}
-td.first,th.first {
-	border-left: 0px;
-}
-tr.row-a {
-	background: #F8F8F8;
-}
-tr.row-b {
-	background: #EFEFEF;
+    font-weight: normal;
+    text-align: center; 
+    padding-left: 5px;
+    padding-right: 5px;
 }
 /* end - table */
 
@@ -127,10 +113,10 @@ label {
 	margin:5px 0;
 }
 input {
-	padding:2px;
-	border:1px solid #eee;
-	font: normal 1em Verdana, sans-serif;
-	color:#777;
+	//padding:2px;
+	//border:1px solid #eee;
+	//font: normal 1em Verdana, sans-serif;
+	//color:#777;
 }
 textarea {
 	width:400px;
@@ -142,13 +128,13 @@ textarea {
 	color:#777;
 }
 input.button { 
-	font: bold 12px Arial, Sans-serif; 
-	height: 24px;
-	margin: 0;
-	padding: 2px 3px; 
-	color: #FFF;
-	background: #8EB50C url(../images/site/button-bg.jpg) repeat-x 0 0;
-	border: none;
+	//font: bold 12px Arial, Sans-serif; 
+	//height: 24px;
+	//margin: 0;
+	//padding: 2px 3px; 
+	//color: #FFF;
+	//background: #8EB50C url(../images/site/button-bg.jpg) repeat-x 0 0;
+	//border: none;
 }
 
 /* search form */
@@ -339,4 +325,108 @@ img.small {
 	width: 30px;
 	height: 30px;
 	margin: 4px;
+}
+
+#header2 {
+    /* background-color: #FF0000; */
+    height: 25px;
+}
+
+#menutop {
+}
+
+#menutop ul {
+    display: inline;
+}
+
+#menutop a {
+    color: #FFF;
+}
+
+#menutop li {
+    display: inline;
+    float: left;
+    padding: 3px 10px 3px 10px;
+    background-color: #03376b;
+    border: 1px white solid;
+    border-width: 1px 1px 1px 0;
+}
+
+#menutop input {
+    width: 75px;
+    height: 17px;
+    background-color: #03376b;
+    border: 0px white solid;
+    color: #FFFFFF;
+}
+
+.bg1 {
+}
+
+.bg2 {
+    background-color: #FFFFFF;
+}
+
+.thead1 {
+    background-color: #03376b;
+}
+
+.thead2 {
+    background-color: #0029ad;
+}
+
+.thead3 {
+    background-color: #FFFFFF;
+}
+
+.tcharw {
+    color: #FFFFFF;
+}
+
+.alle {
+    text-align: left;
+}
+
+.bolded {
+    font-weight: bold;
+}
+
+
+.calendarContainer
+{
+	width: 200px;
+	border: 0 solid #000000;
+}
+
+.calendarContainer tr
+{
+	padding: 0px;
+	border: 0 solid #000000;
+}
+
+.calendarContainer td
+{
+	padding: 0px;
+	border: 0 solid #000000;
+}
+
+.calendarContainer table
+{
+	padding: 0px;
+	border: 0 solid #000000;
+}
+
+.tdLabel
+{
+	width: 100px;
+	color: blue;
+	text-align: center;
+	font-weight: bold;
+	vertical-align: middle;
+	white-space: nowrap; 	
+}
+
+.wwFormTable
+{
+	width: 100%;
 }
