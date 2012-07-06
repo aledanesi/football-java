@@ -44,7 +44,7 @@
 <div id="content-wrap">
 	
 <s:actionerror/>
-<s:form action="saveOrUpdateTeam" enctype="multipart/form-data" method="POST" style="width: 300px">
+<s:form action="saveOrUpdateTeam" enctype="multipart/form-data" method="POST" style="width: 350px">
 
 <s:push value="team">								
 <s:hidden name="id" />
