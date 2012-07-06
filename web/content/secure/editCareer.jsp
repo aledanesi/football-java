@@ -52,7 +52,7 @@ jQ(document).ready(function()
 <!-- content-wrap starts here -->
 <div id="content-wrap">
 	
-<s:form action="saveCareer" enctype="multipart/form-data" method="POST" style="width: 300px;">
+<s:form action="saveCareer" enctype="multipart/form-data" method="POST" style="width: 350px;"> 
 <s:push value="career">
 <input type="hidden" name="player.id" value="${playerId}" />
 	
@@ -96,26 +96,26 @@ jQ(document).ready(function()
 			
 			<s:hidden name="id" />
 			
-			<s:file name="userImage" label="Foto" key="photo" />
+			<s:file name="userImage" label="Foto" key="photo" size="15" /> 
 											
 			<s:textfield name="stagione" id="stagione" key="season" />
 			<s:select name="team.id" list="teamList" listKey="id" listValue="name" key="team" />
 			
 			<s:textfield name="serie" id="serie" key="division" />		
-			<s:textfield name="dettaglioCarriera.partiteGiocate" id="dettaglioCarriera.partiteGiocate" key="playedGames" />		
-			<s:textfield name="dettaglioCarriera.partiteTotali"  id="dettaglioCarriera.partiteTotali"  key="totalGames" />
+			<s:textfield name="dettaglioCarriera.partiteGiocate" id="dettaglioCarriera.partiteGiocate" key="playedGames" size="4" />		
+			<s:textfield name="dettaglioCarriera.partiteTotali"  id="dettaglioCarriera.partiteTotali"  key="totalGames"  size="4" />
 			
-			<s:textfield name="dettaglioCarriera.minutiGiocati" id="dettaglioCarriera.minutiGiocati" key="playedMinutes" />		
-			<s:textfield name="dettaglioCarriera.minutiTotali"  id="dettaglioCarriera.minutiTotali"  key="totalMinutes" />																	
+			<s:textfield name="dettaglioCarriera.minutiGiocati" id="dettaglioCarriera.minutiGiocati" key="playedMinutes" size="4" />		
+			<s:textfield name="dettaglioCarriera.minutiTotali"  id="dettaglioCarriera.minutiTotali"  key="totalMinutes"  size="4" />																	
 
-			<s:textfield name="goal" id="goal" key="goal" />																	
+			<s:textfield name="goal" id="goal" key="goal" size="4" />																	
 
-			<s:textfield name="dettaglioCarriera.sostFatte" id="dettaglioCarriera.sostFatte" key="sostitutionMade" />		
-			<s:textfield name="dettaglioCarriera.sostAvute" id="dettaglioCarriera.sostAvute" key="sostitutionReceived" />																	
+			<s:textfield name="dettaglioCarriera.sostFatte" id="dettaglioCarriera.sostFatte" key="sostitutionMade" size="4" />		
+			<s:textfield name="dettaglioCarriera.sostAvute" id="dettaglioCarriera.sostAvute" key="sostitutionReceived" size="4" />																	
 
-			<s:textfield name="dettaglioCarriera.ammonizioni"    	 id="dettaglioCarriera.ammonizioni" 		key="yellowCard" />		
-			<s:textfield name="dettaglioCarriera.espulsioni"    	 id="dettaglioCarriera.espulsioni"  		key="redCard" />																	
-			<s:textfield name="dettaglioCarriera.giornateSqualifica" id="dettaglioCarriera.giornateSqualifica"  key="disqMatchs" />								 
+			<s:textfield name="dettaglioCarriera.ammonizioni"    	 id="dettaglioCarriera.ammonizioni" 		key="yellowCard" size="4" />		
+			<s:textfield name="dettaglioCarriera.espulsioni"    	 id="dettaglioCarriera.espulsioni"  		key="redCard" size="4" />																	
+			<s:textfield name="dettaglioCarriera.giornateSqualifica" id="dettaglioCarriera.giornateSqualifica"  key="disqMatchs" size="4" />								 
 			
 	</s:push>			
 									
