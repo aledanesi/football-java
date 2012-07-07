@@ -1,0 +1,432 @@
+/********************************************
+   AUTHOR:        Erwin Aligam 
+   WEBSITE:         http://www.styleshout.com/
+  TEMPLATE NAME:    Envision
+   TEMPLATE CODE:   S-0013
+   VERSION:          1.0            
+ *******************************************/
+ 
+/********************************************
+   HTML ELEMENTS
+********************************************/ 
+
+/* Top Elements */
+* { margin: 0; padding: 0; }
+
+body {
+  background: #CCC;
+  font: 70%/1.5em Verdana, Tahoma, arial, sans-serif;
+  color: #555; 
+  text-align: center;
+}
+
+/* links */
+a, a:visited {
+  text-decoration: none;
+  color: #2180BC;
+  background: inherit;
+}
+a:hover {
+  color: #88ac0b;
+  background: inherit;
+  text-decoration: underline;
+}
+
+/* headers */
+h1, h2, h3 {
+  font-family: 'Trebuchet MS', Tahoma, Sans-serif;
+  font-weight: Bold;     
+}
+h1 {
+  font-size: 130%;  
+}
+h2 {
+  font-size: 120%;
+  text-transform: uppercase;
+  color: #88ac0b;
+}
+h3 {
+  font-size: 120%;
+  color: #666666; 
+}
+
+img {
+  border: 0px;    
+}
+
+h1, h2, h3, p {
+  padding: 10px;    
+  margin: 0;
+}
+ul, ol {
+  margin: 5px 20px;
+  #padding: 0 20px;
+}
+
+acronym {
+  cursor: help;
+  border-bottom: 1px solid #777;
+}
+
+/* start - table */
+table {
+    border-collapse: collapse;
+    //width: 750px;
+}
+
+table,
+tr,
+td,
+th
+{
+    border-top: 1px #000000 solid; 
+    padding: 2px 2px 2px 2px;
+}
+
+table
+{
+    border: 1px #000000 solid; 
+}
+
+th {
+    font-weight: bold;
+    text-align: center; 
+}
+
+td {
+    font-weight: normal;
+    text-align: center; 
+    padding-left: 5px;
+    padding-right: 5px;
+}
+/* end - table */
+
+/* form elements */
+form {
+  margin:10px; padding: 0 5px;
+  border: 1px solid #f2f2f2; 
+  background-color: #FAFAFA; 
+}
+label {
+  display:block;
+  font-weight:bold;
+  margin:5px 0;
+}
+input {
+  //padding:2px;
+  //border:1px solid #eee;
+  //font: normal 1em Verdana, sans-serif;
+  //color:#777;
+}
+textarea {
+  width:400px;
+  padding:2px;
+  font: normal 1em Verdana, sans-serif;
+  border:1px solid #eee;
+  height:100px;
+  display:block;
+  color:#777;
+}
+input.button { 
+  //font: bold 12px Arial, Sans-serif; 
+  //height: 24px;
+  //margin: 0;
+  //padding: 2px 3px; 
+  //color: #FFF;
+  //background: #8EB50C url(../images/site/button-bg.jpg) repeat-x 0 0;
+  //border: none;
+}
+
+/* search form */
+.searchform {
+  background-color: transparent;
+  border: none;  
+  margin: 0; padding: 5px 0 15px 0;  
+  width: 190px;  
+}
+.searchform p { margin: 0; padding: 0; }
+.searchform input.textbox { 
+  width: 120px;
+  color: #777; 
+  height: 18px;
+  padding: 2px;  
+  border: 1px solid #E5E5E5;
+  vertical-align: top;
+}
+.searchform input.button { 
+  width: 60px;
+  height: 24px;
+  padding: 2px 5px;
+  vertical-align: top;
+}
+
+/********************************************
+   LAYOUT
+********************************************/ 
+#wrap {
+  width: 820px;
+  background: #CCC url(../images/site/content.jpg) repeat-y center top;
+  margin: 0 auto;
+  text-align: left;
+}
+#content-wrap {
+  clear: both;
+  width: 760px;
+  padding: 20px; 
+  margin: 0px auto;
+}
+#header {
+  width: 820px;
+  position: relative;
+  height: 103px;
+  background: #CCC url(../images/site/header.jpg) no-repeat center top;
+  padding: 0;  
+  color: #FFF;
+  /* font-size: 14px; */
+}
+#header h1#logo-text {
+  position: absolute;
+  margin: 0; padding: 0;
+  font: bolder 44px 'Trebuchet MS', Arial, Sans-serif;
+  letter-spacing: -2px;
+  color: #FFF;
+  text-transform: none;
+  
+  /* change the values of top and left to adjust the position of the logo*/
+  top: 25px; left: 47px;  
+}
+#header h2#slogan {
+  position: absolute;
+  margin: 0; padding: 0;
+  font: normal 12px 'Trebuchet MS', Arial, Sans-serif;
+  text-transform: none;
+  color: #FFF;
+  
+  /* change the values of top and left to adjust the position of the slogan*/
+  top: 80px; left: 55px;    
+}
+
+/* header links */
+#header #header-links {
+  position: absolute;
+  top: 20px; right: 30px;  
+  color: #C6DDEE;
+  font-size: 10px;  
+}
+#header #header-links a {  
+  color: #FFF;
+  text-decoration: none;  
+}
+#header #header-links a:hover {
+  color: #D4E59F;  
+}
+
+
+/* Main Column */
+#main {
+  float: left;
+  width: 65%;
+  padding: 0; margin: 0 0 0 5px;
+  display: inline;
+  background: white;
+  min-height: 400px;
+  overflow: auto;
+}
+#main h1 {
+  margin-top: 10px;
+  font: Bold 140% 'Trebuchet MS', Tahoma, Sans-serif;
+  color: #88ac0b; 
+  padding: 5px 0 5px 25px;   
+  border-bottom: 1px solid #EFF0F1;
+  background: #FFF url(../images/site/square-green.png) no-repeat 3px 50%;  
+}
+
+.post-footer {
+  background-color: #FAFAFA;
+  padding: 5px; margin: 20px 10px 0 10px;
+  border: 1px solid #f2f2f2;
+  font-size: 95%;  
+}
+.post-footer .date {
+  background: url(../images/site/clock.gif) no-repeat left center;
+  padding-left: 20px; margin: 0 10px 0 5px;
+}
+.post-footer .comments {
+  background: url(../images/site/comment.gif) no-repeat left center;
+  padding-left: 20px; margin: 0 10px 0 5px;
+}
+.post-footer .readmore {
+  background: url(../images/site/page.gif) no-repeat left center;
+  padding-left: 20px; margin: 0 10px 0 5px;
+}
+
+/* Sidebar */  
+#sidebar {
+  float: right;
+  width: 34.3%;
+  padding: 0;  
+  color: #68774A;
+  background:#EDFDCE;
+  #margin:40px 0px 0px;
+  min-height:400px;
+}  
+#sidebar h1 {
+  margin-top: 10px;
+  padding: 5px 5px; 
+  font: bold 1.4em 'Trebuchet MS', Tahoma, Sans-serif;
+  color: #728D26;  
+}
+
+
+/* Footer */  
+#footer {
+  color: #C6DDEE;
+  background: #CCC url(../images/site/footer.jpg) no-repeat center top;
+  clear: both;
+  width: 820px;
+  height: 65px;
+  text-align: center;  
+  font-size: 92%;  
+}
+#footer a { 
+  color: #FFF;
+  text-decoration: none; 
+}
+
+/* alignment classes */
+.float-left  { float: left; }
+.float-right { float: right; }
+.align-left  { text-align: left; }
+.align-right { text-align: right; }
+
+/* display and additional classes */
+.clear { clear: both; }
+
+
+.horizontal li {
+  display: inline;
+}
+
+img.large {
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+}
+
+img.medium {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  margin: 5px;
+}
+
+img.small {
+  border: 1px solid black;
+  width: 30px;
+  height: 30px;
+  margin: 4px;
+}
+
+#header2 {
+    /* background-color: #FF0000; */
+    height: 25px;
+}
+
+#menutop {
+}
+
+#menutop ul {
+    display: inline;
+}
+
+#menutop a {
+    color: #FFF;
+}
+
+#menutop li {
+    display: inline;
+    float: left;
+    padding: 3px 10px 3px 10px;
+    background-color: #03376b;
+    border: 1px white solid;
+    border-width: 1px 1px 1px 0;
+}
+
+#menutop input {
+    width: 75px;
+    height: 17px;
+    background-color: #03376b;
+    border: 0px white solid;
+    color: #FFFFFF;
+}
+
+.bg1 {
+}
+
+.bg2 {
+    background-color: #FFFFFF;
+}
+
+.thead1 {
+    background-color: #03376b;
+}
+
+.thead2 {
+    background-color: #0029ad;
+}
+
+.thead3 {
+    background-color: #FFFFFF;
+}
+
+.tcharw {
+    color: #FFFFFF;
+}
+
+.alle {
+    text-align: left;
+}
+
+.bolded {
+    font-weight: bold;
+}
+
+
+.calendarContainer
+{
+  width: 200px;
+  border: 0 solid #000000;
+}
+
+.calendarContainer tr
+{
+  padding: 0px;
+  border: 0 solid #000000;
+}
+
+.calendarContainer td
+{
+  padding: 0px;
+  border: 0 solid #000000;
+}
+
+.calendarContainer table
+{
+  padding: 0px;
+  border: 0 solid #000000;
+}
+
+.tdLabel
+{
+  width: 100px;
+  color: blue;
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
+  white-space: nowrap;   
+}
+
+.wwFormTable
+{
+  width: 100%;
+}
