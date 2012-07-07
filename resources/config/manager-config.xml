@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"  
+  xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.directwebremoting.org/schema/spring-dwr
+         http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">              
+
+
+     <!-- Activates annotation-based bean configuration -->
+  <context:annotation-config />
+  
+  <!-- Scans for application @Components to deploy -->
+  <context:component-scan base-package="com.progetto" />
+  
+  <dwr:configuration>
+      <dwr:convert type="bean" class="com.progetto.domain.Division" />
+      <dwr:convert type="bean" class="com.progetto.domain.Team" />
+   </dwr:configuration>  
+  
+  <!-- ========================= MANAGERs ========================= -->
+
+  <!--  Explicit transaction (Annotation) -->
+  <bean id="nationManager" parent="parentTransProxy">
+    <property name="target"><ref bean="nationManagerTarget"/></property>
+  </bean>
+
+  <bean id="divisionManager" parent="parentTransProxy">
+    <property name="target"><ref bean="divisionManagerTarget"/></property>
+    <dwr:remote javascript="divisionManager">
+        <dwr:include method="listDivisionsByNation" />
+      </dwr:remote>    
+  </bean>
+
+  <bean id="positionManager" parent="parentTransProxy">
+    <property name="target"><ref bean="positionManagerTarget"/></property>
+  </bean>
+  
+  <bean name="nationManagerTarget" class="com.progetto.manager.impl.NationManagerImpl" />
+  
+  <bean name="divisionManagerTarget" class="com.progetto.manager.impl.DivisionManagerImpl" />
+  
+  <bean name="positionManagerTarget" class="com.progetto.manager.impl.PositionManagerImpl" />
+
+  <!--  Implicit transaction (Annotation) -->
+  <bean name="teamManager" class="com.progetto.manager.impl.TeamManagerImpl">
+    <dwr:remote javascript="teamManager">
+        <dwr:include method="listTeamsByDivision" />
+      </dwr:remote>    
+  </bean>
+  
+  <bean name="playerManager" class="com.progetto.manager.impl.PlayerManagerImpl" />
+  
+  <bean name="careerManager" class="com.progetto.manager.impl.CareerManagerImpl" />
+  
+    
+</beans>
