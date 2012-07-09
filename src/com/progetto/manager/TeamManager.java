@@ -40,7 +40,7 @@ public interface TeamManager
 
 	public List<Team> listTeams();
    
-  public List<Team> listTeamsByQuery(String query);   
+	public List<Team> listTeamsByQuery(String query);   
 	
 	public List<Division> listDivisions();
 
