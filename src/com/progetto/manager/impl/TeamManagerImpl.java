@@ -57,7 +57,12 @@ public class TeamManagerImpl implements TeamManager
 	public List<Team> listTeams()
 	{
 		return teamDAO.listTeams();
-	}		
+	}	 
+ 
+	public List<Team> listTeamsByQuery(String query)
+	{
+		return teamDAO.listTeamsByQuery(query);
+	}	 
 	
 	public List<Division> listDivisions()
 	{
