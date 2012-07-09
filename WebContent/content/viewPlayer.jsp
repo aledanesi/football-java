@@ -51,6 +51,7 @@
             <li>
         <s:url id="insertCareerURL" action="insertCareer">
           <s:param name="playerId" value="%{id}"></s:param>
+          <s:param name="id" value=""></s:param>
         </s:url>
         <s:a href="%{insertCareerURL}"><s:text name="insertCareer"/></s:a>
             </li>  
