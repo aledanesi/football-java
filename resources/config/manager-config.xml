@@ -51,7 +51,8 @@
   <bean name="teamManager" class="com.progetto.manager.impl.TeamManagerImpl">
     <dwr:remote javascript="teamManager">
         <dwr:include method="listTeamsByDivision" />
-      </dwr:remote>    
+        <dwr:include method="listTeamsByQuery" />
+    </dwr:remote>    
   </bean>
   
   <bean name="playerManager" class="com.progetto.manager.impl.PlayerManagerImpl" />
