@@ -48,6 +48,13 @@ public interface TeamDao
 	 * @return the teams found
 	 */	
 	public List<Team> listTeams();
+   
+	/**
+	 * Method to list teams
+	 * 
+	 * @return the teams found
+	 */	
+	public List<Team> listTeamsByQuery(String query);	   
 	
 	/**
 	 * Method to get a team list by a division 
