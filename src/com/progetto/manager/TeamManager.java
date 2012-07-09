@@ -39,6 +39,8 @@ public interface TeamManager
 	public List<Team> listTeamsByDivision(long idDivision);
 
 	public List<Team> listTeams();
+   
+  public List<Team> listTeamsByQuery(String query);   
 	
 	public List<Division> listDivisions();
 
