@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-  pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display" %>
@@ -15,26 +15,60 @@
 <s:head />
 
 <link rel="stylesheet" href="styles/Envision.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="styles/jquery-ui.css" />
 
 
 <%-- JQUERY --%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.3.2.min.js"></script>
-    
+<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-ui.1.8.21.custom.min.js"></script> 
+
+<script type='text/javascript' src='dwr/engine.js'></script>
+<script type='text/javascript' src='dwr/util.js'></script>
+<script type='text/javascript' src='dwr/interface/teamManager.js'></script>
+ 
+		
 <%-- APPLICATION SPECIFIC --%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/script.js"></script>  
+<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/script.js"></script>	
 
 <script language="Javascript">
-var jQ = jQuery.noConflict();
-
-jQ(document).ready(function()
+var $ = jQuery.noConflict();
+         		
+$(document).ready(function()
 { 
-  jQ('#firstName').focus(); 
+	$('#firstName').focus(); 
 });
+
+function autoTeam()
+{
+	var query = $("#team").val();
+	teamManager.listTeamsByQuery(query, loadData);	
+}
+
+function loadData(data)
+{
+	var teams = new Array(); //viene creato l'array
+
+	var size = data.length;
+	for (var i = 0; i < size; i++)
+	{
+		var arr = {"label":data[i].name, "id":data[i].id};
+		teams[i] = arr;		
+	}		
+	$('#team').autocomplete({ source: teams, select: function (event, ui) 
+		{  
+			var id = ui.item.id;
+			$('#teamId').val(id);
+		} 
+	});
+}
+
+
+
 </script>
 
 </head>
 <body>
-  
+	
 <div id="wrap"><!--header -->
 <div id="header">
 
@@ -51,72 +85,79 @@ jQ(document).ready(function()
 
 <!-- content-wrap starts here -->
 <div id="content-wrap">
-  
+	
 <s:form action="saveCareer" enctype="multipart/form-data" method="POST" style="width: 350px;"> 
 <s:push value="career">
 <input type="hidden" name="player.id" value="${playerId}" />
-  
+	
 
 
 <div id="header2">
     <div id="menutop">
         <ul>                                 
             <li>
-        <s:url id="listURL" action="viewPlayer">
-          <s:param name="id">${playerId}</s:param>
-        </s:url>              
-        <s:a href="%{listURL}">Torna alla lista</s:a>
+				<s:url id="listURL" action="viewPlayer">
+					<s:param name="id">${playerId}</s:param>
+				</s:url>							
+				<s:a href="%{listURL}">Torna alla lista</s:a>
             </li>
             <li style="width: 80px; text-align: center;">
-        <input type="submit" value="Salva"  />
+				<input type="submit" value="Salva"  />
             </li>  
          </ul>             
     </div>
 </div>
 
 
-      <tr>
-          <td colspan="2" style="margin: 15px;">
-          <p align="center" style="margin: 10px; font-weight: bold; font-size: 14px"> 
-             Inserisci anno di carriera
-          </p></td>
-        </tr>      
-    
-              
-      <tr>
-        <s:if test="%{image != null}">
-              <td colspan="2" style="text-align: center"><img src="<s:url action="getDynamicImageCareer"><s:param name="id">${career.id}</s:param></s:url>"></td>       
-        </s:if>  
-        <s:if test="%{image == null}">
-            <td colspan="2" style="text-align: center">
-              <img src="${pageContext.request.contextPath}/images/players/notFound.jpg" alt="Foto di ${lastName}" />
-            </td>  
-        </s:if>                       
-      </tr>
-      
-      <s:hidden name="id" />
-      
-      <s:file name="userImage" label="Foto" key="photo" size="15" /> 
-                      
-      <s:textfield name="stagione" id="stagione" key="season" />
-      <s:select name="team.id" list="teamList" listKey="id" listValue="name" key="team" />
-      
-      <s:textfield name="serie" id="serie" key="division" />    
-      <s:textfield name="dettaglioCarriera.partiteGiocate" id="dettaglioCarriera.partiteGiocate" key="playedGames" size="4" />    
+			<tr>
+		      <td colspan="2" style="margin: 15px;">
+		      <p align="center" style="margin: 10px; font-weight: bold; font-size: 14px"> 
+		         Inserisci anno di carriera
+		      </p></td>
+		    </tr>			
+		
+							
+			<tr>
+				<s:if test="%{image != null}">
+		        	<td colspan="2" style="text-align: center"><img src="<s:url action="getDynamicImageCareer"><s:param name="id">${career.id}</s:param></s:url>"></td> 			
+				</s:if>	
+				<s:if test="%{image == null}">
+		    		<td colspan="2" style="text-align: center">
+		    			<img src="${pageContext.request.contextPath}/images/players/notFound.jpg" alt="Foto di ${lastName}" />
+		    		</td>	
+				</s:if>										 	
+			</tr>
+			
+			<s:hidden name="id" />
+			
+			<s:file name="userImage" label="Foto" key="photo" size="15" /> 
+											
+			<s:textfield name="stagione" id="stagione" key="season" />
 
-      <s:textfield name="goal" id="goal" key="goal" size="4" />                                  
+			<s:textfield name="team.name" id="team" key="team" onkeyup="autoTeam()" />
+      		<s:hidden name="team.id" id="teamId" />								
+			
+			<s:textfield name="serie" id="serie" key="division" />		
+			<s:textfield name="dettaglioCarriera.partiteGiocate" id="dettaglioCarriera.partiteGiocate" key="playedGames" size="4" />		
 
-      <s:textfield name="dettaglioCarriera.sostFatte" id="dettaglioCarriera.sostFatte" key="sostitutionMade" size="4" />    
-      <s:textfield name="dettaglioCarriera.sostAvute" id="dettaglioCarriera.sostAvute" key="sostitutionReceived" size="4" />                                  
+			<s:textfield name="goal" id="goal" key="goal" size="4" />																	
 
-      <s:textfield name="dettaglioCarriera.ammonizioni"       id="dettaglioCarriera.ammonizioni"     key="yellowCard" size="4" />    
-      <s:textfield name="dettaglioCarriera.espulsioni"       id="dettaglioCarriera.espulsioni"      key="redCard" size="4" />                                  
-      
-  </s:push>      
-                  
-  </s:form>  
+			<s:textfield name="dettaglioCarriera.sostFatte" id="dettaglioCarriera.sostFatte" key="sostitutionMade" size="4" />		
+			<s:textfield name="dettaglioCarriera.sostAvute" id="dettaglioCarriera.sostAvute" key="sostitutionReceived" size="4" />																	
+
+			<s:textfield name="dettaglioCarriera.ammonizioni"    	 id="dettaglioCarriera.ammonizioni" 		key="yellowCard" size="4" />		
+			<s:textfield name="dettaglioCarriera.espulsioni"    	 id="dettaglioCarriera.espulsioni"  		key="redCard" size="4" />		
+				
+
+			
+	</s:push>			
+									
+	</s:form>																
+
 
 </div>
+
+
 
 <!--footer starts here-->
 <div id="footer">
@@ -124,6 +165,10 @@ jQ(document).ready(function()
 <p>&copy; 2012 <strong>Football Java</strong> | Design by: <a href="#">aledanesi</a></p>
 
 </div>
+
+	<script>
+		
+	</script>
 
 <!-- wrap ends here --></div>
 
