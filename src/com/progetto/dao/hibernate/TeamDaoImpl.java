@@ -99,6 +99,19 @@ public class TeamDaoImpl extends HibernateDaoSupport implements TeamDao {
 	}
 
 	/**
+	 * Method to list teams
+	 * 
+	 * @return the teams found
+	 */	
+	@SuppressWarnings("unchecked")
+	@Override	
+	public List<Team> listTeamsByQuery(String query) 
+	{
+		List<Team> lista = getHibernateTemplate().findByNamedParam("from Team t where t.name like :query order by t.name ", "query", query+'%');
+		return lista;
+	}	
+
+	/**
 	 * Method to get a team list by a division
 	 * 
 	 * @param divisionId
