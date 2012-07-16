@@ -62,8 +62,8 @@
         <value>com.progetto.domain.Player</value>
         <value>com.progetto.domain.Division</value>
         <value>com.progetto.domain.Career</value>
-				<value>com.progetto.domain.Season</value>
-				<value>com.progetto.domain.SeasonYear</value>        
+        <value>com.progetto.domain.Season</value>
+        <value>com.progetto.domain.SeasonYear</value>        
       </list>
     </property>
     <property name="hibernateProperties">
