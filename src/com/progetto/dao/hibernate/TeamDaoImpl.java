@@ -110,6 +110,46 @@ public class TeamDaoImpl extends HibernateDaoSupport implements TeamDao {
 		List<Team> lista = getHibernateTemplate().findByNamedParam("from Team t where t.name like :query order by t.name ", "query", query+'%');
 		return lista;
 	}	
+   
+	/**
+	 * Method to list teams
+	 * 
+	 * @return the teams found
+	 */	
+	@SuppressWarnings("unchecked")
+	@Override	
+	public List<Team> listFreeTeamsBySeason(Long seasonId, Long divisionId) 
+	{
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Criteria criteria = session.createCriteria(Season.class);
+		criteria.add(Restrictions.eq("seasonYear.id", seasonId));
+		criteria.add(Restrictions.ne("division.id", divisionId));
+		criteria.setProjection(Projections.property("team.id"));
+		List<Long> listaLong = criteria.list();
+
+		criteria = session.createCriteria(Team.class);
+		criteria.addOrder(Order.asc("name"));
+		if (listaLong.size() > 0)
+			criteria.add(Restrictions.not(Restrictions.in("id", listaLong.toArray(new Long[listaLong.size()]))));
+	
+		List<Team> lista = criteria.list();
+
+		return lista;
+	}	
+	
+	@SuppressWarnings("unchecked")
+	@Override	
+	public List<Long> listSelectedTeamsBySeason(Long seasonId, Long divisionId) 
+	{
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		Criteria criteria = session.createCriteria(Season.class);
+		criteria.add(Restrictions.eq("seasonYear.id", seasonId));
+		criteria.add(Restrictions.eq("division.id", divisionId));
+		criteria.setProjection(Projections.property("team.id"));
+		List<Long> listaLong = criteria.list();
+
+		return listaLong;
+	}   
 
 	/**
 	 * Method to get a team list by a division
