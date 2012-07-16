@@ -38,5 +38,8 @@
   <bean name="divisionDAO" class="com.progetto.dao.hibernate.DivisionDaoImpl">
     <property name="hibernateTemplate" ref="hibernateTemplate" />
   </bean>  
+  <bean name="seasonDAO" class="com.progetto.dao.hibernate.SeasonDaoImpl">
+    <property name="hibernateTemplate" ref="hibernateTemplate" />
+  </bean>  
 
 </beans>
