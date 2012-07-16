@@ -63,6 +63,18 @@ public class TeamManagerImpl implements TeamManager
 	{
 		return teamDAO.listTeamsByQuery(query);
 	}	 
+   
+	public List<Team> listFreeTeamsBySeason(Long seasonId, Long divisionId)
+	{
+		return teamDAO.listFreeTeamsBySeason(seasonId, divisionId);
+	}
+	
+	public Long[] listSelectedTeamsBySeason(Long seasonId, Long divisionId)
+	{
+		List<Long> lista = teamDAO.listSelectedTeamsBySeason(seasonId, divisionId);
+		Long[] arr = new Long[lista.size()];
+		return lista.toArray(arr);
+	}   
 	
 	public List<Division> listDivisions()
 	{
