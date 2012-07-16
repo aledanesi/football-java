@@ -40,7 +40,11 @@ public interface TeamManager
 
 	public List<Team> listTeams();
    
-	public List<Team> listTeamsByQuery(String query);   
+	public List<Team> listTeamsByQuery(String query); 
+  
+	public List<Team> listFreeTeamsBySeason(Long seasonId, Long divisionId);	
+	
+	public Long[] listSelectedTeamsBySeason(Long seasonId, Long divisionId);  
 	
 	public List<Division> listDivisions();
 
