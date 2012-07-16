@@ -59,5 +59,6 @@
   
   <bean name="careerManager" class="com.progetto.manager.impl.CareerManagerImpl" />
   
+  <bean name="seasonManager" class="com.progetto.manager.impl.SeasonManagerImpl" />
     
 </beans>
