@@ -54,7 +54,21 @@ public interface TeamDao
 	 * 
 	 * @return the teams found
 	 */	
-	public List<Team> listTeamsByQuery(String query);	   
+	public List<Team> listTeamsByQuery(String query);	  
+  
+	/**
+	 * Method to list teams
+	 * 
+	 * @return the teams found
+	 */	
+	public List<Team> listFreeTeamsBySeason(Long seasonId, Long divisionId);
+	
+	/**
+	 * Method to list teams
+	 * 
+	 * @return the teams found
+	 */		
+	public List<Long> listSelectedTeamsBySeason(Long seasonId, Long divisionId); 
 	
 	/**
 	 * Method to get a team list by a division 
