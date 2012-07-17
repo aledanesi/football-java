@@ -38,7 +38,6 @@
 
 </div>
 
-<!-- content-wrap starts here -->
 <div id="content-wrap">
   
 <div id="header2"> 
@@ -157,15 +156,6 @@
 </table> 
 
 </div>
-
-<!--footer starts here-->
-<div id="footer">
-
-<p>&copy; 2012 <strong>Football Java</strong> | Design by: <a href="#">aledanesi</a></p>
-
-</div>
-
-<!-- wrap ends here --></div>
 
 </body>
 </html>
