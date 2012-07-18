@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="styles/Envision.css" type="text/css" />
 
 <%-- JQUERY --%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery/jquery-1.7.2.js"></script>
 
 <%-- APPLICATION SPECIFIC --%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/script.js"></script>
@@ -24,41 +24,25 @@
 </head>
 <body>
   
-<div id="wrap"><!--header -->
-<div id="header">
-
-<h1 id="logo-text">Football Java <sup style="font: Verdana, Tahoma, arial, sans-serif;"><small style="font-size: 20px">beta</small></sup></h1>
-<!-- <h2 id="slogan">put your site slogan here...</h2> -->
-
-<s:url id="logoutURL" value="j_spring_security_logout" />
-
-<div id="header-links">
-<p><a href="index.jsp">Home</a> | <a href="index.html">Contact</a> | <a href="index.html">Site Map</a> | <s:a href="%{logoutURL}">Logout</s:a></p>
-</div>
-
-</div>
-
-<div id="content-wrap">
-  
 <div id="header2"> 
-	<div id="menutop"> 
-		<ul> 
-			<li> 
-				<s:url id="returnListURL" action="searchTeam"> 
-				<s:param name="teamId" value=""></s:param> 
-				</s:url> 
-				<s:a href="%{returnListURL}"><s:text name="returnListTeam"/></s:a> 
-			</li> 
-			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<li> 
-					<s:url id="insertPlayerURL" action="insertPlayer"> 
-					<s:param name="teamId" value="%{teamId}"></s:param> 
-					</s:url> 
-					<s:a href="%{insertPlayerURL}"><s:text name="insertPlayer"/></s:a> 
-				</li> 
-			</sec:authorize>
-		</ul> 
-	</div> 
+  <div id="menutop"> 
+    <ul> 
+      <li> 
+        <s:url id="returnListURL" action="searchTeam"> 
+        <s:param name="teamId" value=""></s:param> 
+        </s:url> 
+        <s:a href="%{returnListURL}"><s:text name="returnListTeam"/></s:a> 
+      </li> 
+      <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <li> 
+          <s:url id="insertPlayerURL" action="insertPlayer"> 
+          <s:param name="teamId" value="%{teamId}"></s:param> 
+          </s:url> 
+          <s:a href="%{insertPlayerURL}"><s:text name="insertPlayer"/></s:a> 
+        </li> 
+      </sec:authorize>
+    </ul> 
+  </div> 
 </div> 
 <table bordercolor="#111111" style="margin-top: 10pt; margin-bottom: 10pt; border-collapse: collapse; width: 400px"> 
 <tbody> 
@@ -88,65 +72,65 @@
 </sec:authorize>
 <th></th> 
 </tr> 
-	<s:iterator value="playerList" status="playerStatus"> 
-	
-	<%-- 
-	_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
-	
-	COLORE DELLA COLONNA DIVERSO PER RUOLO
-	
-	_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
-	
-	--%>
-	
-	<s:if test="position.id == 1"> 
-	<tr style="background-color: #00FF99"> 
-	</s:if> 
-	<s:elseif test="position.id == 2"> 
-	<tr style="background-color: #33CCFF"> 
-	</s:elseif> 
-	<s:elseif test="position.id == 3"> 
-	<tr style="background-color: #CCFF66"> 
-	</s:elseif> 
-	<s:else> 
-	<tr style="background-color: #FF9966"> 
-	</s:else> 
-		<td><img src="${pageContext.request.contextPath}/images/flags/${nation.id}.png" alt="${nation.name}" /> </td> 
-		<td style="white-space: nowrap;text-align: left"><s:property value="lastName" /> 
-		<s:property value="firstName" /> 
-		</td> 
-		<td style="text-align: center"><s:date name="birthDate" format="dd/MM/yyyy" /></td> 
-		<td style="text-align: center"><s:property value="appearances" /></td> 
-		<td style="text-align: center"><s:property value="goalScored" /></td> 
-		<td style="text-align: center"><s:property value="position.value" /></td>
-		<sec:authorize access="hasRole('ROLE_ADMIN')">
-		<td style="text-align: center"> 
-		<s:url id="editURL" action="editPlayer"> 
-		<s:param name="id" value="%{id}"></s:param> 
-		</s:url> 
-		<s:a href="%{editURL}"><img src="${pageContext.request.contextPath}/images/edit.png" alt="<s:text name="edit"/>" /> 
-		</s:a> 
-		</td> 
-		</sec:authorize>
-		<td style="text-align: center"> 
-		<s:url id="viewURL" action="viewPlayer"> 
-		<s:param name="id" value="%{id}"></s:param> 
-		</s:url> 
-		<s:a href="%{viewURL}"><img src="${pageContext.request.contextPath}/images/view.png" alt="<s:text name="view"/>" /> 
-		</s:a> 
-		</td> 
-		<sec:authorize access="hasRole('ROLE_ADMIN')"> 
-		<td> 
-		<s:url id="deleteURL" action="deletePlayer"> 
-		<s:param name="id" value="%{id}"></s:param> 
-		</s:url> 
-		<s:a href="%{deleteURL}" onclick="return project.confirmDeletePlayer();"> 
-		<img src="${pageContext.request.contextPath}/images/delete.png" alt="<s:text name="delete"/>" /> 
-		</s:a> 
-		</td> 
-		</sec:authorize>
-	</tr> 
-	</s:iterator> 
+  <s:iterator value="playerList" status="playerStatus"> 
+  
+  <%-- 
+  _=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
+  
+  COLORE DELLA COLONNA DIVERSO PER RUOLO
+  
+  _=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
+  
+  --%>
+  
+  <s:if test="position.id == 1"> 
+  <tr style="background-color: #00FF99"> 
+  </s:if> 
+  <s:elseif test="position.id == 2"> 
+  <tr style="background-color: #33CCFF"> 
+  </s:elseif> 
+  <s:elseif test="position.id == 3"> 
+  <tr style="background-color: #CCFF66"> 
+  </s:elseif> 
+  <s:else> 
+  <tr style="background-color: #FF9966"> 
+  </s:else> 
+    <td><img src="${pageContext.request.contextPath}/images/flags/${nation.id}.png" alt="${nation.name}" /> </td> 
+    <td style="white-space: nowrap;text-align: left"><s:property value="lastName" /> 
+    <s:property value="firstName" /> 
+    </td> 
+    <td style="text-align: center"><s:date name="birthDate" format="dd/MM/yyyy" /></td> 
+    <td style="text-align: center"><s:property value="appearances" /></td> 
+    <td style="text-align: center"><s:property value="goalScored" /></td> 
+    <td style="text-align: center"><s:property value="position.value" /></td>
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+    <td style="text-align: center"> 
+    <s:url id="editURL" action="editPlayer"> 
+    <s:param name="id" value="%{id}"></s:param> 
+    </s:url> 
+    <s:a href="%{editURL}"><img src="${pageContext.request.contextPath}/images/edit.png" alt="<s:text name="edit"/>" /> 
+    </s:a> 
+    </td> 
+    </sec:authorize>
+    <td style="text-align: center"> 
+    <s:url id="viewURL" action="viewPlayer"> 
+    <s:param name="id" value="%{id}"></s:param> 
+    </s:url> 
+    <s:a href="%{viewURL}"><img src="${pageContext.request.contextPath}/images/view.png" alt="<s:text name="view"/>" /> 
+    </s:a> 
+    </td> 
+    <sec:authorize access="hasRole('ROLE_ADMIN')"> 
+    <td> 
+    <s:url id="deleteURL" action="deletePlayer"> 
+    <s:param name="id" value="%{id}"></s:param> 
+    </s:url> 
+    <s:a href="%{deleteURL}" onclick="return project.confirmDeletePlayer();"> 
+    <img src="${pageContext.request.contextPath}/images/delete.png" alt="<s:text name="delete"/>" /> 
+    </s:a> 
+    </td> 
+    </sec:authorize>
+  </tr> 
+  </s:iterator> 
 </table> 
 </div> 
 </s:if> 
@@ -154,8 +138,6 @@
 </tr> 
 </tbody> 
 </table> 
-
-</div>
 
 </body>
 </html>
