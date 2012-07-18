@@ -33,31 +33,38 @@ import com.progetto.manager.DivisionManager;
 
 /**
  * @author C_ICTDNS
- * 
+ *
  */
-public class DivisionManagerImpl implements DivisionManager {
+public class DivisionManagerImpl implements DivisionManager
+{
 	@Autowired
 	private DivisionDao divisionDAO;
 
 	@Override
-	public List<Division> listDivisions() {
+	public List<Division> listDivisions()
+	{
 		return divisionDAO.listDivisions();
-	}
+	}	
+	
+	public Division getDivision(Long teamId, Long seasonYearId)
+	{
+		return divisionDAO.getDivision(teamId, seasonYearId);
+	}		
 
 	@Override
 	/**
-	 * Method to get a nation
+	 * Method to get a nation 
 	 * 
-	 * @param nationId
-	 *            the nation id
+	 * @param nationId the nation id
 	 * @return the nation found
-	 */
-	public List<Division> listDivisionsByNation(Long nationId) {
+	 */	
+	public List<Division> listDivisionsByNation(Long nationId)
+	{
 		return divisionDAO.listDivisionsByNation(nationId);
-	}
-
+	}	
+	
 	public void setDivisionDAO(DivisionDao divisionDAO) {
 		this.divisionDAO = divisionDAO;
-	}
+	}	
 
 }
