@@ -34,6 +34,7 @@
     <property name="target"><ref bean="divisionManagerTarget"/></property>
     <dwr:remote javascript="divisionManager">
         <dwr:include method="listDivisionsByNation" />
+        <dwr:include method="getDivision" />
       </dwr:remote>    
   </bean>
 
