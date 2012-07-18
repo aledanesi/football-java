@@ -29,10 +29,13 @@ import com.progetto.domain.Division;
 
 /**
  * @author C_ICTDNS
- * 
+ *
  */
-public interface DivisionDao {
+public interface DivisionDao 
+{
 	public List<Division> listDivisions();
-
+	
+	public Division getDivision(Long teamId, Long seasonYearId);
+	
 	public List<Division> listDivisionsByNation(Long nationId);
 }
