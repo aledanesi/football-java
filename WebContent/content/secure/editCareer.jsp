@@ -25,6 +25,7 @@
 <script type='text/javascript' src='dwr/engine.js'></script>
 <script type='text/javascript' src='dwr/util.js'></script>
 <script type='text/javascript' src='dwr/interface/teamManager.js'></script>
+<script type='text/javascript' src='dwr/interface/divisionManager.js'></script>
  
 		
 <%-- APPLICATION SPECIFIC --%>
@@ -35,10 +36,7 @@ var $ = jQuery.noConflict();
          		
 $(document).ready(function()
 { 
-	$('#firstName').focus(); 
-	
-	$("#seasonYearId").prepend('<option value=""></option>'); 
-	
+	$('#firstName').focus();
 });
 
 function autoTeam()
@@ -62,6 +60,29 @@ function loadData(data)
 			$('#teamId').val(id);
 		} 
 	});
+	changeDivision();	
+}
+
+function changeDivision()
+{
+	
+	var teamId = $("#teamId").val();
+	var seasonYearId = $("#seasonYearId").val();
+	
+	divisionManager.getDivision(teamId, seasonYearId, loadDivision);
+}
+
+function loadDivision(data)
+{
+	if (data != null)
+	{
+		var division = data.name;
+		$("#serie").val(division);		
+	}
+	else 
+	{
+		$("#serie").val('');
+	}
 }
 </script>
 
@@ -110,24 +131,24 @@ function loadData(data)
 		
 		<s:file name="userImage" label="Foto" key="photo" size="15" /> 
 										
-		<s:textfield name="team.name" id="team" key="team" onkeyup="autoTeam()" />
+		<s:textfield name="team.name" id="team" key="team" onkeyup="autoTeam();" />
      	<s:hidden name="team.id" id="teamId" />								
 
-		<s:select name="seasonYear.id" id="seasonYearId" list="seasonYearList" listKey="id" listValue="value" key="season" />
+		<s:select name="seasonYear.id" id="seasonYearId" list="seasonYearList" listKey="id" listValue="value" key="season" onchange="changeDivision()" />
 		
-		<s:textfield name="serie" id="serie" key="division" />		
+		<s:textfield name="serie" id="serie" key="division" />	
 		<s:textfield name="dettaglioCarriera.partiteGiocate" id="dettaglioCarriera.partiteGiocate" key="playedGames" size="4" />		
 
-		<s:textfield name="goal" id="goal" key="goal" size="4" />																	
+		<s:textfield name="goal" id="goal" key="goal" size="4" />									
 
 		<s:textfield name="dettaglioCarriera.sostFatte" id="dettaglioCarriera.sostFatte" key="sostitutionMade" size="4" />		
 		<s:textfield name="dettaglioCarriera.sostAvute" id="dettaglioCarriera.sostAvute" key="sostitutionReceived" size="4" />																	
 
-		<s:textfield name="dettaglioCarriera.ammonizioni"    	 id="dettaglioCarriera.ammonizioni" 		key="yellowCard" size="4" />		
-		<s:textfield name="dettaglioCarriera.espulsioni"    	 id="dettaglioCarriera.espulsioni"  		key="redCard" size="4" />		
+		<s:textfield name="dettaglioCarriera.ammonizioni" id="dettaglioCarriera.ammonizioni" key="yellowCard" size="4" />		
+		<s:textfield name="dettaglioCarriera.espulsioni"  id="dettaglioCarriera.espulsioni"  key="redCard" size="4" />		
 				
 	</s:push>			
-									
+
 </s:form>																
 
 </body>
