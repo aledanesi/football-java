@@ -42,7 +42,7 @@
 <body>
 	
 	<div align="center"> 	
-	    <s:form action="saveSeason" style="width: 200px">
+	    <s:form action="saveSeason" style="">
 		    <s:push value="season">
 		
 		      <s:select name="seasonYear.id" id="seasonYearId" list="yearList" listKey="id" listValue="value" onchange="changeSelect()"  />
