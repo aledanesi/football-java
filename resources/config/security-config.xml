@@ -61,12 +61,12 @@
 		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="accessDecisionManager" ref="accessDecisionManager" />
 		<property name="securityMetadataSource">
-      <s:filter-security-metadata-source>
-        <s:intercept-url pattern="/styles/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <s:intercept-url pattern="/images/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        <s:intercept-url pattern="/login.jsp*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
-        <s:intercept-url pattern="/**" access="ROLE_ADMIN,ROLE_USER"/>
-	  </s:filter-security-metadata-source>        
+		   <s:filter-security-metadata-source>
+		      <s:intercept-url pattern="/styles/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+		      <s:intercept-url pattern="/images/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+		      <s:intercept-url pattern="/login.jsp*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
+		      <s:intercept-url pattern="/**" access="ROLE_ADMIN,ROLE_USER"/>
+		   </s:filter-security-metadata-source>        
     </property>
 	</bean>	
 	
