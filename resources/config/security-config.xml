@@ -67,7 +67,7 @@
 		      <s:intercept-url pattern="/login.jsp*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
 		      <s:intercept-url pattern="/**" access="ROLE_ADMIN,ROLE_USER"/>
 		   </s:filter-security-metadata-source>        
-    </property>
+		</property>
 	</bean>	
 	
 	<bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">
