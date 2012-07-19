@@ -11,10 +11,10 @@
 <head> 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Gestione Campionati</title> 
-	<link rel="stylesheet" href="styles/Envision.css" type="text/css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/styles/multiselect/common.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/styles/jquery/jquery-ui.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/styles/multiselect/ui.multiselect.css" />
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/styles/Envision.css" />
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery/jquery-1.7.2.js"></script>
 	
@@ -28,7 +28,6 @@
 		$(function(){
 			$.localise('ui-multiselect', {/*language: 'en',*/ path: 'js/locale/'});
 			$(".multiselect").multiselect();
-			//$('#switcher').themeswitcher();
 		});
 		
 		function changeSelect()
