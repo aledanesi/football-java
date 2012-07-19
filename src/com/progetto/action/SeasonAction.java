@@ -95,32 +95,28 @@ public class SeasonAction extends FileUploadAction implements ModelDriven<Season
 	 * 
 	 * @return String
 	 */
-	@Action(value = "/handleSeason", results = { @Result(name = "success", location = "/content/handleSeason.jsp") })
+	@Action(value = "/handleSeason", results = { @Result(name = "success", location = "/content/secure/handleSeason.jsp") })
 	public String list() {
 		
 		yearList = seasonManager.listYears();
 		divisionList = divisionManager.listDivisions();
 		nationList = nationManager.listNations();
 
+		// default value
+		Long seasonYearId = 12L;
+		Long divisionId = 1L;
 		if (season.getSeasonYear() != null && season.getDivision() != null)
 		{
-			Long seasonYearId = season.getSeasonYear().getId();
-			Long divisionId = season.getDivision().getId();
-			
-			teamList = teamManager.listFreeTeamsBySeason(seasonYearId, divisionId);
-			season.setArr(teamManager.listSelectedTeamsBySeason(seasonYearId, divisionId));
+			seasonYearId = season.getSeasonYear().getId();
+			divisionId = season.getDivision().getId();			
 		}
+		
+		teamList = teamManager.listFreeTeamsBySeason(seasonYearId, divisionId);
+		season.setArr(teamManager.listSelectedTeamsBySeason(seasonYearId, divisionId));
 		
 		return SUCCESS;
 	}	
 	
-	/** * To list all users. * @return String */
-	@Action(value = "/searchChampionship", results = { @Result(name = "success", location = "/content/handleSeason.jsp") })
-	public String search() {
-		championshipList = seasonManager.listSeason();
-		return SUCCESS;
-	}	
-
 	/*
 	 * _=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_
 	 * 
