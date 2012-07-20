@@ -103,10 +103,5 @@ public class User implements Serializable
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-	
-	public Boolean getLdapAuth()
-	{
-		return false;
-	}
 		
 }
