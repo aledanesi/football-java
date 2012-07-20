@@ -40,6 +40,9 @@
   </bean>  
   <bean name="seasonDAO" class="com.progetto.dao.hibernate.SeasonDaoImpl">
     <property name="hibernateTemplate" ref="hibernateTemplate" />
-  </bean>  
+  </bean> 
+  <bean name="userDAO" class="com.progetto.dao.hibernate.UserDaoImpl">
+    <property name="hibernateTemplate" ref="hibernateTemplate" />
+  </bean>   
 
 </beans>
