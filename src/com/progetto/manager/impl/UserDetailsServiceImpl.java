@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,7 +22,6 @@ public class UserDetailsServiceImpl implements UserDetailsService
 	@Autowired 
 	private UserDao dao;   
 	
-	@SuppressWarnings("deprecation")
 	@Transactional(readOnly = true)   
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException 
 	{      
@@ -35,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService
 			List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();             
 			for (Role r : user.getRoles()) 
 			{                 
-				roles.add(new GrantedAuthorityImpl(r.getName()));             
+				roles.add(new SimpleGrantedAuthority(r.getName()));             
 			}              
 			// initialize user             
 			SecurityUser securityUser = new SecurityUser(                 
