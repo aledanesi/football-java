@@ -1,10 +1,8 @@
 <decorators defaultdir="/WEB-INF/decorators">
     <excludes>
-        <pattern>/nodecorate/*</pattern>
         <pattern>/styles/*</pattern>
         <pattern>/scripts/*</pattern>
         <pattern>/images/*</pattern>
-        <pattern>/login.jsp</pattern>
         <pattern>/index.jsp</pattern>
     </excludes>
 
