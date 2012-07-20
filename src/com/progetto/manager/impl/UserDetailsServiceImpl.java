@@ -31,24 +31,10 @@ public class UserDetailsServiceImpl implements UserDetailsService
 		if (user != null) 
 		{              
 			// convert roles             
-			List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();             
-			for (Role r : user.getRoles()) 
-			{                 
-				roles.add(new SimpleGrantedAuthority(r.getName()));             
-			}              
+			List<GrantedAuthority> roles = obtainGrantedAuthority(user);             
+             
 			// initialize user             
-			SecurityUser securityUser = new SecurityUser(                 
-					user.getUsername(),                 
-					user.getLdapAuth() ? getLdapPassword(user.getUsername()) : user.getPassword(), 
-					user.getStatus() != User.Status.NOT_COMMITED, 
-					user.getStatus() != User.Status.BLOCKED, 
-					true, 
-					true,                 
-					roles             
-			);              
-			
-			securityUser.setUser(user);              
-			return securityUser;         
+			return makeSecurityUser(user, roles);         
 		} 
 		else 
 		{             
@@ -57,9 +43,30 @@ public class UserDetailsServiceImpl implements UserDetailsService
 		
 	}
 	
-	private String getLdapPassword(String username)
+	private List<GrantedAuthority> obtainGrantedAuthority(User user)
 	{
-		return "";
+		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();             
+		for (Role r : user.getRoles()) 
+		{                 
+			roles.add(new SimpleGrantedAuthority(r.getName()));             
+		}  
+		return roles;
+	}
+	
+	private SecurityUser makeSecurityUser(User user, List<GrantedAuthority> roles)
+	{
+		SecurityUser securityUser = new SecurityUser(                 
+				user.getUsername(),                 
+				user.getPassword(), 
+				user.getStatus() != User.Status.NOT_COMMITED, 
+				user.getStatus() != User.Status.BLOCKED, 
+				true, 
+				true,                 
+				roles             
+		); 		
+		securityUser.setUser(user);
+		
+		return securityUser;
 	}
 	 
 }
