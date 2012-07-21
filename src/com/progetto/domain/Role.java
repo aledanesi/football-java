@@ -23,6 +23,8 @@
  */
 package com.progetto.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,50 +40,50 @@ import javax.persistence.Table;
  */
 @Entity 
 @Table(name="ROLE") 
-public class Role 
+public class Role implements Serializable 
 {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)     
-	@Column(name="ID", unique=true, nullable=false)  	
-	private int id;     
-	
-	@Column(name="name", nullable=false) 
-	private String name;      
-	
-	@OneToOne     
-	@JoinColumn(name="user_id", referencedColumnName="id", nullable=false)     	
-	private User user;      
-	
+  
+  @Id
+  @GeneratedValue(strategy=GenerationType.AUTO)     
+  @Column(name="ID", unique=true, nullable=false)    
+  private int id;     
+  
+  @Column(name="name", nullable=false) 
+  private String name;      
+  
+  @OneToOne     
+  @JoinColumn(name="user_id", referencedColumnName="id", nullable=false)       
+  private User user;      
+  
    
-	public int getId() 
-	{         
-		return id;     
-	}     
-	
-	public void setId(int id) 
-	{         
-		this.id = id;     
-	}      
-	
+  public int getId() 
+  {         
+    return id;     
+  }     
+  
+  public void setId(int id) 
+  {         
+    this.id = id;     
+  }      
+  
     
-	public String getName() 
-	{         
-		return name;     
-	}     
-	
-	public void setName(String name) 
-	{         
-		this.name = name;     
-	}      
-	
-	public User getUser() 
-	{         
-		return user;     
-	}      
-	
-	public void setUser(User user) 
-	{         
-		this.user = user;     
-	}  
+  public String getName() 
+  {         
+    return name;     
+  }     
+  
+  public void setName(String name) 
+  {         
+    this.name = name;     
+  }      
+  
+  public User getUser() 
+  {         
+    return user;     
+  }      
+  
+  public void setUser(User user) 
+  {         
+    this.user = user;     
+  }  
 }
