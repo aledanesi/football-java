@@ -159,7 +159,7 @@
 		<s:iterator value="careerList" status="careerStatus">
 		
 	    <tr class="bg2">
-		    <td><s:property value="stagione" /></td>
+		    <td><s:property value="stagione.value" /></td>
 		    <td style="text-align: left;"><img src="${pageContext.request.contextPath}/images/flags/${team.nation.id}.png" alt="${team.nation.name}" /> &nbsp;<s:property value="team.name" /></td>
 		    <td><s:property value="serie" /></td>
 		    <td><a href="/dettaglio/37919/37924/37935/37942/37948/37962/37985/37991/38000/38006/38015/38019/38031/38296/38301/=1637919|37924|37935|37942|37948|37962|37985|37991|38000|38006|38015|38019|38031|38296|38301|"><s:property value="dettaglioCarriera.partiteGiocate" /></a>/<s:property value="dettaglioCarriera.partiteTotali" /></td>
