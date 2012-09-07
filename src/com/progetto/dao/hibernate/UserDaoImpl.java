@@ -38,21 +38,20 @@ import com.progetto.domain.User;
 @Repository("userDAO")
 public class UserDaoImpl extends HibernateDaoSupport implements UserDao
 {
-	
-	/*************************************************
-	  
-	  METHODS
-	  
-	 **************************************************/	
+  
+  /*************************************************
+    
+    METHODS
+    
+   **************************************************/  
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public User findUserByName(String username) 
-	{	
-		List<User> users = getHibernateTemplate().find("from User where username=?", username);
-		
-		return users == null || users.size() <= 0 ? null : (User) users.get(0); 
+  @SuppressWarnings("unchecked")
+  public User findUserByName(String username) 
+  {  
+    List<User> users = getHibernateTemplate().find("from User where username=?", username);
+    
+    return users == null || users.size() <= 0  ? null : (User) users.get(0); 
 
-	}
+  }
 
 }

@@ -43,72 +43,82 @@ import com.progetto.manager.SeasonManager;
 @Transactional(readOnly = true)
 public class SeasonManagerImpl implements SeasonManager
 {
-	@Autowired
-	private SeasonDao seasonDao;
+  @Autowired
+  private SeasonDao seasonDao;
 
-	
-	/**
-	 * Method to save season
-	 * 
-	 * @param career the season to save
-	 */	
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void saveOrUpdateSeason(Season season)
-	{
-		seasonDao.saveOrUpdateSeason(season);
-	}	
-	
-	/**
-	 * Method to list season of a team
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public List<Season> listSeason()
-	{
-		return seasonDao.listSeason();
-	}
-	
-	/**
-	 * Method to list season of a team
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public List<SeasonYear> listYears()
-	{
-		return seasonDao.listYears();
-	}	
-	
-	/**
-	 * Method to get a year of player career 
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public Season getSeasonById(Long seasonID)
-	{
-		return seasonDao.getSeasonById(seasonID);
-	}	
-	
-	/**
-	 * Method to get a year of player career 
-	 * 
-	 * @param idSeason the season ask for our team
-	 */
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void deleteAll(Season bean)
-	{		
-		Long yearID = bean.getSeasonYear().getId();
-		Long divisionID = bean.getDivision().getId();
-		
-		
-		List<Season> lista = seasonDao.getSeasonsByYearID(yearID, divisionID);
-		for (Season champ: lista)
-		{
-			seasonDao.delete(champ.getId());
-		}
-	}
+  
+  /**
+   * Method to save season
+   * 
+   * @param career the season to save
+   */  
+  @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+  public void saveOrUpdateSeason(Season season)
+  {
+    seasonDao.saveOrUpdateSeason(season);
+  }  
+  
+  /**
+   * Method to list season of a team
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public List<Season> listSeason()
+  {
+    return seasonDao.listSeason();
+  }
+  
+  /**
+   * Method to list season of a team
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public List<SeasonYear> listYears()
+  {
+    return seasonDao.listYears();
+  }  
+  
+  /**
+   * Method to get a year of player career 
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public Season getSeasonById(Long seasonID)
+  {
+    return seasonDao.getSeasonById(seasonID);
+  }  
+  
+  /**
+   * Method to get a year of player career 
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public SeasonYear getSeasonYearById(Long seasonYearID)
+  {
+    return seasonDao.getSeasonYearById(seasonYearID);
+  }   
+  
+  /**
+   * Method to get a year of player career 
+   * 
+   * @param idSeason the season ask for our team
+   */
+  @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+  public void deleteAll(Season bean)
+  {    
+    Long yearID = bean.getSeasonYear().getId();
+    Long divisionID = bean.getDivision().getId();
+    
+    
+    List<Season> lista = seasonDao.getSeasonsByYearID(yearID, divisionID);
+    for (Season champ: lista)
+    {
+      seasonDao.delete(champ.getId());
+    }
+  }
     
     public void setSeasonDao(SeasonDao seasonDao) {
-		this.seasonDao = seasonDao;
-	}
+    this.seasonDao = seasonDao;
+  }
 
 }

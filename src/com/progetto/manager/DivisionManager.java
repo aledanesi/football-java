@@ -33,9 +33,11 @@ import com.progetto.domain.Division;
  */
 public interface DivisionManager 
 {
-	public List<Division> listDivisions();
-	
-	public Division getDivision(Long teamId, Long seasonYearId);
-	
-	public List<Division> listDivisionsByNation(Long nationId);
+  public List<Division> listDivisions();
+  
+  public Division getDivision(Long teamId, Long seasonYearId);
+  
+  public Division getDivisionById(Long divisionId);
+  
+  public List<Division> listDivisionsByNation(Long nationId);
 }

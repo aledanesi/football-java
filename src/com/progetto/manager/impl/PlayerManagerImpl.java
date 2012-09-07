@@ -28,6 +28,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.progetto.dao.PlayerDao;
 import com.progetto.domain.Player;
@@ -38,14 +40,22 @@ import com.progetto.manager.PlayerManager;
  *
  */
 @Service("playerManager")
+@Transactional(readOnly = true)
 public class PlayerManagerImpl implements PlayerManager
 {
 	@Autowired
 	private PlayerDao playerDAO;
 	
-	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void saveOrUpdatePlayer(Player player)
 	{
+		if (player.getImage() == null && player.getId() != null)
+		{
+			Long id = player.getId();
+			Player p = getPlayerById(id);
+			byte[] image = p.getImage();
+			player.setImage(image);
+		}	
 		playerDAO.saveOrUpdatePlayer(player);
 	}
 
@@ -65,7 +75,7 @@ public class PlayerManagerImpl implements PlayerManager
 		List<Player> listaNew = new ArrayList<Player>();
 		for (Player player : listaOrig)
 		{
-			if (player.getTeamId() != null )
+			if (player.getTeam().getId() != null )
 			{
 				listaNew.add(player);
 			}
@@ -78,6 +88,7 @@ public class PlayerManagerImpl implements PlayerManager
 		return playerDAO.listPlayers();
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void deletePlayer(long idPlayer)
 	{
 		playerDAO.deletePlayer(idPlayer);
@@ -91,7 +102,8 @@ public class PlayerManagerImpl implements PlayerManager
 	public void updateTeam(long idPlayer, long idTeam)
 	{
 		Player player = getPlayerById(idPlayer);
-		player.setTeamId(idTeam);
+		//player.setTeamId(idTeam);
+		player.getTeam().setId(idTeam);
 		
 		playerDAO.saveOrUpdatePlayer(player);
 	}

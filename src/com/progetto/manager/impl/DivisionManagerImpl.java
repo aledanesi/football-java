@@ -37,34 +37,37 @@ import com.progetto.manager.DivisionManager;
  */
 public class DivisionManagerImpl implements DivisionManager
 {
-	@Autowired
-	private DivisionDao divisionDAO;
+  @Autowired
+  private DivisionDao divisionDAO;
 
-	@Override
-	public List<Division> listDivisions()
-	{
-		return divisionDAO.listDivisions();
-	}	
-	
-	public Division getDivision(Long teamId, Long seasonYearId)
-	{
-		return divisionDAO.getDivision(teamId, seasonYearId);
-	}		
+  public List<Division> listDivisions()
+  {
+    return divisionDAO.listDivisions();
+  }  
+  
+  public Division getDivision(Long teamId, Long seasonYearId)
+  {
+    return divisionDAO.getDivision(teamId, seasonYearId);
+  }    
+  
+  public Division getDivisionById(Long divisionId)
+  {
+    return divisionDAO.getDivisionById(divisionId);
+  }      
 
-	@Override
-	/**
-	 * Method to get a nation 
-	 * 
-	 * @param nationId the nation id
-	 * @return the nation found
-	 */	
-	public List<Division> listDivisionsByNation(Long nationId)
-	{
-		return divisionDAO.listDivisionsByNation(nationId);
-	}	
-	
-	public void setDivisionDAO(DivisionDao divisionDAO) {
-		this.divisionDAO = divisionDAO;
-	}	
+  /**
+   * Method to get a nation 
+   * 
+   * @param nationId the nation id
+   * @return the nation found
+   */  
+  public List<Division> listDivisionsByNation(Long nationId)
+  {
+    return divisionDAO.listDivisionsByNation(nationId);
+  }  
+  
+  public void setDivisionDAO(DivisionDao divisionDAO) {
+    this.divisionDAO = divisionDAO;
+  }  
 
 }

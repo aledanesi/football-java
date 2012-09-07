@@ -74,7 +74,6 @@ public class PositionDaoImpl extends HibernateDaoSupport implements PositionDao 
 	 * @return the nations found
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Position> listPositions() {
 		return getHibernateTemplate().find("from Position");
 	}
@@ -86,7 +85,6 @@ public class PositionDaoImpl extends HibernateDaoSupport implements PositionDao 
 	 *            the position id
 	 * @return the position found
 	 */
-	@Override
 	public Position getPositionById(Long positionId) {
 		return (Position) getHibernateTemplate()
 				.get(Position.class, positionId);
@@ -98,7 +96,6 @@ public class PositionDaoImpl extends HibernateDaoSupport implements PositionDao 
 	 * @param positionId
 	 *            the position id
 	 */
-	@Override
 	public void deletePosition(Long positionId) {
 		Position position = (Position) getHibernateTemplate().get(
 				Position.class, positionId);

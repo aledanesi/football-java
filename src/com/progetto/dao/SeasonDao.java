@@ -35,45 +35,52 @@ import com.progetto.domain.SeasonYear;
  */
 public interface SeasonDao 
 {
-	/**
-	 * Method to save season
-	 * 
-	 * @param career the season to save
-	 */	
-	public void saveOrUpdateSeason(Season season);
-	
-	/**
-	 * Method to list season of a team
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public List<Season> listSeason();
-	
-	/**
-	 * Method to list season of a team
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public List<SeasonYear> listYears();	
-	
-	/**
-	 * Method to list season of a team
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public List<Season> getSeasonsByYearID(Long yearID, Long divisionID);	
-	
-	/**
-	 * Method to get a year of player career 
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public Season getSeasonById(Long seasonID);
-	
-	/**
-	 * Method to get a year of player career 
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public void delete(Long seasonID);
+  /**
+   * Method to save season
+   * 
+   * @param career the season to save
+   */  
+  public void saveOrUpdateSeason(Season season);
+  
+  /**
+   * Method to list season of a team
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public List<Season> listSeason();
+  
+  /**
+   * Method to list season of a team
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public List<SeasonYear> listYears();  
+  
+  /**
+   * Method to list season of a team
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public List<Season> getSeasonsByYearID(Long yearID, Long divisionID);  
+  
+  /**
+   * Method to get a year of player career 
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public Season getSeasonById(Long seasonID);
+  
+  /**
+   * Method to get a year of player career 
+   * 
+   * @param idSeason the season ask for our team
+   */    
+  public SeasonYear getSeasonYearById(Long seasonYearID);
+  
+  /**
+   * Method to get a year of player career 
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public void delete(Long seasonID);
 }

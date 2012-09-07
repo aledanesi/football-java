@@ -33,5 +33,5 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public interface UserDetailsManager 
 {
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException;
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException;
 }

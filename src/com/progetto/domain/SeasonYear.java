@@ -41,39 +41,39 @@ import javax.persistence.Table;
 @Table(name="SEASON_YEAR")
 public class SeasonYear implements Serializable 
 {
-	// serial version UID
-	private static final long serialVersionUID = 7526472295622776147L;
-	
-	/*************************************************
-	  
-	  FIELDS
-	  
-	 **************************************************/	
+  // serial version UID
+  private static final long serialVersionUID = 7526472295622776147L;
+  
+  /*************************************************
+    
+    FIELDS
+    
+   **************************************************/  
 
-	@Id
-	@GeneratedValue
-	@Column(name="ID")	
-	private Long id;
-	
-	@Column(name="VALUE")	
-	private String value;
+  @Id
+  @GeneratedValue
+  @Column(name="ID")  
+  private Long id;
+  
+  @Column(name="VALUE")  
+  private String value;
 
-	
-	
-	public Long getId() {
-		return id;
-	}
+  
+  
+  public Long getId() {
+    return id;
+  }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-	public String getValue() {
-		return value;
-	}
+  public String getValue() {
+    return value;
+  }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
-	
+  public void setValue(String value) {
+    this.value = value;
+  }
+  
 }

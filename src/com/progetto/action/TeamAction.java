@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +11,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.interceptor.ServletRequestAware;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -28,7 +26,7 @@ import com.progetto.manager.PlayerManager;
 import com.progetto.manager.TeamManager;
 import com.progetto.util.ProjectUtil;
 
-public class TeamAction extends FileUploadAction implements ServletRequestAware, ModelDriven<Team>
+public class TeamAction extends FileUploadAction implements ModelDriven<Team>
 {
 
 	private static final long serialVersionUID = 1L;
@@ -51,9 +49,8 @@ public class TeamAction extends FileUploadAction implements ServletRequestAware,
 
 	private List<Nation> nationList;
 
-	private ServletRequest servletRequest;
-
 	private static final Long DEFAULT_DIVISION = 1L;
+	private static final Long DEFAULT_NATION = 11L;
 
 	public TeamAction()
 	{
@@ -67,7 +64,6 @@ public class TeamAction extends FileUploadAction implements ServletRequestAware,
 		divisionList = teamManager.listDivisions();
 	}
 
-	@Override
 	public Team getModel()
 	{
 		return team;
@@ -85,11 +81,11 @@ public class TeamAction extends FileUploadAction implements ServletRequestAware,
 
 	public void validate()
 	{
-		if (team.getName() != null && StringUtils.isEmpty(team.getName()))
+		if (team != null && team.getName() != null && StringUtils.isEmpty(team.getName()))
 		{
 			addActionError("Il nome è obbligatorio.");
 		}
-		if (team.getPosti() != null && StringUtils.isEmpty(team.getPosti()))
+		if (team != null && team.getPosti() != null && StringUtils.isEmpty(team.getPosti()))
 		{
 			addFieldError("team.posti", "I posti sono obbligatori.");
 		}
@@ -133,12 +129,6 @@ public class TeamAction extends FileUploadAction implements ServletRequestAware,
 			byte[] image = getFileBytes();
 			team.setImage(image);
 		}
-		else
-			if (team.getId() != null)
-			{
-				team.setImage(teamManager.getTeamById(team.getId()).getImage());
-			}
-
 		teamManager.saveOrUpdateTeam(team);
 
 		return search();
@@ -153,12 +143,14 @@ public class TeamAction extends FileUploadAction implements ServletRequestAware,
 	{ @Result(name = "success", location = "/content/listTeam.jsp") })
 	public String list()
 	{
+		Long nationId = DEFAULT_NATION;
 		Long divisionId = DEFAULT_DIVISION;
 
-		teamList = teamManager.listTeamsByDivision(divisionId);
+		teamList = teamManager.listTeamsByDivision(nationId, divisionId);
 		divisionList = teamManager.listDivisions();
 
-		servletRequest.setAttribute("divisionId", divisionId);
+		team.getNation().setId(nationId);
+		team.getDivision().setId(divisionId);
 
 		return SUCCESS;
 	}
@@ -172,16 +164,22 @@ public class TeamAction extends FileUploadAction implements ServletRequestAware,
 	{ @Result(name = "success", location = "/content/listTeam.jsp") })
 	public String search()
 	{
+		Long nationId = DEFAULT_NATION;
 		Long divisionId = DEFAULT_DIVISION;
 
+		if (team.getNation().getId() != null)
+		{
+			nationId = team.getNation().getId();
+			team.getNation().setId(nationId);
+		}
 		if (team.getDivision().getId() != null)
 		{
 			divisionId = team.getDivision().getId();
+			team.getDivision().setId(divisionId);
 		}
 
-		teamList = teamManager.listTeamsByDivision(divisionId);
-		divisionList = teamManager.listDivisions();
-		servletRequest.setAttribute("divisionId", divisionId);
+		teamList = teamManager.listTeamsByDivision(nationId, divisionId);
+
 		return SUCCESS;
 	}
 
@@ -319,11 +317,5 @@ public class TeamAction extends FileUploadAction implements ServletRequestAware,
 	public List<Division> getDivisionList()
 	{
 		return divisionList;
-	}
-
-	@Override
-	public void setServletRequest(HttpServletRequest servletRequest)
-	{
-		this.servletRequest = servletRequest;
 	}
 }

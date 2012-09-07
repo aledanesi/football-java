@@ -29,14 +29,14 @@
     <ul> 
       <li> 
         <s:url id="returnListURL" action="searchTeam"> 
-        <s:param name="teamId" value=""></s:param> 
+        <s:param name="team.id" value=""></s:param> 
         </s:url> 
         <s:a href="%{returnListURL}"><s:text name="returnListTeam"/></s:a> 
       </li> 
       <sec:authorize access="hasRole('ROLE_ADMIN')">
         <li> 
           <s:url id="insertPlayerURL" action="insertPlayer"> 
-          <s:param name="teamId" value="%{teamId}"></s:param> 
+          <s:param name="team.id" value="%{team.id}"></s:param> 
           </s:url> 
           <s:a href="%{insertPlayerURL}"><s:text name="insertPlayer"/></s:a> 
         </li> 
@@ -52,7 +52,7 @@
 <br>
 <p align="center" style="margin: 10px; font-weight: bold; font-size: 20px">
 <img src="<s:url action="getDynamicImageTeam"> 
-<s:param name="id" value="%{teamId}"></s:param> </s:url>"> 
+<s:param name="id" value="%{team.id}"></s:param> </s:url>"> 
 </p>
 </td> 
 <td valign="middle" style="margin: 15pt;"> 

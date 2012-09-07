@@ -25,8 +25,11 @@ package com.progetto.manager.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.progetto.dao.CareerDao;
 import com.progetto.dao.TeamDao;
@@ -40,8 +43,11 @@ import com.progetto.manager.CareerManager;
  *
  */
 @Service("careerManager")
+@Transactional(readOnly = true)
 public class CareerManagerImpl implements CareerManager
 {
+	Logger log = Logger.getLogger(this.getClass());
+	
 	@Autowired
 	private CareerDao careerDAO;
 	
@@ -53,8 +59,20 @@ public class CareerManagerImpl implements CareerManager
 		return careerDAO.getCareerById(idCareer);
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.SUPPORTS)
 	public void saveOrUpdateCareer(Career career)
 	{
+		if (career.getImage() == null && career.getId() != null) 
+	    {
+			Career careerImage = getCareerById(career.getId());
+			if (careerImage != null)
+			{
+				career.setImage(careerImage.getImage());  
+			}
+	    }	
+		Team team = teamDAO.getTeamById(career.getTeam().getId());
+		career.setTeam(team);		
+		
 		careerDAO.saveOrUpdateCareer(career);
 	}
 	
@@ -63,15 +81,16 @@ public class CareerManagerImpl implements CareerManager
 		return careerDAO.listCareer(idPlayer);
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void batchCareer(Player player)
 	{
 
-		Team team = teamDAO.getTeamById(player.getTeamId());
+		Team team = teamDAO.getTeamById(player.getTeam().getId());
 		
 		Career career = new Career();
 		career.setPlayer(player);
 		career.setSerie("SERIE A");
-		career.setStagione("2011-2012");
+		//career.setStagione("2011-2012");
 		career.setTeam(team);
 		//career.setImage(player.getImage());	
 		

@@ -35,69 +35,69 @@ import com.progetto.domain.Team;
  */
 public interface TeamDao 
 {
-	/**
-	 * Method to save team
-	 * 
-	 * @param team the team to save
-	 */	
-	public void saveOrUpdateTeam(Team team);
-	
-	/**
-	 * Method to list teams
-	 * 
-	 * @return the teams found
-	 */	
-	public List<Team> listTeams();
-   
-	/**
-	 * Method to list teams
-	 * 
-	 * @return the teams found
-	 */	
-	public List<Team> listTeamsByQuery(String query);	  
+  /**
+   * Method to save team
+   * 
+   * @param team the team to save
+   */  
+  public void saveOrUpdateTeam(Team team);
   
-	/**
-	 * Method to list teams
-	 * 
-	 * @return the teams found
-	 */	
-	public List<Team> listFreeTeamsBySeason(Long seasonId, Long divisionId);
-	
-	/**
-	 * Method to list teams
-	 * 
-	 * @return the teams found
-	 */		
-	public List<Long> listSelectedTeamsBySeason(Long seasonId, Long divisionId); 
-	
-	/**
-	 * Method to get a team list by a division 
-	 * 
-	 * @param divisionId the division id
-	 * @return the teams found
-	 */	
-	public List<Team> listTeamsByDivision(Long divisionId);
-	
-	/**
-	 * Method to list divisions
-	 * 
-	 * @return the divisions found
-	 */			
-	public List<Division> listDivisions();
+  /**
+   * Method to list teams
+   * 
+   * @return the teams found
+   */  
+  public List<Team> listTeams();
+   
+  /**
+   * Method to list teams
+   * 
+   * @return the teams found
+   */  
+  public List<Team> listTeamsByQuery(String query);    
+  
+  /**
+   * Method to list teams
+   * 
+   * @return the teams found
+   */  
+  public List<Team> listFreeTeamsBySeason(Long seasonId, Long divisionId, Long nationId);
+  
+  /**
+   * Method to list teams
+   * 
+   * @return the teams found
+   */    
+  public List<Long> listSelectedTeamsBySeason(Long seasonId, Long divisionId, Long nationId); 
+  
+  /**
+   * Method to get a team list by a division 
+   * 
+   * @param divisionId the division id
+   * @return the teams found
+   */  
+  public List<Team> listTeamsByDivision(Long nationId, Long divisionId);
+  
+  /**
+   * Method to list divisions
+   * 
+   * @return the divisions found
+   */      
+  public List<Division> listDivisions();
 
-	/**
-	 * Method to get team by id
-	 * 
-	 * @param teamId the team id
-	 * @return the team found
-	 */	
-	public Team getTeamById(Long teamId);
-	
-	/**
-	 * Method to delete a team
-	 * 
-	 * @param teamId the team id
-	 */	
-	public void deleteTeam(Long teamId);
-	
+  /**
+   * Method to get team by id
+   * 
+   * @param teamId the team id
+   * @return the team found
+   */  
+  public Team getTeamById(Long teamId);
+  
+  /**
+   * Method to delete a team
+   * 
+   * @param teamId the team id
+   */  
+  public void deleteTeam(Long teamId);
+  
 }

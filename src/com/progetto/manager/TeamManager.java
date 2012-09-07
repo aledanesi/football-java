@@ -34,22 +34,22 @@ import com.progetto.domain.Team;
  */
 public interface TeamManager 
 {
-	public void saveOrUpdateTeam(Team team);
+  public void saveOrUpdateTeam(Team team);
 
-	public List<Team> listTeamsByDivision(long idDivision);
+  public List<Team> listTeamsByDivision(Long nationId, Long divisionId);
 
-	public List<Team> listTeams();
+  public List<Team> listTeams();
    
-	public List<Team> listTeamsByQuery(String query); 
+  public List<Team> listTeamsByQuery(String query); 
   
-	public List<Team> listFreeTeamsBySeason(Long seasonId, Long divisionId);	
-	
-	public Long[] listSelectedTeamsBySeason(Long seasonId, Long divisionId);  
-	
-	public List<Division> listDivisions();
+  public List<Team> listFreeTeamsBySeason(Long seasonId, Long divisionId, Long nationId);  
+  
+  public Long[] listSelectedTeamsBySeason(Long seasonId, Long divisionId, Long nationId);  
+  
+  public List<Division> listDivisions();
 
-	public void deleteTeam(long idTeam);
+  public void deleteTeam(long idTeam);
 
-	public Team getTeamById(long idTeam);
-	
+  public Team getTeamById(long idTeam);
+  
 }

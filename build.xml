@@ -10,12 +10,10 @@
 	<property name="build.dir" location="build" />
 	<property name="dist.dir" location="dist" />
 	<property name="web.dir" location="WebContent" />
-	<property name="res.dir" location="resources" />
+	<property name="res.dir" location="WebContent/WEB-INF/" />
 	<property name="deploy.dir" location="${appserver.home}/webapps" />
 	<property name="lib.dir" location="WebContent/WEB-INF/lib" />
 	
-	
-
 
 	<!-- create our ant classpath using the fileset task -->
 	<path id="class.path">
@@ -36,15 +34,9 @@
 		<tstamp />
 		<!-- Create the build directory structure used by compile -->
 		<mkdir dir="${build.dir}" />
-		<mkdir dir="${build.dir}/WEB-INF" />
-		<mkdir dir="${build.dir}/WEB-INF/lib" />
-		<mkdir dir="${build.dir}/WEB-INF/classes" />
 	</target>
 
 	<target name="compile" depends="init" description="compile the source">
-		<!-- Compile the java code from ${src} into ${build} -->
-		<javac srcdir="${src.dir}" destdir="${build.dir}/WEB-INF/classes" classpathref="class.path" />
-
 	</target>
 
 	<target name="dist" depends="compile" description="generate the distribution">
@@ -52,34 +44,6 @@
 		<copy todir="${build.dir}">
 			<fileset dir="${web.dir}" />
 		</copy>
-
-		<copy todir="${build.dir}/WEB-INF/classes">
-			<fileset dir="${src.dir}/" excludes="**/*.java" />
-		</copy>
-
-		<copy todir="${build.dir}/WEB-INF/classes">
-			<fileset dir="${res.dir}">
-				<exclude name="web.xml" />
-				<exclude name="spring.xml" />
-			</fileset>
-		</copy>
-
-		<copy todir="${build.dir}/WEB-INF/lib">
-			<fileset dir="${lib.dir}">
-				<include name="**/*.jar" />
-			</fileset>
-		</copy>
-
-		<copy todir="${build.dir}/WEB-INF/config">
-			<fileset dir="${res.dir}/config">
-				<include name="**/*.xml" />
-			</fileset>
-		</copy>
-
-		<!-- Create the distribution directory -->
-		<copy file="${res.dir}/web.xml" toDir="${build.dir}/WEB-INF" />
-
-		<mkdir dir="${dist.dir}" />
 
 		<war warfile="${dist.dir}/${app.name}.war" basedir="${build.dir}" webxml="${build.dir}/WEB-INF/web.xml" />
 	</target>

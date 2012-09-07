@@ -24,13 +24,11 @@
 package com.progetto.dao.hibernate;
 
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
-import com.googlecode.s2hibernate.struts2.plugin.annotations.TransactionTarget;
+
 import com.progetto.dao.CareerDao;
 import com.progetto.domain.Career;
 
@@ -41,18 +39,6 @@ import com.progetto.domain.Career;
  */
 @Repository("careerDAO")
 public class CareerDaoImpl extends HibernateDaoSupport implements CareerDao {
-
-	/***************************************************************************
-	 * 
-	 * FIELDS
-	 * 
-	 **************************************************************************/
-
-	@SessionTarget
-	Session session;
-
-	@TransactionTarget
-	Transaction transaction;
 
 	/***************************************************************************
 	 * 
@@ -67,9 +53,9 @@ public class CareerDaoImpl extends HibernateDaoSupport implements CareerDao {
 	 *            the career to save
 	 * 
 	 */
-	@Override
 	@Transactional
-	public void saveOrUpdateCareer(Career career) {
+	public void saveOrUpdateCareer(Career career) 
+	{
 		getHibernateTemplate().saveOrUpdate(career);
 	}
 
@@ -80,11 +66,10 @@ public class CareerDaoImpl extends HibernateDaoSupport implements CareerDao {
 	 *            the player ask for our career
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Career> listCareer(Long idPlayer) {
 		return getHibernateTemplate().find(
 				"from Career c where c.player.id = " + idPlayer
-						+ " order by stagione desc");
+						+ " order by stagione.id, month_transfer desc");
 	}
 
 	/**
@@ -94,7 +79,6 @@ public class CareerDaoImpl extends HibernateDaoSupport implements CareerDao {
 	 *            the player ask for our career
 	 * @return the career
 	 */
-	@Override
 	public Career getCareerById(Long careerId) {
 		return (Career) getHibernateTemplate().get(Career.class, careerId);
 	}

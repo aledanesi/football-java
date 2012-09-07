@@ -1,178 +1,220 @@
-*
-{ 
-margin: 0; 
-padding: 0; 
+* {
+    margin: 0;
+    padding: 0;
 }
-body
-{ 
-background: #FFF; 
-font: normal 12px Verdana, Arial; 
-color: #0029AD; 
-margin-top: 10px; 
-scrollbar-3dlight-color : #FFFFFF; 
-scrollbar-arrow-color : #0029ad; 
-scrollbar-base-color : #eef2f9; 
-scrollbar-darkshadow-color : #0029ad; 
-scrollbar-face-color : #FFFFFF; 
-scrollbar-highlight-color : #eef2f9; 
-scrollbar-shadow-color : #eef2f9; 
-scrollbar-track-color : #eef2f9; 
+
+body {
+    background: #FFF;
+    font: normal 12px Verdana, Arial;
+    color: #0029AD;
+    margin-top: 10px;
+    scrollbar-3dlight-color : #FFFFFF;
+    scrollbar-arrow-color : #0029ad;
+    scrollbar-base-color : #eef2f9;
+    scrollbar-darkshadow-color : #0029ad;
+    scrollbar-face-color : #FFFFFF;
+    scrollbar-highlight-color : #eef2f9;
+    scrollbar-shadow-color : #eef2f9;
+    scrollbar-track-color : #eef2f9;
 }
-input, select
+
+input,
+select
 {
-padding: 2px; 
-background-color: #7fadf0; 
-color: #FFFFFF; 
-border-style: 1px solid; 
-border-color:#7fadf0; 
-font-size: 12px 
+    padding: 2px;
+    background-color: #7fadf0;
+    color: #FFFFFF;
+    border-style: 1px solid;
+    border-color:#7fadf0;
+    font-size: 12px
 }
-ul, li 
+
+ul, li
 {
-margin: 0; 
-padding: 0; 
-list-style: none; 
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
+			
+
 /* ************************************************************************ */
-#header, 
-#page 
+
+#header,
+#page
 {
-margin-left: 10px; 
+    margin-left: 10px;
 }
+
 /* ************************************************************************ */
-#header { 
-/* background-color: #FF0000; */ 
-height: 25px; 
+
+#header {
+    /* background-color: #FF0000; */
+    height: 25px;
 }
-#menutop { 
+
+#menutop {
 }
-#menutop ul { 
-display: inline; 
+
+#menutop ul {
+    display: inline;
 }
-#menutop a { 
-color: #FFF; 
+
+#menutop a {
+    color: #FFF;
 }
-#menutop li { 
-display: inline; 
-float: left; 
-padding: 3px 10px 3px 10px; 
-background-color: #03376b; 
-border: 1px white solid; 
-border-width: 1px 1px 1px 0; 
+
+#menutop li {
+    display: inline;
+    float: left;
+    padding: 3px 10px 3px 10px;
+    background-color: #03376b;
+    border: 1px white solid;
+    border-width: 1px 1px 1px 0;
 }
-#menutop input { 
-width: 85px; 
-height: 14px; 
-background-color: #03376b; 
-border: 0px white solid; 
-font-weight: bold; 
+
+#menutop input {
+    width: 85px;
+    height: 14px;
+    background-color: #03376b;
+    border: 0px white solid;
+    font-weight: bold;
 }
+
 /* ************************************************************************ */
-#footer { 
-margin-top: 20px; 
-text-align: right; 
-width: 780px; 
-font-size: 50%; 
+
+#footer {
+    margin-top: 20px;
+    text-align: right;
+    width: 780px;
+    font-size: 50%;
 }
+
 /* ************************************************************************ */
-img.fotob { 
-padding: 1px; 
-border: 2px solid #0029ad; 
-margin: 3px; 
+
+img.fotob  {
+    padding: 1px;
+    border: 2px solid #0029ad;
+    margin: 3px;
+    
 }
-h1
-{ 
-font-weight: bold; 
-font-size: 16px; 
-margin-top: 1.5em; 
-margin-bottom: 1em; 
-color: #0029ad; 
+
+h1 {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    color: #0029ad;
 }
-table
-{ 
-border-collapse: collapse; 
-width: 750px; 
+
+table {
+    border-collapse: collapse;
+    width: 750px;
 }
-table, tr, td, th
-{
-border-top: 1px #000000 solid; 
-padding: 2px 2px 2px 2px; 
-}
-table
-{
-border: 1px #000000 solid; }
+
+table,
+tr,
+td,
 th
-{ 
-font-weight: bold; 
-text-align: center; }
-td
-{ 
-font-weight: normal; 
-text-align: center; 
-padding-left: 5px; 
-padding-right: 5px; 
-}
-a
-{ 
-font-weight: bold; 
-text-decoration: none; 
-color: #0029ad; 
-}
-img
-{ 
-border: 0px; }
-.bg1 { 
-}
-.bg2 { 
-background-color: #FFFFFF; 
-}
-.thead1 { 
-background-color: #03376b; 
-}
-.thead2 { 
-background-color: #0029ad; 
-}
-.thead3 { 
-background-color: #FFFFFF; 
-}
-.tcharw { 
-color: #FFFFFF; 
-}
-.alle { 
-text-align: left; 
-}
-.bolded { 
-font-weight: bold; 
-}
-.calendarContainer 
 {
-width: 200px; 
-border: 0 solid #000000; 
+    border-top: 1px #000000 solid; 
+    padding: 2px 2px 2px 2px;
 }
-.calendarContainer tr 
+
+table
 {
-padding: 0px; 
-border: 0 solid #000000; 
+    border: 1px #000000 solid; 
 }
-.calendarContainer td 
-{
-padding: 0px; 
-border: 0 solid #000000; 
+
+th {
+    font-weight: bold;
+    text-align: center; 
 }
-.calendarContainer table 
-{
-padding: 0px; 
-border: 0 solid #000000; 
+
+td {
+    font-weight: normal;
+    text-align: center; 
+    padding-left: 5px;
+    padding-right: 5px;
 }
-.tdLabel 
-{
-width: 100px; 
-color: blue; 
-text-align: center; 
-font-weight: bold; 
-vertical-align: middle; 
-white-space: nowrap; }
-.wwFormTable 
-{
-width: 100%; 
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+    color: #0029ad;
 }
+
+img {
+	border: 0px;    
+}
+
+.bg1 {
+}
+
+.bg2 {
+    background-color: #FFFFFF;
+}
+
+.thead1 {
+    background-color: #03376b;
+}
+
+.thead2 {
+    background-color: #0029ad;
+}
+
+.thead3 {
+    background-color: #FFFFFF;
+}
+
+.tcharw {
+    color: #FFFFFF;
+}
+
+.alle {
+    text-align: left;
+}
+
+.bolded {
+    font-weight: bold;
+}
+
+
+.calendarContainer
+{
+	width: 200px;
+	border: 0 solid #000000;
+}
+
+.calendarContainer tr
+{
+	padding: 0px;
+	border: 0 solid #000000;
+}
+
+.calendarContainer td
+{
+	padding: 0px;
+	border: 0 solid #000000;
+}
+
+.calendarContainer table
+{
+	padding: 0px;
+	border: 0 solid #000000;
+}
+
+.tdLabel
+{
+	width: 100px;
+	color: blue;
+	text-align: center;
+	font-weight: bold;
+	vertical-align: middle;
+	white-space: nowrap; 	
+}
+
+.wwFormTable
+{
+	width: 100%;
+}
+

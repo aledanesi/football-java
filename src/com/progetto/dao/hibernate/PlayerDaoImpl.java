@@ -24,13 +24,11 @@
 package com.progetto.dao.hibernate;
 
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
-import com.googlecode.s2hibernate.struts2.plugin.annotations.TransactionTarget;
+
 import com.progetto.dao.PlayerDao;
 import com.progetto.domain.Player;
 
@@ -41,17 +39,6 @@ import com.progetto.domain.Player;
 @Repository("playerDAO")
 public class PlayerDaoImpl extends HibernateDaoSupport implements PlayerDao {
 
-	/***************************************************************************
-	 * 
-	 * FIELDS
-	 * 
-	 **************************************************************************/
-
-	@SessionTarget
-	Session session;
-
-	@TransactionTarget
-	Transaction transaction;
 
 	/***************************************************************************
 	 * 
@@ -65,10 +52,16 @@ public class PlayerDaoImpl extends HibernateDaoSupport implements PlayerDao {
 	 * @param career
 	 *            the player to save
 	 */
-	@Override
 	@Transactional
 	public void saveOrUpdatePlayer(Player player) {
-		getHibernateTemplate().saveOrUpdate(player);
+		  if (player.getId() != null)
+		  {
+			  getHibernateTemplate().merge(player);
+		  }
+		  else 
+		  {
+			  getHibernateTemplate().saveOrUpdate(player);
+		  }	
 	}
 
 	/**
@@ -79,7 +72,6 @@ public class PlayerDaoImpl extends HibernateDaoSupport implements PlayerDao {
 	 * @return the players found
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Player> listPlayers() {
 		return getHibernateTemplate().find("from Player p order by p.lastName");
 	}
@@ -90,11 +82,10 @@ public class PlayerDaoImpl extends HibernateDaoSupport implements PlayerDao {
 	 * @return the players found
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Player> listPlayersByTeam(Long idTeam) {
 		return getHibernateTemplate()
 				.findByNamedParam(
-						"from Player p where p.teamId = :idTeam order by p.position, p.lastName",
+						"from Player p where p.team.id = :idTeam order by p.position, p.lastName",
 						"idTeam", idTeam);
 	}
 
@@ -104,7 +95,6 @@ public class PlayerDaoImpl extends HibernateDaoSupport implements PlayerDao {
 	 * @return the players found
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Player> listPlayersByLetter(String letter) {
 		return getHibernateTemplate()
 				.findByNamedParam(
@@ -119,8 +109,8 @@ public class PlayerDaoImpl extends HibernateDaoSupport implements PlayerDao {
 	 *            the playerId id
 	 * @return the players found
 	 */
-	@Override
-	public Player getPlayerById(Long playerId) {
+	public Player getPlayerById(Long playerId) 
+	{
 		return (Player) getHibernateTemplate().get(Player.class, playerId);
 	}
 
@@ -130,10 +120,9 @@ public class PlayerDaoImpl extends HibernateDaoSupport implements PlayerDao {
 	 * @param playerId
 	 *            the playerId id
 	 */
-	@Override
-	public void deletePlayer(Long playerId) {
-		Player player = (Player) getHibernateTemplate().get(Player.class,
-				playerId);
+	public void deletePlayer(Long playerId) 
+	{
+		Player player = (Player) getHibernateTemplate().get(Player.class, playerId);
 		getHibernateTemplate().delete(player);
 	}
 }

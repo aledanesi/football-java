@@ -30,6 +30,6 @@ import com.progetto.domain.User;
  *
  */
 public interface UserDao {
-	
-	public User findUserByName(String username);
+  
+  public User findUserByName(String username);
 }

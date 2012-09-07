@@ -21,143 +21,188 @@ import com.progetto.manager.TeamManager;
 
 public class SeasonAction extends FileUploadAction implements ModelDriven<Season> 
 {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private TeamManager teamManager;
-	private NationManager nationManager;
-	private DivisionManager divisionManager;
-	private SeasonManager seasonManager;
+  private TeamManager teamManager;
+  private NationManager nationManager;
+  private DivisionManager divisionManager;
+  private SeasonManager seasonManager;
 
-	private List<SeasonYear> yearList;
-	private List<Season> championshipList;
-	private List<Team> teamList;
-	private List<Nation> nationList;
-	
-	private String[] selTeams;
-	
-	private List<Division> divisionList;
+  private List<SeasonYear> yearList;
+  private List<Season> championshipList;
+  private List<Team> teamList;
+  private List<Nation> nationList;
+  
+  private String[] selTeams;
+  
+  private List<Division> divisionList;
 
-	private Season season;
+  private Season season;
 
-	public SeasonAction() {
-		teamManager = (TeamManager) SpringHelper.getBean("teamManager");
-		nationManager = (NationManager) SpringHelper.getBean("nationManager");
-		divisionManager = (DivisionManager) SpringHelper.getBean("divisionManager");
-		seasonManager = (SeasonManager) SpringHelper.getBean("seasonManager");
+  public SeasonAction() {
+    teamManager = (TeamManager) SpringHelper.getBean("teamManager");
+    nationManager = (NationManager) SpringHelper.getBean("nationManager");
+    divisionManager = (DivisionManager) SpringHelper.getBean("divisionManager");
+    seasonManager = (SeasonManager) SpringHelper.getBean("seasonManager");
 
-		season = new Season();
-		
-		selTeams = new String[0];
-		teamList = new ArrayList<Team>();
-		yearList = new ArrayList<SeasonYear>();
-		divisionList = divisionManager.listDivisions();
-	}
+    season = new Season();
+    
+    selTeams = new String[0];
+    teamList = new ArrayList<Team>();
+    yearList = new ArrayList<SeasonYear>();
+    divisionList = divisionManager.listDivisions();
+  }
 
-	@Override
-	public Season getModel() {
-		return season;
-	}
+  public Season getModel() {
+    return season;
+  }
 
-	/*
-	 * _=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
-	 * 
-	 * METODI DI ACTION
-	 * 
-	 * _=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
-	 */
+  /*
+   * _=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
+   * 
+   * METODI DI ACTION
+   * 
+   * _=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
+   */
 
 
-	/**
-	 * To save or update career.
-	 * 
-	 * @return String
-	 */
-	@Action(value = "/saveSeason", results = {
-			@Result(name = "success", location = "/content/handleSeason.jsp"), 
-			@Result(name = "input", location = "/content/handleSeason.jsp") }
+  /**
+   * To save or update career.
+   * 
+   * @return String
+   */
+  @Action(value = "/saveSeason", results = {
+      @Result(name = "success", location = "/content/secure/handleSeason.jsp"), 
+      @Result(name = "input", location = "/content/secure/handleSeason.jsp") }
 
-	)
-	public String save() 
-	{
-		seasonManager.deleteAll(season);
-		for (int i = 0; i < selTeams.length; i++)
-		{
-			season.setTeam(teamManager.getTeamById(Integer.parseInt(selTeams[i])));
-			seasonManager.saveOrUpdateSeason(season);
-			season.setId(null);
-		}
-	
-		return list();
-	}
+  )
+  public String save() 
+  {
+    seasonManager.deleteAll(season);
+    for (int i = 0; i < selTeams.length; i++)
+    {
+      Season season = new Season();
+      season.setDivision(this.getSeason().getDivision());
+      season.setNation(this.getSeason().getNation());
+      season.setSeasonYear(this.getSeason().getSeasonYear());
+      season.setTeam(teamManager.getTeamById(Integer.parseInt(selTeams[i])));
+      seasonManager.saveOrUpdateSeason(season);
+    }
+  
+    return list();
+  }
 
-	/**
-	 * To list all users.
-	 * 
-	 * @return String
-	 */
-	@Action(value = "/handleSeason", results = { @Result(name = "success", location = "/content/secure/handleSeason.jsp") })
-	public String list() {
-		
-		yearList = seasonManager.listYears();
-		divisionList = divisionManager.listDivisions();
-		nationList = nationManager.listNations();
+  /**
+   * To list all users.
+   * 
+   * @return String
+   */
+  @Action(value = "/handleSeason", results = { @Result(name = "success", location = "/content/secure/handleSeason.jsp") })
+  public String list() {
+    
+    yearList = seasonManager.listYears();
+    nationList = nationManager.listNations();
+    
+    // default value
+    Long seasonYearId = 13L;
+    Long divisionId = 1L;
+    Long nationId = 11L;      
+    
+    if (season.getSeasonYear() != null)
+    {
+    	seasonYearId = season.getSeasonYear().getId(); 
+      	season.setSeasonYear(seasonManager.getSeasonYearById(seasonYearId));
+    }
+    else 
+    {
+    	season.setSeasonYear(seasonManager.getSeasonYearById(seasonYearId));
+    }
+    
+    if (season.getNation() != null)
+    {
+    	nationId = season.getNation().getId();  
+    	season.setNation(nationManager.getNationById(nationId));
+    } 
+    else 
+    {
+    	season.setNation(nationManager.getNationById(nationId));
+    }
 
-		// default value
-		Long seasonYearId = 12L;
-		Long divisionId = 1L;
-		if (season.getSeasonYear() != null && season.getDivision() != null)
-		{
-			seasonYearId = season.getSeasonYear().getId();
-			divisionId = season.getDivision().getId();			
-		}
-		
-		teamList = teamManager.listFreeTeamsBySeason(seasonYearId, divisionId);
-		season.setArr(teamManager.listSelectedTeamsBySeason(seasonYearId, divisionId));
-		
-		return SUCCESS;
-	}	
-	
-	/*
-	 * _=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_
-	 * 
-	 * METODI GET E SET
-	 * 
-	 * =_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
-	 */
+    divisionList = divisionManager.listDivisionsByNation(nationId);
 
-	public Season getSeason() {
-		return season;
-	}
+    if (season.getDivision() != null)
+    {
+    	divisionId = season.getDivision().getId(); 
+    	Division division = divisionManager.getDivisionById(divisionId);
+    	if (! divisionList.contains(division) && divisionList.size() > 0)
+    	{
+    		division = divisionList.get(0);
+    		divisionId = division.getId();
+        	season.setDivision(divisionManager.getDivisionById(division.getId()));
+    	}
+    	else 
+    	{
+    		season.setDivision(divisionManager.getDivisionById(divisionId));	
+    	}
+    	
+    } 
+    else 
+    {
+    	if (divisionList.size() > 0)
+    	{
+        	Division division = divisionList.get(0);
+        	divisionId = division.getId();
+        	season.setDivision(divisionManager.getDivisionById(division.getId()));
+    	}
+    }    
+    
+    teamList = teamManager.listFreeTeamsBySeason(seasonYearId, divisionId, nationId);
+    season.setArr(teamManager.listSelectedTeamsBySeason(seasonYearId, divisionId, nationId));
 
-	public void setSeason(Season season) {
-		this.season = season;
-	}
+    return SUCCESS;
+  }  
+  
+  /*
+   * _=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_
+   * 
+   * METODI GET E SET
+   * 
+   * =_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=
+   */
 
-	public List<Season> getChampionshipList() {
-		return championshipList;
-	}
-	
-	public List<SeasonYear> getYearList() {
-		return yearList;
-	}	
-	
-	public List<Team> getTeamList() {
-		return teamList;
-	}	
-	
-	public List<Nation> getNationList() {
-		return nationList;
-	}		
-	
-	public List<Division> getDivisionList() {
-		return divisionList;
-	}	
+  public Season getSeason() {
+    return season;
+  }
 
-	public String[] getSelTeams() {
-		return selTeams;
-	}
+  public void setSeason(Season season) {
+    this.season = season;
+  }
 
-	public void setSelTeams(String[] selTeams) {
-		this.selTeams = selTeams;
-	}
+  public List<Season> getChampionshipList() {
+    return championshipList;
+  }
+  
+  public List<SeasonYear> getYearList() {
+    return yearList;
+  }  
+  
+  public List<Team> getTeamList() {
+    return teamList;
+  }  
+  
+  public List<Nation> getNationList() {
+    return nationList;
+  }    
+  
+  public List<Division> getDivisionList() {
+    return divisionList;
+  }  
+
+  public String[] getSelTeams() {
+    return selTeams;
+  }
+
+  public void setSelTeams(String[] selTeams) {
+    this.selTeams = selTeams;
+  }
 }

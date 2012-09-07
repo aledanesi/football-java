@@ -34,41 +34,48 @@ import com.progetto.domain.SeasonYear;
  */
 public interface SeasonManager 
 {
-	
-	/**
-	 * Method to save season
-	 * 
-	 * @param career the season to save
-	 */	
-	public void saveOrUpdateSeason(Season championship);
-	
-	/**
-	 * Method to list season of a team
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public List<Season> listSeason();
-	
-	/**
-	 * Method to list season of a team
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public List<SeasonYear> listYears();
-	
-	
-	/**
-	 * Method to get a year of player career 
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public Season getSeasonById(Long idSeason);
-	
-	/**
-	 * Method to get a year of player career 
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	public void deleteAll(Season bean);
-	
+  
+  /**
+   * Method to save season
+   * 
+   * @param career the season to save
+   */  
+  public void saveOrUpdateSeason(Season championship);
+  
+  /**
+   * Method to list season of a team
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public List<Season> listSeason();
+  
+  /**
+   * Method to list season of a team
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public List<SeasonYear> listYears();
+  
+  
+  /**
+   * Method to get a year of player career 
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public Season getSeasonById(Long idSeason);
+  
+  /**
+   * Method to get a year of player career 
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public SeasonYear getSeasonYearById(Long seasonYearID);
+  
+  /**
+   * Method to get a year of player career 
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  public void deleteAll(Season bean);
+  
 }

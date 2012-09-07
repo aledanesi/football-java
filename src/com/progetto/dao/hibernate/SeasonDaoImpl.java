@@ -43,90 +43,96 @@ import com.progetto.domain.SeasonYear;
 @Repository("seasonDAO")
 public class SeasonDaoImpl extends HibernateDaoSupport implements SeasonDao 
 {
-	
-	/*************************************************
-	  
-	  METHODS
-	  
-	 **************************************************/	
-	
-	/**
-	 * Method to save career
-	 * 
-	 * @param career the career to save
-	 * 
-	 */	
-	@Override
-	public void saveOrUpdateSeason(Season championship) 
-	{		
-		getHibernateTemplate().saveOrUpdate(championship);	
-	}	
-	
-	/**
-	 * Method to list career of a player
-	 * 
-	 * @param idPlayer the player ask for our career
-	 */	
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Season> listSeason() 
-	{
-		return getHibernateTemplate().find("from Season s order by year desc");
-	}	
-	
-	/**
-	 * Method to list career of a player
-	 * 
-	 * @param idPlayer the player ask for our career
-	 */	
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<SeasonYear> listYears() 
-	{
-		return getHibernateTemplate().find("from SeasonYear s order by id desc");
-	}		
-	
-	/**
-	 * Method to list season of a team
-	 * 
-	 * @param idSeason the season ask for our team
-	 */	
-	@SuppressWarnings("unchecked")
-	public List<Season> getSeasonsByYearID(Long yearID, Long divisionID)
-	{
-		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
-		Criteria criteria = session.createCriteria(Season.class);
-		criteria.add(Restrictions.eq("seasonYear.id", yearID));
-		criteria.add(Restrictions.eq("division.id", divisionID));
-		List<Season> lista = criteria.list();	
-		
-		return lista;
-	}	
-	
-	
-	/**
-	 * Method to get a year of player career 
-	 * 
-	 * @param idPlayer the player ask for our career
-	 * @return the career
-	 */		
-	@Override
-	public Season getSeasonById(Long seasonID) 
-	{
-		return (Season)getHibernateTemplate().get(Season.class, seasonID);
-	}	
-	
-	/**
-	 * Method to save career
-	 * 
-	 * @param career the career to save
-	 * 
-	 */	
-	@Override
-	public void delete(Long seasonID) 
-	{		
-		Season team = (Season)getHibernateTemplate().get(Season.class, seasonID);
-		getHibernateTemplate().delete(team);
-	}		
+  
+  /*************************************************
+    
+    METHODS
+    
+   **************************************************/  
+  
+  /**
+   * Method to save career
+   * 
+   * @param career the career to save
+   * 
+   */  
+  public void saveOrUpdateSeason(Season championship) 
+  {    
+    getHibernateTemplate().saveOrUpdate(championship);  
+  }  
+  
+  /**
+   * Method to list career of a player
+   * 
+   * @param idPlayer the player ask for our career
+   */  
+  @SuppressWarnings("unchecked")
+  public List<Season> listSeason() 
+  {
+    return getHibernateTemplate().find("from Season s order by year asc");
+  }  
+  
+  /**
+   * Method to list career of a player
+   * 
+   * @param idPlayer the player ask for our career
+   */  
+  @SuppressWarnings("unchecked")
+  public List<SeasonYear> listYears() 
+  {
+    return getHibernateTemplate().find("from SeasonYear s order by value desc");
+  }    
+  
+  /**
+   * Method to list season of a team
+   * 
+   * @param idSeason the season ask for our team
+   */  
+  @SuppressWarnings("unchecked")
+  public List<Season> getSeasonsByYearID(Long yearID, Long divisionID)
+  {
+    Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+    Criteria criteria = session.createCriteria(Season.class);
+    criteria.add(Restrictions.eq("seasonYear.id", yearID));
+    criteria.add(Restrictions.eq("division.id", divisionID));
+    List<Season> lista = criteria.list();  
+    
+    return lista;
+  }  
+  
+  
+  /**
+   * Method to get a year of player career 
+   * 
+   * @param idPlayer the player ask for our career
+   * @return the career
+   */    
+  public Season getSeasonById(Long seasonID) 
+  {
+    return (Season)getHibernateTemplate().get(Season.class, seasonID);
+  }  
+  
+  /**
+   * Method to get a year of player career 
+   * 
+   * @param idPlayer the player ask for our career
+   * @return the career
+   */    
+  public SeasonYear getSeasonYearById(Long seasonYearID) 
+  {
+    return (SeasonYear)getHibernateTemplate().get(SeasonYear.class, seasonYearID);
+  }    
+  
+  /**
+   * Method to save career
+   * 
+   * @param career the career to save
+   * 
+   */  
+  public void delete(Long seasonID) 
+  {    
+    Season team = (Season)getHibernateTemplate().get(Season.class, seasonID);
+    getHibernateTemplate().delete(team);
+  }    
 
 }

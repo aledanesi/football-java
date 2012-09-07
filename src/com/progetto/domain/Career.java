@@ -35,129 +35,158 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Career class.
- * The class describe the career of any player.
- *
+ * Career class. The class describe the career of any player.
+ * 
  * @author Alessandro Danesi
  */
 @Entity
-@Table(name="CAREER")
-public class Career implements Serializable 
+@Table(name = "CAREER")
+public class Career implements Serializable
 {
-	
+
 	/*************************************************
-	  
-	  FIELDS
-	  
+	 * FIELDS
 	 **************************************************/
-	
+
 	// serial version UID
 	private static final long serialVersionUID = 7526472295622776147L;
 
 	@Id
 	@GeneratedValue
-	@Column(name="ID")	
+	@Column(name = "ID")
 	private Long id;
-	
-	@Column(name="GOAL")
+
+	@Column(name = "GOAL")
 	private String goal;
-	
-	@ManyToOne(cascade = CascadeType.MERGE)	
+
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private SeasonYear stagione = new SeasonYear();
-	
-	@ManyToOne(cascade = CascadeType.MERGE)	
+
+	@Column(name = "MONTH_TRANSFER")
+	private String monthTransfer;
+
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Player player = new Player();
-	
+
 	@ManyToOne(cascade = CascadeType.MERGE)
 	private Team team;
-	
-	@Column(name="SERIE")
-	private String serie;
-	
-	@Column(name="IMAGE")
-	private byte[] image;	
-	
-	
-	@Embedded 
-	private CareerDetail dettaglioCarriera;		
-	
-	/*************************************************
-	  
-	  METHODS
-	  
-	 **************************************************/	
-	
 
-	public Long getId() 
+	@ManyToOne(cascade = CascadeType.MERGE)
+	private Team teamOwner;
+
+	@Column(name = "SERIE")
+	private String serie;
+
+	@Column(name = "IMAGE")
+	private byte[] image;
+
+	@Embedded
+	private CareerDetail dettaglioCarriera;
+
+	/*************************************************
+	 * METHODS
+	 **************************************************/
+
+	public Long getId()
 	{
 		return id;
 	}
-	public void setId(Long id) 
+
+	public void setId(Long id)
 	{
 		this.id = id;
-	}		
-	
-	public Player getPlayer() 
+	}
+
+	public Player getPlayer()
 	{
 		return player;
 	}
-	public void setPlayer(Player player) 
+
+	public void setPlayer(Player player)
 	{
 		this.player = player;
 	}
-		
-	public SeasonYear getStagione() 
+
+	public SeasonYear getStagione()
 	{
 		return stagione;
 	}
-	public void setStagione(SeasonYear stagione) 
+
+	public void setStagione(SeasonYear stagione)
 	{
 		this.stagione = stagione;
 	}
-		
-	public Team getTeam() 
+
+	public Team getTeam()
 	{
 		return team;
 	}
-	public void setTeam(Team team) 
+
+	public void setTeam(Team team)
 	{
 		this.team = team;
 	}
-	
-	
-	public String getSerie() 
+
+	public Team getTeamOwner()
+	{
+		return teamOwner;
+	}
+
+	public void setTeamOwner(Team teamOwner)
+	{
+		this.teamOwner = teamOwner;
+	}
+
+	public String getSerie()
 	{
 		return serie;
 	}
-	public void setSerie(String serie) 
+
+	public void setSerie(String serie)
 	{
 		this.serie = serie;
 	}
-		
-	public String getGoal() 
+
+	public String getGoal()
 	{
 		return goal;
 	}
-	public void setGoal(String goal) 
+
+	public void setGoal(String goal)
 	{
 		this.goal = goal;
 	}
-	
-	public CareerDetail getDettaglioCarriera() 
+
+	public String getMonthTransfer()
+	{
+		return monthTransfer;
+	}
+
+	public void setMonthTransfer(String monthTransfer)
+	{
+		this.monthTransfer = monthTransfer;
+	}
+
+	public CareerDetail getDettaglioCarriera()
 	{
 		return dettaglioCarriera;
 	}
-	public void setDettaglioCarriera(CareerDetail dettaglioCarriera) 
+
+	public void setDettaglioCarriera(CareerDetail dettaglioCarriera)
 	{
 		this.dettaglioCarriera = dettaglioCarriera;
-	}		
-	
-	public byte[] getImage() {
+	}
+
+	public byte[] getImage()
+	{
 		return image;
 	}
-	public void setImage(byte[] image) {
+
+	public void setImage(byte[] image)
+	{
 		this.image = image;
 	}
+
 	/**
 	 * Method to view the object fields
 	 * */
@@ -168,10 +197,9 @@ public class Career implements Serializable
 		sb.append("id: " + id);
 		sb.append(", player.id: " + player);
 		sb.append(", stagione: " + stagione);
-		sb.append(", sost fatte: " + dettaglioCarriera.getSostFatte());
-		sb.append(", sost avute: " + dettaglioCarriera.getSostAvute());	
 		sb.append(", team: " + team);
 		sb.append(", serie: " + serie);
+		sb.append(", partiteGiocate: " + dettaglioCarriera.getPartiteGiocate());
 		sb.append(", goal: " + goal);
 		sb.append("]");
 		return sb.toString();

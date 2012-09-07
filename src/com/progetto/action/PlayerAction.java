@@ -64,8 +64,6 @@ public class PlayerAction extends FileUploadAction implements ServletRequestAwar
 
 	private Player player;
 
-	// private Career career = new Career();
-
 	private List<String> lettereRicerca;
 
 	private ServletRequest request;
@@ -89,7 +87,6 @@ public class PlayerAction extends FileUploadAction implements ServletRequestAwar
 		divisionList = divisionManager.listDivisions();
 	}
 
-	@Override
 	public Player getModel()
 	{
 		return player;
@@ -179,25 +176,19 @@ public class PlayerAction extends FileUploadAction implements ServletRequestAwar
 	public String save()
 	{
 		Position position = positionManager.getPositionById(player.getPosition().getId());
-		// Team team = teamManager.getTeamById(player.getTeam().getId());
-		Team team = teamManager.getTeamById(player.getTeamId());
+		Team team = teamManager.getTeamById(player.getTeam().getId());
 		Nation nation = nationManager.getNationById(player.getNation().getId());
 
 		player.setPosition(position);
-		player.setTeamId(team.getId()); // ???
+		player.setTeam(team);
 		player.setNation(nation);
 
 		if (userImage != null)
 		{
 			byte[] image = getFileBytes();
 			player.setImage(image);
-		}
-		else
-			if (player.getId() != null)
-			{
-				player.setImage(playerManager.getPlayerById(player.getId()).getImage());
-			}
-
+		}	
+		
 		playerManager.saveOrUpdatePlayer(player);
 
 		return listByTeam();
@@ -229,20 +220,20 @@ public class PlayerAction extends FileUploadAction implements ServletRequestAwar
 	public String saveChangeTeam()
 	{
 
-		if (player.getTeamId() == null)
+		if (player.getTeam().getId() == null)
 		{
 			addFieldError("player.teamId", "La squadra è obbligatoria.");
 
 			player = playerManager.getPlayerById(player.getId());
-			Team team = teamManager.getTeamById(player.getTeamId());
+			Team team = teamManager.getTeamById(player.getTeam().getId());
 			divisionList = divisionManager.listDivisionsByNation(team.getNation().getId());
 
 			return INPUT;
 		}
 
 		Player bean = playerManager.getPlayerById(player.getId());
-		playerManager.updateTeam(player.getId(), player.getTeamId());
-		player.setTeamId(bean.getTeamId());
+		playerManager.updateTeam(player.getId(), player.getTeam().getId());
+		player.setTeam(bean.getTeam());
 
 		return SUCCESS;
 	}
@@ -256,10 +247,10 @@ public class PlayerAction extends FileUploadAction implements ServletRequestAwar
 	{ @Result(name = "success", location = "/content/listPlayer.jsp") })
 	public String listByTeam()
 	{
-		if (player.getTeamId() != null)
+		if (player.getTeam().getId() != null)
 		{
-			playerList = playerManager.listPlayersByTeam(player.getTeamId());
-			Team team = teamManager.getTeamById(player.getTeamId());
+			playerList = playerManager.listPlayersByTeam(player.getTeam().getId());
+			Team team = teamManager.getTeamById(player.getTeam().getId());
 			request.setAttribute("team", team);
 		}
 		return SUCCESS;
@@ -406,7 +397,6 @@ public class PlayerAction extends FileUploadAction implements ServletRequestAwar
 		return lettereRicerca;
 	}
 
-	@Override
 	public void setServletRequest(HttpServletRequest servletRequest)
 	{
 		this.request = servletRequest;

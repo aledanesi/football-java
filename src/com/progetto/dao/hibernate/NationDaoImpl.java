@@ -24,12 +24,10 @@
 package com.progetto.dao.hibernate;
 
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
-import com.googlecode.s2hibernate.struts2.plugin.annotations.SessionTarget;
-import com.googlecode.s2hibernate.struts2.plugin.annotations.TransactionTarget;
+
 import com.progetto.dao.NationDao;
 import com.progetto.domain.Nation;
 
@@ -39,19 +37,10 @@ import com.progetto.domain.Nation;
  * @author Alessandro Danesi
  */
 @Repository("nationDAO")
-public class NationDaoImpl extends HibernateDaoSupport implements NationDao {
+public class NationDaoImpl extends HibernateDaoSupport implements NationDao 
+{
 
-	/***************************************************************************
-	 * 
-	 * FIELDS
-	 * 
-	 **************************************************************************/
 
-	@SessionTarget
-	Session session;
-
-	@TransactionTarget
-	Transaction transaction;
 
 	/***************************************************************************
 	 * 
@@ -75,7 +64,6 @@ public class NationDaoImpl extends HibernateDaoSupport implements NationDao {
 	 * @return the nations found
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Nation> listNations() {
 		return getHibernateTemplate().find("from Nation n order by n.name");
 	}
@@ -87,7 +75,6 @@ public class NationDaoImpl extends HibernateDaoSupport implements NationDao {
 	 *            the nation id
 	 * @return the nations found
 	 */
-	@Override
 	public Nation getNationById(Long nationId) {
 		return (Nation) getHibernateTemplate().get(Nation.class, nationId);
 	}
@@ -98,10 +85,8 @@ public class NationDaoImpl extends HibernateDaoSupport implements NationDao {
 	 * @param nationId
 	 *            the nation id
 	 */
-	@Override
 	public void deleteNation(Long nationId) {
-		Nation nation = (Nation) getHibernateTemplate().get(Nation.class,
-				nationId);
+		Nation nation = (Nation) getHibernateTemplate().get(Nation.class, nationId);
 		getHibernateTemplate().delete(nation);
 	}
 }
