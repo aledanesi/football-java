@@ -1,0 +1,6804 @@
+* {
+	margin:0;
+	padding:0;
+	font-size:8pt;
+	font-family:Verdana, Helvetica, sans-serif;		
+}
+
+body 
+{
+	color: #ffffff;
+	background-color:#D4DAE3;
+}
+
+
+form 
+{
+	margin:10px; padding: 0 5px;
+	background-color: #FAFAFA; 
+}
+
+input 
+{
+	font-size:10pt;
+}
+
+img {
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+a:link, a:visited, a:hover, a:active {color:#0e2e7f;text-decoration:none;}
+
+p 
+{
+	padding: 10px;	
+}
+
+div 
+{
+	padding-top: 2px;	
+	padding-bottom: 2px;	
+}
+
+label 
+{
+	color: #000000;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 10px;	
+}
+
+input[type="text"], input[type="password"], textarea, select {
+	width: 150px;	
+}
+
+input[type="button"], input[type="submit"]
+{
+	background-color: rgb(14, 46, 128);
+	border: 0;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #ffffff;
+	margin: 1px 0 0 4px;
+	padding: 2px;
+	width: 80px;
+	height: 20px;	
+}
+
+input[type="text"], input[type="password"], select, input[type="checkbox"], input[type="file"] 
+{
+    background-image: -moz-linear-gradient(center top , rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0) 4px, rgba(0, 0, 0, 0));
+    border-color: #AAAAAA;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: normal;
+    outline: 0 none;
+    padding: 6px 4px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus
+{
+    background-image: -moz-linear-gradient(center top , rgba(0, 0, 0, 0.19), rgba(0, 0, 0, 0) 5px, rgba(0, 0, 0, 0));
+    border-color: #222222;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #222222;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+}
+
+/********************************************
+   LAYOUT
+********************************************/ 
+#flag {
+	border: 1px solid black;
+	width: 16px;
+	height: 7px;
+	vertical-align: top;
+	margin-top: 2px;
+}
+
+#wrap {
+	width: 900px;
+	background-color: #ffffff;
+	text-align: left;
+	padding: 20px;
+	margin-top: 15px; 
+	margin-left: 250px; 
+	font-size: 14px; 
+	repeat-x scroll 0 0 #4F84B8; 
+	border-radius: 10px; 
+	box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);	
+}
+
+#content-wrap {
+	clear: both;
+	width: 760px;
+	padding: 20px; 
+	margin: 0px auto;
+}
+
+#header {
+	background-color: rgb(14, 46, 128);
+	width: 900px;
+	position: relative;
+	height: 100px;
+	color: #FFF;
+	border-radius: 10px;
+	box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);	
+}
+
+#footer {
+	background-color: rgb(14, 46, 128);
+	width: 900px;
+	height: 50px;
+	text-align: center;	
+	font-size: 92%;	
+	border-radius: 10px;
+	box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4);	
+}
+
+#footer a { 
+	color: #FFF;
+	text-decoration: none; 
+}
+
+
+#logo-text {
+	position: absolute;
+	margin: 0; padding: 0;
+	font: bolder 44px 'Trebuchet MS', Arial, Sans-serif;
+	letter-spacing: -2px;
+	color: #FFF;
+	text-transform: none;
+	top: 25px; left: 47px;	
+}
+#header-links {
+	position: absolute;
+	top: 20px; right: 30px;	
+	color: #C6DDEE;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#header #header-links a {	
+	color: #FFF;
+	text-decoration: none;	
+}
+#header #header-links a:hover {
+	color: #D4E59F;	
+}
+
+#fitem {
+	text-align: left;
+	margin-top: 10px;
+	margin-bottom: 10px;	
+}
+
+#sidebar {
+	float: right;
+	width: 250px;
+	color: #68774A;
+	margin: 30px 0px 0px;
+	border: 1px solid #000000; 
+	padding: 0px;
+}	
+#sidebar h1 {
+	margin-top: 10px;
+	padding: 5px 5px; 
+	font: bold 1.4em 'Trebuchet MS', Tahoma, Sans-serif;
+	color: #728D26;	
+}
+
+#menutop {
+	height: 40px;
+}
+
+#menutop ul {
+    display: inline;
+}
+
+#menutop a {
+    color: #FFF;
+}
+
+#menutop li {
+  display: inline;
+  float: left;
+  padding: 3px 6px 3px 6px;
+	background-color: rgb(14, 46, 128);
+  border: 1px white solid;
+  border-width: 1px 1px 1px 0;
+	height: 20px;
+	font-weight: bold;	    
+}
+
+
+/* Standard Tabelle */
+table.standard_tabelle {
+	background-color:#fff;
+	color: #000000;
+	margin-top:2px;
+	border: 1px solid #999;
+	width:100%;
+}
+
+.standard_tabelle tr.even {
+	background-color: rgb(230, 230, 230);
+}
+
+.standard_tabelle tr.odd {
+	background-color: rgb(241, 241, 241);
+}
+
+.standard_tabelle td {
+	padding:3px;
+	color:#484747;
+	font-size:7.5pt;
+}
+
+.standard_tabelle td a {
+	font-size:7.5pt;
+}
+
+
+.standard_tabelle th {
+	background-color: #0e2e80;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding:2px 4px;
+	background-image:url(../img/bg_table_th.gif);
+	background-repeat:repeat-x;
+}
+
+.standard_tabelle th a {
+	color:#FFFFFF;
+}
+
+.circle {
+	width: 18px;
+	height: 14px;
+	background: #393939;
+	color: #ffffff;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+
+.search_div 
+{
+	width: 400px; 
+	text-align: center; 
+	margin-left: 200px; 
+	border: 1px solid #000000;
+	padding: 2px;
+}
+
+
+a:link, a:visited, a:hover, a:active {color:#0e2e7f;text-decoration:none;}
+a:hover, a:active {text-decoration:underline;}
+.newskopf {margin:10px 0; background-color:#e6e6e6; }
+ul li {margin:0;padding:0;}
+
+#main {
+	float:left;
+	width:960px;
+	position:relative;
+	left:1px;
+	top:1px;
+	background:#d4dae3 url(../img/bg_main.gif) repeat-y;
+	/* z-index: 2; */ 
+}
+
+.tDnD_whileDrag td {
+	background-color:#D6EAB6;
+	font-weight:bold;
+}
+
+.notificationlist, .notificationlist:hover, .notificationlistred, .notificationlistred:hover, .notificationlistold, .notificationlistold:hover {
+	padding:10px;
+	padding-left:18px;
+	cursor:pointer;
+	border-bottom:1px solid #f1f1f1;
+	background-color:#EDFFEE;
+}
+.notificationlist:hover, .notificationlistred:hover {
+	background-color:#D5E8D6;
+	color:#005908;
+}
+.notificationlistred {
+	background-color:#ffdfdf;
+	color:#940011;
+}
+
+.notificationlistold { 
+	background-color:transparent;
+}
+.notificationlistold:hover { 
+	background-color:#f1f1f1;
+}
+
+
+#content {
+	background-color:#fff;
+	padding-right:2px;
+}
+
+#head {
+	width:100%;
+	clear:both;
+	position:absolute;
+	top:0;
+	height:70px;
+	margin-top:3px;
+}
+
+#content_ {
+    background-color: #FFFFFF;
+    border: 1px solid #999999;
+    padding: 15px;  
+}	
+
+
+.sprites_test_chef {
+	height:8px;
+	width:8px;
+	text-decoration: none;
+	background: url(../img/sprites_test_png.png) 159px 3px;
+}
+
+.sprites_test_chef:hover, .sprites_test_chef:active {
+    background-position: 159px 3px;
+}
+
+.news_bg {
+	background-image:url('../img/bg_head_news.jpg');
+}
+.standard_bg {
+	background-image:url('../img/bg_head_standard.jpg');
+}
+.wettbewerbe_bg {
+	background-image:url('../img/bg_head_wettbewerbe.jpg');
+}
+.level1_bg {
+	background-image:url('../img/bg_head_level1.png');
+}
+.community_bg {
+	background-image:url('../img/bg_head_community.jpg');
+}
+.statistiken_bg {
+	background-image:url('../img/bg_head_statistik.jpg');
+}
+.startseite_bg {
+	background-image:url('../img/bg_head_startseite.jpg');
+}
+.startseite_beta {
+	background-image:url('../img/bg_head_startseite_beta.jpg');
+}
+
+#headright {
+	width:230px;
+}
+.newsfoto {
+	float:left;
+	margin:3px 10px 5px 0;
+}
+.social_box {
+	width:100%;
+	height:50px;
+	background:#d4d7dc url(../img/smb1.jpg) no-repeat left top;
+	/*border: solid 1px #515151;*/
+	margin-top: 10px; 
+	vertical-align:middle;
+}
+.social_box_profil {
+	width:100%;
+	height:80px;
+	background:#d4d7dc url(../img/smbsp.jpg) no-repeat left top;
+	margin-top:10px
+}
+.gbsb {
+	height:20px;
+	width:60px;
+	margin-top:3px;
+}
+.fbsb {
+	height:20px;
+	width:110px;
+	margin-top:3px;
+	margin-left:10%;
+}
+.tbsb {
+	height:20px;
+	width:90px;
+	margin-top:3px;
+}
+/* Linkdefinitionen im Header */
+#logo {
+	margin-top:5px;
+	margin-left:7px;
+	position:absolute;
+}
+/* Link: ..immer besser */
+a#ib:link, a#ib:visited, a#ib:hover, a#ib:active {
+	position:absolute;
+	margin-top:55px;
+	margin-left:10px;
+	width:120px;
+	text-align:right;
+	font-size:7.5pt;
+	font-style:italic;
+	font-weight:bold;
+	text-decoration:none;
+	padding:1px 0 1px 0;
+	color:#666;
+}
+a#ib:hover, a#ib:active {
+	text-decoration:underline;
+}
+/* List + Links / header rechts*/
+#head ul {
+	list-style-image: url(../img/arrow_white_right.gif);
+}
+#head ul li {
+	height:12px;
+	padding-top:5px;
+}
+form#login {
+	width:180px;
+	color:#fff;
+	font-size:7pt;
+	margin-top:5px;
+}
+
+form#logout {
+	width:180px;
+	color:#fff;
+	font-size:7pt;
+	margin-top:4px;
+}
+
+.shortlinks {
+	width:45px;
+	color:#fff;
+	font-size:7pt;
+	margin-top:4px;
+	padding:0 0 0 5px;
+}
+
+#login p {
+	font-size:7pt;
+	margin-top:4px;
+	height:15px;
+}
+
+#logout p {
+	font-size:7pt;
+	margin-top:4px;
+	height:15px;
+}
+
+.shortlinks p {
+	font-size:7pt;
+	margin-top:3px;
+	height:12px;
+}
+
+.spanforum {
+	font-size:10.5pt;
+
+}
+
+#login a:link,#login a:visited, #login a:hover, #login a:active {
+	color:#fff;
+	font-size:7pt;
+}
+
+#logout a:link,#logout a:visited, #logout a:hover, #logout a:active {
+	color:#fff;
+	font-size:7pt;
+}
+
+.shortlinks a {
+	color:#fff;
+	font-size:7pt;
+}
+
+.checkbox {
+	height:12px;
+	vertical-align:middle;
+	margin-top:-3px;
+	margin-left:4px;
+}
+
+.kleines_wappen {
+	height:10px;
+	vertical-align:middle;
+	margin-top:-3px;
+	margin-left:4px;
+}
+
+.ausgleich {
+	height:18px;
+	vertical-align:middle;
+	margin-top:-6px;
+	margin-left:4px;
+}
+.mbd {
+	margin-bottom:7px !important;
+}
+.mitte {
+	vertical-align:middle;
+	margin-top:-3px;
+	margin-right:3px;
+	margin-left:2px;
+}	
+
+.headinput, .headinputtext {
+	border:1px solid #f1f1f1;
+	background-color:#f1f1f1;
+}
+/** ACHTUNG, evtl konflikt mit IE */
+.headinputtext {
+	width:100px;
+	height:13px;
+	padding:0 0 0 2px;
+	color:#444;
+	font-size:7pt;
+	margin:0;
+}
+.searchinput {
+	width:120px;
+	height:14px;
+	padding:0;
+}
+
+a.arrow:link, a.arrow:visited, a.arrow:hover, a.arrow:active  {
+	font-size:7.5pt;
+	color:#fff;
+	text-decoration:none;
+	margin-left:-3px;
+}
+a.arrow:hover, a.arrow:active  {
+	text-decoration:underline;
+}
+/* HEAD Navigation (inkl. Schnell-Suche) */
+#headnavi {
+	width:960px;
+	font-family: Arial, Helvetica, sans-serif;
+	position:absolute;
+	margin-top:70px;
+	background-image:url(../img/bg_head_navi_n.gif);
+	border-top:1px solid #fff;
+	border-bottom:1px solid #fff;
+	border-right:2px solid #fff;
+}
+#headnavi form {
+	border-right:1px solid #fff;
+	display:block;
+	height:23px;
+	width:164px;
+}
+
+#headnavi a:link,#headnavi a:visited, #headnavi a:hover, #headnavi a:active {
+	/*font-family:arial, sans-serif;*/
+	color:#fff;
+	text-decoration:none;
+	font-size:8pt;
+	font-weight:bold;
+	border-right:1px solid #fff;
+	display:block;
+	float:left;
+	padding:5px 8px;
+	text-transform:uppercase;
+}
+#headnavi a:hover, #headnavi a:active {
+	text-decoration:underline;
+}  
+#headbalken {
+	width:100%;
+	position:absolute;
+	margin-top:70.5pt;
+	border-top:1px solid #fff;
+	background-image:url(../img/bg_breadcrumb_neu.jpg);
+	background-repeat:no-repeat;
+	height:18px;
+	padding:4px 0 0 0;
+}
+.bc {
+	padding:0 0 0 180px;
+	color:#fff;
+}
+
+.bc a {
+	color:#0e2e7f;
+	background:transparent url(../img/linkpfeil_b.gif) no-repeat left;
+	padding-left:9px;
+}
+
+.bc a:hover {
+	color:#fff;
+	background:transparent url(../img/linkpfeil_w.gif) no-repeat left;
+	text-decoration:none;
+}
+
+#center {
+	width:65%;
+	margin:0 auto;
+}
+
+#left {
+	float:left;
+	width:160px;
+	background:#fff;
+	padding-bottom:10px;
+}
+
+#angeteasert_1 {
+	float:left;
+	margin-top:10px;
+}
+
+#centerbig {
+	width: 790px;
+	float:left;
+	margin-left:10px;
+	padding-top:10px;
+}
+
+#centerbig_black {
+    width: 790px;
+    float:left;
+    margin-left:0px;
+    padding:10px 5px;
+    background-color:#000;
+}
+
+
+#centerbig_land {
+	width: 790px;
+	float:left;
+	margin-left:10px;
+	padding-top:10px;
+}
+
+#centerbig_tipprunde {
+	width: 800px;
+	float:left;
+	padding-top:4px;
+	background-position:bottom;
+	background-repeat:no-repeat;
+	background-color:#fff;
+}
+
+#centerbig_wmtipprunde {
+	width: 800px;
+	float:left;
+	padding-top:4px;
+	background-color:#fff;
+}
+
+#centerbig_werbung {
+	width: 795px;
+	float:left;
+	margin-left:5px;
+	padding-top:7px;
+	background-color:#fff;
+}
+
+#centerbig_tipprunde_ohne_bg {
+	width: 800px;
+	float:left;
+	padding-top:4px;
+	background-color:#efeff3;
+}
+
+#centersmall { 
+	width: 590px;
+	margin-right:10px;
+	margin-left:10px;
+	padding-top:10px;
+	float:left;
+}
+
+#centersmall_2 { 
+	width: 550px;
+	margin-right:10px;
+	margin-left:10px;
+	padding-top:10px;
+	float:left;
+}
+
+#centersmall_3 { 
+	width: 520px;
+	margin-right:10px;
+	margin-left:10px;
+	padding-top:10px;
+	float:left;
+}
+
+#centersmall_4 { 
+	width: 550px;
+	margin-right:10px;
+	padding-top:10px;
+	float:left;
+}
+
+#centersmall_5 { 
+	width: 450px;
+	margin-right:10px;
+	padding-top:2px;
+	float:left;
+}
+
+#centersmall_6 { 
+	width: 460px;
+	margin-right:10px;
+	padding-top:10px;
+	float:left;
+}
+
+#right_2 {
+	width:230px;
+	float:left;
+	padding-top:10px;
+}
+
+#right_3 {
+	width:260px;
+	float:left;
+	padding-top:10px;
+}
+#right_2 ul {
+	list-style-image: url(../img/listenpunkt.gif);
+	padding:2px 2px 2px 18px;
+	margin-top:-2px;
+	margin-bottom:10px;
+	background-color:#e6e6e6;
+}
+#right_2 ul li {
+	margin:2px 0;
+	font-size:7.5pt !important;
+}
+#right_2 ul li a:link, #right ul li a:visited, #right ul li a:hover, #right ul li a:active {
+	font-size:7.5pt;
+}
+#right_2 ul li a:hover, #right ul li a:active {
+	text-decoration:underline;
+}
+
+#centerbig_land ul {
+	list-style-image: url(../img/listenpunkt.gif);
+	padding:4px 2px 2px 18px;
+}
+#centerbig_land ul li {
+	margin:0 0 2px 0;
+	font-size:7.5pt !important;
+}
+
+#centerbig_land ul li a:link, #centerbig_land ul li a:visited, #centerbig_land ul li a:hover, #centerbig_land ul li a:active {
+	font-size:7.5pt;
+}
+
+
+#right_2 form {
+	padding:6px;
+}
+
+#right_5 {
+	width:330px;
+	float:left;
+	padding-top:2px;
+}
+
+#right_6 {
+	width:320px;
+	float:left;
+	padding-top:10px;
+}
+
+.splitterbox {
+	width:178px;
+	float:left;
+	height:115px;
+	color:#fff;
+	text-decoration:none
+}
+
+.splitterbox b {
+	font-size:10.5pt;
+	text-transform:uppercase;
+	padding-top:6px;
+	display:block;
+	text-align:center;
+}
+.splitterbox span {
+	display:block;
+	margin:0;
+	font-size:7pt;
+}
+.splittertext {
+	padding:5px 7px;
+	color:#da0000;
+	font-weight:bold;
+	font-size:7.5pt;
+}
+
+.themenbox {
+	margin-top:10px;
+	width:230px;
+	float:left;
+	height:115px;
+	color:#fff;
+	text-decoration:none
+}
+
+.themenbox b {
+	font-size:10.5pt;
+	text-transform:uppercase;
+	padding-top:6px;
+	display:block;
+	text-align:center;
+}
+.themenbox span {
+	display:block;
+	margin:0;
+	font-size:7pt;
+}
+.thementext {
+	padding:5px 7px;
+	color:#da0000;
+	font-weight:bold;
+	font-size:7.5pt;
+	line-height:1.4;
+}
+
+a.teaserstart_2:link, a.teaserstart_2:visited, a.teaserstart_2:hover, a.teaserstart_2:active {
+    width:178px;
+    float:left;
+    height:115px;
+    color:#fff;
+    text-decoration:none;
+}
+
+a.teaserstart_rechts:link, a.teaserstart_rechts:visited, a.teaserstart_rechts:hover, a.teaserstart_rechts:active {
+    width:210px;
+    height:115px;
+    color:#fff;
+    padding:0 10px;
+    margin-bottom:10px;
+    float:left;
+}
+a.teaserstart_rechts:hover, a.teaserstart_rechts:active {
+    /*text-decoration:underline;*/
+    color:#a3afca;
+}
+.teaserstart_rechts b {
+    font-size:10.5pt;
+    text-transform:uppercase;
+    padding-top:6px;
+    display:block;
+    text-align:center;
+}
+.teaserstart_rechts span {
+    display:block;
+    margin-left:5px;
+    margin-right:5px;
+    margin-top:0;
+    font-size:7pt;
+}
+
+.margin-left {
+	
+	margin-left:8px;	
+}
+
+.teasertext {
+	padding:4px 0 0 35px;
+	font-size:7.5pt;	
+}	
+	
+a.teaserstart_2:hover, a.teaserstart_2:active {
+	/*text-decoration:underline;*/
+	color:#a3afca;
+}
+.teaserstart_2 b {
+	font-size:10.5pt;
+	text-transform:uppercase;
+	padding-top:6px;
+	display:block;
+	text-align:center;
+}
+.teaserstart_2 span {
+	display:block;
+	margin-left:5px;
+	margin-right:5px;
+	margin-top:0;
+	font-size:7pt;
+}
+#right {
+	width:190px;
+	float:left;
+	padding-top:10px;
+}
+
+.balken, .linie {
+	height:10px;
+	background-color:#a4abb8;
+	clear:both;
+	border:0;
+	margin-bottom:10px;
+}
+
+.wappentrennung {
+	height:2px;
+	background-color:#e6e6e6;
+	clear:both;
+	border:0;
+	margin:10px 0;
+}
+
+.kleinerstrich {
+	height:1px;
+	background-color:transparent;
+	clear:both;
+	border:0;
+	border-top:1px dotted #0e2e7f;
+	margin:10px 0;
+}
+
+.transparentetrennung {
+	height:1px;
+	background-color:transparent;
+	clear:both;
+	border:0;
+	margin:10px 0;
+}
+
+.wappen_start {
+	margin:0 4px 0 5px;	
+}
+
+.footerstrich {
+	height:2px;
+	background:#fff url(../img/bg_footer.jpg) repeat-y;
+	border:0;
+	margin:10px 0 10px 10px;
+}
+
+
+.linie {
+	height:1px;
+}
+.newsimg, .newsimgborder, .newsimgklein {
+	float:left;
+	margin-right:10px;
+}
+.newsimgborder {
+	border:0;
+}
+.newsimgklein {
+	margin-top:3px;
+}
+.newsbighead, .newsnormalhead {
+	font-size:7pt;
+	/*color:#96b3ff;*/
+	padding:2px 6px 4px 6px;
+	width:330px;
+	float:left;
+}
+
+/* Timo */
+.newstimohead {
+	clear:both;
+	font-size:7pt;
+	color:#444;
+	background-color:#ddd;
+	padding:2px 6px 4px 6px;
+	font-weight:normal !important;
+}
+
+
+.newstimohead_klein {
+	clear:both;
+	font-size:9px;
+	color:#444;
+	height:28px;
+	background-color:#ddd;
+	padding:2px 6px 4px 6px;
+	font-weight:normal !important;
+	font-style:italic;
+}
+
+.newstimo_klein {
+	padding:0;
+	margin:0;
+}
+
+a.newstimo_klein:link, a.newstimo_klein:visited, a.newstimo_klein:hover, a.newstimo_klein:active {
+	display:block;
+	color:#0e2f80;
+	padding:0;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:7.5pt;
+	padding-top:3px;
+	font-style:normal !important;
+}
+
+a.newstimo_klein:hover, a.newstimo_klein:active {
+	text-decoration:underline;
+}
+.newstext_klein {
+	font-size:7.5pt;
+	line-height:1.6;
+	background-color:#f1f1f1;
+	border:0 solid #999;
+	border-top:0;
+	height:113px;
+	margin-bottom:10px;
+	padding:0 3px 3px 6px;
+}
+
+
+a.weiterlesen_klein:link, a.weiterlesen_klein:visited, a.weiterlesen_klein:hover, a.weiterlesen_klein:active {
+	font-weight:bold;
+	text-decoration:none;
+	position:relative;
+	
+	padding:1px 3px 5px 10px;
+	font-size:10px;
+	display:inline;
+}
+
+.newstimohead_topnews {
+	font-size:7pt;
+	color:#fff;
+	padding:2px 6px 4px 6px;
+	font-weight:normal !important;
+	background:#0e2f80 url(http://www.transfermarkt.de/bilder/bg_top_news.png) repeat-x;
+}
+
+.newstimohead_wmnews {
+	font-size:7pt;
+	color:#fff;
+	padding:2px 6px 4px 6px;
+	font-weight:normal !important;
+	background:#0e2f80 url(http://www.transfermarkt.de/bilder/bg_wm_news.png) repeat-x;
+}
+
+.newsheadline_text {
+	padding:0;
+	margin:0;
+}
+
+a.newsheadline_text:link, a.newsheadline_text:visited, a.newsheadline_text:hover, a.newsheadline_text:active {
+	display:block;
+	color:#fff;
+	padding:0;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:10.5pt;
+	padding-top:3px;
+	
+}
+
+a.newsheadline_text:hover, a.newsheadline_text:active {
+	text-decoration:underline;
+}
+
+.newstimohead_iv {
+	font-size:7pt;
+	color:#fff;
+	background-color:#0e2f80;
+	padding:2px 6px 4px 6px;
+	font-weight:normal !important;
+}
+.accordion_p {
+	font-size:7pt;
+	color:#444;
+	padding:2px 6px 4px 6px;
+	font-weight:normal !important;
+}
+
+.fixed {
+	position:absolute;
+ 	left:10px; top:10px; width:300px; height:150px;
+}	
+
+.newstimo {
+	padding:0;
+	margin:0;
+	font-size:10pt !important;
+}
+
+a.newstimo:link, a.newstimo:visited, a.newstimo:hover, a.newstimo:active {
+	display:block;
+	color:#0e2e80;
+	padding:0;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:10.5pt;
+	padding-top:3px;
+	
+}
+
+a.newstimo:hover, a.newstimo:active {
+	text-decoration:underline;
+}
+
+.newstext {
+	font-size:8pt;
+	line-height:1.6;
+	background-color:#f1f1f1;
+	border:0 solid #999;
+	border-top:0;
+	height:140px;
+	margin-bottom:10px;
+	padding:3px 4px 0 3px;
+}
+
+.newstext_mittel {
+	font-size:8pt;
+	line-height:1.6;
+	background-color:#f1f1f1;
+	border:0 solid #999;
+	border-top:0;
+	height:90px;
+	margin-bottom:10px;
+	padding:3px 4px 0 3px;
+}
+
+.newstext_accordion {
+	font-size:8pt;
+	line-height:1.6;
+	background-color:#f1f1f1;
+	border:0 solid #999;
+	border-top:0;
+	height:80px;
+	margin-bottom:10px;
+	padding:3px 4px 0 3px;
+}
+
+.infotext_accordion {
+	font-size:8pt;
+	line-height:1.6;
+	background-color:#f1f1f1;
+	border:0 solid #999;
+	border-top:0;
+	height:40px;
+	margin-bottom:10px;
+	padding:10px 20px 0 50px;
+}
+
+.newstext_big {
+	font-size:8pt;
+	line-height:1.6;
+	background-color:#f1f1f1;
+	border:0;
+	border-top:0;
+	height:190px;	
+	padding:3px 4px 0 3px;
+	margin:0;
+}
+
+.newszusatz_big {
+	margin:0;
+	padding-top:2px;
+	background-color:#e6e6e6;
+	margin-bottom:10px;
+	color:#0E2E80;
+	font-size:7.5pt;
+	font-weight:bold;
+	vertical-align:top;
+}
+
+.kl_icon {
+	margin-bottom:3px;
+	margin-top:-5px;
+}
+
+.newsanzeigetext {
+	font-size:8pt;
+	line-height:1.6;
+	background-color:#f1f1f1;
+	border:0 solid #999;
+	border-top:0;
+	margin-bottom:10px;
+	padding:8px;
+	min-height:150px;
+}
+
+.newsanzeigetext a {
+	text-decoration:underline;
+}
+
+
+.tipprundetext {
+	font-size:8pt;
+	line-height:1.6;
+	background-color:#f1f1f1;
+	border:0 solid #999;
+	border-top:0;
+	margin-bottom:10px;
+	padding:8px;
+}
+
+.tipprundetext a {
+	text-decoration:underline;
+}
+
+.foto_news {
+	background-color:#fff;
+	padding:2px;
+	margin:0 5px 0 0;
+	float:left;
+}
+
+.foto_newsanzeige {
+	background-color:#fff;
+	padding:2px;
+	margin:2px 10px 0 0;
+	float:left;
+}
+
+.wappen_news {
+	background-color:#fff;
+	padding:4px;
+	margin-right:10px;
+}
+
+.wappen_news_iv {
+	background-color:#fff;
+	padding:2px;
+	margin:2px 10px 2px 2px;
+}
+.show_more {
+	background:transparent url(../img/show_more.png) no-repeat;
+	cursor:pointer;
+}
+
+.show_less {
+	background:transparent url(../img/show_less.png) no-repeat;
+	cursor:pointer;
+}
+.show_more_ms {
+	background:transparent url(http://static.transfermarkt.net/static/img/show_more_ms.png) no-repeat;
+	cursor:pointer;
+}
+
+.show_less_ms {
+	background:transparent url(http://static.transfermarkt.net/static/img/show_less_ms.png) no-repeat;
+	cursor:pointer;
+}
+
+.pfeil_zu {
+    background-image:url(http://static.transfermarkt.net/static/img/pfeil_zu_timeline.png);
+    background-repeat:no-repeat;
+    background-position:50%;
+}
+
+.pfeil_auf {
+    background-image:url(http://static.transfermarkt.net/static/img/pfeil_auf_timeline.png);
+    background-repeat:no-repeat;
+    background-position:50%;
+}
+
+.minifoto_accordion {
+	background-color:#fff;
+	padding:2px;
+	margin-right:5px;
+}
+
+.minifoto_ib {
+	background-color:#fff;
+	padding:3px;
+	margin-right:5px;
+}
+
+a.weiterlesen:link, a.weiterlesen:visited, a.weiterlesen:hover, a.weiterlesen:active {
+	font-weight:bold;
+	text-decoration:none;
+	position:relative;
+	float:right;
+	padding:0 5px 5px 5px;
+}
+
+
+.newsticker_subheadline {
+	padding:0;
+	margin:0;
+}
+
+a.newsticker_subheadline:link, a.newsticker_subheadline:visited, a.newsticker_subheadline:hover, a.newsticker_subheadline:active {
+	display:block;
+	color:#0e2e80;
+	padding:0;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:8pt;
+	padding-top:3px;
+	
+}
+
+a.newsticker_subheadline:hover, a.newstimo:active {
+	text-decoration:underline;
+}
+
+
+.newsticker_headline {
+	margin:0;
+	display:block;
+	color:#0e2e80;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:9pt;
+	padding:5px 0;
+}
+
+.newstickertext {
+	font-size:7.5pt;
+	line-height:1.65;
+	background-color:#f1f1f1;
+	border:0 solid #999;
+	border-top:0;
+	margin-bottom:10px;
+	padding:0 8px 8px 8px;
+	min-height:150px;
+}
+
+.newstickertext a {
+	text-decoration:underline;
+	font-size:7.5pt;
+}
+
+
+.newstickertext i {
+	font-size:7.5pt;
+	font-style:normal !important;
+}
+
+
+/* Timo */
+.newsnormalhead {
+	width:464px;
+}
+
+.newskleinhead {
+	padding-right:10px;
+	margin-bottom:10px;
+}
+.newsbighead img, .newsnormalhead img {
+	float:left;
+	margin-right:6px;
+	margin-top:3px;
+}
+a.newshead:link, a.newshead:visited, a.newshead:hover, a.newshead:active {
+	display:block;
+	color:#006;
+	padding:0;
+	text-decoration:none;
+	font-weight:bold;
+	font-size:9pt;
+	padding-top:3px;
+}
+a.newshead:hover, a.newshead:active {
+	text-decoration:underline;
+}
+a.newsheadblau:link, a.newsheadblau:visited, a.newsheadblau:hover, a.newsheadblau:active  {
+	text-decoration:none;
+	font-weight:bold;
+	display:block;
+}
+a.newsheadblau:hover, a.newsheadblau:active  {
+	text-decoration:underline;
+}
+.newsbox, .newsbigtext, .newsnormaltext {
+	padding:6px;
+	margin-bottom:10px;
+}
+.newsbigtext {
+	float:left;
+	width:330px;
+}
+.newsnormaltext {
+	float:left;
+	height:118px;
+	width:464px;
+	height:81px;
+}
+a.mehr:link, a.mehr:visited, a.mehr:hover, a.mehr:active,
+a.mehr9:link, a.mehr9:visited, a.mehr9:hover, a.mehr9:active
+{
+	font-weight:bold;
+	text-decoration:none;
+	position:relative;
+	float:right;
+}
+a.mehr:hover, a.mehr:active, a.mehr9:hover, a.mehr9:active {
+	text-decoration:underline;
+}
+a.mehr9:link, a.mehr9:visited, a.mehr9:hover, a.mehr9:active {
+	font-size:7pt;
+}
+
+a.zurueck:link, a.zurueck:visited, a.zurueck:hover, a.zurueck:active,  
+a.weiter:link, a.weiter:visited, a.weiter:hover, a.weiter:active {
+	text-decoration:none;
+	font-size:7pt;
+}
+
+a.zurueck:link, a.zurueck:visited, a.zurueck:hover, a.zurueck:active {
+	padding-left:10px;
+	background:url(../img/arrow_zurueck.gif) no-repeat left;
+	margin-left:10px;
+}
+a.weiter:link, a.weiter:visited, a.weiter:hover, a.weiter:active {
+	padding-right:10px;
+	background:url(../img/arrow_weiter.gif) no-repeat right;
+}	
+
+a.weiter2:link, a.weiter2:visited, a.weiter2:hover, a.weiter2:active {
+	padding-left:10px;
+	background:url(../img/arrow_weiter.gif) no-repeat left;
+}	
+.hl_tabelle {
+	background-color:#0e2e80;
+	font-size:7.5pt;
+	color:#fff;	
+	font-weight:bold;
+	padding:1px 4px 2px 4px;
+	background-position:2px 49%;
+}
+
+.hl_startseite, .hl_startseite_orange, .hl_menexpert {
+	/*background-color:#a7b0c2;
+	color:#0e2e80;*/
+	color:#fff;
+	text-transform:uppercase;
+	font-weight:bold;
+	padding:3px 0 4px 17px;
+	background:#0e2e80 url(../img/dott.gif) no-repeat left;
+	background-position:2px 49%;
+}
+.hl_teaser {
+	background:#3d5119 url(/static/img/teaser/teaser_bg_eds.png) no-repeat left;
+	color:#fff;
+	text-transform:uppercase;
+	font-weight:bold;	
+	padding:2px 7px;
+}
+.hl_startseite_orange {
+	background:#BF0008 url(../img/dott.gif) no-repeat left;
+	background-position:2px 49%;	
+}
+
+.hl_startseite_gruen {
+	color:#fff;
+	text-transform:uppercase;
+	font-weight:bold;
+	padding:3px 0 4px 17px;
+	background:#225F00 url(../img/dott.gif) no-repeat left;
+	background-position:2px 49%;
+}
+
+.hl_unterseite {
+	color:#fff;
+	font-weight:bold;
+	padding:3px 0 4px 17px;
+	background:#0e2e80 url(../img/dott.gif) no-repeat left;
+	background-position:2px 49%;
+}
+
+.hl_unterseite a {
+	color:#fff;
+	text-decoration:none;
+}
+
+
+.hl_menexpert {
+	background:#ed7111 url(../img/dott.gif) no-repeat left;
+	background-position:2px 49%;	
+}
+
+.box_startseite, .box_startseite_orange {
+	background-color:#f1f1f1;
+	padding:1px 3px;
+	margin-bottom:10px;
+	font-size:7.5pt;
+	line-height:1.4;
+}
+
+.box_startseite a {
+	font-size:7.5pt !important;
+}
+
+.box_teaser {
+	padding:5px 5px 5px 30px;
+	margin-bottom:10px;
+	margin-top:3px;
+	font-size:8.0pt !important;
+	line-height:1.3;
+	background:#E2ECD7 url(/static/img/teaser/teaser_arrow.png) no-repeat 8px 5px;
+	padding-left:30px !important;
+}
+
+.box_startseite_orange {
+	color:#9F6800;
+	background:#FFE4AF;
+}
+.box_startseite_header {
+	background-color:#ddd;
+	padding:1px 3px;
+	font-size:7pt;
+	line-height:1.4;
+}
+.box_startseite_menexpert {
+	background-color:#f1f1f1;
+	padding:5px;
+	font-size:7.5pt;
+	text-align:center;
+}
+.box_startseite img {
+	float:left;
+	margin:4px 5px 0 1px;
+	border:1px solid #fff;
+}
+#right ul {
+	list-style-image: url(../img/listenpunkt.gif);
+	padding:0 2px 2px 18px;
+	margin-top:-2px;
+	margin-bottom:10px;
+	background-color:#e6e6e6;
+}
+
+#right ul li {
+	margin:2px 0;
+}
+#right ul li a:link, #right ul li a:visited, #right ul li a:hover, #right ul li a:active {
+	font-size:7.5pt;
+}
+#right ul li a:hover, #right ul li a:active {
+	text-decoration:underline;
+}
+#right form {
+	padding:6px;
+}
+
+.quelle_anzeige_start {
+	background:#3E5899;
+	border:1px solid #999;
+	color:#fff;
+	font-weight:bold;
+	padding:2px 5px;
+	border-bottom:0;
+}	
+
+.startpost_text {
+	color:#444;
+	background-color:#fff;
+	padding:2px 5px;
+	border:1px solid #999;
+	margin-bottom:5px;
+}
+
+
+a.browse:link, a.browse:visited, a.browse:hover, a.browse:active, 
+a.abrowse:link, a.abrowse:visited, a.abrowse:hover, a.abrowse:active {
+	color:#fff;
+	text-decoration:none;
+	width:22px;
+	background-color:#0e2e80;
+	margin-right:1px;
+	display:block;
+	float:right;
+	text-align:center;
+	font-size:7.5pt;
+	height:12px;
+	padding:1px 2px 2px 2px;
+	margin-top:5px;
+}
+
+a.abrowse:link, a.abrowse:visited, a.abrowse:hover, a.abrowse:active {
+	background-color:#3E5899;
+	text-decoration:underline;
+	font-weight:bold;
+}
+
+span.browse {
+	background-color:#e6e6e6;
+	display:block;
+	float:right;
+	text-align:center;
+	font-size:7.5pt;
+	width:110px;
+	margin-right:1px;
+	color:#444;
+	height:12px;
+	padding:1px 2px 2px 2px;
+	margin-top:5px;
+}	
+
+.startpost_text ul {
+	list-style-image: url(../img/listenpunkt.gif);
+	padding:0 2px 2px 18px;
+	margin-bottom:10px;
+}
+.startpost_text ul li {
+	margin:2px 0;
+}
+.startpost_text ul li a:link, #right ul li a:visited, #right ul li a:hover, #right ul li a:active {
+	font-size:7.5pt;
+}
+.startpost_text ul li a:hover, #right ul li a:active {
+	text-decoration:underline;
+}
+/* Standard Tabelle */
+table.standard_tabelle {
+	background-color:#fff;
+	color: #000000;
+	margin-top:2px;
+	border: 1px solid #999;
+	width:100%;
+}
+
+.standard_tabelle td {
+	padding:3px;
+	color:#484747;
+	font-size:7.5pt;
+}
+
+.standard_tabelle td a {
+	font-size:7.5pt;
+}
+
+
+.standard_tabelle th {
+	background-color: #0e2e80;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding:2px 4px;
+	background-image:url(../img/bg_table_th.gif);
+	background-repeat:repeat-x;
+}
+
+.standard_tabelle th a {
+	color:#FFFFFF;
+}
+
+/* Standard Tabelle fuer Forum */
+table.standard_forum_tabelle {
+	background-color:#fff;
+	color: #000000;
+	margin-top:2px;
+	border: 1px solid #999;
+	width:100%;
+}
+
+.standard_forum_tabelle td {
+	padding:3px;
+	color:#484747;
+}
+
+
+.standard_forum_tabelle th {
+	background-color: #0e2e80;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding:2px 4px;
+	background-image:url(../img/bg_table_th.gif);
+	background-repeat:repeat-x;
+}
+
+.standard_forum_tabelle th a {
+	color:#FFFFFF;
+}
+
+
+/* Standard Tabelle im Spielerprofil fuer Forum */
+table.tabelle_forum_spieler {
+	background-color:#fff;
+	color: #000;
+	margin:0;
+	border: 1px solid #e6e6e6;
+	width:100%;
+	line-height:1.7;
+}
+
+.tabelle_forum_spieler td {
+	padding:0 4px;
+	margin:0;
+	color:#484747;
+	background-color:#f1f1f1;
+
+}
+
+.tabelle_forum_spieler th img{
+	margin-right: 5px;
+}
+
+.tabelle_forum_spieler th {
+	background-color: #0e2e80;
+	color: #fff;
+	font-weight: bold;
+	padding:2px 4px;
+	background-image:url(../img/bg_table_th.gif);
+	line-height:1.3;
+}
+
+.bggrey {
+	background-color: #929292;
+	font-weight: bold;
+	padding:2px 4px;
+	background-image:url('/static/img/bg_table_th_grey.gif') !important;
+	background-repeat:repeat-x;
+}
+
+/* Standard Tabelle */
+table.alarm_tabelle {
+	background-color:#fff;
+	color: #000000;
+	margin-top:2px;
+	border: 1px solid #999;
+	width:100%;
+}
+
+.alarm_tabelle td {
+	padding:3px;
+	color:#484747;
+}
+
+.alarm_tabelle th {
+	background-color: #690100;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding:2px 4px;
+	background-image:url(../img/bg_table_th_alarm.gif);
+	background-repeat:repeat-x;
+}
+.alarm_tabelle th a {
+	color:#FFFFFF;
+}
+
+/* Standard Tabelle mit Grafiken (Fotos o. Wappen) */
+table.tabelle_grafik {
+	background-color:#fff;
+	color: #000000;
+	margin-top:2px;
+	border: 1px solid #999;
+	width:100%;
+}
+
+.tabelle_grafik td {
+	padding:0 2px;
+	margin:0;
+	color:#484747;
+	font-size:7.5pt;
+
+}
+
+.tabelle_grafik td a {
+	font-size:7.5pt;
+}
+
+
+.tabelle_grafik th img{
+	margin-right: 5px;
+}
+
+.tabelle_grafik th {
+	background-color: #0e2e80;
+	color: #fff;
+	font-weight: bold;
+	padding:2px 4px;
+	background-image:url(../img/bg_table_th.gif);
+	background-repeat:repeat-x;
+}
+
+
+/* Neue Tabelle mit Grafiken (Fotos o. Wappen) */
+table.tabelle_fresh {
+	background-color:#fff;
+	color: #000000;
+	margin-top:2px;
+	border: 1px solid #999;
+	width:100%;
+}
+
+.tabelle_fresh td {
+	padding:0 2px;
+	margin:0;
+	color:#484747;
+}
+
+.tabelle_fresh th img {
+	margin-right: 5px;
+}
+
+.tabelle_fresh th {
+	background-color: #3F589A;
+	color: #fff;
+	font-weight: bold;
+	padding:2px 4px;
+}
+
+tr.strich td {
+	border-bottom: 1px dotted #006;
+}
+
+tr.strichtop td {
+	border-top: 1px dotted #006;
+}
+
+tr.dashed td {
+	border-bottom: 1px dashed #006;
+}
+
+tr.solid td {
+	border-bottom: 1px solid #006;
+}
+
+.border {
+	border:1px solid #e6e6e6;	
+}
+
+.beschreibung {
+	background:#d4d7dc url(../img/bg_info_text.jpg) no-repeat left top;
+	line-height:1.6;
+	margin-top:10px;	
+	padding:5px 15px 5px 70px;
+	font-size:7.5pt;
+}
+
+.beschreibung_stadion_main {
+	background: url(../img/pixelreihe_beschr.jpg) repeat-y left top;
+}
+
+.beschreibung_nahverkehr {
+	background: url(../img/Infokasten_nahverkehr_1.jpg) no-repeat left top;
+	min-height:85px;
+	line-height:1.6;
+	margin-top:10px;	
+	padding:5px 15px 5px 70px;
+	font-size:7.5pt;
+}
+
+.beschreibung_auto {
+	background: url(../img/Infokasten_automobil.jpg) no-repeat left top;
+	line-height:1.6;
+	margin-top:10px;	
+	padding:5px 15px 5px 70px;
+	font-size:7.5pt;
+	min-height:85px;
+}
+
+
+.beschreibung_em_info {
+	background: url(http://static.transfermarkt.de/static/img/info_em_kader_text.jpg) no-repeat left top;
+	line-height:1.6;
+	margin-top:10px;	
+	padding:10px 15px 5px 100px;
+	font-size:7.5pt;
+	min-height:85px;
+}
+
+.faq_site {
+	background: url(/static/img/faq_bg.jpg) no-repeat left top;
+	min-height:140px;
+}
+
+.faq_pixelreihe {
+	background: url(../img/faq_pixelreihe.jpg) repeat-y left top;
+}
+
+.beschreibung a {
+	font-size:7.5pt;
+}
+
+.beschreibung b {
+	font-size:7.5pt;
+}
+
+.beschreibung i {
+	font-size:7.5pt;
+}
+
+
+
+.infokasten {
+	background:#d4d7dc url(../static/img/infokasten.png) no-repeat left top;
+	line-height:1.7;
+	margin-top:10px;	
+	padding:10px 20px 10px 8px;
+	font-size:7.5pt;
+}
+
+.infokasten a {
+	font-size:7.5pt;
+}
+
+.infokasten b {
+	font-size:7.5pt;
+}
+
+.infokasten i {
+	font-size:7.5pt;
+}
+
+
+.hinweis {
+	background-color:#F8CFCD;
+	line-height:1.6;
+	margin:10px 0;	
+	padding:10px 5px;
+	border:1px solid #F8A7A3;
+	text-align:left;
+}
+.beschreibung2 {
+	background-color:#f1f1f1;
+	line-height:1.6;
+	padding:10px;
+}
+
+.kommentare {
+	background-color:#f1f1f1;
+	line-height:1.2;
+	padding:10px;
+}
+
+.zusatztext {
+	background-color:#dedede;
+	line-height:1.6;
+	margin:0;
+	padding:5px;
+}
+
+h1 {
+	font-weight: bold;
+	font-size: 13.5pt;
+	color:#006;
+}
+
+h2 {
+	font-weight: bold;
+
+}
+
+.info {
+	background: #e6e6e6;
+	color:#444;
+	font-size:7.5pt;
+	margin-top:2px;
+	padding:3px 3px;
+	border: 1px solid #999;
+}
+
+.drunter {
+	color:#0e2e80;
+	font-size:7.5pt;
+	padding:0 6px 2px 0;
+	background:#a4abb8 url(../img/bg_lasche.jpg) no-repeat left;
+	height:12px !important;
+}
+
+
+.drunter a {
+	color:#0e2e80;
+}
+
+.drunter_orange {
+	color:#FFBF4F;
+	font-size:7.5pt;
+	padding:1px 6px 2px 0;
+	background:#FFBF4F url(../img/bg_lasche_orange.jpg) no-repeat left;
+}
+
+.drunter_orange a {
+	color:#0e2e80;
+}
+
+.tabellen_ueberschrift {
+	color:#555;
+	font-size:8pt;
+	margin-top:18px;
+	padding:2px 16px;
+	border: 0;	
+	background:transparent url(../img/dott.jpg) no-repeat left;
+	background-color:#fff;
+}
+
+.tabellen_ueberschrift_ohne {
+	color:#555;
+	font-size:8pt;
+	margin-top:18px;
+	padding:2px;
+	border: 0;	
+}
+.pfeil {
+	padding:0 5px;
+}
+.pfeilindex {
+	padding:0 0 0 10px;
+}
+.newsfoto_medium {
+	margin:0 4px 0 0;
+	border:1px solid #bebebe;
+	float:left;
+}
+
+.pfeil_head {
+	padding:0 5px 0px 5px;
+}
+
+
+tr.news_datum td {
+	background-image:url(../img/bg_head_navi_balken.jpg);
+	color:#fff;
+	font-size:7pt;
+}
+
+.ueberschrift {
+	font-weight:bold;
+	color:#006;
+	font-size:8pt;
+}
+
+.minifoto {
+	padding:0 2px;
+	vertical-align:bottom;
+}
+
+.vereinHeader {
+	line-height:1.4;
+	font-weight:bold;
+	font-size:8pt;
+	color:#0e2e7f;
+}
+
+.headerWappen {
+	float:left;
+	padding:0 10px 5px 0;
+}
+	
+.headerWappenKlein {
+	float:left;
+	padding:0 10px 5px 0;
+	margin-bottom:40px;
+}
+	
+.scrollen {
+	overflow: auto;
+}
+
+/* Positionierung der Positionen */
+
+.hp1 { position:absolute; top:68px; left:25px; }
+.hp2 { position:absolute; top:62px; left:43px; }
+.hp3l { position:absolute; top:47px; left:53px; }
+.hp3r { position:absolute; top:68px; left:69px; }
+.hp4 { position:absolute; top:26px; left:45px; }
+.hp5 { position:absolute; top:89px; left:96px; }
+.hp6 { position:absolute; top:43px; left:89px; }
+.hp7 { position:absolute; top:34px; left:115px; }
+.hp8 { position:absolute; top:62px; left:151px; }
+.hp9 { position:absolute; top:13px; left:93px; }
+.hp10 { position:absolute; top:24px; left:141px; }
+.hp11m { position:absolute; top:4px; left:117px; }
+.hp11s { position:absolute; top:-2px; left:139px; }
+.hp12m { position:absolute; top:49px; left:179px; }
+.hp12s { position:absolute; top:38px; left:201px; }
+.hp13 { position:absolute; top:13px; left:163px; }
+.hp14 { position:absolute; top:8px; left:176px; }
+
+
+.np1 { position:absolute; top:68px; left:25px; }
+.np2 { position:absolute; top:62px; left:43px; }
+.np3l { position:absolute; top:47px; left:53px; }
+.np3r { position:absolute; top:68px; left:69px; }
+.np4 { position:absolute; top:26px; left:45px; }
+.np5 { position:absolute; top:89px; left:96px; }
+.np6 { position:absolute; top:43px; left:89px; }
+.np7 { position:absolute; top:34px; left:115px; }
+.np8 { position:absolute; top:62px; left:151px; }
+.np9 { position:absolute; top:13px; left:93px; }
+.np10 { position:absolute; top:24px; left:141px; }
+.np11m { position:absolute; top:4px; left:117px; }
+.np11s { position:absolute; top:-2px; left:139px; }
+.np12m { position:absolute; top:49px; left:179px; }
+.np12s { position:absolute; top:38px; left:201px; }
+.np13 { position:absolute; top:13px; left:163px; }
+.np14 { position:absolute; top:8px; left:176px; }
+
+
+/* Positionierung der Positionen im Spielbericht */
+
+.pos_text a { color:#fff !important; font-size:6.5pt; font-weight:bold; text-shadow:#626262 1px 1px; }
+.pos_text { color:#fff !important; font-size:6.5pt; width:90px; text-align:center; font-weight:bold; line-height:1; text-shadow:#626262 1px 1px; text-decoration:none; }
+
+.pos_ersatz a { color:#fff !important; font-size:6.5pt; font-weight:bold; text-shadow:#626262 1px 1px; }
+.pos_ersatz { color:#fff !important; font-size:6.5pt; width:90px; text-align:center; font-weight:bold; line-height:1; text-shadow:#626262 1px 1px; text-decoration:none; }
+
+
+.pos1_2 { position:absolute; top:154px; left:72px; }
+.pos3_l_2 { position:absolute; top:113px; left:40px;}
+.pos3_r_2 { position:absolute; top:113px; left:104px;}
+.pos4_2 { position:absolute; top:111px; left:-20px;}
+.pos5_2 { position:absolute; top:111px; left:165px;}
+.pos6_2 { position:absolute; top:81px; left:72px;}
+.pos6_r_2 { position:absolute; top:81px; left:45px;}
+.pos7_2 { position:absolute; top:81px; left:72px;}
+.pos8_2 { position:absolute; top:59px; left:142px;}
+.pos9_2 { position:absolute; top:59px; left:0;}
+.pos10_2 { position:absolute; top:40px; left:72px;}
+.pos11_2 { position:absolute; top:42px; left:-20px;}
+.pos12_2 { position:absolute; top:-2px; left:139px;}
+.pos13_2 { position:absolute; top:49px; left:179px;}
+.pos14_2 { position:absolute; top:1px; left:72px;}
+.pos10_l_2 { position:absolute; top:40px; left:42px;}
+.pos10_r_2 { position:absolute; top:40px; left:106px;}
+.pos13_2 { position:absolute; top:5px; left:42px;}
+.pos14_l_2 { position:absolute; top:1px; left:42px;}
+.pos14_r_2 { position:absolute; top:1px; left:106px;}
+
+
+.pos1_3 { position:absolute; top:154px; left:72px; }
+.pos3_l_3 { position:absolute; top:113px; left:40px;}
+.pos3_r_3 { position:absolute; top:113px; left:104px;}
+.pos4_3 { position:absolute; top:111px; left:-20px;}
+.pos5_3 { position:absolute; top:111px; left:165px;}
+.pos6_3 { position:absolute; top:75px; left:120px;}
+.pos6_r_3 { position:absolute; top:75px; left:25px;}
+.pos7_3 { position:absolute; top:75px; left:120px;}
+.pos8_3 { position:absolute; top:29px; left:162px;}
+.pos9_3 { position:absolute; top:29px; left:-20px;}
+.pos10_3 { position:absolute; top:50px; left:72px;}
+.pos11_3 { position:absolute; top:42px; left:-20px;}
+.pos12_3 { position:absolute; top:-2px; left:139px;}
+.pos13_3 { position:absolute; top:49px; left:179px;}
+.pos14_3 { position:absolute; top:1px; left:72px;}
+.pos10_l_3 { position:absolute; top:40px; left:42px;}
+.pos10_r_3 { position:absolute; top:40px; left:106px;}
+.pos14_3 { position:absolute; top:1px; left:72px;}
+
+
+.pos1_4 { position:absolute; top:154px; left:72px;}
+.pos3_l_4 { position:absolute; top:113px; left:40px;}
+.pos3_r_4 { position:absolute; top:113px; left:104px;}
+.pos4_4 { position:absolute; top:111px; left:-20px;}
+.pos5_4 { position:absolute; top:111px; left:165px;}
+.pos6_4 { position:absolute; top:73px; left:40px;}
+.pos6_r_4 { position:absolute; top:73px; left:40px;}
+.pos7_4 { position:absolute; top:73px; left:105px;}
+.pos7_r_4 { position:absolute; top:68px; left:40px;}
+.pos7_l_4 { position:absolute; top:68px; left:105px;}
+.pos8_4 { position:absolute; top:48px; left:160px;}
+.pos9_4 { position:absolute; top:48px; left:-18px;}
+.pos10_4 { position:absolute; top:40px; left:72px;}
+.pos11_4 { position:absolute; top:42px; left:-20px;}
+.pos12_4 { position:absolute; top:-2px; left:139px;}
+.pos13_l_4 { position:absolute; top:15px; left:42px;}
+.pos13_r_4 { position:absolute; top:15px; left:106px;}
+.pos14_l_4 { position:absolute; top:1px; left:42px;}
+.pos14_r_4 { position:absolute; top:1px; left:106px;}
+
+
+.pos1_5 { position:absolute; top:154px; left:72px;}
+.pos3_l_5 { position:absolute; top:113px; left:40px;}
+.pos3_r_5 { position:absolute; top:113px; left:104px;}
+.pos4_5 { position:absolute; top:111px; left:-20px;}
+.pos5_5 { position:absolute; top:111px; left:165px;}
+.pos6_5 { position:absolute; top:73px; left:45px;}
+.pos6_r_5 { position:absolute; top:73px; left:45px;}
+.pos7_5 { position:absolute; top:73px; left:100px;}
+.pos7_r_5 { position:absolute; top:68px; left:45px;}
+.pos7_l_5 { position:absolute; top:68px; left:100px;}
+.pos8_5 { position:absolute; top:48px; left:160px;}
+.pos9_5 { position:absolute; top:48px; left:-18px;}
+.pos10_5 { position:absolute; top:40px; left:72px;}
+.pos11_5 { position:absolute; top:42px; left:-20px;}
+.pos12_5 { position:absolute; top:-2px; left:139px;}
+.pos13_l_5 { position:absolute; top:15px; left:42px;}
+.pos14_l_5 { position:absolute; top:1px; left:42px;}
+.pos14_5 { position:absolute; top:1px; left:72px;}
+
+
+.pos1_6 { position:absolute; top:154px; left:72px;}
+.pos3_l_6 { position:absolute; top:113px; left:23px;}
+.pos3_m_6 { position:absolute; top:117px; left:72px;}
+.pos3_r_6 { position:absolute; top:113px; left:120px;}
+.pos4_6 { position:absolute; top:99px; left:-20px;}
+.pos5_6 { position:absolute; top:99px; left:165px;}
+.pos6_6 { position:absolute; top:73px; left:45px;}
+.pos6_r_6 { position:absolute; top:63px; left:23px;}
+.pos7_6 { position:absolute; top:63px; left:120px;}
+.pos8_6 { position:absolute; top:48px; left:160px;}
+.pos9_6 { position:absolute; top:48px; left:-18px;}
+.pos10_6 { position:absolute; top:45px; left:72px;}
+.pos10_z_6 { position:absolute; top:50px; left:72px;}
+.pos11_6 { position:absolute; top:42px; left:-20px;}
+.pos12_6 { position:absolute; top:-2px; left:139px;}
+.pos13_6 { position:absolute; top:10px; left:106px;}
+.pos14_l_6 { position:absolute; top:1px; left:42px;}
+.pos14_6 { position:absolute; top:1px; left:106px;}
+
+.pos1_7 { position:absolute; top:154px; left:72px;}
+.pos3_l_7 { position:absolute; top:113px; left:23px;}
+.pos3_m_7 { position:absolute; top:117px; left:72px;}
+.pos3_r_7 { position:absolute; top:113px; left:120px;}
+.pos4_7 { position:absolute; top:99px; left:-20px;}
+.pos5_7 { position:absolute; top:99px; left:165px;}
+.pos6_7 { position:absolute; top:80px; left:72px;}
+.pos7_7 { position:absolute; top:80px; left:72px;}
+.pos8_7 { position:absolute; top:55px; left:140px;}
+.pos9_7 { position:absolute; top:55px; left:0px;}
+.pos8_12 { position:absolute; top:50px; left:140px;}
+.pos9_11 { position:absolute; top:50px; left:0px;}
+.pos10_7 { position:absolute; top:40px; left:72px;}
+.pos11_7 { position:absolute; top:42px; left:-20px;}
+.pos12_7 { position:absolute; top:-2px; left:139px;}
+.pos13_l_7 { position:absolute; top:15px; left:42px;}
+.pos14_7 { position:absolute; top:1px; left:72px;}
+
+.pos1_8 { position:absolute; top:154px; left:72px;}
+.pos2_8 { position:absolute; top:117px; left:72px;}
+.pos3_l_8 { position:absolute; top:113px; left:15px;}
+.pos3_m_8 { position:absolute; top:113px; left:72px;}
+.pos3_r_8 { position:absolute; top:113px; left:128px;}
+.pos4_8 { position:absolute; top:99px; left:-20px;}
+.pos5_8 { position:absolute; top:99px; left:165px;}
+.pos6_8 { position:absolute; top:80px; left:72px;}
+.pos7_8 { position:absolute; top:80px; left:72px;}
+.pos8_8 { position:absolute; top:60px; left:140px;}
+.pos9_8 { position:absolute; top:60px; left:0px;}
+.pos10_8 { position:absolute; top:40px; left:72px;}
+.pos11_8 { position:absolute; top:17px; left:-20px;}
+.pos12_8 { position:absolute; top:17px; left:160px;}
+.pos13_l_8 { position:absolute; top:15px; left:42px;}
+.pos14_8 { position:absolute; top:1px; left:72px;}
+
+
+.pos1_9 { position:absolute; top:154px; left:72px;}
+.pos2_9 { position:absolute; top:117px; left:72px;}
+.pos3_l_9 { position:absolute; top:113px; left:15px;}
+.pos3_m_9 { position:absolute; top:113px; left:72px;}
+.pos3_r_9 { position:absolute; top:113px; left:128px;}
+.pos4_9 { position:absolute; top:99px; left:-20px;}
+.pos5_9 { position:absolute; top:99px; left:165px;}
+.pos6_l_9 { position:absolute; top:77px; left:110px;}
+.pos6_r_9 { position:absolute; top:77px; left:45px;}
+.pos7_9 { position:absolute; top:80px; left:72px;}
+.pos8_9 { position:absolute; top:60px; left:160px;}
+.pos9_9 { position:absolute; top:60px; left:-15px;}
+.pos10_9 { position:absolute; top:40px; left:72px;}
+.pos11_9 { position:absolute; top:50px; left:-15px;}
+.pos12_9 { position:absolute; top:50px; left:160px;}
+.pos13_9 { position:absolute; top:15px; left:42px;}
+.pos14_l_9 { position:absolute; top:1px; left:42px;}
+.pos14_r_9 { position:absolute; top:1px; left:106px;}
+
+
+.pos1_10 { position:absolute; top:154px; left:72px; }
+.pos3_l_10 { position:absolute; top:113px; left:40px;}
+.pos3_r_10 { position:absolute; top:113px; left:104px;}
+.pos4_10 { position:absolute; top:111px; left:-20px;}
+.pos5_10 { position:absolute; top:111px; left:165px;}
+.pos6_10 { position:absolute; top:80px; left:72px;}
+.pos7_10 { position:absolute; top:80px; left:72px;}
+.pos8_10 { position:absolute; top:60px; left:140px;}
+.pos9_10 { position:absolute; top:60px; left:0px;}
+.pos10_10 { position:absolute; top:40px; left:72px;}
+.pos10_l_10 { position:absolute; top:53px; left:20px;}
+.pos10_r_10 { position:absolute; top:53px; left:126px;}
+.pos11_10 { position:absolute; top:17px; left:-17px;}
+.pos12_10 { position:absolute; top:17px; left:160px;}
+.pos13_l_10 { position:absolute; top:15px; left:42px;}
+.pos14_10 { position:absolute; top:1px; left:72px;}
+
+
+.pos1_11 { position:absolute; top:154px; left:72px; }
+.pos3_l_11 { position:absolute; top:113px; left:40px;}
+.pos3_r_11 { position:absolute; top:113px; left:104px;}
+.pos4_11 { position:absolute; top:111px; left:-20px;}
+.pos5_11 { position:absolute; top:111px; left:165px;}
+.pos6_11 { position:absolute; top:77px; left:72px;}
+.pos6_r_11 { position:absolute; top:77px; left:45px;}
+.pos7_11 { position:absolute; top:55px; left:100px;}
+.pos8_11 { position:absolute; top:55px; left:160px;}
+.pos9_11 { position:absolute; top:55px; left:-18px;}
+.pos10_11 { position:absolute; top:55px; left:72px;}
+.pos11_11 { position:absolute; top:42px; left:-20px;}
+.pos12_11 { position:absolute; top:-2px; left:139px;}
+.pos13_11 { position:absolute; top:49px; left:179px;}
+.pos14_11 { position:absolute; top:1px; left:72px;}
+.pos10_l_11 { position:absolute; top:55px; left:42px;}
+.pos10_r_11 { position:absolute; top:55px; left:106px;}
+.pos13_11 { position:absolute; top:10px; left:106px;}
+.pos14_l_11 { position:absolute; top:1px; left:42px;}
+.pos14_r_11 { position:absolute; top:1px; left:106px;}
+
+
+.pos1_12 { position:absolute; top:154px; left:72px;}
+.pos2_12 { position:absolute; top:117px; left:72px;}
+.pos3_l_12 { position:absolute; top:113px; left:15px;}
+.pos3_m_12 { position:absolute; top:113px; left:72px;}
+.pos3_r_12 { position:absolute; top:113px; left:128px;}
+.pos4_12 { position:absolute; top:99px; left:-20px;}
+.pos5_12 { position:absolute; top:99px; left:165px;}
+.pos6_12 { position:absolute; top:80px; left:72px;}
+.pos7_12 { position:absolute; top:80px; left:72px;}
+.pos8_12 { position:absolute; top:55px; left:168px;}
+.pos9_12 { position:absolute; top:55px; left:-20px;}
+.pos10_12 { position:absolute; top:45px; left:72px;}
+.pos10_l_12 { position:absolute; top:45px; left:42px;}
+.pos10_r_12 { position:absolute; top:45px; left:106px;}
+.pos11_12 { position:absolute; top:17px; left:-20px;}
+.pos12_12 { position:absolute; top:17px; left:160px;}
+.pos13_l_12 { position:absolute; top:15px; left:42px;}
+.pos14_l_12 { position:absolute; top:1px; left:42px;}
+.pos14_r_12 { position:absolute; top:1px; left:106px;}
+
+
+.pos1_13 { position:absolute; top:154px; left:72px;}
+.pos2_13 { position:absolute; top:117px; left:72px;}
+.pos3_l_13 { position:absolute; top:113px; left:15px;}
+.pos3_m_13 { position:absolute; top:113px; left:72px;}
+.pos3_r_13 { position:absolute; top:113px; left:128px;}
+.pos4_13 { position:absolute; top:99px; left:-20px;}
+.pos5_13 { position:absolute; top:99px; left:165px;}
+.pos6_l_13 { position:absolute; top:77px; left:110px;}
+.pos6_r_13 { position:absolute; top:77px; left:45px;}
+.pos7_13 { position:absolute; top:80px; left:72px;}
+.pos8_13 { position:absolute; top:55px; left:168px;}
+.pos9_13 { position:absolute; top:55px; left:-20px;}
+.pos10_13 { position:absolute; top:45px; left:72px;}
+.pos10_l_13 { position:absolute; top:40px; left:42px;}
+.pos10_r_13 { position:absolute; top:40px; left:112px;}
+.pos11_13 { position:absolute; top:17px; left:-20px;}
+.pos12_13 { position:absolute; top:17px; left:160px;}
+.pos13_l_13 { position:absolute; top:15px; left:42px;}
+.pos14_13 { position:absolute; top:1px; left:72px;}
+
+
+.pos1_14 { position:absolute; top:154px; left:72px;}
+.pos3_l_14 { position:absolute; top:113px; left:40px;}
+.pos3_r_14 { position:absolute; top:113px; left:104px;}
+.pos4_14 { position:absolute; top:111px; left:-20px;}
+.pos5_14 { position:absolute; top:111px; left:165px;}
+.pos6_14 { position:absolute; top:77px; left:72px;}
+.pos7_14 { position:absolute; top:77px; left:100px;}
+.pos8_14 { position:absolute; top:48px; left:160px;}
+.pos9_14 { position:absolute; top:48px; left:-18px;}
+.pos10_14 { position:absolute; top:40px; left:72px;}
+.pos11_14 { position:absolute; top:42px; left:-20px;}
+.pos12_14 { position:absolute; top:-2px; left:139px;}
+.pos13_14 { position:absolute; top:49px; left:179px;}
+.pos14_14 { position:absolute; top:1px; left:72px;}
+.pos10_l_14 { position:absolute; top:40px; left:42px;}
+.pos10_r_14 { position:absolute; top:40px; left:106px;}
+
+.pos1_15 { position:absolute; top:154px; left:72px;}
+.pos2_15 { position:absolute; top:117px; left:72px;}
+.pos3_l_15 { position:absolute; top:113px; left:15px;}
+.pos3_m_15 { position:absolute; top:113px; left:72px;}
+.pos3_r_15 { position:absolute; top:113px; left:128px;}
+.pos4_15 { position:absolute; top:99px; left:-20px;}
+.pos5_15 { position:absolute; top:99px; left:165px;}
+.pos6_15 { position:absolute; top:80px; left:72px;}
+.pos7_15 { position:absolute; top:80px; left:72px;}
+.pos8_15 { position:absolute; top:60px; left:165px;}
+.pos9_15 { position:absolute; top:60px; left:-20px;}
+.pos10_15 { position:absolute; top:40px; left:72px;}
+.pos11_15 { position:absolute; top:17px; left:-20px;}
+.pos12_15 { position:absolute; top:17px; left:160px;}
+.pos13_l_15 { position:absolute; top:15px; left:42px;}
+.pos14_15 { position:absolute; top:1px; left:72px;}
+.pos10_l_15 { position:absolute; top:40px; left:42px;}
+.pos10_r_15 { position:absolute; top:40px; left:106px;}
+.pos14_l_15 { position:absolute; top:1px; left:42px;}
+.pos14_r_15 { position:absolute; top:1px; left:106px;}
+
+.pos1_16 { position:absolute; top:154px; left:72px;}
+.pos3_l_16 { position:absolute; top:113px; left:40px;}
+.pos3_r_16 { position:absolute; top:113px; left:104px;}
+.pos4_16 { position:absolute; top:111px; left:-20px;}
+.pos5_16 { position:absolute; top:111px; left:165px;}
+.pos6_16 { position:absolute; top:77px; left:45px;}
+.pos6_r_16 { position:absolute; top:77px; left:40px;}
+.pos7_16 { position:absolute; top:77px; left:105px;}
+.pos8_16 { position:absolute; top:48px; left:160px;}
+.pos9_16 { position:absolute; top:48px; left:-18px;}
+.pos10_16 { position:absolute; top:40px; left:72px;}
+.pos11_16 { position:absolute; top:42px; left:-20px;}
+.pos12_16 { position:absolute; top:-2px; left:139px;}
+.pos13_16 { position:absolute; top:49px; left:179px;}
+.pos14_16 { position:absolute; top:1px; left:72px;}
+
+
+.pos1_17 { position:absolute; top:154px; left:72px;}
+.pos2_17 { position:absolute; top:117px; left:72px;}
+.pos3_l_17 { position:absolute; top:113px; left:15px;}
+.pos3_m_17 { position:absolute; top:113px; left:72px;}
+.pos3_r_17 { position:absolute; top:113px; left:128px;}
+.pos4_17 { position:absolute; top:99px; left:-20px;}
+.pos5_17 { position:absolute; top:99px; left:165px;}
+.pos6_17 { position:absolute; top:80px; left:72px;}
+.pos7_17 { position:absolute; top:80px; left:72px;}
+.pos8_17 { position:absolute; top:80px; left:145px;}
+.pos9_17 { position:absolute; top:80px; left:0px;}
+.pos10_17 { position:absolute; top:40px; left:72px;}
+.pos11_17 { position:absolute; top:40px; left:-15px;}
+.pos12_17 { position:absolute; top:40px; left:160px;}
+.pos13_l_17 { position:absolute; top:15px; left:42px;}
+.pos14_17 { position:absolute; top:1px; left:72px;}
+.pos10_l_17 { position:absolute; top:40px; left:42px;}
+.pos10_r_17 { position:absolute; top:40px; left:106px;}
+.pos14_l_17 { position:absolute; top:1px; left:42px;}
+.pos14_r_17 { position:absolute; top:1px; left:106px;}
+
+.pos1_18 { position:absolute; top:154px; left:72px;}
+.pos3_l_18 { position:absolute; top:113px; left:40px;}
+.pos3_r_18 { position:absolute; top:113px; left:104px;}
+.pos4_18 { position:absolute; top:111px; left:-20px;}
+.pos5_18 { position:absolute; top:111px; left:165px;}
+.pos6_m_18 { position:absolute; top:80px; left:72px;}
+.pos6_l_18 { position:absolute; top:77px; left:130px;}
+.pos6_r_18 { position:absolute; top:77px; left:15px;}
+.pos7_18 { position:absolute; top:77px; left:100px;}
+.pos8_18 { position:absolute; top:48px; left:160px;}
+.pos9_18 { position:absolute; top:48px; left:-18px;}
+.pos10_l_18 { position:absolute; top:40px; left:42px;}
+.pos10_r_18 { position:absolute; top:40px; left:106px;}
+.pos11_18 { position:absolute; top:42px; left:-20px;}
+.pos12_18 { position:absolute; top:-2px; left:139px;}
+.pos13_18 { position:absolute; top:49px; left:179px;}
+.pos14_18 { position:absolute; top:1px; left:72px;}
+
+.pos1_19 { position:absolute; top:154px; left:72px;}
+.pos3_l_19 { position:absolute; top:113px; left:40px;}
+.pos3_r_19 { position:absolute; top:113px; left:104px;}
+.pos4_19 { position:absolute; top:111px; left:-20px;}
+.pos5_19 { position:absolute; top:111px; left:165px;}
+.pos6_19 { position:absolute; top:80px; left:72px;}
+.pos7_19 { position:absolute; top:77px; left:100px;}
+.pos8_19 { position:absolute; top:48px; left:160px;}
+.pos9_19 { position:absolute; top:48px; left:-18px;}
+.pos10_19 { position:absolute; top:40px; left:72px;}
+.pos11_19 { position:absolute; top:42px; left:-20px;}
+.pos12_19 { position:absolute; top:-2px; left:139px;}
+.pos13_19 { position:absolute; top:49px; left:179px;}
+.pos14_l_19 { position:absolute; top:1px; left:42px;}
+.pos14_r_19 { position:absolute; top:1px; left:106px;}
+
+.pos1_20 { position:absolute; top:154px; left:72px;}
+.pos3_l_20 { position:absolute; top:113px; left:40px;}
+.pos3_r_20 { position:absolute; top:113px; left:104px;}
+.pos4_20 { position:absolute; top:111px; left:-20px;}
+.pos5_20 { position:absolute; top:111px; left:165px;}
+.pos6_m_20 { position:absolute; top:80px; left:72px;}
+.pos6_l_20 { position:absolute; top:77px; left:130px;}
+.pos6_r_20 { position:absolute; top:77px; left:15px;}
+.pos7_20 { position:absolute; top:77px; left:100px;}
+.pos8_20 { position:absolute; top:48px; left:160px;}
+.pos9_20 { position:absolute; top:48px; left:-18px;}
+.pos10_20 { position:absolute; top:40px; left:72px;}
+.pos11_20 { position:absolute; top:42px; left:-20px;}
+.pos12_20 { position:absolute; top:-2px; left:139px;}
+.pos13_20 { position:absolute; top:10px; left:104px;}
+.pos14_l_20 { position:absolute; top:1px; left:40px;}
+.pos14_r_20 { position:absolute; top:1px; left:104px;}
+
+.pos1_21 { position:absolute; top:154px; left:72px;}
+.pos3_l_21 { position:absolute; top:110px; left:23px;}
+.pos3_m_21 { position:absolute; top:117px; left:72px;}
+.pos3_r_21 { position:absolute; top:110px; left:120px;}
+.pos4_21 { position:absolute; top:90px; left:-20px;}
+.pos5_21 { position:absolute; top:90px; left:165px;}
+.pos6_l_21 { position:absolute; top:65px; left:110px;}
+.pos6_r_21 { position:absolute; top:65px; left:35px;}
+.pos7_21 { position:absolute; top:80px; left:72px;}
+.pos8_21 { position:absolute; top:40px; left:160px;}
+.pos9_21 { position:absolute; top:40px; left:-15px;}
+.pos10_21 { position:absolute; top:40px; left:72px;}
+.pos11_21 { position:absolute; top:42px; left:-20px;}
+.pos12_21 { position:absolute; top:-2px; left:139px;}
+.pos13_l_21 { position:absolute; top:15px; left:42px;}
+.pos13_21 { position:absolute; top:13px; left:72px;}
+.pos14_21 { position:absolute; top:4px; left:72px;}
+
+
+.pos1_22 { position:absolute; top:154px; left:72px;}
+.pos3_l_22 { position:absolute; top:113px; left:40px;}
+.pos3_r_22 { position:absolute; top:113px; left:104px;}
+.pos4_22 { position:absolute; top:111px; left:-20px;}
+.pos5_22 { position:absolute; top:111px; left:165px;}
+.pos6_m_22 { position:absolute; top:70px; left:72px;}
+.pos6_l_22 { position:absolute; top:70px; left:130px;}
+.pos6_r_22 { position:absolute; top:70px; left:15px;}
+.pos8_22 { position:absolute; top:48px; left:160px;}
+.pos9_22 { position:absolute; top:48px; left:-18px;}
+.pos10_22 { position:absolute; top:40px; left:72px;}
+.pos11_22 { position:absolute; top:42px; left:-20px;}
+.pos12_22 { position:absolute; top:-2px; left:139px;}
+.pos13_l_22 { position:absolute; top:15px; left:42px;}
+.pos14_l_22 { position:absolute; top:1px; left:42px;}
+.pos13_22 { position:absolute; top:13px; left:72px;}
+.pos14_22 { position:absolute; top:4px; left:72px;}
+
+
+.pos1_23 { position:absolute; top:154px; left:72px;}
+.pos3_l_23 { position:absolute; top:113px; left:40px;}
+.pos3_r_23 { position:absolute; top:113px; left:104px;}
+.pos4_23 { position:absolute; top:111px; left:-20px;}
+.pos5_23 { position:absolute; top:111px; left:165px;}
+.pos6_m_23 { position:absolute; top:70px; left:72px;}
+.pos6_l_23 { position:absolute; top:70px; left:105px;}
+.pos6_r_23 { position:absolute; top:70px; left:40px;}
+.pos8_23 { position:absolute; top:70px; left:160px;}
+.pos9_23 { position:absolute; top:70px; left:-18px;}
+.pos10_23 { position:absolute; top:35px; left:72px;}
+.pos11_23 { position:absolute; top:42px; left:-20px;}
+.pos12_23 { position:absolute; top:-2px; left:139px;}
+.pos13_l_23 { position:absolute; top:15px; left:42px;}
+.pos14_l_23 { position:absolute; top:1px; left:42px;}
+.pos13_23 { position:absolute; top:35px; left:85px;}
+.pos14_23 { position:absolute; top:1px; left:72px;}
+
+.pos1_24 { position:absolute; top:154px; left:72px;}
+.pos2_24 { position:absolute; top:117px; left:72px;}
+.pos3_l_24 { position:absolute; top:113px; left:15px;}
+.pos3_m_24 { position:absolute; top:113px; left:72px;}
+.pos3_r_24 { position:absolute; top:113px; left:128px;}
+.pos4_24 { position:absolute; top:99px; left:-20px;}
+.pos5_24 { position:absolute; top:99px; left:165px;}
+.pos6_l_24 { position:absolute; top:70px; left:105px;}
+.pos6_r_24 { position:absolute; top:70px; left:40px;}
+.pos7_24 { position:absolute; top:80px; left:62px;}
+.pos8_24 { position:absolute; top:60px; left:160px;}
+.pos9_24 { position:absolute; top:60px; left:-20px;}
+.pos10_24 { position:absolute; top:40px; left:72px;}
+.pos11_24 { position:absolute; top:17px; left:-20px;}
+.pos12_24 { position:absolute; top:17px; left:160px;}
+.pos13_l_24 { position:absolute; top:15px; left:42px;}
+.pos14_24 { position:absolute; top:1px; left:72px;}
+
+
+.pos1_24 { position:absolute; top:154px; left:72px;}
+.pos2_24 { position:absolute; top:117px; left:72px;}
+.pos3_l_24 { position:absolute; top:113px; left:15px;}
+.pos3_m_24 { position:absolute; top:113px; left:72px;}
+.pos3_r_24 { position:absolute; top:113px; left:128px;}
+.pos4_24 { position:absolute; top:99px; left:-20px;}
+.pos5_24 { position:absolute; top:99px; left:165px;}
+.pos6_l_24 { position:absolute; top:70px; left:105px;}
+.pos6_r_24 { position:absolute; top:70px; left:40px;}
+.pos7_24 { position:absolute; top:80px; left:62px;}
+.pos8_24 { position:absolute; top:60px; left:160px;}
+.pos9_24 { position:absolute; top:60px; left:-20px;}
+.pos10_24 { position:absolute; top:40px; left:72px;}
+.pos11_24 { position:absolute; top:17px; left:-20px;}
+.pos12_24 { position:absolute; top:17px; left:160px;}
+.pos13_l_24 { position:absolute; top:15px; left:42px;}
+.pos14_24 { position:absolute; top:1px; left:72px;}
+
+
+.pos1_25 { position:absolute; top:154px; left:72px;}
+.pos2_25 { position:absolute; top:120px; left:72px;}
+.pos3_l_25 { position:absolute; top:100px; left:5px;}
+.pos3_m_25 { position:absolute; top:88px; left:72px;}
+.pos3_r_25 { position:absolute; top:100px; left:138px;}
+.pos4_25 { position:absolute; top:99px; left:-20px;}
+.pos5_25 { position:absolute; top:99px; left:165px;}
+.pos6_l_25 { position:absolute; top:70px; left:105px;}
+.pos6_r_25 { position:absolute; top:70px; left:40px;}
+.pos7_25 { position:absolute; top:50px; left:72px;}
+.pos8_25 { position:absolute; top:60px; left:160px;}
+.pos9_25 { position:absolute; top:60px; left:-20px;}
+.pos10_25 { position:absolute; top:40px; left:72px;}
+.pos11_25 { position:absolute; top:17px; left:-20px;}
+.pos12_25 { position:absolute; top:17px; left:160px;}
+.pos13_l_25 { position:absolute; top:15px; left:42px;}
+.pos14_25 { position:absolute; top:1px; left:72px;}
+
+.pos1_26 { position:absolute; top:154px; left:72px;}
+.pos2_26 { position:absolute; top:117px; left:72px;}
+.pos3_l_26 { position:absolute; top:113px; left:15px;}
+.pos3_m_26 { position:absolute; top:113px; left:72px;}
+.pos3_r_26 { position:absolute; top:113px; left:128px;}
+.pos4_26 { position:absolute; top:99px; left:-20px;}
+.pos5_26 { position:absolute; top:99px; left:165px;}
+.pos6_m_26 { position:absolute; top:70px; left:72px;}
+.pos6_l_26 { position:absolute; top:70px; left:140px;}
+.pos6_r_26 { position:absolute; top:70px; left:10px;}
+.pos7_26 { position:absolute; top:80px; left:72px;}
+.pos8_26 { position:absolute; top:50px; left:170px;}
+.pos9_26 { position:absolute; top:50px; left:-20px;}
+.pos10_26 { position:absolute; top:40px; left:72px;}
+.pos11_26 { position:absolute; top:50px; left:-15px;}
+.pos12_26 { position:absolute; top:50px; left:160px;}
+.pos13_26 { position:absolute; top:15px; left:42px;}
+.pos14_l_26 { position:absolute; top:1px; left:42px;}
+.pos14_r_26 { position:absolute; top:1px; left:106px;}
+
+.pos1_27 { position:absolute; top:154px; left:72px;}
+.pos2_27 { position:absolute; top:120px; left:72px;}
+.pos3_l_27 { position:absolute; top:108px; left:5px;}
+.pos3_m_27 { position:absolute; top:85px; left:72px;}
+.pos3_r_27 { position:absolute; top:108px; left:138px;}
+.pos4_27 { position:absolute; top:99px; left:-20px;}
+.pos5_27 { position:absolute; top:99px; left:165px;}
+.pos6_m_27 { position:absolute; top:70px; left:72px;}
+.pos6_l_27 { position:absolute; top:70px; left:140px;}
+.pos6_r_27 { position:absolute; top:55px; left:35px;}
+.pos7_27 { position:absolute; top:55px; left:110px;}
+.pos8_27 { position:absolute; top:55px; left:170px;}
+.pos9_27 { position:absolute; top:55px; left:-20px;}
+.pos10_27 { position:absolute; top:40px; left:72px;}
+.pos11_27 { position:absolute; top:50px; left:-15px;}
+.pos12_27 { position:absolute; top:50px; left:160px;}
+.pos13_27 { position:absolute; top:11px; left:42px;}
+.pos14_l_27 { position:absolute; top:1px; left:42px;}
+.pos14_r_27 { position:absolute; top:1px; left:106px;}
+
+.pos1_28 { position:absolute; top:154px; left:72px;}
+.pos2_28 { position:absolute; top:123px; left:72px;}
+.pos3_l_28 { position:absolute; top:108px; left:5px;}
+.pos3_m_28 { position:absolute; top:89px; left:72px;}
+.pos3_r_28 { position:absolute; top:108px; left:138px;}
+.pos4_28 { position:absolute; top:99px; left:-20px;}
+.pos5_28 { position:absolute; top:99px; left:165px;}
+.pos6_28 { position:absolute; top:56px; left:72px;}
+.pos6_r_28 { position:absolute; top:55px; left:35px;}
+.pos7_28 { position:absolute; top:55px; left:110px;}
+.pos8_28 { position:absolute; top:55px; left:170px;}
+.pos9_28 { position:absolute; top:55px; left:-20px;}
+.pos10_28 { position:absolute; top:24px; left:72px;}
+.pos11_28 { position:absolute; top:50px; left:-15px;}
+.pos12_28 { position:absolute; top:50px; left:160px;}
+.pos13_28 { position:absolute; top:3px; left:42px;}
+.pos14_l_28 { position:absolute; top:1px; left:42px;}
+.pos14_r_28 { position:absolute; top:1px; left:106px;}
+
+.pos_default { position:absolute; top:1px; left:1px;}
+
+.p2 { padding:2px;}
+.p5 { padding:5px;}
+.p10 { padding:10px;}
+.pad { padding:5px 5px 2px 5px;}
+.pl20 {	padding-left:20px; }
+.pr15 {	padding-right:15px; }
+.pr5 {	padding-right:5px; }
+.pl15 {	padding-left:15px; }
+.defbor { border:1px solid #ccc; }
+.pl20i { padding-left:20px !important; }
+.pr20 { padding-right:20px; }
+.ml20 { margin-left:20px; }
+.ml3 { margin-left:3px; }
+.ml200 { margin-left:200px; }
+.mr10 { margin-right:10px; }
+.mr20 { margin-right:20px; }
+.mb20 { margin-bottom:20px; }
+.mt20 { margin-top:20px; }
+.mt10i { margin-top:5px !important; } 
+.ml10 { margin-left:10px; }
+.mr10 { margin-right:10px; }
+.mb10 { margin-bottom:10px; }
+.mb5 { margin-bottom:5px; }
+.mt10 { margin-top:10px !important; }
+.mt20 { margin-top:40px; }
+.ml5 { margin-left:5px;}
+.mr5 { margin-right:5px;}
+.mb5 { margin-bottom:5px;}
+.mt5 { margin-top:5px;}
+.mt6 { margin-top:6px;}
+.mt7 { margin-top:7px;}
+.mt7 { margin-top:8px;}
+
+.mt1 { margin-top:1px; }
+.mt2 { margin-top:2px !important; }
+.mt3 {  margin-top:3px; }
+.mt4 {  margin-top:4px; }
+
+.m0 { margin:0; }
+.pl165 { padding-left:165px !important; }
+.wappen_margin {
+	margin:1px 0;	
+}
+
+.miniwappen {
+	vertical-align:middle;	
+}
+
+.miniwappenwidth {
+	width:15px !important;
+	padding-left:2px  !important;
+	padding-right:2px  !important;
+}
+
+.icon_margin {
+	margin-top:4px;	
+}
+
+.breadcrumb_padding {
+	padding:0;
+}
+	
+.opacity30 {
+	opacity: 0.30;
+	
+}	
+.opacity10 {
+	opacity: 0.10;
+}
+.opacity10_presseschau {
+	opacity: 0.14;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=14)";
+	filter: alpha(opacity=14);
+}
+
+.opacity20_termine {
+	opacity: 0.64;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=66)";
+	filter: alpha(opacity=66);
+}
+
+.opacity20 {
+	opacity: 0.20;
+}
+
+.opacity40 {
+	opacity: 0.40;
+}
+.opacity50 {
+	opacity: 0.50;
+}
+
+.opacity70 {
+	opacity: 0.70;
+}
+
+.opacity80 {
+	opacity: 0.80;
+}
+
+.opacity90 {
+	opacity: 0.90;
+}
+
+/* NAVIGATION VON TIMO 
+
+div#left ul {
+	width: 156px;
+	border: 1px solid #999;
+	margin-bottom:20px;
+	background:#fff;
+}
+
+div#left li {
+	width: 155px;
+}
+
+div#left li a {
+	color:#444;
+}
+*/
+
+/* NAVIGATION VON TIMO */
+
+div#left ul {
+	width: 160px;
+	border: 0;
+	margin-bottom:20px;
+	background:#fff;
+	list-style-type:none;
+}
+
+div#left li {
+	width: 160px;
+	margin:0;
+	list-style-type:none;
+}
+
+a.navipoint:link,a.navipoint:visited,a.navipoint:hover,a.navipoint:active,
+a.navipoint_first:link, a.navipoint_first:visited, a.navipoint_first:hover, a.navipoint_first:active { 
+	margin: 1px 0;
+	padding: 4px 10px;
+	background-color: #828a9a;
+	color: #fff;
+	text-decoration: none;
+	display:block;
+	border-left:10px solid #fff;
+}
+
+a.navipoint:hover,a.navipoint:active {
+	background: #0E2E80;
+}
+
+
+a.navipoint_first:link,a.navipoint_first:visited,a.navipoint_first:hover,a.navipoint_first:active {
+	border-left:0;
+	background: #828a9a url(../img/lasche_navi.jpg) no-repeat left;
+	padding:4px 0 4px 20px ;
+}
+a.navipoint_first:hover,a.navipoint_first:active {
+	background: #0E2F80 url(../img/lasche_navi_over.jpg) no-repeat left;
+
+}
+
+/* Subnavi */
+a.navipoint_sub:link,a.navipoint_sub:visited,a.navipoint_sub:hover,a.navipoint_sub:active,
+a.navipoint_sub_first:link, a.navipoint_sub_first:visited, a.navipoint_sub_first:hover, a.navipoint_sub_first:active { 
+	margin: 1px 0;
+	padding: 4px 14px;
+	background-color: #a4abb8;
+	color: #fff;
+	text-decoration: none;
+	display:block;
+	border-left:10px solid #fff;
+}
+
+
+a.navipoint_sub:hover,a.navipoint_sub:active {
+	background: #828a9a url(../img/bg_border_sub1.jpg) no-repeat left;
+	border-left:10px solid #fff;
+}
+
+a.navipoint_sub_first:link,a.navipoint_sub_first:visited,a.navipoint_sub_first:hover,a.navipoint_sub_first:active {
+	background: #a4abb8 url(../img/bg_border_sub1.jpg) no-repeat left;
+	padding:4px 14px;
+	border-left:10px solid #fff;
+}
+a.navipoint_sub_first:hover,a.navipoint_sub_first:active {
+	background: #828a9a;
+	border-left:10px solid #fff;
+}
+
+
+/* Subnavi Sub */
+a.navipoint_sub2:link,a.navipoint_sub2:visited,a.navipoint_sub2:hover,a.navipoint_sub2:active,
+a.navipoint_sub2_first:link, a.navipoint_sub2_first:visited, a.navipoint_sub2_first:hover, a.navipoint_sub2_first:active { 
+	margin: 1px 0;
+	padding: 4px 14px;
+	background-color: #c0c5ce;
+	color: #fff;
+	text-decoration: none;
+	display:block;
+	border-left:10px solid #fff;
+}
+
+
+a.navipoint_sub2:hover,a.navipoint_sub2:active {
+	background: #a4abb8 url(../img/bg_border_sub.jpg) no-repeat left;
+	border-left:10px solid #fff;
+}
+
+a.navipoint_sub2_first:link,a.navipoint_sub2_first:visited,a.navipoint_sub2_first:hover,a.navipoint_sub2_first:active {
+	background: #c0c5ce url(../img/bg_border_sub.jpg) no-repeat left;
+	padding:4px 14px;
+	border-left:10px solid #fff;
+}
+a.navipoint_sub2_first:hover,a.navipoint_sub2_first:active {
+	background: #a4abb8;
+	border-left:10px solid #fff;
+}
+
+.aktiv {
+	background-color:#0e2e7f !important;
+}
+
+.aktiv_first {
+	background: #0E2F80 url(../img/lasche_navi_over.jpg) no-repeat left !important;
+}
+
+.aktiv2 {
+	background: #a4abb8 url(../img/bg_border_sub_aktiv.png) no-repeat left !important;
+}
+/* Hauptmenüpunkte */
+
+.mainpoint_g,.mainpoint_li {
+	margin: 1px 0;
+	padding: 4px 10px;
+	background-color: #a4abb8;
+	text-decoration: none;
+	display:block;
+	color:#0e2e7f;
+	font-weight:bold;
+	width:140px !important;
+}
+
+.mainpoint_li_2 {
+	margin: 1px 0;
+	padding: 4px 10px;
+	background-color: #a4abb8;
+	text-decoration: none;
+	display:block;
+	color:#0e2e7f;
+	font-weight:bold;
+	width:140px !important;
+}
+
+.mainpoint_lasche {
+	margin: 1px 0;
+	padding: 0;
+	background: #0E2E80 url(../img/lasche_navi_down.jpg) no-repeat right;
+	color: #444;
+	text-decoration: none;
+	display:block;
+	border:0;
+	width:160px !important;
+	height:10px;
+}
+.mainpoint_lasche_up {
+	margin: 1px 0;
+	padding: 0;
+	background: #0E2E80 url(../img/lasche_navi_up.jpg) no-repeat right;
+	color: #444;
+	text-decoration: none;
+	display:block;
+	border:0;
+	width:160px !important;
+	height:10px;
+}
+.mainpoint_g:hover {
+	color: #fff;
+	background: #0E2E80;
+	text-decoration:none;
+	display:block;
+}
+
+/* Maskottchen */
+.maskottchenbox_head {
+	position:relative;
+	background:#0E2E80 url(http://static.transfermarkt.net/static/img/transferbox/bg_head_box_geruechte.png) repeat-x;
+	color:#fff;
+	padding:3px;
+	font-size:8.5pt;
+	font-weight:bold;
+	text-align:center;
+	border:1px solid #0E2E80;
+	text-transform:uppercase;
+}
+
+.maskottchenbox_content {
+	position:relative;
+	background:#D4D7DC;
+	border:0;
+	border-bottom:5px solid #0E2E80;
+	padding:5px;
+	text-align:center;
+	width:220px;
+	height:255px;
+}
+
+.maskottchenbox_img {
+	border:1px solid #0E2E80;
+	margin:0 5px;
+}
+
+.maskottchenbox_text {
+	color:#444;
+	font-size:7pt;
+	padding:5px;
+	line-height:1.3;
+	text-align:left;
+	background-color:#fff;
+	border:1px dotted #ccc;
+	width:210px;
+	margin-top:2px;
+	height:25px;
+}
+
+
+
+/* Transferbox */
+.transferbox_head {
+	position:relative;
+	background:#9b0400 url(http://static.transfermarkt.net/static/img/transferbox/bg_head_box.png) repeat-x;
+	color:#fff;
+	padding:3px;
+	font-size:8.5pt;
+	font-weight:bold;
+	text-align:center;
+	border:1px solid #9b0400;
+	text-transform:uppercase;
+}
+
+.transferbox_content {
+	position:relative;
+	background:#7e7f80 url(http://static.transfermarkt.net/static/img/transferbox/bg_box.png) repeat-y;
+	border:0;
+	border-bottom:5px solid #9b0400;
+	padding-bottom:5px;
+}
+
+.transferbox_img {
+	position:absolute;
+	top:8px;
+	left:165px;
+}
+
+.transferbox_text {
+	color:#fff;
+	font-size:7pt;
+	padding:5px 5px 2px 5px;
+	line-height:2.0;
+}
+
+.transferbox_single_text {
+	color:#fff;
+	font-size:7pt;
+}
+
+.transferbox_vereininfo {
+	background:#9b0400 url(http://static.transfermarkt.net/static/img/transferbox/bg_transfer.png) repeat-y;
+	color:#444;
+	font-size:7pt;
+	padding:2px 5px;
+	width:220px;
+}
+
+.transferbox_pfeil_links {
+	position:absolute;
+	top:3px;
+	left:2px;
+}
+
+.transferbox_pfeil_rechts {
+	position:absolute;
+	top:3px;
+	left:124px;
+}
+
+
+
+/* Geruechtebox */
+.geruechtebox_head {
+	position:relative;
+	background:#0E2E80 url(http://static.transfermarkt.net/static/img/transferbox/bg_head_box_geruechte.png) repeat-x;
+	color:#fff;
+	padding:3px;
+	font-size:8.5pt;
+	font-weight:bold;
+	text-align:center;
+	border:1px solid #0E2E80;
+	text-transform:uppercase;
+}
+
+.geruechtebox_content {
+	position:relative;
+	background:#7e7f80 url(http://static.transfermarkt.net/static/img/transferbox/bg_box.png) repeat-y;
+	border:0;
+	border-bottom:5px solid #0E2E80;
+	padding-bottom:5px;
+}
+
+
+.presseschaubox_content {
+	position:relative;
+	background:#fff url(http://static.transfermarkt.net/static/img/bg_presseschau_startseite.jpg) repeat-y;
+	border:0;
+	border-bottom:5px solid #0E2E80;
+}
+
+
+.startbegbox_content {
+	position:relative;
+	background:#919293;
+	border:0;
+	border-bottom:5px solid #0E2E80;
+	padding-bottom:5px;
+	width:226px;
+	height:218px;
+	color:#fff;
+	font-size:7.5pt;
+	text-align:center;
+	padding:3px 2px;
+}
+
+.geruechtebox_zusatz {
+	margin-top:2px;
+	width:220px !important;
+	position:relative;
+	background:#7e7f80 url(http://static.transfermarkt.net/static/img/transferbox/bg_box_zusatz.png) repeat-y;
+	border:0;
+	border-bottom:5px solid #0E2E80;
+	color:#fff;
+	font-size:7pt;
+	padding:2px 5px;
+	line-height:1.5;
+}
+
+.geruechtebox_img {
+	position:absolute;
+	top:8px;
+	left:165px;
+	z-index:0;
+}
+
+.geruechtebox_neu {
+	position:absolute;
+	top:5px;
+	left:215px;
+	z-index:999;
+}
+
+.geruechtebox_neu_forum {
+	z-index:999;
+}
+
+.geruechtebox_text {
+	color:#fff;
+	font-size:7pt;
+	padding:5px 5px 2px 5px;
+	line-height:2.0;
+	z-index:999;
+}
+
+
+
+.geruechtebox_single_text {
+	color:#fff;
+	font-size:7pt;
+}
+
+.geruechtebox_vereininfo {
+	background:#fff url(http://static.transfermarkt.net/static/img/transferbox/bg_transfer.png) repeat-y;
+	color:#444;
+	font-size:7pt;
+	padding:2px 5px;
+	width:220px;
+}
+
+.geruechtebox_pfeil_links {
+	position:absolute;
+	top:3px;
+	left:2px;
+}
+
+.geruechtebox_pfeil_rechts {
+	position:absolute;
+	top:3px;
+	left:124px;
+}
+
+/* Geruechtebox Verein */
+.geruechtebox_verein_head {
+	position:relative;
+	background:#0E2E80 url(http://static.transfermarkt.net/static/img/transferbox/bg_head_box_geruechte.png) repeat-x;
+	color:#fff;
+	padding:3px;
+	font-size:8.5pt;
+	font-weight:bold;
+	text-align:center;
+	border:1px solid #0E2E80;
+	text-transform:uppercase;
+}
+
+.geruechtebox_verein_content {
+	position:relative;
+	background:#7e7f80 url(http://static.transfermarkt.net/static/img/transferbox/bg_box_geruechte_verein.png) repeat-y;
+	border:0;
+	border-bottom:5px solid #0E2E80;
+	padding-bottom:5px;
+}
+
+.hr_sliderbox {background:transparent url(http://static.transfermarkt.net/static/img/transferbox/bg_hr_slider.png) no-repeat; height:1px; border:0;margin:0; }
+
+.geruechtebox_verein_img {
+	position:absolute;
+	top:8px;
+	left:210px;
+}
+
+
+.geruechtebox_pokal_img {
+	position:absolute;
+	top:8px;
+	left:180px;
+}
+
+.geruechtebox_verein_pfeil_links {
+	position:absolute;
+	top:3px;
+	left:15px;
+}
+
+.geruechtebox_verein_pfeil_rechts {
+	position:absolute;
+	top:3px;
+	left:210px;
+}
+
+
+.geruechtebox_pokal_pfeil_rechts {
+	position:absolute;
+	top:3px;
+	left:170px;
+}
+
+.geruechtebox_verein_vereininfo {
+	background:#fff url(http://static.transfermarkt.net/static/img/transferbox/bg_geruechte.png) repeat-y;
+	color:#444;
+	font-size:7pt;
+	padding:2px 5px;
+	width:320px;
+}
+
+.geruechtebox_nummer {
+	position:absolute;
+	top:3px;
+	left:170px;
+	z-index:999;
+	background-color:#fff;
+	padding:1px 2px;
+	border:1px dotted #ccc;
+}
+
+.box_paarung {
+	position:relative;
+	width:320px;
+	height:90px;
+}
+
+.begegnungbox_vereinh_img {
+	position:absolute;
+	top:3px;
+	left:7px;
+	background-color:#fff;
+	padding:2px;
+	border:1px solid #444;
+}
+
+.begegnungbox_vereing_img {
+	position:absolute;
+	top:3px;
+	left:260px;
+	background-color:#fff;
+	padding:2px;
+	border:1px solid #444;
+}
+
+.begegnungbox_anzeigetafel {
+	position:absolute;
+	top:3px;
+	left:77px;
+	background:url(http://static.transfermarkt.net/static/img/transferbox/anzeigetafel.png) no-repeat;
+	width:179px;
+	height:60px;
+	padding-top:4px;
+	padding-left:2px;
+	text-align:center;
+}
+
+
+.begegnungbox_bericht {
+	position:absolute;
+	top:66px;
+	left:78px;
+	background:url(http://static.transfermarkt.net/static/img/transferbox/bericht.png) repeat-y;
+	width:171px;
+	height:15px;
+	padding-top:3px;
+	padding-left:3px;
+	text-align:center;
+	color:#000;
+	font-weight:bold;
+	font-size:7.0pt;
+}
+
+.hr_begbox {
+	height:1px; border:0;
+	margin:3px 0 3px 68px;
+	background:url(http://static.transfermarkt.net/static/img/transferbox/bericht.png) no-repeat;
+}
+
+.begegnungbox_anzeigetafel_text {
+	position:absolute;
+	top:15px;
+	left:5px;
+	color:#f6d641;
+	font-size:30px;
+	font-weight:bold;
+	letter-spacing:8px;
+	text-align:center;
+	width:170px;
+}
+
+.lsp1 {
+	letter-spacing:1px !important;
+}
+
+
+.begegnungbox_anzeigetafel_uhrzeit {
+	position:absolute;
+	top:18px;
+	left:5px;
+	color:#f6d641 !important;
+	font-size:11px;
+	font-weight:bold;
+	line-height:1.3;
+	text-align:center;
+	width:170px;
+}
+
+
+.begegnungbox_content {
+	position:relative;
+	background:#6f7479 url(http://static.transfermarkt.net/static/img/transferbox/bg_begegnungbox.png) repeat-y;
+	border:0;
+	border-bottom:5px solid #0E2E80;
+	padding-bottom:5px;
+}
+
+
+.begegnungbox_text {
+	color:#fff;
+	font-size:7pt;
+	padding:5px 5px 2px 5px;
+	line-height:1.5;
+	z-index:999;
+}
+
+
+.ul_news {
+	list-style-image: url(../img/listenpunkt.gif);
+	padding:5px 2px 5px 18px;
+	background-color:#e6e6e6;
+}
+
+
+.ul_news a:link, #right ul li a:visited, #right ul li a:hover, #right ul li a:active {
+	font-size:7.5pt;
+}
+
+.ul_news a:hover, #right ul li a:active {
+	text-decoration:underline;
+}
+
+.lhmg {
+	line-height:2.0;
+}
+
+.pad_lef_5 {
+	padding-left: 5px;
+}
+
+.pad_box_geruechte {
+	padding: 5px 5px 0 5px;
+}
+
+/* ForenIcons */
+.gk0, .gk1, .gk2, .gk3,.gs1, .gs2, .gs3, .gs4, .default, .closed, .sticky, .stickyclosed, .poll, .pollclosed, .pollold, .wspoll, .wspollclosed, .wspollold, .verschoben {
+	background-repeat:no-repeat;
+	background-position: center;
+}
+.thread {
+	background-position: left;
+	padding-left:30px;
+}
+/* Icons: Gerüchteküche */
+.gk0 { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_gk_0.gif); }
+.gk1 { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_gk_1.gif); }
+.gk2 { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_gk_2.gif); }
+.gk3 { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_gk_3.gif); }
+/* Icons: Gerichtssaal */
+.gs1 { background-image:url(http://static.transfermarkt.net/img/icons/offen.jpg); }
+.gs2 { background-image:url(http://static.transfermarkt.net/img/icons/wartend.jpg); }
+.gs3 { background-image:url(http://static.transfermarkt.net/img/icons/ok.jpg); }
+.gs4 { background-image:url(http://static.transfermarkt.net/img/icons/sanktion.gif); }
+/* Icons: normale Foren */
+.default { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_new.gif); }
+.closed { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_closed.gif); }
+.sticky { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_anouncement.gif) }
+.stickyclosed { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_anouncement_closed.gif) }
+.poll { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_poll_new.gif); }
+.pollclosed { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_poll_closed.gif); }
+.pollold { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_poll_old.gif); }
+.wspoll { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_wspoll_new.gif); }
+.wspollclosed { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_wspoll_closed.gif); }
+.wspollold { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_wspoll_old.gif); }
+
+
+.adminicon_n { 	background-image: url(http://static.transfermarkt.net/img/admin_icons/admin_n.gif); }
+.adminicon_h { 	background-image: url(http://static.transfermarkt.net/img/admin_icons/admin_h.gif); }
+.adminicon_n, .adminicon_h {
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+.verschoben { background-image:url(http://static.transfermarkt.net/bilder/board_icons/icon_verschoben.gif); }
+
+.stickyorange { background-color:#FEE1B8; }
+
+.forumoptions,.forumoptions_gk { 
+	color:red;
+	left:314px;
+	float:right;
+	text-align:right;
+}
+.forumoptions_gk { 
+	color:red;
+	left:280px;
+	float:right;
+	text-align:right;
+}
+
+.mainpoint {
+	padding: 5px;
+	margin: 1px;
+	background-color: #0E2E80;
+	color: #fff;
+	text-decoration: none;
+	width:144px !important;
+	text-transform:uppercase;
+	font-weight:bold;
+}
+
+.blue { 
+	margin: 1px;
+	padding: 5px;
+	background-color: #e6e6e6;
+	color: #444;
+	text-decoration: none;
+	display:block;
+	border-left:5px solid #0e2e80;
+}
+
+.orange_dott { 
+	background-color:#EF7B0A;
+	padding:0 10px;
+	border:1px solid #efefef;
+}
+
+.login_button {
+	background-color:#3E5899;
+	background-image:url(../img/bg_form_2.jpg);
+	border:0;
+	font-size:7pt;
+	color:#fff;
+	margin: 1px 0 0 4px;
+	width:60px;
+}
+
+.logout_button {
+	background-color:#3E5899;
+	background-image:url(../img/bg_form_2.jpg);
+	border:0;
+	font-size:7pt;
+	color:#fff;
+	margin: 2px 0 0 0;
+	width:60px;
+}
+
+.reg_button {
+	background-color:#3E5899;
+	background-image:url(../img/bg_reg_button.jpg);
+	border:0;
+	font-size:7pt;
+	color:#fff;
+	margin:2px 5px 0 0;
+	padding:0;
+	width:15px;
+}
+
+.form {
+	background-color:#f1f1f1;
+	border: 1px solid #bbb;
+	font-size:7pt;
+}
+
+.tippform {
+	background-color:#fff;
+	border: 1px solid #bbb;
+	font-size:7pt;
+}
+
+.inaktiv {
+	background-color:#ddd;
+}
+
+.button_tippen {
+	background-color:#3E5899;
+	background-image:url(../img/bg_table_th.gif);
+	border:0;
+	font-size:7pt;
+	color:#fff;
+	margin:5px 0;
+	cursor:pointer;
+}
+
+.button_akt {
+	background-color:#ddd;
+	border:1px dotted #0e2e80;
+	font-size:7.5pt;
+	color:#0e2e80;
+	font-weight:bold;
+	margin:20px 0 15px 0;
+	padding:2px 3px;
+	cursor:pointer;
+	text-align:center;
+	width:80%;
+}
+
+.beitrag_forum {
+	background-image:url(../img/beitraege_news.png);
+	border:0;
+	padding:2px 5px 0 5px;
+	font-size:7.5pt;
+	font-weight:bold;
+	color:#fff;
+	width:132px !important;
+	height:19px !important;
+	margin-top:-1px;
+	float:left;
+}
+
+.anzahl_beitraege_forum {
+	background-image:url(../img/anzahl_beitraege_forum.png);
+	border:0;
+	padding:1px 5px 0 8px;
+	font-size:7.5pt;
+	font-weight:bold;
+	color:#000;
+	width:26px !important;
+	height:17px !important;
+	float:left;
+}
+
+.button_grey {
+	background-color:#3E5899;
+	background-image:url(../img/bg_table_th_grey.gif);
+	border:0;
+	font-size:7pt;
+	color:#eee;
+	margin:5px 0;
+}	
+
+.button_zufall {
+	background-color:#e5e5e5;
+	
+	border:1px solid #ccc;
+	font-size:7pt;
+	color:#555;
+	margin:-2px 2px 0 0;
+}	
+
+.form_spieltag {
+	background-color:#f1f1f1;
+	border: 1px solid #3E5899;
+	font-size:7pt;
+	width:25px;
+	color:#000000;
+}
+
+.bg_select {
+	background-color:#fff;
+	padding:5px;
+	font-size:7.5pt;
+	color:#0e2e80;
+	height:40px;
+	line-height:1.5;
+	font-size:8pt;
+	font-weight:bold;
+	border:1px solid #ddd;
+	background-image:url(http://www.transfermarkt.de/img/bg_auswahl_tmv3.jpg);
+}
+
+.bg_select_wappen {
+	background-color:#fff;
+	padding:5px;
+	font-size:7.5pt;
+	color:#0e2e80;
+	height:40px;
+	line-height:1.5;
+	font-size:8pt;
+	font-weight:bold;
+	border:1px solid #ddd;
+	margin-top:15px;
+	background-image:url(http://www.transfermarkt.de/img/bg_auswahl_tmv3.jpg);
+}
+
+.bg_wappen {
+	background-color:#fff;
+	padding:6px 3px 3px 3px;
+	border:1px solid #eee;
+	height:29px;
+}
+
+.box_level1 {
+	height:100%;
+	padding:1px;
+	font-size:7pt !important;
+	background:url("http://www.transfermarkt.de/bilder/box_level1.jpg") no-repeat #033C89;
+	border-top:1px solid #fff;
+	line-height:1.3;
+}
+
+.box_level1 ul li {
+	color:#fff;
+	font-size:7pt !important;
+	padding:0;
+	margin:0;
+	list-style-image: url("http://www.transfermarkt.de/bilder/listenpunkt_w.png");
+}
+
+.select {
+	color:#0e2e80;
+	font-size:7pt;
+	border:1px solid #bbb;	
+}
+
+.dropdown {
+	position:absolute;
+	right:10px;
+	margin-top:8px;
+}
+
+.dropdown_header {
+	position:absolute;
+	right:5px;
+	margin-top:2px;
+}
+
+
+.option {
+	color:#0e2e80;
+	font-size:7pt;
+	padding: 0 10px;
+	margin: 3px 0;
+}
+/*
+.form {
+	background-color:#fff;
+	border: 0;
+	font-size:7.5pt;
+	padding:1px 2px;
+	font-weight:bold;
+	color:#0e2e80;;
+}
+
+.bg_select {
+	background-color:#0e2e80;
+	padding:4px 10px;
+	font-size:8pt;
+	font-weight:bold;
+
+	color:#fff;
+}
+
+.select {
+	color:#006;
+	font-size:7pt;
+	border:1px solid #bbb;
+	
+}
+
+.option {
+	color:#006;
+	font-size:7.5pt;
+	padding: 0 10px;
+	margin: 3px 0;
+}
+*/
+/* Standard Tabelle im Spielerprofil */
+table.tabelle_spieler {
+	background-color:#fff;
+	color: #000;
+	margin:0;
+	border: 1px solid #e6e6e6;
+	width:100%;
+	line-height:1.7;
+}
+
+.tabelle_spieler td {
+	padding:0 4px;
+	margin:0;
+	color:#484747;
+	background-color:#f1f1f1;
+	font-size:7.5pt;
+}
+
+.tabelle_spieler td a {
+	font-size:7.5pt;
+}
+
+.tabelle_spieler th img{
+	margin-right: 5px;
+}
+
+.tabelle_spieler th {
+	background-color: #0e2e80;
+	color: #fff;
+	font-weight: bold;
+	padding:2px 4px;
+	background-image:url(../img/bg_table_th.gif);
+	line-height:1.3;
+}
+
+/* Tabelle ohne BG */
+table.tabelle_transparent {
+	background-color: transparent;
+	color: #000;
+	margin:0;
+	border: 0;
+	width:100%;
+	line-height:1.7;
+}
+
+.tabelle_transparent td {
+	padding:0 4px;
+	border:0;
+	border-bottom:1px solid #fff !important;
+	color:#484747;
+	background-color: transparent;
+	font-size:7pt;
+}
+
+
+.signatur {
+	margin-top:20px;
+	padding-top:5px;
+	display:block;
+	font-size:7pt;
+	color:#999;
+	width:500px;
+	border-top:1px solid #006;
+	font-family:Verdana, Arial, sans-serif;
+}
+.msg {
+	vertical-align:top !important;
+	padding:8px 5px !important;
+	font-size:8pt !important;
+	border-left:1px solid #efefef !important;
+	line-height:15px !important;
+	height:100px !important;
+}
+
+.quote .quote_source {
+	display:block;
+	border-left:5px solid #3E5899;
+	font-style:normal;
+	background-color:#efefef;
+	font-size:7.5pt;
+}
+td > .quote_source, td > .quote_source b  {
+	font-size: 11px;
+	margin:0;
+	padding:0;	
+	background-color:transparent;
+	font-weight:normal;
+}
+
+
+.quote_source > .quote_source {
+	display:none;
+}
+
+
+.quote, .quote > .quote > .quote {
+	padding:5px 10px;
+	color:#484747;
+	display:block;
+	font-style:italic;
+	font-size:8pt;
+	border:1px solid #484747;
+	margin:0;
+	background:#fff;
+	margin-top:5px;
+}
+.quote > .quote {
+	border:0;
+	background-color:#E6E6E6;
+}
+.quote > .quote > .quote {
+	background-color:#fff;
+}
+.quote > .quote > .quote > .quote, .quote > .quote > .quote > .quote > * { display:none; }
+span.bearbeitet {
+	display:block;
+	font-size:7pt;
+	color:#aaa;
+}
+.quote > .quote > .quote {
+	border:0;
+}
+
+/* Traumelf [ Managerspiel: Jan ist doof, weil er meine Styles und mein JS-Script ueberschrieben hat! ] */
+
+.highlight {
+	background-color: blue !important;
+}
+.ui-state-hover {
+	background-color: orange !important;
+}
+
+.original {
+	width:200px;
+	cursor:move;
+	font-size:8pt;
+	padding:0px; 
+	margin:2px; 
+	border: 1px solid grey;
+}
+.original b {
+	display:inline;
+	font-weight:bold;
+}
+.original code {
+	display:none;
+}
+
+.original img {
+	display:none;
+}
+.original span {
+	display:inline;
+}
+.copy {
+	cursor:move;
+}
+.copy b {
+	display:none;
+}
+.copy a {
+	display:none;
+}
+.copy code {
+
+}		
+
+.copy img {
+	display:inline;
+}
+.copy span {
+	display:none;
+}
+
+/* Traumelf */
+
+.highlight {
+	background-color: blue !important;
+}
+.orig {
+	width:220px;
+	background-color: #ccc !important;
+	cursor:move;
+	text-align:left;
+	border:1px solid #333;
+	margin-bottom:2px;
+	font-size:8pt;
+	padding:2px;
+}
+.orig b {
+	display:inline;
+	font-weight:bold;
+}
+.orig code {
+	display:none;
+}
+.orig img {
+	display:none;
+}
+.orig span {
+	display:inline;
+}
+.kopie {
+	text-align:center;
+	background-color: #ccc;
+	margin:2px auto;
+	width:64px !important;
+}
+.kopie b {
+	display:none;
+}
+.kopie code {
+	display:inline;
+	font-size:7.5pt;
+	font-family:arial,verdana,sans-serif;
+}		
+
+.kopie img {
+	display:inline;
+	margin-top:1px;
+}
+.kopie span {
+	display:none;
+}
+
+.wph_head {
+	background-image:none !important;
+	background-color:#e6e6e6 !important;
+	font-size:7pt !important;
+	color:#444 !important;
+	font-weight:normal !important;
+	height:38px;
+	border:1px solid #e6e6e6 !important;
+	margin-top:10px !important;
+}
+a.wph_l:link, a.wph_l:visited, a.wph_l:hover, a.wph_l:active {
+	display:block !important;
+	color:#0e2e80 !important;
+	padding:0 !important;
+	text-decoration:none !important;
+	font-weight:bold !important;
+	font-size:10.5pt !important;
+	padding-bottom:5px !important;
+	
+}
+a.wph_l:hover, a.wph_l:active {
+	text-decoration:underline;
+}
+
+/* Hintergrund für Tabellenzeilen */
+.dunkel { background: #e6e6e6 !important;  }
+.hell { background: #f1f1f1 !important; }
+.tdblue { background: #CADEF7 !important; }
+.tdhellblue { background: #E6EAEF !important; }
+.bg_green { background-color:#C8EDC6; }
+.white { background-color: #fff !important; background-image:none !important; }
+.white_t { color: #fff !important; }
+.max_dunkel { background: #dedede !important; }
+.blau { background: #0E2E80; }
+.transparent { background-color: transparent !important;}
+
+/* Klassen für Platzierungsfarben in Tabellen*/
+.meister, .aufsteiger {
+	background-color:#94b95a;
+}
+.gruen {
+	background-color:#afd179;
+}
+.cleague {
+	background-color:#c3dc9a;
+}
+.orange {
+	background-color:#EFA93B;
+}
+.dunkelrot {
+	background-color:#8F1A29;
+}
+.clquali {
+	background-color:#e2f5c3;
+}
+.uefa {
+	background-color:#bdd9ef;
+}
+.uicup {
+	background-color:#a5cce9;
+}
+.hellblau {
+	background-color:#a5cce9;
+}
+.gelbpos {
+	background-color:#fee492;
+}
+.blaupos {
+	background-color:#cde9ff;
+}
+.ggfabsteiger {
+	background-color:#f8cfcd;
+}
+.absteiger {
+	background-color:#f8a7a3;
+}
+
+.spieler_bg {
+	background-color:#cedafc;
+}
+.transfer_bg {
+	background-color:#c8edc6;
+}
+
+.green_bg_table {
+    background-image: url('/static/img/bg_green_table.png');
+}
+
+.red_bg_table {
+    background-image: url('/static/img/bg_red_table.png');
+}
+
+
+
+/* quick-classes */
+.fr { float:right; }
+.fl { float:left; }
+.cw {color:#fff !important;}
+.pr { position:relative; }
+.pa { position:absolute; }
+
+.al { text-align:left; }
+.ar { text-align:right; }
+.ac { text-align:center; }
+.aj { text-align:justify; }
+
+.vm { vertical-align:middle; }
+.vt { vertical-align:top; }
+.vb { vertical-align:bottom; }
+
+.fb { font-weight:bold; }
+.fn { font-weight:normal }
+
+.cb { clear:both; }
+
+.wsn { white-space:normal; }
+.wsnw { white-space:nowrap; }
+
+.nb { border:0 !important; }
+
+.s8 { font-size:6.5pt !important;; }
+.s9 { font-size:7pt !important;; }
+.s10 { font-size:7.5pt !important;; }
+.s11 { font-size:8pt !important;; }
+.s12 {font-size:9pt !important;; }
+.s13 {font-size:10pt !important;; }
+.s14 {font-size:11pt !important;; }
+.s16 {font-size:12pt !important;;font-weight:bold; }
+.s18 {font-size:13.5pt !important;; }
+.s24 {font-size:18pt !important;;font-weight:bold; }
+.s25 {font-size:15pt !important;font-weight:bold; }
+
+.tdu { text-decoration:underline !important; }
+.tdn { text-decoration:none !important; ; }
+
+.fsi { font-style:oblique; }
+.fsn { font-style:normal !important; }
+
+.bgt { background-color:transparent !important; }
+.bgw { background-color:#fff !important; }
+
+.db { display:block; }
+.di { display:inline; }
+.dib { display:inline-block; }
+.dn { display:none; }
+
+.pt4 {padding-top:7px !important; }
+.pd10 {padding:10px 0 2px 0 !important; }
+
+.cp { cursor:pointer; }
+.cm { cursor:move; }
+.ch { cursor:help; }
+.cd { cursor:default; }
+.ca { text-transform:capitalize}
+.pad3 { padding:3px !important; }
+.oa { overflow:auto; }
+.hei1 { height:1px !important; }
+.hei20 { height:20px; }
+.hei23 { height:23px; }
+.hei26 { height:26px; }
+.hei28 { height:33px; }
+.hei35 { height:35px; }
+.hei120 { height:120px; }
+.wid65 { width:65px !important; }
+.wid150 { width:150px !important; }
+.wid200 { width:180px !important; }
+.wid205 { width:205px !important; }
+.wid210 { width:210px !important; }
+.wid230 { width:230px !important; }
+.wid250 { width:250px !important; }
+.wid310 { width:310px !important; }
+.wid350 { width:350px !important; }
+.wid_traumelf { margin-left:156px; }
+.wid49 { width:49% !important; }
+.wid33 { width:33% !important; }
+.wid39 { width:39% !important; }
+.wid59 { width:59% !important; }
+.wid90 { width:94% !important; }
+.wid10 { width:1% !important; }
+.fff { color:#fff !important; }
+/* .444 { color:#444 !important; } */
+.mt { margin-top:10px; }
+.mt20 { margin-top:20px; }
+.mr10 { margin-right:10px; }
+.ml10 { margin-left:10px; }
+.mn { margin:0; }
+.pn { padding:0; }
+.pb2 { padding:0 2px 2px 5px; }
+.pt10 { padding-top:10px !important; }
+.pt5 { padding-top:5px !important; }
+.pt8 { padding-top:8px !important; }
+.pl10 { padding-left:10px !important; }
+.pr10 { padding-right:10px !important; }
+.wid100 { width:100%; }
+.wid100px { width:100px; }
+.wid115px { width:115px; }
+.wid80 { width:80%; }
+.wid500 { width:500px; }
+.wid498 { width:498px; }
+.wid30 { width:30px; }
+.underline { text-decoration:underline; }
+.red { color:red !important; }
+.green { color:#336F0D !important; }
+.grey { color:grey !important; }
+.cobl { color:#0e2f80 !important; }
+.fwn { font-weight:normal; }
+
+/* Testborder */
+.tb { border:1px solid red; }
+
+.lh { line-height:1.5;}
+.lhg { line-height:1.6;}
+.lheg { line-height:2.0;}
+
+.bgred { background-color:#FFA5A5;}
+.bggreen { background-color:#EEF7D4;}
+
+.btred { border:1px solid #FFA5A5; }
+
+.button  {
+	background-color:#f1f1f1;
+	color:#0e2f80;
+	border:1px solid #e6e6e6;
+}
+.note_button  {
+	background-color:#CC0E27;
+	color:#fff;
+	border:1px solid #fff;
+	cursor:pointer;
+}
+
+.note_button_small  {
+	background-color:#CC0E27;
+	color:#fff;
+	padding:0;
+	cursor:pointer;
+	border:0;
+}
+
+.likebutton,likebutton_h  {
+	background-color:#f1f1f1;
+	color:#0e2f80;
+	border:1px solid #aaa;
+	font-size:7pt;
+	cursor:pointer;
+	background-image:url('/static/img/like_button_n.gif');
+	background-repeat:repeat-x;
+	margin:2px 0;
+}
+.likebutton_h  {
+	background-color:#f1f1f1;
+	color:#0e2f80;
+	border:1px solid #aaa;
+	font-size:7pt;
+	cursor:pointer;
+	background-image:url('/static/img/like_button_h.gif');
+	background-repeat:repeat-x;
+	margin:2px 0;
+}
+
+fieldset p {
+	padding: 5px;
+	margin: 2px;
+	border-bottom:1px solid #e6e6e6;
+}
+	
+form.formular fieldset fieldset {
+	border: none;
+	margin: 3px;
+}
+	
+form.formular fieldset fieldset legend {
+	padding: 0 0 5px;
+	font-weight: normal;
+	}
+	
+form.formular fieldset fieldset label {
+	display: block;
+	width: auto;
+}
+
+form.formular em {
+	font-weight: bold;
+	font-style: normal;
+	color: #f00;
+	display:inline;
+}
+
+form.formular label { width: 200px; } /* Width of labels */
+form.formular fieldset fieldset label { margin-left: 123px; } /* Width plus 3 (html space) */
+
+form.formular legend { padding-left: 0; }
+	
+form.formular legend,
+form.formular label { color: #333; }
+
+form.formular fieldset {
+	border: none;
+	border-top: 1px solid #0e2f80;
+	background-color:#f1f1f1;
+}
+
+.txtareaforum {  width:570px;height:300px; }
+fieldset.adminfield {
+	border-top:1px solid #990200 !important;
+}
+fieldset.adminfield legend.adminoptions {
+	color:#990200;padding:0 5px 5px 20px;vertical-align:middle;
+	background:url('http://www.transfermarkt.de/bilder/admin_icons/admin_h.gif') no-repeat left;
+}
+	
+
+.sr {
+	position: absolute;
+	left: -9999em;
+	top: 0;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.page {
+	margin-top:10px;
+}
+fieldset.error {
+	background-color:#FFDFDF;
+	color:#7F0011;
+	border: none;
+	border-top: 1px solid #7F0011;	
+	margin-bottom:10px;
+}
+fieldset.error legend { 
+	font-weight:bold;
+	color:#7F0011;
+	padding: 0 5px 5px 20px;
+	background:url('/static/images/icons/denied.gif') no-repeat left top;
+}
+
+fieldset.error ul {
+	margin-left:35px;
+	margin-bottom:5px;
+}
+fieldset.access {
+	background-color:#C8EDC6;
+	color:#137724;
+	border: none;
+	border-top: 1px solid #137724;	
+	margin-bottom:10px;
+}
+fieldset.access legend { 
+	font-weight:bold;
+	color:#137724;
+	padding: 0 5px 5px 20px;
+	background:url('/static/images/icons/accept.gif') no-repeat left top;
+}
+
+fieldset.access ul {
+	margin-left:35px;
+	margin-bottom:5px;
+}
+fieldset.access p {
+	padding:5px 20px 15px 20px;
+}
+a:link.alarm, a:link.visited, a:link.hover, a:link.active,.alarm {
+	background-color:#DF0033;
+	color:#fff !important;
+	text-decoration:none;
+	font-size:7.5pt;
+	font-weight:bold;
+	padding:0 3px;
+}
+a:link.hover, a:link.active {
+	background-color:#DF0033;
+	color:orange;
+}
+
+
+.box_poll {
+	padding:6px;
+	background-color:#f1f1f1;
+	margin:20px 0;
+	font-size:7.0pt;
+	border:1px dotted #ccc;
+	line-height:1.6;
+	box-shadow: 0 2px 3px #888;
+	width:775px;
+}
+
+.box_poll_frage {
+	color:#0e2f80;
+	font-weight:bold;
+	font-style:oblique;
+	font-size:9pt;
+	margin:0 0 6px 0;
+}
+
+.box_poll_zusatz {
+	font-style:oblique;
+	font-size:7.5pt;
+	margin:0 0 3px 5px;
+}
+
+.box_poll_beschreibung {
+	font-style:oblique;
+	font-size:7.5pt;
+	margin:0 0 3px 5px;
+	color:#000;
+}
+
+.box_poll_multi {
+	font-style:oblique;
+	font-size:8pt;
+	margin:0 0 3px 10px;
+	line-height:1.9;
+}
+
+.poll_radio_button {
+	height:12px;
+	vertical-align:middle;
+	margin:-3px 4px 0 4px;
+}
+
+.poll_box_input {
+	font-size:8pt;
+	padding:1px;
+	color:#444;
+	font-style:oblique;
+	border:1px solid #ccc;
+	box-shadow: 1px 1px 2px #bbb;
+}
+
+.poll_box_select {
+	font-size:7.5pt;
+	color:#444;
+	font-style:oblique;
+	border:1px solid #ccc;
+	box-shadow: 1px 1px 2px #bbb;
+}
+
+.poll_box_option {
+	font-size:7.5pt;
+	color:#444;
+	font-style:oblique;
+	margin:3px;
+}
+
+.em_navipunkt {
+    background: url(http://static.transfermarkt.net/static/img/bg_navi_em.jpg) no-repeat;
+    font-weight:bold;
+}
+
+.bgsand { background-color:#ffe !important;}
+.bgsternd { background: url(/static/img/keine_wertung_forum.png) no-repeat center 17px;}
+.bgstern0 { background: url(/static/img/sterne_forum_0.png) no-repeat center 17px;}
+.bgstern1 { background: url(/static/img/sterne_forum_1.png) no-repeat center 17px;}
+.bgstern2 { background: url(/static/img/sterne_forum_2.png) no-repeat center 17px;}
+.bgstern3 { background: url(/static/img/sterne_forum_3.png) no-repeat center 17px;}
+.bgstern4 { background: url(/static/img/sterne_forum_4.png) no-repeat center 17px;}
+.bgstern5 { background: url(/static/img/sterne_forum_5.png) no-repeat center 17px;}
+
+
+#toepfe, #gruppen {width: 100%; margin-top:5px;}
+
+.wid_191 {width: 191px !important;}
+.teilnehmer {background: #fff url('http://www.transfermarkt.de/static/img/flaggen/teilnehmer_header.png') no-repeat left;color:#fff;font-weight:bold;padding:4px 5px 5px 5px ; margin:5px 0 0 0; border:1px solid #ddd; border-bottom:0;}
+.topf {margin: 2px; border:1px solid #ccc;}
+.topfhead {height: 11px;background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/bg_lostopf.png') no-repeat left; color: #fff; font-weight:bold; padding:4px 5px 5px 5px ; margin:1px;}
+.topfbody {margin: 1px 0;}
+
+.bg_13485 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/13485.png') no-repeat left;}
+.bg_6602 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/6602.png') no-repeat left;}
+.bg_3499 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3499.png') no-repeat left;}
+.bg_3703 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3703.png') no-repeat left;}
+.bg_13313 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/13313.png') no-repeat left;}
+.bg_3585 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3585.png') no-repeat left;}
+.bg_5872 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/5872.png') no-repeat left;}
+.bg_3591 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3591.png') no-repeat left;}
+.bg_3575 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3575.png') no-repeat left;}
+.bg_3670 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3670.png') no-repeat left;}
+.bg_5704 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/5704.png') no-repeat left;}
+.bg_14163 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/14163.png') no-repeat left;}
+.bg_3441 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3441.png') no-repeat left;}
+.bg_3674 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3674.png') no-repeat left;}
+.bg_15229 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/15229.png') no-repeat left;}
+.bg_3856 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3856.png') no-repeat left;}
+
+
+.bg_3375 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3375.png') no-repeat left;}
+.bg_3442 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3442.png') no-repeat left;}
+.bg_3379 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3379.png') no-repeat left;}
+.bg_3699 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3699.png') no-repeat left;}
+.bg_3262 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3262.png') no-repeat left;}
+.bg_3448 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3448.png') no-repeat left;}
+.bg_3299 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3299.png') no-repeat left;}
+.bg_3376 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3376.png') no-repeat left;}
+.bg_3300 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3300.png') no-repeat left;}
+.bg_3557 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3557.png') no-repeat left;}
+.bg_3378 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3378.png') no-repeat left;}
+.bg_3556 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3556.png') no-repeat left;}
+.bg_3445 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3445.png') no-repeat left;}
+.bg_3436 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3436.png') no-repeat left;}
+.bg_3377 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3377.png') no-repeat left;}
+.bg_3509 {background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/3509.png') no-repeat left;}
+
+
+
+.verein_em12 {margin: 1px 1px; padding:4px 0 5px 50px; border:1px solid #ddd; }
+.kleineflagge {width:12px;height:8px;margin-right:2px;}
+.gruppenkopf {margin: 2px 5px 0 0; border:1px solid #ccc;}
+.em_finals {margin: 2px 5px 0 0; border:1px solid #ccc;width:388px; padding:1px;}
+.em_finals2 {margin: 2px 0 0 0; border:1px solid #ccc;width:388px; padding:1px;}
+.gruppenkopf_last {margin: 2px 0 0 1px; border:1px solid #ccc;}
+.begs {margin: 2px; border:1px solid #ccc;}
+.beghead {height: 11px;background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/bg_lostopf.png') no-repeat left; color: #fff; font-weight:bold; padding:4px 5px 5px 5px ; margin:1px; margin-top:3px;}
+.beghead_finals {height: 11px;background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/bg_finals.png') no-repeat left; color: #fff; font-weight:bold; padding:4px 5px 5px 5px ; margin:0;}
+.gruppehead {height: 11px;background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/bg_lostopf.png') no-repeat left; color: #fff; font-weight:bold; padding:4px 5px 5px 5px ; margin:1px;}
+.gruppehead_A {height: 11px;background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/gruppenkopf_135.png') no-repeat left; color: #fff; font-weight:bold; padding:4px 5px 5px 5px ; margin:1px;}
+.gruppehead_C {height: 11px;background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/gruppenkopf_135.png') no-repeat left; color: #fff; font-weight:bold; padding:4px 5px 5px 5px ; margin:1px;}
+.gruppehead_B {height: 11px;background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/gruppenkopf_177.png') no-repeat left; color: #fff; font-weight:bold; padding:4px 5px 5px 5px ; margin:1px;}
+.gruppehead_D {height: 11px;background: #F1F1F1 url('http://www.transfermarkt.de/static/img/flaggen/gruppenkopf_177.png') no-repeat left; color: #fff; font-weight:bold; padding:4px 5px 5px 5px ; margin:1px;}
+.gruppebody {margin: 1px;}
+.begbody {margin: 1px 0; color:#0e2f80 !important; font-size: 10px; line-height:1.4; background-color:#f1f1f1; padding:2px 0 3px 3px; border:1px solid #ddd; }
+.begbody_finals {margin: 0; color:#0e2f80 !important; font-size: 10px; line-height:1.4; background-color:#f1f1f1; padding:2px 0 3px 3px; border:1px solid #ddd; margin-top:1px; }
+.hr_auslosung {background-color: #ddd; height:1px; border:0;margin:4px; }
+.hr_umfrage {background-color: #ddd; height:1px; border:0;margin:4px 0; width:775px; }
+.hr_news {clear:both; background-color: #F1F1F1; height:1px; border:0; width:99%; border-top:1px dotted #bbb; margin:15px 0 5px 0; }
+.hr_news_klein {clear:both; background-color: #F1F1F1; height:1px; border:0; width:99%; border-top:1px dotted #bbb; margin:4px 0 4px 0; }
+.hr_em_finals {background-color: #ddd; height:1px; border:0;margin:8px 0 7px 0; }
+.bg_finals_1 {background-color:#f0f4fc;}
+.bg_finals_2 {background-color:#f7fcf0;}
+.bg_finals_3 {background-color:#f0f4fc;}
+.bg_finals_4 {background-color:#f7fcf0;}
+.bg_finals2_1 {background-color:#f0f4fc;}
+.bg_finals2_2 {background-color:#f7fcf0;}
+.bg_tabelle_rechner {background-color:#f0f4fc;line-height:1.6;}
+.bg_tabelle_rechner_hell {background-color:#F1F1F1;line-height:1.6;}
+/*
+CSS-Klassen fuer Ajax-Pager 
+pages - Komplettes <ul>-Element 
+pageButton - Alle <li>-Elemente 
+firstButton - Erste Seite <li>-Element 
+backButton - Seite Zurueck <li>-Element 
+activeButton - Ausgewaehlte Seite <li>-Element 
+goButton - Seite Vor <li>-Element 
+lastButton - Letzte Seite <li>-Element
+*/
+.pages { 
+	list-style-type: none;
+	margin:10px 0 0 0;
+	padding:10px 0 0 0;
+	width: 100%;
+}
+.pageButton {
+	float: left;
+	border: 1px solid #999;
+	background-color:#e6e6e6;
+	width: 5px;
+	margin: 2px;
+	padding:2px 15px 2px 12px;
+}
+.firstButton {
+	float: left;
+	border: 1px solid #999;
+	background-color:#e6e6e6;
+	width: 50px;
+	margin: 2px;
+	padding:2px 8px;
+}
+.backButton {
+	float: left;
+	border: 1px solid #999;
+	background-color:#e6e6e6;
+	width: 50px;
+	margin: 2px;
+	padding:2px 8px;
+	text-align:center;
+}
+.activeButton {
+	float: left;
+	border: 1px solid #0e2e7f;
+	background-color:#ddd;
+	width: 5px;
+	margin: 2px;
+	padding:2px 15px 2px 12px;
+	font-weight:bold;	
+}
+.goButton {
+	float: left;
+	border: 1px solid #999;
+	background-color:#e6e6e6;
+	width: 50px;
+	margin: 2px;
+	padding:2px 8px;
+}
+.lastButton {
+	float: left;
+	border: 1px solid #999;
+	background-color:#e6e6e6;
+	width: 50px;
+	margin: 2px;
+	padding:2px 8px;
+}
+
+/*
+CSS-Klassen fuer Ajax-Autocomplete
+*/
+.ac_results {
+	padding: 0px;
+	border: 1px solid #999;
+	background-color: #f1f1f1;
+	overflow: hidden;
+	z-index: 99999;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: default;
+	display: block;
+	/* 
+	if width will be 100% horizontal scrollbar will apear 
+	when scroll mode will be used
+	*/
+	/*width: 100%;*/
+	font: menu;
+	font-size: 9pt;
+	/* 
+	it is very important, if line-height not setted or setted 
+	in relative units scroll will be broken in firefox
+	*/
+	line-height: 16px;
+	overflow: hidden;
+}
+
+.ac_loading {
+	background: white url('indicator.gif') right center no-repeat;
+}
+.animatedLoad {
+	background: transparent url('http://www.transfermarkt.de/bilder/board_icons/animiert.gif') center center no-repeat;
+}
+.ac_odd {
+	background-color: #e6e6e6;
+}
+
+.ac_over {
+	background-color: #0e2e7f;
+	color: white;
+}
+
+/* Mein-TM */
+
+.meintm {
+		
+}
+
+.meintmright {
+	width:510px;
+}
+
+.meintmfoto {
+	border:0;
+	width:58px;
+}
+.meintmminifoto {
+	float:left;
+	margin-right:5px;
+	border:1px solid #bbb;
+}
+
+.meintmblock {
+	width:100%;
+}	
+
+.meintmtrennung {
+	height:1px;
+	background-color:#e6e6e6;
+	clear:both;
+	border:0;
+	margin:5px 0;
+}
+
+
+.meintmdate {
+	font-size:7.5pt;
+	color:#999;
+	margin-top:3px;
+	display:inline-block;
+}
+
+.meintmcomments {
+	margin-top:2px;
+}
+
+.meintmbutton { 
+	background:none;
+	border:0;
+	cursor:pointer;
+	color:#0e2e7f;
+	font-size:7.5pt;
+	text-decoration:underline;
+}
+
+.meintmform {
+	background-color:#e6e6e6;
+	padding:5px;
+}
+
+.ueberschriftmeintm {
+	color:#fff;
+	background:#fff url(../../../img/bg_table_th_gross.jpg) repeat-x;
+	height:25px;
+	padding:4px 6px;
+	border:1px solid #999;
+}
+
+.ueberschriftmfehler {
+	color:#fff;
+	background-image: url(../../../img/bg_table_th_gross_error.jpg);
+	height:25px;
+	padding:5px 6px;
+}
+
+.trikotwerbung {
+	border:1px solid #f1f1f1;
+	background-color:#fafafa;
+	margin:20px 0;
+	font-size:7.5pt;
+	color:#666;
+	line-height:1.3;
+	padding:5px;
+}
+
+.favoriten {
+	padding:2px 2px 2px 18px;
+	margin-top:-2px;
+	margin-bottom:0 !important;
+	background-color:#e6e6e6 !important;
+	width:140px !important;
+	list-style-image: url('http://www.transfermarkt.de/static/img/listenpunkt.gif');
+	line-height:1.5;
+}
+
+#bottombar {
+	width: 100%;
+	height: 30px;
+	z-index:5000;
+	position: fixed;
+	bottom: 0px;
+	left:0;
+	text-align: center;
+	color:#fff;
+	background:#fff url(../../../img/bg_table_th_gross.jpg) repeat-x;
+	height:25px;
+	border:1px solid #999;
+}
+
+.footer_button_container {
+	z-index:5000;
+	position:fixed;
+	width:200px;
+	height:200px;
+	background:#3F589A;
+	display:none;
+	color:#fff;	
+}
+.container_close {
+	font-size:5pt;
+	margin:2px;
+	float:right;
+	cursor:pointer;
+}
+
+#modernfavs {
+	bottom:40px;
+	right:20px; 
+}
+#adminsonline {
+	bottom:250px;
+	right:20px;
+}
+#lastvisited {
+	bottom:40px;
+	right:240px;
+}
+#notes {
+	z-index:5000;
+	position:fixed;
+	bottom:240px;
+	right:240px;
+	width:200px;
+	background:#3F589A;
+	display:none;
+	color:#fff;
+}
+.abstand {
+	margin:10px 0;
+}
+
+/* Managerspiel */
+
+
+#centerbig_ma {
+	width: 790px;
+	float:left;
+	padding-top:10px;
+	background-image: url(http://www.transfermarkt.de/img/managerspiel/ma_background.png); 
+	background-repeat:repeat;
+}
+
+.tabellen_ueberschrift_ma {
+	color:#000;
+	font-size:8pt;
+	margin-top:20px;
+	padding:2px 16px;
+	border: 0;	
+	background:transparent url(http://www.transfermarkt.de/img/dott.jpg) no-repeat left;
+}
+
+.seiten_ueberschrift_ma {
+	color:#000;
+	font-size:8pt;
+	margin-top:5px;
+	padding:2px 16px;
+	border: 0;	
+	background:transparent url(http://www.transfermarkt.de/img/dott.jpg) no-repeat left;
+}
+
+a.anleitung_ma:hover, a.anleitung_ma:active {
+	color:#a3afca;
+}
+
+fieldset.error_ma {
+	background-color:#FFDFDF;
+	color:#7F0011;
+	border: none;
+	border-top: 1px solid #7F0011;	
+	margin-bottom:10px;
+}
+fieldset.error_ma b { 
+	font-weight:bold;
+	color:#7F0011;
+	padding: 0 5px 5px 20px;
+}
+
+fieldset.error_ma ul {
+	margin-left:35px;
+	margin-bottom:5px;
+}
+fieldset.access_ma {
+	background-color:#C8EDC6;
+	color:#286F00;
+	border: none;
+	border-top: 1px solid #137724;	
+	margin-bottom:10px;
+}
+
+fieldset.access_ma b { 
+	font-weight:bold;
+	color:#286F00;
+	padding: 0 5px 5px 20px;
+}
+
+fieldset.access_ma ul {
+	margin-left:35px;
+	margin-bottom:5px;
+}
+fieldset.access_ma p {
+	padding:5px 20px 15px 20px;
+}
+
+.ma_button {
+	background-image:url(http://www.transfermarkt.de/img/managerspiel/buttons/ma_button.gif);
+	background-repeat:repeat-x;
+	border:0;
+	font-size:7pt;
+	color:#fff;
+	margin:5px 0;
+}
+.ma_hilfe_ueberschrift {
+	color:#286F00;
+	font-size:10.5pt;
+	margin-top:18px;
+	padding:5px 25px;
+	border: 0;	
+	background:transparent url(http://www.transfermarkt.de/img/managerspiel/icons/icon_hilfe.png) no-repeat left;
+}	
+.ma_beschreibung {
+	background-color:#f1f1f1;
+	line-height:1.6;
+	margin-top:10px;	
+	padding:10px;
+}
+.ma_beschreibung_2 {
+	background-color:#f1f1f1;
+	line-height:1.6;
+	margin-top:2px;	
+	padding:5px;
+}
+
+.ma_beschreibung_2 b{
+	color:#286F00;
+}
+.ma_beschreibung b{
+	color:#286F00;
+}
+
+/* CSS-STYLES VON FREE-X-MEDIA */
+#frnMain { float: left; position: relative; width: 967px; }
+#frnBanner { padding: 0; margin: 10px 0 0; }
+#frnBannerAd { z-index: 900; margin-bottom: 10px; position: relative; text-align: center; }
+#frnAdSky { right: 0; width: 0; position: absolute; top: 110px; }
+#frnAdSkyPos { padding-left: 12px; position: absolute; }
+#TMcontentAd { width:300px;float:left;}
+
+#banneroben { z-index: 900; position: relative; text-align: right; }
+#bannerrechts { right: 0; width: 0; position: absolute; top: 10px; }
+
+.wbatleft {
+	margin-left:964px;
+}
+.wbattop {
+	margin-left:314px;
+}
+.wbattop_ff {
+	margin-left:314px;
+	height:90px;
+}
+
+#background-click-layer
+{
+	display:block;
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	z-index:0;
+}
+
+
+/* Produktionslogfile */
+#plf_centerbig {
+	width: 950px;
+	float:left;
+	margin-left:10px;
+}
+#plf_centersmall {
+	width: 715px;
+	float:left;
+	margin-left:10px;
+}
+
+#plf_right {
+	width:230px;
+	float:left;
+}
+
+#plf_headbalken {
+	width:100%;
+	position:absolute;
+	margin-top:95px;
+	background-color:#0e2e8e;
+	height:5px;
+}
+.like_info { 
+	
+}
+.likemsg {
+	float:left;
+	font-size:7pt;
+	vertical-align:middle;
+	padding:2px 0 0 10px;
+}
+.sbicon {
+	background:transparent;
+	padding:0;
+	margin:0;
+	border:0;
+}
+
+.farben_tr_1 {
+	background-color:#AFD179;
+}
+
+.farben_tr_2 {
+	background-color:#C3DC9A;
+}
+
+.farben_tr_3 {
+	background-color:#C3DC9A;
+}
+
+.farben_tr_4 {
+	background-color:#D6EAB6;
+}
+
+.farben_tr_5 {
+	background-color:#BDD9EF;
+}
+
+.farben_tr_6 {
+	background-color:#BDD9EF;
+}
+
+.farben_tr_7 {
+	background-color:#F1F1F1;
+}
+
+.farben_tr_8 {
+	background-color:#F1F1F1;
+}
+
+.farben_tr_9 {
+	background-color:#F1F1F1;
+}
+
+
+.farben_tr_10 {
+	background-color:#F1F1F1;
+}
+
+.farben_tr_11 {
+	background-color:#F1F1F1;
+}
+
+.farben_tr_12 {
+	background-color:#F1F1F1;
+}
+
+.farben_tr_13 {
+	background-color:#F1F1F1;
+}
+
+.farben_tr_14 {
+	background-color:#F1F1F1;
+}
+
+.farben_tr_15 {
+	background-color:#F1F1F1;
+}
+
+.farben_tr_16 {
+	background-color:#F8CFCD;
+}
+
+.farben_tr_17 {
+	background-color:#F8A7A3;
+}
+
+.farben_tr_18 {
+	background-color:#F8A7A3;
+}
+
+.tr_highlight {
+	background-color:#ccc;
+	font-weight:bold;
+	font-style:oblique;
+}
+
+.pfeil_up {
+	background-image:url('http://www.transfermarkt.de/bilder/sonstiges/gk_up.gif');
+	background-repeat:no-repeat;
+	background-position:27px 7px;
+	text-align:right;
+	width:35px;
+	color:green;
+}
+.pfeil_down {
+	background-image:url('http://www.transfermarkt.de/bilder/sonstiges/gk_down.gif');
+	background-repeat:no-repeat;
+	background-position:27px 7px;
+	text-align:right;
+	width:35px;
+	color:red;
+}
+.pfeil_equal {
+	background-image:url('http://www.transfermarkt.de/bilder/sonstiges/gk_equal.gif');
+	background-repeat:no-repeat;
+	background-position:27px 7px;
+	text-align:right;
+	width:35px;
+}
+
+.neuzugang {
+	background-image:url('http://www.transfermarkt.de/bilder/neuzugang_4.png');
+	background-repeat:no-repeat;
+	background-position:98% 50%;
+}
+
+.neuzugang_de {
+	background-image:url('http://www.transfermarkt.de/bilder/neuzugang_4.png');
+	background-repeat:no-repeat;
+	background-position:98% 50%;
+}
+
+.winter_neuzugang_de {
+    background-image:url('http://www-herzog.transfermarkt.de/bilder/winter_neuzugang.png');
+    background-repeat:no-repeat;
+    background-position:98% 50%;
+}
+
+.leihe_zurueck_de {
+    background-image:url('http://www-herzog.transfermarkt.de/bilder/neuzugang_leihe.png');
+    background-repeat:no-repeat;
+    background-position:98% 50%;
+}
+
+.neuzugang_tr {
+    background-image:url('http://www.transfermarkt.de/bilder/yeni.png');
+    background-repeat:no-repeat;
+    background-position:98% 50%;
+
+}
+
+.leihe_zurueck_tr {
+    background-image:url('http://www.transfermarkt.de/bilder/yeni_leihe.png');
+    background-repeat:no-repeat;
+    background-position:98% 50%;
+
+}
+
+.em_kader_icon {
+    background-image:url('http://static.transfermarkt.net/static/img/em_kader_logo_gross.png');
+    background-repeat:no-repeat;
+    background-position:-15px -25px;
+}
+
+.em_kader_zeile {
+    background-color:#f2e2e2 !important;
+}
+
+.bp_abgang {
+	background-position:98% 5% !important;
+}
+
+#centerbig_tr {
+	width: 790px;
+	float:left;
+	margin-left:0px;
+	padding:10px 5px;
+}
+
+#centerbig_tr a {
+	color:#0e2e80;
+}
+
+#centerbig_tr2 a {
+	color:#0e2e80;
+	background-image:url(../img/listenpunkt.gif);
+	background-repeat:no-repeat;
+	background-position:right top;
+	padding-right:5px;
+}
+
+.beschreibung_tr {
+	padding:6px;
+	background-color:#f1f1f1;
+	margin-bottom:10px;
+	font-size:7.5pt;
+	border:1px dotted #ccc;
+}
+
+.optionen_tr {
+	padding:0;
+	background-color:#f1f1f1;
+	border:1px dotted #ccc;
+	margin-bottom:10px;
+}
+
+.ueberschrift_tr {
+	color:#0E2E80;
+	font-size:8.5pt;
+	font-weight:bold;
+	padding:0 0px;
+	margin-bottom:1px;
+	border: 0;	
+	font-style:oblique;
+	/* background:transparent url(http://www.transfermarkt.de/bilder/tipprunde/blue_dott.png) no-repeat left; */
+}
+
+.form_tr {
+	background-color:#fff;
+	border: 1px solid #ccc;
+	font-size:7pt;
+	width:200px;
+}
+
+
+table.tabelle_tr {
+	background-color:#fff;
+	color: #000000;
+	margin-top:2px;
+	border: 1px solid #ccc;
+	width:100%;
+}
+
+.tabelle_tr td {
+	padding:3px 3px;
+	color:#484747;
+}
+
+.tabelle_tr th {
+	background-color: #0e2e80;
+	color: #FFFFFF;
+	font-weight: bold;
+	padding:2px 3px;
+	background-color:#3F589A;
+}
+
+.tabelle_tr th a {
+	color:#FFFFFF;
+}
+
+.tr_trennung {
+	height:2px;
+	background-color:#fff;
+	clear:both;
+	border:0;
+	margin:10px 0;
+}
+
+.tr_blue { 
+	margin: 1px;
+	padding: 5px;
+	color: #444;
+	text-decoration: none;
+	display:block;
+	border-left:5px solid #3F589A;
+}
+
+.button_tr {
+	background-color:#3F589A;
+	border:1px solid #ccc;
+	font-size:7pt;
+	color:#fff;
+	margin:8px 0;
+	font-style:oblique;
+	cursor:pointer;
+}
+
+.table_fixed {
+	table-layout:fixed;
+}
+
+.hellblau_tr {
+	background-color:#E0F1FF;
+}
+
+.hellrot_tr {
+	background-color:#FFEDED;
+}
+
+.hellgruen_tr {
+	background-color:#F4FFE2;
+}
+
+.border_tr {
+	border:1px solid #ccc;
+}
+
+.lt_begegnung_box {
+	height:23px;
+	background:#e6eaf1 url('http://static.transfermarkt.net/static/img/liveticker/liveticker_begegnung.png') no-repeat;	
+}
+
+.lt_begegnung_box_em {
+	height:23px;
+	background:#e6eaf1 url('http://static.transfermarkt.net/static/img/liveticker/em/liveticker_begegnung_em.png') no-repeat;	
+}
+
+.lt_select_box {
+	height:23px;
+	background:#e6eaf1 url('http://static.transfermarkt.net/static/img/liveticker/liveticker_select_wb.png') no-repeat;	
+}
+
+.lt_begegnung_tabelle {
+	margin-left:15px;
+	margin-top:0px;
+	line-height:2;
+	margin-right:15px;
+}
+
+.lt_begegnung_wappen {
+	background-repeat:no-repeat;
+	background-position:-14px -24px;
+	opacity: 0.30;
+}
+
+.lt_begegnung_box_breit {
+	height:23px;
+	background:#e6eaf1 url('http://static.transfermarkt.net/static/img/liveticker/liveticker_begegnung_lld.png') no-repeat;	
+}
+
+.red_tipico {
+	background-color:#c8102e !important;
+	color:#fff !important;
+}
+
+.grey_tipico {
+	background-color:#919799 !important;
+	color:#fff !important;
+}
+
+.pn_middle {
+	position:absolute;
+	left:300px;
+}
+.no_button {
+	background:transparent;
+	border:0;
+	font-size:7pt;
+	margin:2px 0;
+}
+
+.button_gk_on {
+	font-weight:bold;
+	color:#0E2E7F;
+	background: url('http://static.transfermarkt.net/bilder/filter_on.png') no-repeat left;
+	padding-left:14px;
+	cursor: pointer;
+}
+
+.button_gk_off {
+	font-weight:bold;
+	color:#0E2E7F;
+	background: url('http://static.transfermarkt.net/bilder/filter_off.png') no-repeat left;
+	padding-left:14px;
+	cursor: pointer;
+}
+
+
+#personPopupContainer, #tablePopupContainer
+{
+    position:absolute;
+    left:0;
+    top:0;
+    display:none;
+    z-index: 100000;
+}
+
+.personPopupPopup
+{
+}
+
+#personPopupContent
+{
+    background-color: #FFF;
+    min-width: 250px;
+    min-height: 83px;
+}
+
+.personPopupPopup .personPopupImage
+{
+    margin: 5px;
+    margin-right: 15px;
+}
+
+.personPopupPopup .corner, .tablePopupPopup .corner
+{
+    width: 19px;
+    height: 15px;
+}
+
+.personPopupPopup .topLeft, .tablePopupPopup .topLeft
+{
+    background: url(/static/images/personpopup/balloon_topLeft.png) no-repeat;
+}
+
+.personPopupPopup .bottomLeft, .tablePopupPopup .bottomLeft
+{
+    background: url(/static/images/personpopup/balloon_bottomLeft.png) no-repeat;
+}
+
+.personPopupPopup .left, .tablePopupPopup .left
+{
+    background: url(/static/images/personpopup/balloon_left.png) repeat-y;
+}
+
+.personPopupPopup .right, .tablePopupPopup .right
+{
+    background: url(/static/images/personpopup/balloon_right.png) repeat-y;
+}
+
+.personPopupPopup .topRight, .tablePopupPopup .topRight
+{
+    background: url(/static/images/personpopup/balloon_topRight.png) no-repeat;
+}
+
+.personPopupPopup .bottomRight, .tablePopupPopup .bottomRight
+{
+    background: url(/static/images/personpopup/balloon_bottomRight.png) no-repeat;
+}
+
+.personPopupPopup .top, .tablePopupPopup .top
+{
+    background: url(/static/images/personpopup/balloon_top.png) repeat-x;
+}
+
+.personPopupPopup .bottom, .tablePopupPopup .bottom
+{
+    background: url(/static/images/personpopup/balloon_bottom.png) repeat-x;
+    text-align: center;
+}
+
+#tablePopupContent {
+    background-color: #FFF;
+    min-height: 100px;
+}
+
+.tablePopupLinks, .tablePopupRechts {
+	width: 136px;
+	height: 100px;
+	float: left;
+}
+
+.tablePopupResult h1 {
+	font-size: 10px;
+	margin-bottom: 2px;
+	font-weight: bold;
+	color: #0E2F80;
+}
+
+.tablePopupResult table {
+	width: 136px;
+	border-spacing: 1px;
+}
+
+.tablePopupResult table th {
+	font-size: 10px;
+	background-color: #0E2E80;
+	color: white;
+	font-weight: bold;
+	background-image: url(../img/bg_table_th.gif);
+	background-repeat: repeat-x;
+	height: 18px;
+	line-height: 18px;
+}
+
+.tablePopupResult table td {
+	height: 21px;
+	line-height: 21px;
+}
+
+.tablePopupResult th, .tablePopupResult td {
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.tablePopupResult .tooltip-tabelle_platz {
+	min-width: 16px;
+}
+
+.tablePopupResult .tooltip-tabelle_verein {
+	min-width: 60px;
+	padding-left: 2px;
+	text-align: left;
+}
+
+.tablePopupResult .tooltip-tabelle_verein-wappen {
+	min-width: 21px;
+}
+
+.tablePopupResult .tooltip-tabelle_verein-wappen  img {
+	max-width: 21px;
+}
+
+.tablePopupResult .tooltip-tabelle_verein-name {
+	min-width: 38px;
+	max-width: 38px;
+	padding-left: 2px;
+	text-align: left;
+}
+
+.tablePopupResult .tooltip-tabelle_diff {
+	min-width: 22px;
+}
+
+.tablePopupResult .tooltip-tabelle_pkt {
+	min-width: 33px;
+}
+
+.tablePopupResult img.tooltip-tabelle_tendenz {
+	float: left;
+	margin: 50px 5px 0 5px;
+} 
+
+.beschreibung_berater {
+	background-color:#f1f1f1;
+	border:1px dotted #ccc;
+	padding-top:10px;
+}
+
+/* Transferbox Managerspiel*/
+.transferbox_head_ma {
+	position:relative;
+	background:#1D5300 url(http://static.transfermarkt.net/static/img/transferbox/bg_box_ma.png) repeat-x;
+	color:#fff;
+	padding:3px;
+	font-size:8.5pt;
+	font-weight:bold;
+	text-align:center;
+	border:1px solid #1D5300;
+	text-transform:uppercase;
+}
+
+.transferbox_content_ma {
+	position:relative;
+	background:#7e7f80 url(http://static.transfermarkt.net/static/img/transferbox/bg_box.png) repeat-y;
+	border:0;
+	border-bottom:5px solid #1D5300;
+}
+
+.transferbox_vereininfo_ma {
+	background:#1D5300 url(http://static.transfermarkt.net/static/img/transferbox/bg_transfer.png) repeat-y;
+	color:#444;
+	font-size:7pt;
+	padding:2px 5px;
+	width:220px;
+}
+
+.ma_titel_gruen { 
+	margin: 1px;
+	padding: 5px;
+	color: #444;
+	text-decoration: none;
+	display:block;
+	border-left:4px solid #1D5300;
+}
+
+.ma_titel_rot { 
+	margin: 1px;
+	padding: 5px;
+	color: #444;
+	text-decoration: none;
+	display:block;
+	border-left:4px solid #A40707;
+}
+
+.ma_titel_grau { 
+	margin: 1px;
+	padding: 5px;
+	color: #444;
+	text-decoration: none;
+	display:block;
+	border-left:2px solid #969696;
+}
+
+.ma_titel_blau { 
+	margin: 1px;
+	padding: 5px;
+	color: #444;
+	text-decoration: none;
+	display:block;
+	border-left:4px solid #0E2E81;
+}
+
+.geruechtebox_verein_vereininfo_ma {
+	background:#fff url(http://static.transfermarkt.net/static/img/transferbox/bg_geruechte.png) repeat-y;
+	color:#444;
+	font-size:7pt;
+	padding:2px 5px;
+	width:320px;
+}
+
+.geruechtebox_head_ma {
+	position:relative;
+	background:#1D5300 url(http://static.transfermarkt.net/static/img/transferbox/bg_box_ma.png) repeat-x;
+	color:#fff;
+	padding:3px;
+	font-size:8.5pt;
+	font-weight:bold;
+	text-align:center;
+	border:1px solid #1D5300;
+	text-transform:uppercase;
+}
+
+.geruechtebox_content_ma {
+	position:relative;
+	background:#7e7f80 url(http://static.transfermarkt.net/static/img/transferbox/bg_box.png) repeat-y;
+	border:0;
+	border-bottom:5px solid #1D5300;
+	padding-bottom:5px;
+}
+
+
+.geruechtebox_zusatz_ma {
+	margin-top:2px;
+	width:220px !important;
+	position:relative;
+	background:#7e7f80 url(http://static.transfermarkt.net/static/img/transferbox/bg_box_zusatz.png) repeat-y;
+	border:0;
+	border-bottom:5px solid #1D5300;
+	color:#fff;
+	font-size:7pt;
+	padding:2px 5px;
+	line-height:1.5;
+}
+
+.berater_head_bg {
+	background: #F1F1F1 url(http://static.transfermarkt.net/static/img/berater/beraterhead_bg.jpg) no-repeat;	
+	height:116px;
+}
+
+.berater_headstrich {
+	height:2px;
+	background:#fff url(http://static.transfermarkt.net/static/img/berater/beraterhead_strich.jpg) no-repeat;
+	border:0;
+}
+
+.berater_logo_bg {
+	background-color: #FFFFFF;
+	width:140px;
+	height:100px;
+	box-shadow: 1px 1px 2px #474747;
+	margin:10px 0 10px 10px;
+}
+
+.tabelle_berater th {
+	color: #fff;
+	font-weight: bold;
+	padding:2px 4px;
+	background: #474747 url(http://static.transfermarkt.net/static/img/berater/bg_table_th_berater.gif) repeat-x;
+	line-height:1.5;
+}
+
+.tabelle_berater td {
+	margin:0;
+	color:#484747;
+	padding:0 4px;
+}
+
+.tabelle_berater th img{
+	margin-right: 5px;
+}
+
+table.tabelle_berater {
+	background-color:#fff;
+	color: #000;
+	margin:0;
+	border: 1px solid #e6e6e6;
+	width:100%;
+	line-height:1.5;
+}
+
+.beschreibung_berater_main {
+	clear:both;
+	background: url(http://static.transfermarkt.net/static/img/berater/berater_infobox_bg_1px.jpg) repeat-y left top;
+	margin-top:10px !important;
+}
+
+.beschreibung_berater {
+	background: url(http://static.transfermarkt.net/static/img/berater/berater_infobox_bg.jpg) no-repeat left top;
+	line-height:1.6;
+	margin-top: 1px;	
+	padding:5px 15px 5px 70px;
+	font-size:7.5pt;
+	border: 0;
+}
+
+.beraterbox_head {
+	position:relative;
+	background:#0E2E80 url(http://static.transfermarkt.net/static/img/berater/bg_head_box_berater.png) repeat-x;
+	color:#fff;
+	padding:3px;
+	font-size:8.5pt;
+	font-weight:bold;
+	border:1px solid #474747;
+	text-transform:uppercase;
+}
+
+.beraterbox_head_bgy {
+	clear:both;
+	background: #F1F1F1;
+}
+
+.berater_firmenname {
+	font-size:13.5pt;
+	color:#585858;
+}
+
+.beraterbox_content {
+	position:relative;
+	background:#F1F1F1;
+	border:0;
+	padding-bottom:5px;
+	width:390px;
+	height:94px;
+}
+
+.beraterbox_pfeil_links {
+	position:absolute;
+	top:3px;
+	left:2px;
+}
+
+.beraterbox_pfeil_rechts {
+	position:absolute;
+	top:3px;
+	left:285px;
+}
+
+.beraterbox_text {
+	color:#000;
+	font-size:7pt;
+	padding:5px 5px 2px 5px;
+	line-height:2.0;
+	z-index:999;
+}
+
+.beraterbox_single_text {
+	color:#000;
+	font-size:7.5pt;
+}
+
+.beraterbox_img {
+	position:absolute;
+	top:5px;
+	left:315px;
+	z-index:0;
+	border:1px solid #474747;
+}
+
+.beraterbox_vereinwappen {
+	position:absolute;
+	top:65px;
+	left:303px;
+}
+
+.hr_berater_leer {clear:both; background-color: #F1F1F1; height:1px; border:0; width:99%; margin:4px 0 4px 0; }
+
+.beraterportal_button {
+	background-image:url(http://static.transfermarkt.net/static/img/berater/portal_button_grau.png);
+	background-repeat:no-repeat;
+	padding:10px;
+	height:15px;
+	width:240px;
+	margin-top:10px;
+}
+
+.beraterportal_bg_button {
+	background-image:url(http://static.transfermarkt.net/static/img/berater/portal_bg.jpg); background-repeat:no-repeat;
+	padding:5px;
+	margin-top:10px;	
+}
+
+.berater_menu {
+list-style-type: none;
+margin: 0;
+padding: 0;
+width: 100%;
+}
+
+.berater_menu li {
+float: left;
+padding: 4px 20px 4px 10px;
+text-align: left;
+margin:1px 0;
+border-right:2px solid #fff;
+}
+
+
+.presseschau_menu {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background-color:#fff;
+}
+
+.presseschau_menu li {
+	float: left;
+	padding: 2px 11px 2px 11px;
+	text-align: left;
+	margin:0;
+	background-color:#fff;
+	border-left:1px solid #E6E6E6;
+	border-top:1px solid #E6E6E6;
+	border-bottom:1px solid #E6E6E6;
+}
+
+.bg_wappen_presseschau {
+	background-color:#F8F8F8;
+	padding:6px 3px 3px 10px;
+	border:1px solid #E6E6E6;
+	border-top:0;
+	height:29px;
+}
+
+.presseschau_aktiv {
+	background-color:#F8F8F8 !important;
+	font-weight:bold;
+	border-bottom:1px solid #F8F8F8 !important;
+}
+
+.presseschau_neuer_eintragL1 {
+	padding: 2px 20px 2px 20px !important;
+}
+
+.presseschau_neuer_eintragL2 {
+	padding: 2px 20px 2px 20px !important;
+}
+
+.presseschau_neuer_eintragL3 {
+	padding: 2px 20px 2px 21px !important;
+}
+
+.presseschau_neuer_eintragamateure {
+	padding: 2px 15px 2px 15px !important;
+}
+
+.presseschau_neuer_eintraginternational {
+	padding: 2px 18px 2px 18px !important;
+}
+
+.presseschau_header {
+	background-image:url(http://static.transfermarkt.net/static/img/presseschau_header_neu.jpg); background-repeat:no-repeat;
+	line-height:1.7;	
+	padding:83px 20px 10px 8px;
+	font-size:7.5pt;
+}
+
+.terminkalender_header {
+	background-image:url(http://static.transfermarkt.net/static/img/terminkalender_header_neu.jpg); background-repeat:no-repeat;
+	background-color:#0E2E80;
+	line-height:1.7;	
+	padding:83px 20px 10px 8px;
+	font-size:7.5pt;
+}
+
+
+.darkred {
+	color:#E3001A !important;
+}
+
+.live_icon {
+	background-image: url(http://static.transfermarkt.net/static/images/live/bg_live.png) !important;
+	background-repeat:no-repeat !important;
+	background-position:left top;
+	cursor:help;
+}
+
+.live_ergebnis {
+	font-size:7.5pt;
+	font-weight:bold;
+	color: #D70000;	
+}
+
+.wappen_presseschau {
+	margin:0 5px 0 5px;	
+}
+.alerticon, .alerticon:hover  {
+	margin-top:6px;
+	float:right;
+	border:0;
+	width:12px;
+	height:12px;
+	background-image:url('http://static.transfermarkt.net/static/img/icon_alert_n.png');
+}
+.alerticon:hover {
+	background-image:url('http://static.transfermarkt.net/static/img/icon_alert_h.png');
+}
+.editicon, editicon:hover {
+	margin-top:4px;
+	margin-left:4px;
+	float:right;
+	border:0;
+	width:16px;
+	height:16px;
+	background:transparent;
+	background-image: url(http://static.transfermarkt.net/img/admin_icons/admin_n.gif); }
+.editicon:hover { 	
+	background-image: url(http://static.transfermarkt.net/img/admin_icons/admin_h.gif); 
+}
+
+/*
+ * Kurzmeldungen auf der Startseite, rechte spalte
+ */
+ul#kurzmeldungen {
+	list-style-image: none;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	background-color: transparent;
+}
+
+/*
+ * Header fuer Sliderboxen
+ */
+.geruechtebox_head {
+	position:relative;
+	background:#0E2E80 url(http://static.transfermarkt.net/static/img/transferbox/bg_head_box_geruechte.png) repeat-x;
+	color:#fff;
+	padding:3px;
+	font-size:8.5pt;
+	font-weight:bold;
+	text-align:center;
+	border:1px solid #0E2E80;
+	text-transform:uppercase;
+}
+
+/*
+ * Style fuer Sliderboxen auf der Startseite im Content-Bereich
+ */
+
+div#centersmall_2 .sliderbox {
+	width: 230px;
+	margin-top: 2px;
+}
+
+div#centersmall_2 .sliderbox ul {
+	padding: 0;
+	margin: 0;
+	line-height: 1.5;
+}
+
+div#centersmall_2 .sliderbox ul li {
+	margin: 0;
+}
+
+/*
+ * Style fuer Sliderboxen auf der Startseite in der rechten Spalte
+ */
+div#right_2 .sliderbox {
+	width: 230px;
+	margin-top: 2px;
+}
+
+div#right_2 .sliderbox ul {
+	padding: 0;
+	margin: 0;
+	line-height: 1.5;
+}
+
+div#right_2 .sliderbox ul li {
+	margin: 0;
+}
+
+/*
+ * Header fuer Sliderboxen
+ */
+.sliderbox_head {
+	position:relative;
+	background:#0E2E80 url(http://static.transfermarkt.net/static/img/transferbox/bg_head_box_geruechte.png) repeat-x;
+	color:#fff;
+	padding:3px;
+	font-size:8.5pt;
+	font-weight:bold;
+	text-align:center;
+	border:1px solid #0E2E80;
+	text-transform:uppercase;
+}
+
+.sliderbox_pfeil_links {
+	position:absolute;
+	top:3px;
+	left:2px;
+}
+
+.sliderbox_pfeil_rechts {
+	position:absolute;
+	top:3px;
+	left:124px;
+}
+
+/*
+ * Style fuer Geruechte-Sliderbox
+ */
+
+ul#bxGeruechte, ul.bx {
+	list-style-image: none;
+	padding: 0;
+}
+
+ul#bxGeruechte .box_content, ul.bx .box_content {
+	position:relative;
+	background:#7e7f80 url(http://static.transfermarkt.net/static/img/transferbox/bg_box.png) no-repeat;
+	border:0;
+	border-bottom:5px solid #0E2E80;
+	padding-bottom:5px;
+	width: 230px;
+}
+
+ul#bxGeruechte .box_spielerfoto, ul.bx .box_spielerfoto {
+	position: absolute;
+	left: 165px;
+	top: 8px;
+	border: 1px solid #444;
+}
+
+ul#bxGeruechte .box_text, ul.bx .box_text {
+	color:#fff;
+	font-size:7pt;
+	padding:5px 5px 2px 5px;
+	line-height:2.0;
+	z-index:999;
+}
+
+ul.bx .box_rang {
+	position:absolute;
+	top:3px;
+	left:160px;
+	z-index:999;
+	background-color:#fff;
+	padding:1px 2px;
+	border:1px dotted #ccc;
+	font-size:7.5pt;
+}
+
+ul#bxGeruechte .box_single_text, ul.bx  .box_single_text {
+	font-size:7pt;
+	color: #fff;
+	font-weight: bold;
+}
+
+ul#bxGeruechte .box_vereininfo, ul.bx .box_vereininfo {
+	background: url("http://static.transfermarkt.net/static/img/transferbox/bg_transfer.png") repeat-y scroll 0 0 #FFFFFF;
+	color: #444;
+	font-size: 7pt;
+	padding: 2px 5px;
+	width: 220px;
+}
+
+.box_vereininfo table {
+	/* table-layout: fixed; */
+}
+
+.box_vereininfo table tr {
+	line-height: 2;
+}
+
+.box_vereininfo table tr td {
+	font-size: 7.5pt;
+}
+
+.box_vereininfo table tr td.text {
+	/* width:70px; */
+}
+.box_vereininfo table tr td.wappen {
+	width:1%;
+	text-align: center;
+}
+.box_vereininfo table tr td.verein {
+	color: #0E2F80;
+	font-weight: bold;
+	padding-left: 5px;
+}
+
+
+/* Style fuer GeruechteBox ende */
+
+/*
+ * Style fuer geruechtebox auf der Startseite, im content-bereich, nach der zweiten News
+ * links neben der Rectangle-Werbung
+ */
+
+ul#geruechtebox_startseite {
+	list-style-image: none;
+	padding: 0;
+}
+
+ul#geruechtebox_startseite .geruechtebox_content {
+	position:relative;
+	background:#7e7f80 url(http://static.transfermarkt.net/static/img/transferbox/bg_box.png) repeat-y;
+	border:0;
+	border-bottom:5px solid #0E2E80;
+	padding-bottom:5px;
+	width: 230px;
+}
+
+ul#geruechtebox_startseite .geruechtebox_spielerfoto {
+	position: absolute;
+	left: 165px;
+	top: 8px;
+	border: 1px solid #444;
+}
+
+ul#geruechtebox_startseite .geruechtebox_vereininfo {
+	background: url("http://static.transfermarkt.net/static/img/transferbox/bg_transfer.png") repeat-y scroll 0 0 #FFFFFF;
+	color: #444;
+	font-size: 7pt;
+	padding: 2px 5px;
+	width: 220px;
+}
+
+ul#geruechtebox_startseite .geruechtebox_vereininfo table {
+	table-layout: fixed;
+}
+
+ul#geruechtebox_startseite .geruechtebox_vereininfo table tr {
+	line-height: 2;
+}
+
+ul#geruechtebox_startseite .geruechtebox_vereininfo table tr td {
+	font-size: 7.5pt;
+}
+
+ul#geruechtebox_startseite .geruechtebox_vereininfo table tr td.text {
+	width:70px;
+}
+ul#geruechtebox_startseite .geruechtebox_vereininfo table tr td.wappen {
+	width:1%;
+	text-align: center;
+}
+ul#geruechtebox_startseite .geruechtebox_vereininfo table tr td.verein {
+	color: #0E2F80;
+	font-weight: bold;
+	padding-left: 5px;
+}
+
+ul#geruechtebox_startseite .geruechtebox_counter {
+	position: absolute;
+	top: 142px;
+	left: 2px;
+	color: rgb(239, 239, 239);
+	font-style: oblique;
+	font-size: 7pt;
+}
+
+.geruechtebox_single_text {
+	font-size:7pt;
+}
+
+.geruechtebox_text {
+	color:#fff;
+	font-size:7pt;
+	padding:5px 5px 2px 5px;
+	line-height:2.0;
+	z-index:999;
+}
+
+.geruechtebox_pfeil_links {
+	position:absolute;
+	top:3px;
+	left:2px;
+}
+
+.geruechtebox_pfeil_rechts {
+	position:absolute;
+	top:3px;
+	left:124px;
+}
+
+/*
+span.geruechtebox_img a img {
+	border:1px solid #444;
+}
+.widt230 {
+	width:230px;
+}
+.gbox_counter {
+	position:absolute;
+	top:142px;
+	left:2px;
+	color:#efefef;
+	font-style:oblique;
+	font-size:7pt;
+}
+*/
+
+
+/*
+ * Style fuer presseschaubox auf der Startseite, in der rechten Spalte
+ */
+ul#presseschaubox_startseite {
+	list-style-image: none;
+	padding: 0;
+}
+
+ul#presseschaubox_startseite .presseschaubox_wrapper {
+	background:#fff url(http://static.transfermarkt.net/static/img/bg_presseschau_startseite.jpg) repeat-y;
+	border:0;
+	border-bottom:5px solid #0E2E80;
+	width:230px;
+	height:222px;
+	margin: 0;
+	padding: 2px 0 0;
+}
+
+ul#presseschaubox_startseite .presseschaubox_header {
+	position:relative;
+	width:220px;
+	height:32px;
+	padding:2px 5px 0 5px;
+	line-height:1.4;
+	font-size: 7.5pt;
+	background-color: #e6e6e6;
+}
+
+ul#presseschaubox_startseite .presseschaubox_header div {
+	width:58px;
+	height:34px;
+	position:absolute;
+	left:172px;
+	top: 0px;
+	background-repeat:no-repeat;
+	background-position:12px -17px;
+	opacity: 0.14;
+}
+
+ul#presseschaubox_startseite .presseschaubox_header span {
+	color: grey;
+	font-style: oblique;
+	font-size: 7.5pt;
+}
+
+ul#presseschaubox_startseite .presseschaubox_header p {
+	padding: 2px 0;
+}
+
+ul#presseschaubox_startseite .presseschaubox_content2 {
+	width:220px;
+	padding:5px;
+	height:154px;
+	line-height:1.4;
+	margin-top:2px;
+	font-size: 7.5pt;
+	text-align: left;
+	background-color: #DDD;
+}
+
+ul#presseschaubox_startseite .presseschaubox_content2 img {
+	float:left;
+	margin:3px 5px 0 1px;
+	width:70px;
+	height:91px;
+	border:1px solid #ccc;
+}
+
+ul#presseschaubox_startseite .presseschaubox_footer {
+	position:relative;
+	width:220px;
+	padding:1px 5px;
+	height:18px;
+	line-height:1.6;
+	margin-top:2px;
+	font-size: 7.5pt;
+	font-style: oblique;
+	font-weight: bold;
+	background-color: #e6e6e6;
+}
+
+ul#presseschaubox_startseite .presseschaubox_footer span {
+	position:absolute;
+	top:1px;
+	left:4px;
+	color:#aaa;
+	font-style:oblique;
+	font-size:7pt;
+	font-weight: normal;
+}
+.transferticker {
+    background-color:red;
+    color:#fff;
+    font-size:10pt;
+    font-weight:bolder;
+    text-align:center;
+    margin-bottom:10px;
+    border:1px solid #b60400;
+    padding:2px;
+    background:#b60400 url(http://www.transfermarkt.de/static/img/bg_transferticker.png) repeat-x;
+}
+
+#top_team {
+    border-top:1px dotted #ccc;
+    border-top:0;
+    width:790px;
+    height:560px;
+    background-color:#f1f1f1;
+    background-image:url('http://static.transfermarkt.net/static/img/feld_2.jpg');
+    background-repeat:no-repeat;
+}
+
+.topteam_spieler {
+    display:inline-block;
+    background-repeat:no-repeat;
+    position:relative;
+    height:68px;
+    width:58px;
+    border:2px solid #fff;
+    border-bottom:0;
+    position:relative;
+}
+
+.topteam_name {
+    display:inline-block;
+    padding:0 3px 0 3px;
+    color:#222;
+    font-weight:bold;
+    font-size:6.5pt;
+    background-color:#fff;
+    min-width:54px;
+    border:1px solid #fff;
+}
+
+.topteam_mw {
+    width:25px;
+    height:10px;
+    color:#222;
+    font-weight:bold;
+    font-size:6pt;
+    background:url('http://static.transfermarkt.net/static/img/transparent_pixel.png') repeat;
+}
+
+.topteam_neuzugang {
+    padding:0 2px;
+    background-color:#ba0400;
+    color:#fff;
+    font-weight:bold;
+    font-size:6.5pt;
+    position:absolute;
+    top:-5px;
+    left:43px;
+}
+
+.topteam_rueck {
+    padding:0 2px;
+    background-color:#ccc;
+    color:#444;
+    font-weight:bold;
+    font-size:6.5pt;
+    position:absolute;
+    top:-5px;
+    left:43px;
+}
+
+
+.topteam_rn {
+    position:absolute;
+    bottom:-2px;
+    right:-3px;
+    width:18px;
+    height:18px;
+    
+}
+
+.topteam_verein {
+    position:absolute;
+    bottom:-2px;
+    right:-3px;
+    
+}
+
+.topteam_border_neu {
+    border:2px solid #ba0400;
+    border-bottom:1px solid #ba0400;
+    
+}
+
+.topteam_name_border_neu {
+    border:2px solid #ba0400;
+    border-top:1px solid #ba0400;
+    min-width:52px;
+}
+
+.topteam_border_rueck {
+    border:2px solid #ccc;
+    border-bottom:1px solid #ccc;
+    
+}
+
+.topteam_name_border_rueck {
+    border:2px solid #ccc;
+    border-top:1px solid #ccc;
+    min-width:52px;
+}
+
+.topteam_padding_sturm_1 {
+    padding:0 50px;
+    padding-top:15px;
+    padding-left:150px;
+}
+
+.topteam_padding_sturm_2 {
+    padding:0 50px;
+    padding-top:15px;
+    padding-right:150px;
+}
+
+.topteam_tabelle {
+    width:100%;
+    
+    table-layout:fixed !important;
+}
+
+.topteam_subtabelle {
+    width:100%;
+    table-layout:fixed !important;
+    text-align:center;
+}
+
+.topteam_wid25 {
+    width:172px !important;
+}
+
+.topteam_wid50 {
+    width50%;
+}
+
+.topteam_tor {
+    height:90px;
+}
+
+.topteam_abwehr {
+    height:110px;
+}
+
+.topteam_mittelfeld {
+    height:220px;
+}
+
+.topteam_sturm {
+    height:110px;
+}
+
+.gkbox_icon_neu {
+    padding:0 1px;
+    background-color:#0a580f;
+    color:#fff;
+    font-weight:bold;
+    font-size:6.5pt;
+    position:absolute;
+    top:5px;
+    left:156px;
+    line-height:1.1;
+    border:1px solid #aaa;
+}
+
+.gkbox_icon_update {
+    padding:0 1px;
+    background-color:#9a443f;
+    color:#fff;
+    font-weight:bold;
+    font-size:6.5pt;
+    position:absolute;
+    top:5px;
+    left:156px;
+    line-height:1.1;
+    border:1px solid #aaa;
+}
+
+.gk_box_icon_neu {
+    padding:0 1px;
+    background-color:#0a580f;
+    color:#fff;
+    font-weight:bold;
+    font-size:6.4pt;
+    line-height:1.1;
+    cursor:help;
+}
+
+.gk_box_icon_update {
+    padding:0 1px;
+    background-color:#9a443f;
+    color:#fff;
+    font-weight:bold;
+    font-size:6.4pt;
+    line-height:1.1;
+    cursor:help;
+}
+
+.ligazusammenfassung {
+	margin-top:10px;
+	height:170px;
+	border:1px solid #ccc;
+	padding:5px 7px;
+}
+
+.ligazusammenfassung .info {
+	height:155px;
+	padding:5px 15px;
+	background-color:#0e2e80;
+	width:216px;
+	border:0;
+	color:#f1f1f1;
+	float:left;
+}
+
+.ligazusammenfassung .details {
+	height:165px;
+	background-color:#fff;
+	width:528px;
+	border:0;
+	margin-top:2px;
+	float:left;
+}
+
+.ligazusammenfassung .details .statistik {
+	float:left;
+	width:78px;
+	height:45px;
+	padding:5px;
+}
+
+.ligazusammenfassung .details .statistik-foto {
+	float:left;
+	width:88px;
+	height:55px;
+	background-position:50% 54%;
+	opacity:0.85;
+}
+
+.ligazusammenfassung .details .statistik-wappen {
+	background-color:#e6e6e6;
+	float:left;
+	width:88px;
+	height:55px;
+	background-position:center;
+	opacity:0.75;
+}
+
+a:hover .statistik-wappen {
+	opacity:1.0 !important;
+}
+
+a:hover .statistik-foto {
+	opacity:1.0 !important;
+}
+
+.ligazusammenfassung .details .statistik-breit {
+	float:left;
+	width:166px;
+	height:45px;
+	padding:5px;
+}
+
+.heller {
+	background-color:#f1f1f1;
+	color:#444 !important;
+}
+
+a:hover .heller {
+	background-color:#dadada !important;
+}
+
+.dunkler {
+	background-color:#e6e6e6 !important;
+	color:#444 !important;
+
+}
+
+a:hover .dunkler {
+	background-color:#dadada !important;
+}
+
+
+.rote-karte {
+	background-color:#a00101 !important;
+	color: #fff !important;
+}
+
+a:hover .rote-karte {
+	background-color:#890101 !important;
+	color: #fff !important;
+}
+
+.gelbe-karte {
+	background-color:#f1b500 !important;
+	color: #fff !important;
+}
+
+a:hover .gelbe-karte {
+	background-color:#e19b01 !important;
+	color: #fff !important;
+}
+
+.gelbe-rote-karte {
+	background:url('http://static.transfermarkt.net/static/img/gelb_rot_hintergrund.jpg') no-repeat;
+	color: #fff !important;
+}
+
+a:hover .gelbe-rote-karte {
+	background:url('http://static.transfermarkt.net/static/img/rot_gelb_hintergrund.jpg') no-repeat;
+	color: #fff !important;
+}
+
+.rot {
+	background-color:#dc5821 !important;
+	color: #fff !important;
+}
+
+.ligazusammenfassung .zahl {
+	font-weight:bold;
+	font-size:18px;
+	display:block;
+}
+
+.die-saison-headline {
+	font-weight:bold;
+	font-size:18px;
+	display:block;
+	margin-top:10px;
+}
+
+.die-saison-text {
+	font-size:9px;
+	margin-top:3px;
+	padding-left:2px;
+	line-height: 1.6;
+}
+
+
+.ligazusammenfassung .informativer-text {
+	font-size:9px;
+	font-weight:bold;
+	display:block;
+	margin-top:2px;
+	padding-left:2px;
+}
+
+.wettbewerbslogo-breit {
+	background-position:center;
+	width:100px;
+	height:50px;
+	background-color:#fff;
+	background-repeat: no-repeat;
+	margin-top:5px;
+}
+
+.button_ligazusammenfassung {
+	background-color:#f1f1f1;
+	border:0;
+	font-size:7.5pt;
+	color:#0e2e80;
+	margin:5px 0;
+}
+
+.matches-played {
+	margin-top:10px;
+	border-spacing: 0px;
+	color:#0e2e80;
+}
+
+table.matches-played td.matches-number {
+    border-right: 1px solid #0e2e80;
+    font-weight: normal;
+    font-size: 22px;
+    padding: 6px 8px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight:bold;
+    background-color:#f1f1f1;
+}
+
+table.matches-played td.matches-played {
+    font-size: 9px;
+    text-transform: uppercase;
+    padding: 6px 7px;
+    font-weight: bold;
+    background-color:#f1f1f1;
+}
+
+.statistik-startseite div.statistik-box {
+    float:left;
+    width:375px;
+    height:128px;
+    padding:10px;   
+    color:#fff;
+    line-height:1.4;
+}
+
+.statistik-startseite .torjubel {
+     background:#26517d url('http://static.transfermarkt.net/static/img/statistik_startseite/torjubel.png') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite .schiedsrichter {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/schiedsrichter.png') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite .torschuetze {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/torschuetze.png') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite .zuschauer {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/zuschauer.png') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite .erfolge {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/erfolge.jpg') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite .trainervergleich {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/trainervergleich.jpg') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite .spielervergleich {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/spielervergleich.jpg') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite div.drueber_text {
+    display:none;
+}
+
+.statistik-startseite a:hover div.drunter_text {
+    display:none;
+}
+
+.statistik-startseite div.drueber_text {
+    display:none;
+}
+
+.statistik-startseite a:hover div.drueber_text {
+    display:block;
+    font-weight:bold;
+    font-size:26px;
+    padding:0;
+    color:#fff;
+}
+
+.statistik-startseite .farbe1 {
+   background-color:#26517d;
+}
+
+.statistik-startseite .farbe2 {
+    background-color:#708da9;
+}
+
+.statistik-startseite .farbe4 {
+    background-color:#336699;
+}
+
+.statistik-startseite .farbe5 {
+    background-color:#bfc7ca;
+}
+
+.statistik-startseite .farbe7 {
+    background-color:#677d7f;
+}
+
+.statistik-startseite .farbe8 {
+    background-color:#d0d8da;
+}
+
+.statistik-startseite a:hover .torjubel {
+     background:#26517d url('http://static.transfermarkt.net/static/img/statistik_startseite/torjubel_hover.png') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite a:hover .schiedsrichter {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/schiedsrichter_hover.png') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite a:hover .torschuetze {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/torschuetze_hover.png') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite a:hover .zuschauer {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/zuschauer_hover.png') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite a:hover .erfolge {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/erfolge_hover.jpg') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite a:hover .trainervergleich {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/trainervergleich_hover.jpg') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite a:hover .spielervergleich {
+     background:url('http://static.transfermarkt.net/static/img/statistik_startseite/spielervergleich_hover.jpg') no-repeat;
+     background-position:center;
+}
+
+.statistik-startseite a:hover .farbe1 {
+     background-color:#1d3f61;
+}
+
+.statistik-startseite a:hover .farbe2 {
+     background-color:#566d85;
+}
+
+.statistik-startseite a:hover .farbe4 {
+     background-color:#274f77;
+}
+
+.statistik-startseite a:hover .farbe5 {
+     background-color:#9aa2a5;
+}
+
+.statistik-startseite a:hover .farbe7 {
+     background-color:#506162;
+}
+
+.statistik-startseite a:hover .farbe8 {
+     background-color:#acb5b8;
+}
+
+.statistik-startseite .grosser-text {
+    font-size:26px;
+    font-weight:bold;
+}
+
+.statistik-startseite .kleiner-text {
+    font-size:19px;
+    line-height:1.1;
+    text-transform:uppercase;
+    width:290px;
+}
+
+#preload {
+    display: none
+}
+
+#preload img {
+	height: 0; width: 0; border: none;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: -30;
+}
+
+.aufstellung_vereinsfarben {
+	font-weight: bold; 
+	margin: auto; 
+	width: 18px; 
+	height: 18px; 
+	border-radius: 17px;
+	margin-bottom: 1px;
+	line-height: 2.3;
+	font-size: 8px !important;
+	text-shadow: none; !important;
+}
+
+.aufstellung_vereinsfarben a {
+	font-size: 8px !important; 
+	text-decoration: none;
+	text-shadow: none; !important;
+}
+
+.box_startseite b {
+	font-size:10px;
+}
+
+.pfeil_erreichen {
+     background:#c3dc9a url('http://static.transfermarkt.net/static/img/pfeil_erreichen.png') no-repeat;
+     background-position:right;
+}
+
+.pfeil_erreichen_none {
+     background:#c3dc9a;
+}
+
+.vorbericht_vorschauvideo_cont {
+	margin-top: 10px;
+	width: 790px;
+	height: 57px;
+	background-image: url(http://static.transfermarkt.net/static/img/spielbericht/vorschau_video.jpg);
+	background-repeat: no repeat;
+	position: relative;
+	cursor: pointer;
+}
+
+.vorbericht_vorschauvideo_spieltag {
+	position: absolute;
+	top: 17px;
+	left: 300px;
+	font-size: 18px;
+	color: #FFFFFF;
+	font-weight: bold;	
+}
+
+.validateTips { border: 1px solid transparent; padding: 0.3em; }
+
+.ui-autocomplete {
+    max-height: 140px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+}
+
+/* IE 6 doesn't support max-height
+ * we use height instead, but this forces the menu to always be this tall
+ */
+* html .ui-autocomplete {
+    height: 140px;
+}

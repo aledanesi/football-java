@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+           http://www.directwebremoting.org/schema/spring-dwr
+           http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">
+
+
+	<!-- Activates annotation-based bean configuration -->
+	<context:annotation-config />
+
+	<!-- Scans for application @Service to deploy -->
+	<context:component-scan base-package="com.jfootball.manager.impl" />
+
+	<!-- enables scanning for @Transactional annotations -->
+	<tx:annotation-driven />
+
+
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+
+	<bean id="viewMappings" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="alwaysUseFullPath" value="true" />
+		<property name="urlMap">
+			<map>
+				<entry key="/dwr/**/*" value-ref="dwrController" />
+			</map>
+		</property>
+	</bean>
+
+	<dwr:controller id="dwrController" debug="true" />
+	<dwr:configuration />
+	<dwr:annotation-config id="dwrAnnotationConfig" />
+	<dwr:annotation-scan base-package="com.jfootball.manager.impl" scanRemoteProxy="true" />
+	<dwr:annotation-scan base-package="com.jfootball.domain" scanDataTransferObject="true" />
+
+	<!-- ========================= MANAGERs ========================= -->
+
+	<bean name="divisionManager"  class="com.jfootball.manager.impl.DivisionManagerImpl" />
+
+	<bean name="teamManager"      class="com.jfootball.manager.impl.TeamManagerImpl" />
+
+	<bean name="playerManager"    class="com.jfootball.manager.impl.PlayerManagerImpl" />
+
+	<bean name="positionManager"  class="com.jfootball.manager.impl.PositionManagerImpl" />
+
+	<bean name="careerManager"    class="com.jfootball.manager.impl.CareerManagerImpl" />
+
+	<bean name="seasonManager"    class="com.jfootball.manager.impl.SeasonManagerImpl" />
+	
+	<bean name="nationManager"    class="com.jfootball.manager.impl.NationManagerImpl" />
+	
+
+</beans>

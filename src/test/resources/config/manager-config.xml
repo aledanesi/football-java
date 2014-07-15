@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">              
+
+
+  <!-- Activates annotation-based bean configuration -->
+  <context:annotation-config />
+  
+  <!-- Scans for application @Service to deploy -->
+  <context:component-scan base-package="com.jfootball.manager.impl" />
+  
+  <!-- enables scanning for @Transactional annotations -->
+  <tx:annotation-driven />  
+    
+  <!-- ========================= MANAGERs ========================= -->
+
+  <!--  Explicit transaction (Annotation) -->
+  <bean id="divisionManager" parent="parentTransProxy">
+    <property name="target"><ref bean="divisionManagerTarget"/></property>
+  </bean>
+  
+  <bean name="divisionManagerTarget" class="com.jfootball.manager.impl.DivisionManagerImpl" />
+
+  <!--  Implicit transaction (Annotation) -->
+  <bean name="teamManager" class="com.jfootball.manager.impl.TeamManagerImpl" />
+
+  <bean name="playerManager" class="com.jfootball.manager.impl.PlayerManagerImpl" />
+
+  <bean name="positionManager" class="com.jfootball.manager.impl.PositionManagerImpl" />
+
+  <bean name="careerManager" class="com.jfootball.manager.impl.CareerManagerImpl" />
+
+  <bean name="seasonManager" class="com.jfootball.manager.impl.SeasonManagerImpl" />
+
+</beans>

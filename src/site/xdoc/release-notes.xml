@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<author email="danesiale@gmail.com">Alessandro Danesi</author>
+		<title>Release Notes</title>
+	</properties>
+	<head></head>
+	<body>
+		<section name="Release Notes">
+			<br />
+			<subsection name="0.9">
+				<table border="0" width="100%">
+					<THEAD>
+						<tr>
+							<th>
+								<b>Activity</b>
+							</th>
+							<th>
+								<b>Date</b>
+							</th>
+							<th>
+								<b>Type</b>
+							</th>
+							<th>
+								<b>Note</b>
+							</th>
+						</tr>
+					</THEAD>
+					<TBODY>
+						<tr>
+							<td>New</td>
+							<td>13/06/2014</td>
+							<td>JFootball</td>
+							<td>Inserito il job del ritorno dei prestiti</td>
+						</tr>
+						<tr>
+							<td>New</td>
+							<td>13/06/2014</td>
+							<td>JFootball</td>
+							<td>Inserito il job della carriera dei giocatori</td>
+						</tr>
+						<tr>
+							<td>New</td>
+							<td>13/06/2014</td>
+							<td>JFootball</td>
+							<td>Controller, Manager e Dao estendono una classe generica</td>
+						</tr>
+					</TBODY>
+				</table>
+			</subsection>
+
+			<br />
+
+			<subsection name="OLD RELEASES">
+
+				<subsection name="0.8">
+					<table border="0" width="100%">
+						<THEAD>
+							<tr>
+								<th>
+									<b>Activity</b>
+								</th>
+								<th>
+									<b>Date</b>
+								</th>
+								<th>
+									<b>Type</b>
+								</th>
+								<th>
+									<b>Note</b>
+								</th>
+							</tr>
+						</THEAD>
+						<TBODY>
+							<tr>
+								<td>New</td>
+								<td>29/04/2014</td>
+								<td>Player</td>
+								<td>Modifica del giocatore dalla pagina del dettaglio</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>10/03/2014</td>
+								<td>Career</td>
+								<td>Semplificata la classe Career, sparisce la classe CareerDetail</td>
+							</tr>
+							<tr>
+								<td>Modify</td>
+								<td>12/03/2014</td>
+								<td>JFootball</td>
+								<td>Create le classi di test</td>
+							</tr>
+							<tr>
+								<td>Modify</td>
+								<td>16/03/2014</td>
+								<td>Player</td>
+								<td>Creata la funzione getRank</td>
+							</tr>
+							<tr>
+								<td>Modify</td>
+								<td>23/03/2014</td>
+								<td>Career</td>
+								<td>Aggiunta la funzione elimina carriera</td>
+							</tr>
+							<tr>
+								<td>Modify</td>
+								<td>31/03/2014</td>
+								<td>JFootball</td>
+								<td>Migliorata la gestione dwr, passaggio alle annotation</td>
+							</tr>
+							<tr>
+								<td>Modify</td>
+								<td>31/03/2014</td>
+								<td>JFootball</td>
+								<td>Aggiunta la libreria dwr nel pom</td>
+							</tr>
+						</TBODY>
+					</table>
+				</subsection>
+
+				<subsection name="0.7">
+					<table border="0" width="100%">
+						<THEAD>
+							<tr>
+								<th>
+									<b>Activity</b>
+								</th>
+								<th>
+									<b>Date</b>
+								</th>
+								<th>
+									<b>Type</b>
+								</th>
+								<th>
+									<b>Note</b>
+								</th>
+							</tr>
+						</THEAD>
+						<TBODY>
+							<tr>
+								<td>Fix</td>
+								<td>06/03/2014</td>
+								<td>Career</td>
+								<td>Migliorata la gestione delle carriere</td>
+							</tr>
+						</TBODY>
+					</table>
+				</subsection>
+
+				<subsection name="0.6">
+					<table border="0" width="100%">
+						<THEAD>
+							<tr>
+								<th>
+									<b>Activity</b>
+								</th>
+								<th>
+									<b>Date</b>
+								</th>
+								<th>
+									<b>Type</b>
+								</th>
+								<th>
+									<b>Note</b>
+								</th>
+							</tr>
+						</THEAD>
+						<TBODY>
+							<tr>
+								<td>Fix</td>
+								<td>28/01/2014</td>
+								<td>Player</td>
+								<td>Migliorata la gestione dei prestiti</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>29/01/2014</td>
+								<td>Team / Player</td>
+								<td>Aggiunto il tracciamento delle ultime modifiche su Team e Player</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>29/01/2014</td>
+								<td>Player</td>
+								<td>Aggiunto il cambio squadra su dialog</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>15/02/2014</td>
+								<td>Player</td>
+								<td>Aggiunto la gestione della carriera su dialog</td>
+							</tr>
+						</TBODY>
+					</table>
+				</subsection>
+
+				<subsection name="0.5">
+					<table border="0" width="100%">
+						<THEAD>
+							<tr>
+								<th>
+									<b>Activity</b>
+								</th>
+								<th>
+									<b>Date</b>
+								</th>
+								<th>
+									<b>Type</b>
+								</th>
+								<th>
+									<b>Note</b>
+								</th>
+							</tr>
+						</THEAD>
+						<TBODY>
+							<tr>
+								<td>Fix</td>
+								<td>20/01/2014</td>
+								<td>Images</td>
+								<td>Tolta la gestione dei blob nel db, adesso le immagini sono salvate nella cartella esterna images</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>20/01/2014</td>
+								<td>Team / Player</td>
+								<td>La validazione delle squadre e dei giocatori adesso è javascript e non più java (spring)</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>21/01/2014</td>
+								<td>Team</td>
+								<td>Aggiunto il campo Fondazione</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>21/01/2014</td>
+								<td>Player</td>
+								<td>Aggiunto il campo Team Owner</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>23/01/2014</td>
+								<td>Team / Player</td>
+								<td>Aggiunto una prima semplice gestione dei prestiti</td>
+							</tr>
+						</TBODY>
+					</table>
+				</subsection>
+
+				<subsection name="0.4">
+					<table border="0" width="100%">
+						<THEAD>
+							<tr>
+								<th>
+									<b>Activity</b>
+								</th>
+								<th>
+									<b>Date</b>
+								</th>
+								<th>
+									<b>Type</b>
+								</th>
+								<th>
+									<b>Note</b>
+								</th>
+							</tr>
+						</THEAD>
+						<TBODY>
+							<tr>
+								<td>Fix</td>
+								<td>04/01/2014</td>
+								<td>Team</td>
+								<td>Il salvataggio del cambio squadra torna sulla ex squadra di appartenenza e non piu sulla squadra d'arrivo</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>12/01/2014</td>
+								<td>Team</td>
+								<td>Refactoring grafica e piccole migliorie</td>
+							</tr>
+						</TBODY>
+					</table>
+				</subsection>
+				<subsection name="0.3">
+					<table border="0" width="100%">
+						<THEAD>
+							<tr>
+								<th>
+									<b>Activity</b>
+								</th>
+								<th>
+									<b>Date</b>
+								</th>
+								<th>
+									<b>Type</b>
+								</th>
+								<th>
+									<b>Note</b>
+								</th>
+							</tr>
+						</THEAD>
+						<TBODY>
+							<tr>
+								<td>Fix</td>
+								<td>01/01/2014</td>
+								<td>Team</td>
+								<td>Fix immagine team in dettaglio</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>01/01/2014</td>
+								<td>Player</td>
+								<td>Fix selezione select nationalità e posizione modifica giocatore</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>01/01/2014</td>
+								<td>Player</td>
+								<td>Fix funzione cambia squadra</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>03/01/2014</td>
+								<td>Player</td>
+								<td>Migliorato la gestione dialog con jquery ui</td>
+							</tr>
+							<tr>
+								<td>Modify</td>
+								<td>04/01/2014</td>
+								<td>Applicazione</td>
+								<td>Aggiornate le librerie jquery (1.10.2) e jquery ui (1.10.3)</td>
+							</tr>
+						</TBODY>
+					</table>
+				</subsection>
+
+				<subsection name="0.2">
+					<table border="0" width="100%">
+						<THEAD>
+							<tr>
+								<th>
+									<b>Activity</b>
+								</th>
+								<th>
+									<b>Date</b>
+								</th>
+								<th>
+									<b>Type</b>
+								</th>
+								<th>
+									<b>Note</b>
+								</th>
+							</tr>
+						</THEAD>
+						<TBODY>
+							<tr>
+								<td>Modify</td>
+								<td>22/12/2013</td>
+								<td>Career</td>
+								<td>Eliminata la foto dal dettaglio della carriera del giocatore</td>
+							</tr>
+							<tr>
+								<td>Modify</td>
+								<td>23/12/2013</td>
+								<td>Team/Player</td>
+								<td>Modificata la gestione Hibernate Team/Player</td>
+							</tr>
+							<tr>
+								<td>Modify</td>
+								<td>28/12/2013</td>
+								<td>Team/Player</td>
+								<td>Modifiche tramite modal dialog</td>
+							</tr>
+							<tr>
+								<td>Modify</td>
+								<td>01/01/2014</td>
+								<td>Team/Player</td>
+								<td>Aggiunta dialog dettaglio e elenco nel link della descrizione</td>
+							</tr>
+						</TBODY>
+					</table>
+				</subsection>
+
+				<subsection name="0.1">
+					<table border="0" width="100%">
+						<THEAD>
+							<tr>
+								<th>
+									<b>Activity</b>
+								</th>
+								<th>
+									<b>Date</b>
+								</th>
+								<th>
+									<b>Type</b>
+								</th>
+								<th>
+									<b>Note</b>
+								</th>
+							</tr>
+						</THEAD>
+						<TBODY>
+							<tr>
+								<td>Versione iniziale del programma</td>
+								<td>17/12/2013</td>
+								<td></td>
+								<td></td>
+							</tr>
+						</TBODY>
+					</table>
+				</subsection>
+			</subsection>
+
+		</section>
+	</body>
+</document> 

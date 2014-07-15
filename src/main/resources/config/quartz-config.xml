@@ -1,0 +1,46 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ 
+
+	<bean id="endSeasonJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	 
+		<property name="targetObject" ref="playerManager" />
+		<property name="targetMethod" value="endSeasonJob" />
+	 
+	</bean>	
+   
+	<bean id="fixPlayersJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	 
+		<property name="targetObject" ref="playerManager" />
+		<property name="targetMethod" value="careerPlayerJob" />
+	 
+	</bean>	
+	
+	<!-- Cron Trigger, fire every July 1st at 06:00am. -->
+	<bean id="endSeasonTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+ 
+		<property name="jobDetail" ref="endSeasonJob" />
+		<property name="cronExpression" value="0 0 6 1 7 ?" />
+ 
+	</bean>	
+
+	<!-- Cron Trigger, fire at 06:30am every day -->
+	<bean id="fixPlayersTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+ 
+		<property name="jobDetail" ref="fixPlayersJob" />
+		<property name="cronExpression" value="0 30 6 * * ?" />
+ 
+	</bean>
+ 
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="fixPlayersTrigger" />
+				<ref bean="endSeasonTrigger" />
+			</list>
+		</property>
+	</bean>
+ 
+</beans>

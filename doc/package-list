@@ -1,0 +1,10 @@
+com.jfootball
+com.jfootball.dao
+com.jfootball.dao.hibernate
+com.jfootball.domain
+com.jfootball.manager
+com.jfootball.manager.impl
+com.jfootball.util
+com.jfootball.web
+com.jfootball.web.form
+com.jfootball.web.validator

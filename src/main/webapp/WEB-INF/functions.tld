@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+	version="2.1">
+
+	<description>JSTL 1.1 functions library</description>
+	<display-name>Custom Functions</display-name>
+	<tlib-version>1.1</tlib-version>
+	<short-name>custom</short-name>
+	<uri>http://jfooball.it/functions</uri>
+
+	<function>
+		<name>nationalDesc</name>
+		<function-class>com.jfootball.util.ProjectUtil</function-class>
+		<function-signature>java.lang.String getNationalDesc(java.lang.String, java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>nationalCapitalize</name>
+		<function-class>com.jfootball.util.ProjectUtil</function-class>
+		<function-signature>java.lang.String getNationCapitalize(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>currencyValue</name>
+		<function-class>com.jfootball.util.ProjectUtil</function-class>
+		<function-signature>java.lang.String getCurrencyValue(java.lang.String)</function-signature>
+	</function>
+
+</taglib>

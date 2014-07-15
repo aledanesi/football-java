@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Maven">
+	<bannerLeft>
+		<name>${project.artifactId}-${project.version}</name>
+		<src>http://maven.apache.org/images/apache-maven-project.png</src>
+		<href>http://maven.apache.org/</href>
+	</bannerLeft>
+
+	<publishDate position="left" format="dd/MM/yyyy"/>
+	
+	<body>
+
+		<menu name="JFootball">
+			<item name="Introduction" href="index.html" />
+			<item name="Download" href="${site.downloadablelist}" />
+			<item name="Release Notes" href="release-notes.html" />
+			<item name="Project Info" href="project-info.html" />
+			<item name="Project Summary" href="project-summary.html" />
+			<item name="Team List" href="team-list.html" />
+		</menu>
+
+	</body>
+</project>

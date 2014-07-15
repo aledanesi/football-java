@@ -1,0 +1,1 @@
+sc create svnserve binpath= "C:\Program Files\Subversion\bin\svnserve.exe --service --listen-port=3690" displayname= "Subversion Repository" depend= Tcpip
