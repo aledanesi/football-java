@@ -45,7 +45,7 @@ public class Nation implements Serializable
 	private String value;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	protected Continent continent;		
+	protected Continent continent = new Continent();		
 
 	
 	

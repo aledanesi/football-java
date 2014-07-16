@@ -12,9 +12,8 @@ jQ(function() {
 
 			var nation = jQ("#nation_id").val();
 			
-			
 			divisionManager.listDivisionsByNation(nation, function(data) {
-	
+
 				jQ( "#division_id" ).empty();
 	
 				dwr.util.addOptions("division_id", data, "id", "name");
@@ -26,7 +25,7 @@ jQ(function() {
 				else 
 				{
 					jQ("#butSearch").removeAttr("disabled");				
-	
+
 					jQ( "#division_id" ).trigger("change");				
 	
 				}
@@ -39,7 +38,6 @@ jQ(function() {
 	
 	jQ("#nation_id").change(function() {
 		var nation = jQ("#nation_id").val();
-		
 
 		divisionManager.listDivisionsByNation(nation, function(data) {
 
@@ -61,12 +59,16 @@ jQ(function() {
 		});
 
 		jQ("#division_id").bind("change", function() {
+
 			jQ('form[name="saison"]').submit();  
 		});	
 
 	});
 
 	jQ("#division_id").bind("change", function() {
+		
+		jQ("#continent_id").val(jQ( "#continent_id option:selected" ).val());
+		
 		jQ('form[name="saison"]').submit();  
 	});	
 	

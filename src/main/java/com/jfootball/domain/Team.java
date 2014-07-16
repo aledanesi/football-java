@@ -99,6 +99,16 @@ public class Team extends ImageObject
 	/**
 	 * Other Constructor
 	 * */
+	public Team(Long continentId, Long nationId, Long divisionId)
+	{
+		this.nation.setId(nationId);
+		this.nation.getContinent().setId(continentId);	
+		this.division.setId(divisionId);		
+	}	
+	
+	/**
+	 * Other Constructor
+	 * */
 	public Team(Long teamId, String name, Long nationId, Long divisionId)
 	{
 		this(nationId, divisionId);
