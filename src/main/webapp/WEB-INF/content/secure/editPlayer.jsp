@@ -207,14 +207,14 @@
 					<td>
 					  <div class="fitem_label">Ingaggio:</div>
 					  <div class="fitem_span">
-							<form:input path="income" style="width: 80px" onkeyup="formatCurrency(this)" />
+							<form:input path="income" style="width: 80px" onkeyup="formatCurrency(jQ(this))" />
 							<form:errors path="income" />
 					  </div>
 					</td>
 					<td>
 					  <div class="fitem_label">Valore:</div>
 					  <div class="fitem_span">
-							<form:input path="value" style="width: 80px" onkeyup="formatCurrency(this)"  />
+							<form:input path="value" style="width: 80px" onkeyup="formatCurrency(jQ(this))"  />
 							<form:errors path="value" />
 					  </div>
 					</td>

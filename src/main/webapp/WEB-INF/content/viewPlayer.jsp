@@ -150,7 +150,7 @@
 		<table cellspacing="1" cellpadding="0" class="tabelle_spieler">
 			<tbody>
 				<tr>
-					<td style="width:58px;background-color:#fff;margin:0px;padding:0 3px;border:1px solid #bbb;" class="ac" rowspan="3">
+					<td style="width: 100px;background-color:#fff;margin:0px;padding:0 3px;border:1px solid #bbb;" class="ac" rowspan="3">
 						<c:choose>
 							<c:when test="${player.endCareer}">
 								<spring:url var="endCareerURL" value="/images/ritiro.jpg" />
@@ -161,7 +161,7 @@
 								<img src="${withoutTeamURL}">
 							</c:when>
 							<c:otherwise>
-								<img src="${imageTURL}">
+								<img src="${imageTURL}" style="width: 75%">
 							</c:otherwise>
 						</c:choose>
 					</td>			

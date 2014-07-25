@@ -97,11 +97,11 @@
 	<div align="center">
 
 		<display:table name="${teamList}" id="row" pagesize="22" requestURI="" style="width: 600px" class="standard_tabelle">
-			<display:column style="text-align: center">
+			<display:column style="text-align: center;">
 				<spring:url var="imageURL" value="/teams/image.do">
 					<spring:param name="id">${row.id}</spring:param>
 				</spring:url>
-				<img width="16" height="20" class="minifoto" src="${imageURL}"/>
+				<img class="minifoto" src="${imageURL}" width="30" height="40"/>
 			</display:column> 
 			<display:column title="Squadra">
 				<a href="#" class="targetLinkTeam" data-team="${row.id}">${row.name}</a>
@@ -109,12 +109,12 @@
 			<display:column property="stadium" title="Stadio" />
 			<display:column property="posti" title="Posti" />
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<display:column style="width: 15px">
+				<display:column style="text-align: center; width: 25px">
 					<a href="#" onclick="team.editTeam('${row.id}'); return false;">
 						<img src="${pageContext.request.contextPath}/images/edit.png" alt="<spring:message code="edit"/>" /> 
 					</a>
 				</display:column>
-				<display:column style="width: 15px">
+				<display:column style="text-align: center; width: 25px">
 					<spring:url var="deleteURL" value="/teams/delete.do">
 						<spring:param name="id">${row.id}</spring:param>
 						<spring:param name="nation.id" value="${row.nation.id}"></spring:param>

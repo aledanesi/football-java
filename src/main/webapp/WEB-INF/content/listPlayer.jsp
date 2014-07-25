@@ -96,8 +96,8 @@
 							<table class="tabelle_spieler" cellSpacing="1" cellPadding="0">
 								<tbody>
 									<tr>
-										<td class="ac verein_header_zelle_wappen" rowSpan="3" style="width: 58px; padding-top: 0px; padding-right: 3px; padding-bottom: 0px; padding-left: 3px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; border-top-color: #bbb; border-right-color: #bbb; border-bottom-color: #bbb; border-left-color: #bbb; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);">
-												<img alt="-" src="${imageURL}">
+										<td class="ac verein_header_zelle_wappen" rowSpan="3" style="width: 100px; padding: 0px; padding-right: 3px; padding-left: 3px; margin: 0px; border-top-color: #bbb; border-right-color: #bbb; border-bottom-color: #bbb; border-left-color: #bbb; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; background-color: rgb(255, 255, 255);">
+												<img alt="-" src="${imageURL}" style="width: 75%">
 										</td>
 										<td class="blau vm verein_header_table_gross_bg" style="background-color: rgb(14, 46, 128);">
 											<h1 class="fff" style="vertical-alignment: middle">
@@ -122,7 +122,7 @@
 									</tr>
 									<tr>
 										<td>
-											<img class="pfeil" alt="-" src="http://static.transfermarkt.net/img/linkpfeil_b.gif">&nbsp;<a class="s10 fn targetLinkPlayers" data-division="${team.division.id}" data-nation="${team.nation.id}"  href="#">${custom:nationalCapitalize(team.division.name)}</a>&nbsp;&nbsp;&nbsp;<a class="s10 fn" href="#">Coppa Italia</a>&nbsp;&nbsp;&nbsp;					
+											<img class="pfeil" alt="-" src="http://static.transfermarkt.net/img/linkpfeil_b.gif">&nbsp;<a class="s10 fn targetLinkPlayers" data-division="${team.division.id}" data-nation="${team.nation.id}"  href="#">${custom:nationalCapitalize(team.division.name)}</a>					
 										</td>
 									</tr>
 									<tr>
@@ -156,7 +156,10 @@
 									<th style="width: 50px;">Nazione</th>
 									<th style="width: 50px;">Squadra precedente</th>									
 									<th style="width: 120px; text-align: center">Scadenza contratto</th>
-									<th style="width: 70px; text-align: center">Ingaggio</th>
+									<th style="width: 70px; text-align: center">Valore giocatore</th>
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
+										<th style="width: 70px; text-align: center">Ingaggio netto</th>									
+									</sec:authorize>
 									<sec:authorize access="hasRole('ROLE_ADMIN')">
 										<th></th>
 										<th></th>
@@ -168,9 +171,11 @@
 									<tr class="${counter % 2 == 0 ? 'odd' : 'even'}">
 									<c:set var="counter" value="${counter+1}" />
 
-									<td style="font-size: 11px; font-weight: bold; text-align: center">
+									<td style="font-size: 11px; font-weight: bold; text-align: center; width: 40px">
 										<c:if test="${! empty row.number}">
-											<img src="${pageContext.request.contextPath}/images/numbers/${row.number}.png" />
+											<div class="rn_nummer">
+												${row.number}
+											</div>	
 										</c:if>
 										<c:if test="${empty row.number}">
 											-
@@ -183,7 +188,7 @@
 													<spring:url var="imageURL" value="/players/image.do">
 													   <spring:param name="id" value="${row.id}" />
 													</spring:url>													
-													<img width="20" height="25" class="minifoto" src="${imageURL}"/>
+													<img width="28" height="36" class="minifoto" src="${imageURL}"/>
 												</td>												
 												<td style="padding: 0px; font-weight: bold">
 													<spring:url var="viewURL" value="/players/view.do" />
@@ -222,10 +227,7 @@
 													   <spring:param name="id" value="${row.teamOwner.id}"></spring:param> 
 													</spring:url>														
 													<span style="width: 30px; text-align: right;">
-														<img class="vt mt4" src="http://static.transfermarkt.net/static/img/minipfeil_abgang.png"/>
-													</span>
-													<span style="width: 30px; text-align: right;">
-														<img width="15" height="18" src="${imageOwnerURL}" title="In prestito dal ${custom:nationalCapitalize(row.teamOwner.name)}">
+														<img width="17" height="22" src="${imageOwnerURL}" title="In prestito dal ${custom:nationalCapitalize(row.teamOwner.name)}">
 													</span>
 												</td>									
 											</c:when>
@@ -235,7 +237,7 @@
 														<spring:param name="id">${row.teamPrev.id}</spring:param>
 													</spring:url>
 													<span style="width: 30px; text-align: right;">
-														<img width="15" height="18" class="minifoto" src="${imageURL}" title="In precedenza al ${custom:nationalCapitalize(row.teamPrev.name)}"/>										
+														<img width="17" height="22" class="minifoto" src="${imageURL}" title="In precedenza al ${custom:nationalCapitalize(row.teamPrev.name)}"/>										
 													</span>
 												</td>									
 											</c:when>
@@ -251,16 +253,19 @@
 											<td style="text-align: center; white-space:nowrap; padding-left: 10px; padding-right: 10px"><c:if test="${! empty row.dateContract}">${row.dateContract}</c:if></td>
 										</c:otherwise>
 									</c:choose>
-									<td style="text-align: center; white-space:nowrap;"><c:if test="${! empty row.value}">${custom:currencyValue(row.income)} &euro;</c:if></td>
+									<td style="text-align: center; white-space:nowrap;"><c:if test="${! empty row.value}">${custom:currencyValue(row.value)}</c:if></td>
 									<sec:authorize access="hasRole('ROLE_ADMIN')">
-										<td style="text-align: center; width: 15px">
+										<td style="text-align: center; white-space:nowrap;"><c:if test="${! empty row.income}">${custom:currencyValue(row.income)}</c:if></td>
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
+										<td style="text-align: center; width: 25px">
 											<a href="#" onclick="player.editPlayer('${row.id}'); return false;">
 												<img src="${pageContext.request.contextPath}/images/edit.png" alt="<spring:message code="edit"/>" /> 
 											</a>
 										</td>
 									</sec:authorize>
 									<sec:authorize access="hasRole('ROLE_ADMIN')">
-										<td style="text-align: center; width: 15px">
+										<td style="text-align: center; width: 25px">
 											<spring:url var="deleteURL" value="/players/delete.do">
 												<spring:param name="id" value="${row.id}"></spring:param>
 												<spring:param name="team.id" value="${team.id}"></spring:param>

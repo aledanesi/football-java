@@ -12,6 +12,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+<%@ taglib prefix="custom" uri="http://jfooball.it/functions"  %>
+
 <html>
 <head>
 <title>Cerca un giocatore</title>
@@ -152,7 +154,7 @@
         	
           <td class="bg2 alle">
 	       	   <a href="#" class="targetLinkPlayer" data-id="${playerStatus.id}">${playerStatus.lastName} ${playerStatus.firstName}</a>               
-		       (${playerStatus.position.descPosizione}) nato a ${playerStatus.birthPlace} il <fmt:formatDate value="${playerStatus.birthDate}" type="both" pattern="dd/MM/yyyy" />              
+		       (${playerStatus.position.descPosizione}<c:if test="${!empty playerStatus.team.name}"> - ${custom:nationalCapitalize(playerStatus.team.name)}</c:if>) nato il <fmt:formatDate value="${playerStatus.birthDate}" type="both" pattern="dd/MM/yyyy" /> a ${playerStatus.birthPlace}              
           </td>
           </tr>              
           
