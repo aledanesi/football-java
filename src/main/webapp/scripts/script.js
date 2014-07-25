@@ -148,17 +148,18 @@ function formatDate(d, e) {
 
 function formatCurrency(obj) {
 	var numero = "positivo";
-	if (obj.value.substr(0,1)=="-") numero = "negativo";
-	valore = obj.value.replace(/[^\d]/g,'').replace(/^0+/g,'');
-	nuovovalore='';
+	if (obj.val().substr(0,1)=="-") 
+		numero = "negativo";
+	var valore = obj.val().replace(/[^\d]/g,'').replace(/^0+/g,'');
+	var nuovovalore='';
 	while(valore.length>3){
 		nuovovalore='.'+valore.substr(valore.length-3)+nuovovalore;
 		valore = valore.substr(0,valore.length-3);
 	}
 	if (numero=="negativo")
-		obj.value="-"+valore+nuovovalore;
+		obj.val("-"+valore+nuovovalore);
 	else 
-		obj.value= valore+nuovovalore;
+		obj.val(valore+nuovovalore);
 }
 
 

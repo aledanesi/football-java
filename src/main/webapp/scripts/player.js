@@ -338,6 +338,9 @@ Player.prototype = {
 
 							// INCOME
 							checkOnText('editPlayer', 'income', data.income);
+							
+							formatCurrency(jQ("#income"));
+							formatCurrency(jQ("#value"));
 
 							// DATE CONTRACT
 							checkOnText('editPlayer', 'dateContract', data.dateContract);

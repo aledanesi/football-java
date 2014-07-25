@@ -6802,3 +6802,15 @@ table.matches-played td.matches-played {
 * html .ui-autocomplete {
     height: 140px;
 }
+
+table .rn_nummer {
+    background-color: #003555;
+    border-radius: 12px;
+    color: #fff;
+    display: inline-block;
+    font-weight: bold;
+    height: 18px;
+    padding-top: 4px;
+    text-align: center;
+    width: 24px;
+}
