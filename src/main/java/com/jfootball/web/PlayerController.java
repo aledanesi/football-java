@@ -378,6 +378,18 @@ public class PlayerController extends GenericController
 			player.setLastUserModify(getUsername());
 			player.setLastTimeModify(new Timestamp(System.currentTimeMillis()));
 
+			
+			// togliere i punti di separazione delle migliaia - 24/07/2014
+			if (player.getValue() != null && ! "".equals(player.getValue().trim()))
+				player.setValue(player.getValue().replace(".", ""));
+			else if ("".equals(player.getValue().trim()))
+				player.setValue(null);
+
+			if (player.getIncome() != null && ! "".equals(player.getIncome().trim()))
+				player.setIncome(player.getIncome().replace(".", ""));
+			else if ("".equals(player.getIncome().trim()))
+				player.setIncome(null);
+			
 			/*
 			 * if (userImage != null) { byte[] image = getFileBytes();
 			 * player.setImage(image); }

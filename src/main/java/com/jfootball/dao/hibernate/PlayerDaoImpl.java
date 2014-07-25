@@ -73,7 +73,7 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 	public void saveOrUpdatePlayer(Player player)
 	{
 		logger.info("Saving player " + player.getFirstName() + " " + player.getLastName());
-
+		
 		if (player.getId() != null)
 		{
 			hibernateTemplate.merge(player);
@@ -115,7 +115,7 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 		logger.info("Player list by team " + teamId + " and category " + teamCategory);
 
 		List<Player> players = hibernateTemplate.findByNamedParam("from Player p where p.team.id = :idTeam and p.teamCategory = :teamCategory "
-				+ "order by p.position, p.number", new String[] { "idTeam", "teamCategory" }, new Object[] { teamId, teamCategory });
+				+ "order by p.position, p.value", new String[] { "idTeam", "teamCategory" }, new Object[] { teamId, teamCategory });
 
 		logger.info("Players returned");
 
@@ -134,7 +134,7 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 		logger.info("Player list by team " + teamId + " and category " + teamCategory);
 
 		List<Player> players = hibernateTemplate.findByNamedParam("from Player p where p.team.id = :idTeam and p.teamCategory = :teamCategory "
-				+ "order by p.position, p.number", new String[] { "idTeam", "teamCategory" }, new Object[] { teamId, teamCategory });
+				+ "order by p.position, p.value desc", new String[] { "idTeam", "teamCategory" }, new Object[] { teamId, teamCategory });
 
 		logger.info("Players returned");
 

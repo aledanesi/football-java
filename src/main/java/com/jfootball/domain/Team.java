@@ -74,7 +74,7 @@ public class Team extends ImageObject
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="team", fetch = FetchType.LAZY)
-	@OrderBy("position, number, birthDate desc")
+	@OrderBy("position, value desc")
     private Set<Player> players;
 	
 	
