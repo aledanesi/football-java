@@ -64,7 +64,7 @@
 			<td style="margin: 0px; padding: 0px 3px; border: 1px solid rgb(187, 187, 187); width: 60px; background-color: rgb(255, 255, 255);" class="ac vm" rowSpan="3">
 				<img class="fl vm" title="Serie A" alt="-" src="${pageContext.request.contextPath}/images/divisions/${team.division.id}.jpg">
 			</td>
-			<td style='background: url("http://static.transfermarkt.net/img/bg_table_th_gross.jpg") repeat-x rgb(230, 230, 230);' class="blau vm">
+			<td style='background: url("${pageContext.request.contextPath}/images/bg_table_th_gross.jpg") repeat-x rgb(14, 46, 128);' class="blau vm">
 
 			    <h1 style="color: rgb(255, 255, 255);"> <a style="color: rgb(255, 255, 255);" class="s18 tdn" href="#">&nbsp;</a>					
 			        <div style="height: 0px; position: relative;">
@@ -96,12 +96,12 @@
 
 	<div align="center">
 
-		<display:table name="${teamList}" id="row" pagesize="22" requestURI="" style="width: 600px" class="standard_tabelle">
+		<display:table name="${teamList}" id="row" requestURI="" style="width: 600px" class="standard_tabelle" >
 			<display:column style="text-align: center;">
 				<spring:url var="imageURL" value="/teams/image.do">
 					<spring:param name="id">${row.id}</spring:param>
 				</spring:url>
-				<img class="minifoto" src="${imageURL}" width="30" height="40"/>
+				<img class="minifoto" src="${imageURL}" width="35" height="40"/>
 			</display:column> 
 			<display:column title="Squadra">
 				<a href="#" class="targetLinkTeam" data-team="${row.id}">${row.name}</a>

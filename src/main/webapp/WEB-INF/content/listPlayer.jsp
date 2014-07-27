@@ -122,12 +122,12 @@
 									</tr>
 									<tr>
 										<td>
-											<img class="pfeil" alt="-" src="http://static.transfermarkt.net/img/linkpfeil_b.gif">&nbsp;<a class="s10 fn targetLinkPlayers" data-division="${team.division.id}" data-nation="${team.nation.id}"  href="#">${custom:nationalCapitalize(team.division.name)}</a>					
+											<img class="pfeil" alt="-" src="${pageContext.request.contextPath}/images/linkpfeil_b.gif">&nbsp;<a class="s10 fn targetLinkPlayers" data-division="${team.division.id}" data-nation="${team.nation.id}"  href="#">${custom:nationalCapitalize(team.division.name)}</a>					
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<img class="pfeil" alt="-" src="http://static.transfermarkt.net/img/linkpfeil_b.gif">&nbsp;
+											<img class="pfeil" alt="-" src="${pageContext.request.contextPath}/images/linkpfeil_b.gif">&nbsp;
 
 											<c:if test="${teamCategory != '1'}">
 												<a class="s10 fn" href="${viewFirstTeamURL}">Prima Squadra</a>&nbsp;&nbsp;&nbsp;
@@ -188,7 +188,7 @@
 													<spring:url var="imageURL" value="/players/image.do">
 													   <spring:param name="id" value="${row.id}" />
 													</spring:url>													
-													<img width="28" height="36" class="minifoto" src="${imageURL}"/>
+													<img width="33" height="37" class="minifoto" src="${imageURL}"/>
 												</td>												
 												<td style="padding: 0px; font-weight: bold">
 													<spring:url var="viewURL" value="/players/view.do" />
@@ -227,7 +227,7 @@
 													   <spring:param name="id" value="${row.teamOwner.id}"></spring:param> 
 													</spring:url>														
 													<span style="width: 30px; text-align: right;">
-														<img width="17" height="22" src="${imageOwnerURL}" title="In prestito dal ${custom:nationalCapitalize(row.teamOwner.name)}">
+														<img width="20" height="24" src="${imageOwnerURL}" title="In prestito dal ${custom:nationalCapitalize(row.teamOwner.name)}">
 													</span>
 												</td>									
 											</c:when>
@@ -237,7 +237,7 @@
 														<spring:param name="id">${row.teamPrev.id}</spring:param>
 													</spring:url>
 													<span style="width: 30px; text-align: right;">
-														<img width="17" height="22" class="minifoto" src="${imageURL}" title="In precedenza al ${custom:nationalCapitalize(row.teamPrev.name)}"/>										
+														<img width="20" height="23" class="minifoto" src="${imageURL}" title="In precedenza al ${custom:nationalCapitalize(row.teamPrev.name)}"/>										
 													</span>
 												</td>									
 											</c:when>

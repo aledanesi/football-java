@@ -150,7 +150,7 @@
 		<table cellspacing="1" cellpadding="0" class="tabelle_spieler">
 			<tbody>
 				<tr>
-					<td style="width: 100px;background-color:#fff;margin:0px;padding:0 3px;border:1px solid #bbb;" class="ac" rowspan="3">
+					<td style="width: 100px;background-color: rgb(241, 241, 241);margin:0px;padding:0 3px;border:1px solid #bbb;" class="ac" rowspan="3">
 						<c:choose>
 							<c:when test="${player.endCareer}">
 								<spring:url var="endCareerURL" value="/images/ritiro.jpg" />
@@ -161,14 +161,14 @@
 								<img src="${withoutTeamURL}">
 							</c:when>
 							<c:otherwise>
-								<img src="${imageTURL}" style="width: 75%">
+								<img src="${imageURL}">
 							</c:otherwise>
 						</c:choose>
 					</td>			
 					<td style="background-color: rgb(14, 46, 128)" class="blau"><h1 style="color:#fff;">${player.number} ${player.firstName} ${player.lastName}</h1></td>
 				</tr>
-				<tr>
-					<td>
+				<tr >
+					<td class="odd">
 						<c:choose>
 							<c:when test="${player.endCareer}">
 								Calciatore ritirato
@@ -177,13 +177,13 @@
 								Calciatore svincolato
 							</c:when>
 							<c:otherwise>
-								<a href="${listPlayerURL}">${player.team.name}</a>, <a href="#">Serie A</a> (Italia)
+								${player.team.name}, ${custom:nationalCapitalize(player.team.division.name)} (${custom:nationalCapitalize(player.team.nation.name)})
 							</c:otherwise>
 						</c:choose>
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td style="background-color: rgb(230, 230, 230); font-weight: bold">
 							&nbsp;
 							<c:if test="${! (player.endCareer || player.withoutTeam)}">
 								${custom:nationalDesc(player.national, player.nation.name)}
@@ -219,17 +219,14 @@
 		</c:if>
 	</sec:authorize>
 	</p>
-	<table cellspacing="1" cellpadding="2" style="margin-top:0;border:1px solid #ccc;" class="tabelle_grafik vcard">
+	<table cellspacing="1" cellpadding="2" style="margin-top:0;border:1px solid #999; background-color: rgb(241, 241, 241);" class="standard_tabelle">
 	<tbody>
 		<tr>
-		<td style="width:110px;border:1px solid #f1f1f1;padding-top:4px;" class="ac vt">
-			<img width="100" height="130" class="minifoto photo" src="${imageURL}">
-		</td>
 		<td class="al vt">
-		<table cellspacing="1" cellpadding="0" class="tabelle_spieler s10">
+		<table cellspacing="1" cellpadding="0" class="standard_tabelle s10">
 			<tbody>
-			<tr>
-				<td style="width:130px;">Nome completo:</td>
+			<tr class="odd">
+				<td style="width:150px;">Nome completo:</td>
 				<td class="fn n">
 					<c:choose>
 						<c:when test="${!empty player.completeName}">
@@ -241,23 +238,23 @@
 					</c:choose>
 				</td>
 			</tr>
-			<tr>
+			<tr class="even">
 				<td>Data di nascita:</td>
 				<td><fmt:formatDate value="${player.birthDate}" type="both" pattern="dd/MM/yyyy" /></td>
 			</tr>
-			<tr>
+			<tr class="odd">
 				<td>Luogo di nascita:</td>
 				<td>${player.birthPlace}</td>
 			</tr>
-			<tr>
+			<tr class="even">
 				<td>Et&agrave;:</td>
 				<td>${player.eta} anni</td>
 			</tr>
-			<tr>
+			<tr class="odd">
 				<td>Altezza:</td>
 				<td>${player.height}</td>
 			</tr>
-			<tr>
+			<tr class="even">
 				<td>Nazionalit&agrave;:</td>
 				<td class="adr">
 					<span class="flaggen_sprite sprite_land_75 vt mt4">
@@ -271,18 +268,18 @@
 					</span>
 				</td>
 			</tr>
-			<tr>
+			<tr class="odd">
 				<td style="width:115px;" class="category">Ruolo:</td>
 				<td>${player.position.descPosizione}</td>
 			</tr>
-			<tr>
+			<tr class="even">
 				<td>Piede:</td>
 				<td>${player.foot}</td>
 			</tr>
       <c:if test="${! (player.endCareer || player.withoutTeam) }"> 
-				<tr>
+				<tr class="odd">
 					<td>Valore di mercato:</td>
-					<td class="note">${player.value} &euro;</td>
+					<td class="note">${custom:currencyValue(player.value)} &euro;</td>
 				</tr>
 			</c:if>
 			</tbody>
@@ -291,28 +288,39 @@
 		</tr>
 		</tbody>
 	</table>
+
+	<!-- ulteriori dati -->
+  <c:if test="${! (player.endCareer || player.withoutTeam) }"> 
+
+	<p class="hl_startseite mt10">Ulteriori dati di ${player.firstName} ${player.lastName}</p>
+	<table cellspacing="1" cellpadding="2" style="margin-top:0;border:1px solid #999; background-color: rgb(241, 241, 241);" class="standard_tabelle">
+	<tbody>
+		<tr>
+		<td class="al vt">
+		<table cellspacing="1" cellpadding="0" class="standard_tabelle s10">
+			<tbody>
+			<tr class="odd">
+				<td style="width: 150px;">Ingaggio:</td>
+				<td>${custom:currencyValue(player.income)} &euro;</td>
+			</tr>							
+			<tr class="even">
+				<td>Scadenza contratto:</td>
+				<td>${player.dateContract}</td>
+			</tr>
+			</tbody>
+			</table>
+		</td>
+		</tr>
+		</tbody>
+	</table>
+
+</c:if> 
+
 </div>
 
-				<!-- ulteriori dati -->
-        <c:if test="${! (player.endCareer || player.withoutTeam) }"> 
-					<div style="width:500px;">
-						<p class="hl_startseite mt10">Ulteriori dati di ${player.firstName} ${player.lastName}</p>            	
-						<table cellspacing="1" cellpadding="2" style="margin-top:0;border:1px solid #ccc;" class="tabelle_grafik">
-							<tbody>
-								<tr class="hell hei20">
-									<td>Ingaggio:</td>
-									<td class="vm">${player.income} &euro;</td>
-								</tr>							
-								<tr class="hell hei20">
-									<td>Scadenza contratto:</td>
-									<td class="vm">${player.dateContract}</td>
-								</tr>
-							</tbody>
-						</table>	
-		      </div>	
-      	</c:if> 
-	      <div style="width:500px;">	
-					<h2 class="hl_startseite mt10" style="text-align: center">Carriera del giocatore</h2>
+
+<div style="width:500px;">	
+	<h2 class="hl_startseite mt10" style="text-align: center">Carriera del giocatore</h2>
 					
 
 <table style="width: 500px;" class="standard_tabelle">
@@ -330,9 +338,12 @@
 	  </sec:authorize>
     </tr>
   
+	<c:set var="counter" value="${0}" />
     <c:forEach items="${careerList}" var="careerStatus">
     
-      <tr class="bg2">
+      <tr class="${counter % 2 == 0 ? 'odd' : 'even'}">
+	  <c:set var="counter" value="${counter+1}" />
+
         <td style="text-align: center">${careerStatus.periodo}</td>
         <td style="text-align: center">${careerStatus.squadra} <c:if test="${careerStatus.onLoan}">(*)</c:if></td>
         <td style="text-align: center">${careerStatus.serie}</td>
@@ -390,12 +401,12 @@
 						<tr>
 		        		<td style="padding: 2px 5px; border-bottom-color: rgb(255, 255, 255); border-bottom-width: 1px; border-bottom-style: solid; background-color: rgb(241, 241, 241);" class="vt" colSpan="2">
 									<c:if test="${player.position.codRuolo == '01'}">
-										<div style='height: 170px; position: relative; background-image: url("http://static.transfermarkt.net/static/img/positionen/Torwart.png"); background-repeat: no-repeat;'>
+										<div style='height: 170px; position: relative; background-image: url(${pageContext.request.contextPath}/images/Torwart.png); background-repeat: no-repeat;'>
 											<img class="${player.position.codCss}" title="${player.position.descPosizione}" alt="${player.position.descPosizione}" src="${pageContext.request.contextPath}/images/hauptposition.png">
 										</div>
 									</c:if>	
 									<c:if test="${player.position.codRuolo == '02'}">
-										<div style='height: 170px; position: relative; background-image: url("http://static.transfermarkt.net/static/img/positionen/Abwehr.png"); background-repeat: no-repeat;'>
+										<div style='height: 170px; position: relative; background-image: url(${pageContext.request.contextPath}/images/Abwehr.png); background-repeat: no-repeat;'>
 										<c:choose>
 											<c:when test="${player.position.codPosizione == 'DC'}">
 													<img class="${player.position.codCss}l" title="${player.position.descPosizione}" alt="${player.position.descPosizione}" src="${pageContext.request.contextPath}/images/hauptposition.png">
@@ -408,12 +419,12 @@
 										</div>
 									</c:if>	
 									<c:if test="${player.position.codRuolo == '03'}">
-										<div style='height: 170px; position: relative; background-image: url("http://static.transfermarkt.net/static/img/positionen/Mittelfeld.png"); background-repeat: no-repeat;'>
+										<div style='height: 170px; position: relative; background-image: url(${pageContext.request.contextPath}/images/Mittelfeld.png); background-repeat: no-repeat;'>
 												<img class="${player.position.codCss}" title="${player.position.descPosizione}" alt="${player.position.descPosizione}" src="${pageContext.request.contextPath}/images/hauptposition.png">
 										</div>
 									</c:if>	
 									<c:if test="${player.position.codRuolo == '04'}">
-										<div style='height: 170px; position: relative; background-image: url("http://static.transfermarkt.net/static/img/positionen/Sturm.png"); background-repeat: no-repeat;'>
+										<div style='height: 170px; position: relative; background-image: url(${pageContext.request.contextPath}/images/Sturm.png); background-repeat: no-repeat;'>
 											<img class="${player.position.codCss}" title="${player.position.descPosizione}" alt="${player.position.descPosizione}" src="${pageContext.request.contextPath}/images/hauptposition.png">
 										</div>
 									</c:if>	
