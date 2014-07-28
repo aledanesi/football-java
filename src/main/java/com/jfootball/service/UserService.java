@@ -36,6 +36,8 @@ public class UserService implements UserDetailsService
 		log.info("--------------------- User Login --------------------- ");
 
 		UserBean user = userDao.findUserByName(username);
+		
+		System.out.println(user.getProfiles());
 
 		if (user != null) {
 			// convert roles
@@ -88,7 +90,15 @@ public class UserService implements UserDetailsService
 	      return user.getUsername();
 	    }
 	    
-	    public boolean isEnabled() {
+	    public UserBean getUser() {
+			return user;
+		}
+
+		public void setUser(UserBean user) {
+			this.user = user;
+		}
+
+		public boolean isEnabled() {
 	    	return true;
 	    }
 	    
