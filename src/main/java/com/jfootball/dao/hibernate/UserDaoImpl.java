@@ -25,12 +25,15 @@ package com.jfootball.dao.hibernate;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.jfootball.dao.UserDao;
 import com.jfootball.domain.user.UserBean;
+import com.jfootball.domain.user.UserProfile;
 
 /**
  * @author C_ICTDNS
@@ -50,7 +53,18 @@ public class UserDaoImpl extends GenericDao implements UserDao
 	@SuppressWarnings("unchecked")
 	public UserBean findUserByName(String username)
 	{
-		List<UserBean> users = hibernateTemplate.find("from UserBean where username=?", username);
+		List<UserBean> users = hibernateTemplate.find("from UserBean WHERE username=?", username);
+		
+		UserBean user = (users == null || users.size() <= 0 ? null : (UserBean) users.get(0));
+		
+		if (user != null)
+		{
+			List<UserProfile> profiles = hibernateTemplate.find("from UserProfile WHERE user_id=?", user.getId());
+			
+			user.setProfiles(profiles);
+		}
+
+		
 
 		return users == null || users.size() <= 0 ? null : (UserBean) users.get(0);
 
