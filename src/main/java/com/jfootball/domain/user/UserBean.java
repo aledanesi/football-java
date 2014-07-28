@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -61,8 +60,9 @@ public class UserBean implements Serializable
 	@JoinColumn(name = "id")
 	private List<RoleBean> roles = new ArrayList<RoleBean>();
 	
-	@OneToOne
-	private UserProfile userProfile = new UserProfile();
+	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name = "id")
+	private List<UserProfile> profiles = new ArrayList<UserProfile>();
 	
 
 	public Long getId()
@@ -114,19 +114,21 @@ public class UserBean implements Serializable
 	{
 		this.roles = roles;
 	}
+	
+
+	public List<UserProfile> getProfiles() {
+		return profiles;
+	}
+
+	public void setProfiles(List<UserProfile> profiles) {
+		this.profiles = profiles;
+	}
 
 	public Boolean getLdapAuth()
 	{
 		return false;
 	}
 	
-	public UserProfile getUserProfile() {
-		return userProfile;
-	}
-
-	public void setUserProfile(UserProfile userProfile) {
-		this.userProfile = userProfile;
-	}
 
 	@Override
 	public String toString()
