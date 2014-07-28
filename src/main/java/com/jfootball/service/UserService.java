@@ -37,8 +37,6 @@ public class UserService implements UserDetailsService
 
 		UserBean user = userDao.findUserByName(username);
 		
-		System.out.println(user.getProfiles());
-
 		if (user != null) {
 			// convert roles
 			List<GrantedAuthority> roles = obtainGrantedAuthority(user);
