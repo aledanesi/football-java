@@ -72,6 +72,11 @@
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<li><a href="#" onclick="player.newPlayer()"><spring:message code="insertPlayer" /> </a></li>
 				</sec:authorize>
+				<sec:authorize access="hasRole('DEVELOPER')">									
+					<c:if test="${!empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
+						<li><a href="#" onclick="player.newPlayer()"><spring:message code="insertPlayer" /> </a></li>
+					</c:if>
+				</sec:authorize>
 			</ul>
 		</div>
 	</div>
@@ -112,7 +117,7 @@
 												<c:if test="${teamCategory == '4'}">
 													<span class="s10 fn fff">(Altri giocatori)</span>
 												</c:if>	
-												<sec:authorize access="hasRole('ROLE_ADMIN')">
+												<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 													<c:if test="${! empty team.lastTimeModify}">
 														<img style="position: absolute" src="${pageContext.request.contextPath}/images/help.png" title="Aggiornato il: <fmt:formatDate pattern="dd/MM/yyyy - [HH:mm:SS]" value="${team.lastTimeModify}" /> da ${team.lastUserModify}">
 													</c:if>
@@ -157,11 +162,18 @@
 									<th style="width: 50px;">Squadra precedente</th>									
 									<th style="width: 120px; text-align: center">Scadenza contratto</th>
 									<th style="width: 70px; text-align: center">Valore giocatore</th>
-									<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">
 										<th style="width: 70px; text-align: center">Ingaggio netto</th>									
 									</sec:authorize>
 									<sec:authorize access="hasRole('ROLE_ADMIN')">
 										<th></th>
+									</sec:authorize>
+									<sec:authorize access="hasRole('DEVELOPER')">
+										<c:if test="${!empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
+											<th></th>
+										</c:if>
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
 										<th></th>
 									</sec:authorize>
 								</tr>
@@ -254,17 +266,26 @@
 										</c:otherwise>
 									</c:choose>
 									<td style="text-align: center; white-space:nowrap;"><c:if test="${! empty row.value}">${custom:currencyValue(row.value)}</c:if></td>
-									<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">
 										<td style="text-align: center; white-space:nowrap;"><c:if test="${! empty row.income}">${custom:currencyValue(row.income)}</c:if></td>
 									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_ADMIN')">
-										<td style="text-align: center; width: 25px">
+									<sec:authorize access="hasRole('ROLE_ADMIN')">									
+										<td style="text-align: center; width: 25px">									
 											<a href="#" onclick="player.editPlayer('${row.id}'); return false;">
 												<img src="${pageContext.request.contextPath}/images/edit.png" alt="<spring:message code="edit"/>" /> 
 											</a>
 										</td>
 									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<sec:authorize access="hasRole('DEVELOPER')">									
+										<c:if test="${!empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
+											<td style="text-align: center; width: 25px">
+												<a href="#" onclick="player.editPlayer('${row.id}'); return false;">
+													<img src="${pageContext.request.contextPath}/images/edit.png" alt="<spring:message code="edit"/>" /> 
+												</a>											
+											</td>
+										</c:if>											
+									</sec:authorize>									
+									<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
 										<td style="text-align: center; width: 25px">
 											<spring:url var="deleteURL" value="/players/delete.do">
 												<spring:param name="id" value="${row.id}"></spring:param>
