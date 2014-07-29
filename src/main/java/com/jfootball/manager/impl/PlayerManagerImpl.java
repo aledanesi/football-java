@@ -35,7 +35,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jfootball.dao.PlayerDao;
+import com.jfootball.dao.TeamDao;
 import com.jfootball.domain.Player;
+import com.jfootball.domain.Team;
 import com.jfootball.manager.PlayerManager;
 
 /**
@@ -48,12 +50,14 @@ import com.jfootball.manager.PlayerManager;
 public class PlayerManagerImpl implements PlayerManager
 {
 	private PlayerDao playerDAO;
+	private TeamDao teamDAO;	
 	
 	
 	@Autowired
-	public PlayerManagerImpl(PlayerDao playerDAO) 
+	public PlayerManagerImpl(PlayerDao playerDAO, TeamDao teamDAO) 
 	{
 		this.playerDAO = playerDAO;
+		this.teamDAO = teamDAO;
 	}		
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
@@ -116,14 +120,19 @@ public class PlayerManagerImpl implements PlayerManager
 		return p;
 	}
 	
-
-	public void updateTeam(Long idPlayer, Long idTeam)
+	@RemoteMethod
+	@Transactional(readOnly = false)
+	public void updateTeam(Long idPlayer, Long idTeam, Boolean isLoan)
 	{
 		Player player = getPlayerByID(idPlayer);
-		//player.setTeamId(idTeam);
-		player.getTeam().setId(idTeam);
+		Team team = teamDAO.getTeamByID(idTeam);
 		
+		if (! isLoan)
+			player.setTeamOwner(team);
+		
+		player.setTeam(team);
 		playerDAO.saveOrUpdatePlayer(player);
+		
 	}
 	
 

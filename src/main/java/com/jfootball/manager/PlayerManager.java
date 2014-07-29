@@ -74,8 +74,9 @@ public interface PlayerManager {
 	/**
 	 * @param idPlayer
 	 * @param idTeam
+	 * @@param isLoan
 	 */
-	public void updateTeam(Long idPlayer, Long idTeam);
+	public void updateTeam(Long idPlayer, Long idTeam, Boolean isLoan);
 
 	/**
 	 * @param idPlayer

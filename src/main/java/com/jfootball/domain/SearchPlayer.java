@@ -10,6 +10,7 @@ package com.jfootball.domain;
  */
 public class SearchPlayer
 {
+	private Long teamId;
 	private String type = "OTHERS";
 	private String iniziale;
 	private String hiddenIniziale;
@@ -38,6 +39,12 @@ public class SearchPlayer
 	public void setHiddenIniziale(String hiddenIniziale)
 	{
 		this.hiddenIniziale = hiddenIniziale;
+	}
+	public Long getTeamId() {
+		return teamId;
+	}
+	public void setTeamId(Long teamId) {
+		this.teamId = teamId;
 	}
 	
 	
