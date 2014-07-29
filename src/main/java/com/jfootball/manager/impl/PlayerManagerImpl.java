@@ -130,6 +130,11 @@ public class PlayerManagerImpl implements PlayerManager
 		if (! isLoan)
 			player.setTeamOwner(team);
 		
+		// fine 
+		player.setNumber(null);
+		player.setEndCareer(null);
+		player.setWithoutTeam(null);		
+		
 		player.setTeam(team);
 		playerDAO.saveOrUpdatePlayer(player);
 		
