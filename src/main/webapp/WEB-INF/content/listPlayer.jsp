@@ -62,6 +62,9 @@
 	<spring:param name="teamCategory">4</spring:param>					
 </spring:url>
 
+<spring:url var="buyPlayerURL" value="/players/buy.do">
+	<spring:param name="teamId">${team.id}</spring:param>
+</spring:url>
 
 <body>
 	
@@ -69,12 +72,13 @@
 		<div id="menutop">
 			<ul>
 				<li><a href="#" class="targetLinkPlayers" data-division="${team.division.id}" data-nation="${team.nation.id}"><spring:message code="returnListTeam" /> </a></li>
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<li><a href="#" onclick="player.newPlayer()"><spring:message code="insertPlayer" /> </a></li>
-				</sec:authorize>
-				<sec:authorize access="hasRole('DEVELOPER')">									
-					<c:if test="${!empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
-						<li><a href="#" onclick="player.newPlayer()"><spring:message code="insertPlayer" /> </a></li>
+				<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">	
+					<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN'}">
+						<li> <a href="#" onclick="player.newPlayer()"><spring:message code="insertPlayer" /> </a></li>
+					</c:if>				
+					<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
+					             !empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
+						 <li> <a href="${buyPlayerURL}">Acquista un giocatore</a></li>
 					</c:if>
 				</sec:authorize>
 			</ul>
@@ -165,12 +169,10 @@
 									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">
 										<th style="width: 70px; text-align: center">Ingaggio netto</th>									
 									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_ADMIN')">
-										<th></th>
-									</sec:authorize>
-									<sec:authorize access="hasRole('DEVELOPER')">
-										<c:if test="${!empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
-											<th></th>
+									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">									
+										<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
+													 !empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
+											 <th></th>
 										</c:if>
 									</sec:authorize>
 									<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -269,19 +271,14 @@
 									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">
 										<td style="text-align: center; white-space:nowrap;"><c:if test="${! empty row.income}">${custom:currencyValue(row.income)}</c:if></td>
 									</sec:authorize>
-									<sec:authorize access="hasRole('ROLE_ADMIN')">									
-										<td style="text-align: center; width: 25px">									
-											<a href="#" onclick="player.editPlayer('${row.id}'); return false;">
-												<img src="${pageContext.request.contextPath}/images/edit.png" alt="<spring:message code="edit"/>" /> 
-											</a>
-										</td>
-									</sec:authorize>
-									<sec:authorize access="hasRole('DEVELOPER')">									
-										<c:if test="${!empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
+									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">									
+										<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
+													 !empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
+									
 											<td style="text-align: center; width: 25px">
-												<a href="#" onclick="player.editPlayer('${row.id}'); return false;">
-													<img src="${pageContext.request.contextPath}/images/edit.png" alt="<spring:message code="edit"/>" /> 
-												</a>											
+														<a href="#" onclick="player.editPlayer('${row.id}'); return false;">
+															<img src="${pageContext.request.contextPath}/images/edit.png" alt="<spring:message code="edit"/>" /> 
+														</a>											
 											</td>
 										</c:if>											
 									</sec:authorize>									

@@ -141,7 +141,7 @@ jQ(window).load(function() {
 							<tr>
 								<td>Squadra:</td>
 								<td>
-									<form:select id="team_id_move" path="team.id" itemLabel="name" itemValue="id" onchange="changeTeam()"/>
+									<form:select id="team_id_move" path="team.id" itemLabel="name" itemValue="id" />
 								</td>
 							</tr>
 							<tr>

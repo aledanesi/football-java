@@ -126,7 +126,7 @@
 		      		<form:input path="iniziale" id="iniziale" size='28' />
 		      				      		
 		      		<input type='button' value='Cerca' size='28' onclick='jQ("#formRicerca").submit();' />
-		      		<input type='button' value='Reset' size='28' onclick="javascript: document.location.href='searchPlayer.actioniniziale=';" />
+		      		<input type='button' value='Reset' size='28' onclick='jQ("#iniziale").val("")' />
 		      </td>
 		  </tr>
 

@@ -7,6 +7,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -97,9 +98,9 @@
 	<div id="menutop">
 		<ul>
 			<c:choose>		                           
-						<c:when test="${! (player.endCareer || player.withoutTeam )}"> 
-								<li>
-					    		<a href="#" class="targetLinkViewPlayer" data-id="${player.team.id}"><spring:message code="returnListPlayer"/></a>
+				<c:when test="${! (player.endCareer || player.withoutTeam )}"> 
+					<li>
+					    <a href="#" class="targetLinkViewPlayer" data-id="${player.team.id}"><spring:message code="returnListPlayer"/></a>
 		            </li>
 		        </c:when>
 	          	<c:otherwise>
@@ -108,27 +109,30 @@
 		            </li>
 	            </c:otherwise>
 	          </c:choose>		                           
-            <sec:authorize access="hasRole('ROLE_ADMIN')">   
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">									
+				<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
+							 !empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == player.team.id}"> 
 		            <li>
 									<a href="#" onclick="player.editPlayer('${player.id}'); return false;">Modifica Giocatore</a>
 		            </li> 
 		            <li>
 									<a href="#" onclick="career.insertCareer('${player.id}'); return false;"><spring:message code="insertCareer"/></a>
 		            </li> 
-				        <c:if test="${! player.endCareer }"> 
-				            <li>
-											<a href="#" onclick="player.movePlayer('${player.id}'); return false;"><spring:message code="changeTeam"/></a>
-				            </li>
+					<c:if test="${! player.endCareer }"> 
+						<li>
+										<a href="#" onclick="player.movePlayer('${player.id}'); return false;"><spring:message code="changeTeam"/></a>
+						</li>
 
-    				        <c:if test="${! player.withoutTeam }"> 
-					            <li>
-												<a href="#" onclick="player.goWithoutTeam();">Svincolato</a>
-					            </li> 
-										</c:if>
-				            <li>
-											<a href="#" onclick="player.goEndCareer();">Fine carriera</a>
-				            </li> 				            
-								</c:if>
+						<c:if test="${! player.withoutTeam }"> 
+							<li>
+											<a href="#" onclick="player.goWithoutTeam();">Svincolato</a>
+							</li> 
+						</c:if>
+						<li>
+										<a href="#" onclick="player.goEndCareer();">Fine carriera</a>
+						</li> 				            
+					</c:if>
+				</c:if>	
         	</sec:authorize>
     	</ul>
 	</div>
@@ -276,7 +280,7 @@
 				<td>Piede:</td>
 				<td>${player.foot}</td>
 			</tr>
-      <c:if test="${! (player.endCareer || player.withoutTeam) }"> 
+			<c:if test="${! (player.endCareer || player.withoutTeam) }"> 
 				<tr class="odd">
 					<td>Valore di mercato:</td>
 					<td class="note">${custom:currencyValue(player.value)} &euro;</td>
@@ -319,56 +323,68 @@
 </div>
 
 
+
+
 <div style="width:500px;">	
-	<h2 class="hl_startseite mt10" style="text-align: center">Carriera del giocatore</h2>
 					
+	<c:if test="${fn:length(careerList) gt 0}">
 
-<table style="width: 500px;" class="standard_tabelle">
-      <tr class="thead1 tcharw">
-      <th style="width: 100px;">Stagione</th>
-      <th style="width: 200px;">Squadra</th>   
-      <th style="width: 100px;">Serie </th>
-      <th style="width: 50px;">Pres.</th>
-      <th style="width: 50px;">Reti</th>
-	  <sec:authorize access="hasRole('ROLE_ADMIN')"> 
-	  	<th>&nbsp;</th>
-	  </sec:authorize>
-	  <sec:authorize access="hasRole('ROLE_ADMIN')"> 
-      	<th>&nbsp;</th>
-	  </sec:authorize>
-    </tr>
-  
-	<c:set var="counter" value="${0}" />
-    <c:forEach items="${careerList}" var="careerStatus">
-    
-      <tr class="${counter % 2 == 0 ? 'odd' : 'even'}">
-	  <c:set var="counter" value="${counter+1}" />
-
-        <td style="text-align: center">${careerStatus.periodo}</td>
-        <td style="text-align: center">${careerStatus.squadra} <c:if test="${careerStatus.onLoan}">(*)</c:if></td>
-        <td style="text-align: center">${careerStatus.serie}</td>
-        <td style="text-align: center">${careerStatus.presenze}</td>
-        <td style="text-align: center">${careerStatus.reti}</td>
-        <sec:authorize access="hasRole('ROLE_ADMIN')"> 
-          <td style="text-align: center">
-          <a href="#" onclick="career.updateCareer('${player.id}', '${careerStatus.id}'); return false;"><img src="${pageContext.request.contextPath}/images/edit.png" alt="<spring:message code="edit"/>" /></a>          
-          </td>
-        </sec:authorize> 
-        <sec:authorize access="hasRole('ROLE_ADMIN')"> 
-        <td style="text-align: center">
-			<spring:url var="deleteURL" value="/careers/delete.do">
-				<spring:param name="id" value="${careerStatus.id}"></spring:param>
-				<spring:param name="player.id" value="${player.id}"></spring:param>
-			</spring:url>         
-        	<a href="#" onclick="career.confirmDeleteCareer('${deleteURL}'); return false;">
-        		<img src="${pageContext.request.contextPath}/images/delete.png" alt="<spring:message code="edit"/>" />
-        	</a>          
-        </td>
-      </sec:authorize> 
-    </tr>
-    </c:forEach>
+		<h2 class="hl_startseite mt10" style="text-align: center">Carriera del giocatore</h2>
+		
+		<table style="width: 500px;" class="standard_tabelle">
+			  <tr class="thead1 tcharw">
+			  <th style="width: 100px;">Stagione</th>
+			  <th style="width: 200px;">Squadra</th>   
+			  <th style="width: 100px;">Serie </th>
+			  <th style="width: 50px;">Pres.</th>
+			  <th style="width: 50px;">Reti</th>
+			  <sec:authorize access="hasAnyRole('ROLE_ADMIN','DEVELOPER')"> 
+				<th>&nbsp;</th>
+			  </sec:authorize>
+			  <sec:authorize access="hasAnyRole('ROLE_ADMIN','DEVELOPER')"> 
+				<th>&nbsp;</th>
+			  </sec:authorize>
+			</tr>
+		  
+			<c:set var="counter" value="${0}" />
+			<c:forEach items="${careerList}" var="careerStatus">
 			
-    </table>					
+			  <tr class="${counter % 2 == 0 ? 'odd' : 'even'}">
+			  <c:set var="counter" value="${counter+1}" />
+
+				<td style="text-align: center">${careerStatus.periodo}</td>
+				<td style="text-align: center">${careerStatus.squadra} <c:if test="${careerStatus.onLoan}">(*)</c:if></td>
+				<td style="text-align: center">${careerStatus.serie}</td>
+				<td style="text-align: center">${careerStatus.presenze}</td>
+				<td style="text-align: center">${careerStatus.reti}</td>
+				<sec:authorize access="hasAnyRole('ROLE_ADMIN','DEVELOPER')"> 
+				  <td style="text-align: center">
+				  <a href="#" onclick="career.updateCareer('${player.id}', '${careerStatus.id}'); return false;"><img src="${pageContext.request.contextPath}/images/edit.png" alt="<spring:message code="edit"/>" /></a>          
+				  </td>
+				</sec:authorize> 
+				<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">									
+					<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
+								 !empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == player.team.id}">
+						<td style="text-align: center">
+							<spring:url var="deleteURL" value="/careers/delete.do">
+								<spring:param name="id" value="${careerStatus.id}"></spring:param>
+								<spring:param name="player.id" value="${player.id}"></spring:param>
+							</spring:url>         
+							<a href="#" onclick="career.confirmDeleteCareer('${deleteURL}'); return false;">
+								<img src="${pageContext.request.contextPath}/images/delete.png" alt="<spring:message code="edit"/>" />
+							</a>          
+						</td>
+					</c:if>
+			  </sec:authorize> 
+			</tr>
+			</c:forEach>
+				
+		</table>					
+
+
+
+	</c:if>
+
 
 	</div>
 
@@ -441,7 +457,7 @@
 </table>	
 	
 	
-	<sec:authorize access="hasRole('ROLE_ADMIN')">   
+	<sec:authorize access="hasAnyRole('ROLE_ADMIN','DEVELOPER')">   
 
 			<jsp:include page="secure/editPlayer.jsp" />	
 
