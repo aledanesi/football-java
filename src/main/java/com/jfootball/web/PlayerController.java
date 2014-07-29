@@ -275,6 +275,50 @@ public class PlayerController extends GenericController
 
 		return view;
 	}
+	
+	/**
+	 * 
+	 * ----------------formBackingObject()----------------
+	 * 
+	 */
+	@RequestMapping("/players/buy")
+	public ModelAndView buy(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("player") SearchPlayer buyPlayer, BindingResult result
+			) 
+	{
+
+		logger.info("--------------------- Player Controller : search --------------------- ");
+
+		ModelAndView view = new ModelAndView(ProjectConstant.BUY_PLAYER);
+
+		
+		if (buyPlayer == null){
+			buyPlayer = new SearchPlayer();
+		}	
+
+		buyPlayer.setTeamId(new Long(request.getParameter("teamId")));
+		view.addObject("buyPlayer", buyPlayer);
+		
+		String searchType = buyPlayer.getType();
+		String hiddenIniziale = buyPlayer.getHiddenIniziale();
+		String iniziale = buyPlayer.getIniziale();
+
+		if (!StringUtils.isEmpty(hiddenIniziale)) 
+		{
+			iniziale = new String(hiddenIniziale);
+		}
+		
+		if (!StringUtils.isEmpty(iniziale)) 
+		{
+			List<Player> playerList = playerManager.listPlayersByLetter(iniziale, searchType);
+
+			view.addObject("playerList", playerList);
+		}
+
+		logger.info("view: BUY_PLAYER");
+
+		return view;
+	}	
 
 	/**
 	 * 
