@@ -17,7 +17,7 @@
     <%-- JQUERY --%>
     <link type="text/css" href="${pageContext.request.contextPath}/scripts/jquery/themes/base/jquery.ui.all.css" rel="stylesheet">
     <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery/ui/jquery-ui.js"></script>
+	  <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery/ui/jquery-ui.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery/jquery.validate.js"></script>
 
 	

@@ -266,7 +266,7 @@ Player.prototype = {
 		jQ('#dEditPlayer').dialog('open');
 
 		cleanPlayer();
-
+		
 		playerManager.getPlayerByID(playerId,
 						function(data) {
 							var urlImage = jQ('#editPlayer input[name=urlImage]').val();
@@ -278,7 +278,7 @@ Player.prototype = {
 							setTextByName('editPlayer', 'completeName',  data.completeName);
 							setTextByName('editPlayer', 'birthDate', dateToYMD(data.birthDate));
 							setTextByName('editPlayer', 'birthPlace', data.birthPlace);
-							
+
 							setTextByName('editPlayer', 'endCareer', data.endCareer);
 							setTextByName('editPlayer', 'withoutTeam', data.withoutTeam);
 							
@@ -291,40 +291,48 @@ Player.prototype = {
 								setTextByName('editPlayer', 'team_nation_id', data.team.nation.id);
 								setTextByName('editPlayer', 'team_division_id', data.team.division.id);								
 							}
-	
+
 
 							// NATION ID
-							checkOnSelectByText('editPlayer', 'nation_id',
-									data.nation.name);
+							//checkOnSelectByText('editPlayer', 'nation_id', data.nation.name);							
+							jQ("#nation_id").val(data.nation.id);
 
 
 							// NATION2 ID
 							if(data.nation2 != null)
-								checkOnSelectByText('editPlayer', 'nation2_id',
-										data.nation2.name);
+								//checkOnSelectByText('editPlayer', 'nation2_id', data.nation2.name);
+								jQ("#nation2_id").val(data.nation2.id);
 
-							// RUOLO ID
-							checkOnSelectByText('editPlayer', 'ruolo_id', data.position.descRuolo);
+							// RUOLO ID							
+
+							//checkOnSelectByText('editPlayer', 'ruolo_id', data.position.descRuolo);
+							jQ("#ruolo_id").val(data.position.codRuolo);
+
 
 							// NATIONAL
-							checkOnSelectByVal('editPlayer', 'national', data.national);
+							//checkOnSelectByVal('editPlayer', 'national', data.national);
+							jQ("#national").val(data.national);
 
 							// TEAM NATION ID
 							if(data.team != null)
-								checkOnSelectByVal('editPlayer', 'team_nation_id', data.team.nation.name);
+								//checkOnSelectByVal('editPlayer', 'team_nation_id', data.team.nation.name);
+								jQ("#team_nation_id").val(data.team.nation.id);
 
 							// TEAM CATEGORY
-							checkOnSelectByVal('editPlayer', 'teamCategory', data.teamCategory);
+							//checkOnSelectByVal('editPlayer', 'teamCategory', data.teamCategory);
+							jQ("#teamCategory").val(data.teamCategory);
 
 							// FOOT
-							checkOnSelectByVal('editPlayer', 'foot', data.foot);
+							//checkOnSelectByVal('editPlayer', 'foot', data.foot);
+							jQ("#foot").val(data.foot);
 
 							positionManager.listPositions(jQ("#ruolo_id").val(),
 											function(data2) {
 												dwr.util.removeAllOptions("position_id");
 												dwr.util.addOptions("position_id", data2, "id", "descPosizione");
 
-												checkOnSelectByText('editPlayer', 'position_id', data.position.descPosizione);
+												//checkOnSelectByText('editPlayer', 'position_id', data.position.descPosizione);
+												jQ("#position_id").val(data.position.id);
 											});
 
 							setTextByName('editPlayer', 'nation', data.nation.id);
@@ -361,8 +369,8 @@ Player.prototype = {
 											dwr.util.addOptions("owner_division_id", data4, "id", "name");
 			
 											// OWNER nation ID
-											checkOnSelectByVal('editPlayer', 'owner_division_id', data.teamOwner.division.id);
-			
+											//checkOnSelectByVal('editPlayer', 'owner_division_id', data.teamOwner.division.id);
+											jQ("#owner_division_id").val(data.teamOwner.division.id);
 								});	
 
 								teamManager.listTeamsByDivision(
@@ -373,15 +381,14 @@ Player.prototype = {
 												dwr.util.addOptions("owner_team_id", data3, "id", "name");
 
 												// OWNER TEAM ID
-												checkOnSelectByVal('editPlayer', 'owner_team_id', data.teamOwner.id);
-
+												//checkOnSelectByVal('editPlayer', 'owner_team_id', data.teamOwner.id);
+												jQ("#owner_team_id").val(data.teamOwner.id);
 												controlloPrestito();
 								});
 
 							}
-							
 
-						});
+						});					
 						
 	},
 

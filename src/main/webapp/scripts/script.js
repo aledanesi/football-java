@@ -61,7 +61,9 @@ function checkOnSelectByVal(form, field, value)
 {
 		jQ('#' + form + ' select[id='+ field + '] option').each(function() {
 			if (jQ(this).val() == value)
-				jQ(this).attr("selected", "selected");
+			{
+					jQ(this).attr("selected", "selected");				
+			}
 		});
 }
 
@@ -72,10 +74,11 @@ function checkOnSelectByText(form, field, value)
 			
 			if (jQ(this).text() == value )
 			{
+				
 				//jQ('#' + form + ' select[id='+ field + '] option:first').removeAttr("selected");			
 
-				jQ(this).attr("selected", true);		
-				
+				jQ(this).attr("selected", true);	
+								
 			}
 
 		});
