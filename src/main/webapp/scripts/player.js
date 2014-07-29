@@ -68,8 +68,8 @@ jQ(function() {
 	
 	jQ( "a.targetLinkPlayer" ).click(function() 
 	{  		
-		jQ("#id").val(jQ(this).attr("data-id"));
-		
+		jQ("#viewPlayerPageForm input[id=id]").val(jQ(this).attr("data-id"));
+
 		jQ("#viewPlayerPageForm").submit(); 
 	});
 
