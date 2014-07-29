@@ -7,6 +7,7 @@ public interface ProjectConstant
 	public static final String LIST_DIVISION = "listDivision";
 	
 	public static final String SEARCH_PLAYER = "searchPlayer";
+	public static final String BUY_PLAYER = "buyPlayer";
 	public static final String VIEW_CAREER   = "viewCareer";	
 	public static final String VIEW_PLAYER   = "viewPlayer";	
 
