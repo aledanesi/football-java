@@ -23,17 +23,27 @@
  */
 package com.jfootball.dao;
 
+import com.jfootball.domain.Nation;
 import com.jfootball.domain.user.UserBean;
+import com.jfootball.domain.user.UserLogged;
 
 /**
  * @author C_ICTDNS
- *
+ * 
  */
 public interface UserDao {
-  
-  /**
- * @param username
- * @return
- */
-public UserBean findUserByName(String username);
+
+	/**
+	 * @param username
+	 * @return
+	 */
+	public UserBean findUserByName(String username);
+	
+	
+	/**
+	 * Method to save used logged
+	 * 
+	 * @param userLogged the user logged to save
+	 */		
+	public void saveOrUpdateUserLogged(UserLogged userLogged);
 }

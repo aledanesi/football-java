@@ -25,14 +25,13 @@ package com.jfootball.dao.hibernate;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.jfootball.dao.UserDao;
 import com.jfootball.domain.user.UserBean;
+import com.jfootball.domain.user.UserLogged;
 import com.jfootball.domain.user.UserProfile;
 
 /**
@@ -70,4 +69,27 @@ public class UserDaoImpl extends GenericDao implements UserDao
 
 	}
 
+	/**
+	 * Method to save used logged
+	 * 
+	 * @param userLogged the user logged to save
+	 */		
+	public void saveOrUpdateUserLogged(UserLogged userLogged)
+	{
+		try 
+		{
+			if (userLogged.getId() != null)
+			{
+				hibernateTemplate.merge(userLogged);
+			} else
+			{
+				hibernateTemplate.saveOrUpdate(userLogged);
+			}			
+		}
+		catch(Exception e)
+		{
+			logger.error(e.getMessage(), e);
+		}
+		
+	}
 }

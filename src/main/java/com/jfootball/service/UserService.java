@@ -1,5 +1,6 @@
 package com.jfootball.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jfootball.dao.UserDao;
 import com.jfootball.domain.user.RoleBean;
 import com.jfootball.domain.user.UserBean;
+import com.jfootball.domain.user.UserLogged;
 
 public class UserService implements UserDetailsService 
 {
@@ -30,7 +32,7 @@ public class UserService implements UserDetailsService
 		this.userDao = userDao;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional(readOnly = false)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException 
 	{
 		log.info("--------------------- User Login --------------------- ");
@@ -40,6 +42,13 @@ public class UserService implements UserDetailsService
 		if (user != null) {
 			// convert roles
 			List<GrantedAuthority> roles = obtainGrantedAuthority(user);
+			
+			// save user logged
+			UserLogged userLogged = new UserLogged();
+			userLogged.setUserId(user.getId());
+			userLogged.setTimeLogged(new Timestamp(System.currentTimeMillis()));
+			
+			userDao.saveOrUpdateUserLogged(userLogged);
 
 			// initialize user
 			log.info("User '" + user.getUsername() + "' logged!");

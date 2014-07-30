@@ -21,7 +21,7 @@ public class CareerValidator implements Validator
 		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "stagioni", "required", "*");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "periodo", "required", "*");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "serie", "required", "*");	
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "presenze", "required", "*");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "reti", "required", "*");	
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "presenze", "required", "*");
+		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "reti", "required", "*");	
 	}
 }
