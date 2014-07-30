@@ -107,10 +107,14 @@ public class TeamController extends GenericController
 		if (session.getAttribute(Constant.USER_IN_SESSION) == null)
 		{
 			UserService.MyUserDetails user = getSecurityUser();
+			
+			if (user != null)
+			{
+				session.setAttribute(Constant.USER_IN_SESSION, user);
 
-			session.setAttribute(Constant.USER_IN_SESSION, user);
+				logger.info("'" + getSecurityUser().getUsername() + "' is in session");
+			}
 
-			logger.info("'" + getSecurityUser().getUsername() + "' is in session");
 		}	
 		
 		// imposto la nazione nella ricerca per la lista dei team 
@@ -288,15 +292,22 @@ public class TeamController extends GenericController
 			continentId = new Long(request.getParameter("nation.continent.id"));
 		
 		UserService.MyUserDetails user = getSecurityUser();
-
-		List<GrantedAuthority> listaRuoli = user.getAuthorities();
-
+		
 		List<Nation> nationList = null;
 
-		if (listaRuoli.contains(Constant.ADMIN))
-			nationList = nationManager.listNationsFromContinent(continentId);
+		if (user != null)
+		{
+			List<GrantedAuthority> listaRuoli = user.getAuthorities();
+
+
+			if (listaRuoli.contains(Constant.ADMIN))
+				nationList = nationManager.listNationsFromContinent(continentId);
+			else
+				nationList = nationManager.listNationsTournament();			
+		}
 		else
 			nationList = nationManager.listNationsTournament();
+
 		
 		return nationList;
 	}
@@ -312,15 +323,20 @@ public class TeamController extends GenericController
 	{
 		
 		UserService.MyUserDetails user = getSecurityUser();
-
-		List<GrantedAuthority> listaRuoli = user.getAuthorities();
-
+		
 		List<Continent> continentList = null;
+		if (user != null)
+		{
+			List<GrantedAuthority> listaRuoli = user.getAuthorities();
 
-		if (listaRuoli.contains(Constant.ADMIN))
-			continentList = continentManager.listContinents();
+			if (listaRuoli.contains(Constant.ADMIN))
+				continentList = continentManager.listContinents();
+			else
+				continentList = new ArrayList<Continent>();		
+		}		
+
 		else
-			continentList = new ArrayList<Continent>();
+			continentList = new ArrayList<Continent>();	
 		
 		return continentList;
 	}	

@@ -77,7 +77,7 @@
 						<li> <a href="#" onclick="player.newPlayer()"><spring:message code="insertPlayer" /> </a></li>
 					</c:if>				
 					<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
-					             !empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
+					             !empty user_in_session.user.profile && user_in_session.user.profile.teamId == team.id}">
 						 <li> <a href="${buyPlayerURL}">Acquista un giocatore</a></li>
 					</c:if>
 				</sec:authorize>
@@ -171,7 +171,7 @@
 									</sec:authorize>
 									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">									
 										<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
-													 !empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
+													 !empty user_in_session.user.profile && user_in_session.user.profile.teamId == team.id}">
 											 <th></th>
 										</c:if>
 									</sec:authorize>
@@ -273,7 +273,7 @@
 									</sec:authorize>
 									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">									
 										<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
-													 !empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == team.id}">
+													 !empty user_in_session.user.profile && user_in_session.user.profile.teamId == team.id}">
 									
 											<td style="text-align: center; width: 25px">
 														<a href="#" onclick="player.editPlayer('${row.id}'); return false;">

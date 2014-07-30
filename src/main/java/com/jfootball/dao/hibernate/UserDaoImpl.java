@@ -25,11 +25,15 @@ package com.jfootball.dao.hibernate;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.jfootball.dao.UserDao;
+import com.jfootball.domain.Team;
 import com.jfootball.domain.user.UserBean;
 import com.jfootball.domain.user.UserLogged;
 import com.jfootball.domain.user.UserProfile;
@@ -58,12 +62,12 @@ public class UserDaoImpl extends GenericDao implements UserDao
 		
 		if (user != null)
 		{
-			List<UserProfile> profiles = hibernateTemplate.find("from UserProfile WHERE user_id=?", user.getId());
+			Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+			Criteria criteria = session.createCriteria(UserProfile.class);
+			UserProfile profile = (UserProfile) criteria.add(Restrictions.eq("userId", user.getId())).uniqueResult();			
 			
-			user.setProfiles(profiles);
+			user.setProfiles(profile);
 		}
-
-		
 
 		return users == null || users.size() <= 0 ? null : (UserBean) users.get(0);
 

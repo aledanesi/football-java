@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -60,9 +61,8 @@ public class UserBean implements Serializable
 	@JoinColumn(name = "id")
 	private List<RoleBean> roles = new ArrayList<RoleBean>();
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name = "id")
-	private List<UserProfile> profiles = new ArrayList<UserProfile>();
+	@Transient
+	private UserProfile profile;
 	
 
 	public Long getId()
@@ -116,12 +116,12 @@ public class UserBean implements Serializable
 	}
 	
 
-	public List<UserProfile> getProfiles() {
-		return profiles;
+	public UserProfile getProfile() {
+		return profile;
 	}
 
-	public void setProfiles(List<UserProfile> profiles) {
-		this.profiles = profiles;
+	public void setProfiles(UserProfile profile) {
+		this.profile = profile;
 	}
 
 	public Boolean getLdapAuth()

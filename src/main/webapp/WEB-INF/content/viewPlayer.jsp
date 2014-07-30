@@ -111,7 +111,7 @@
 	          </c:choose>		                           
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">									
 				<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
-							 !empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == player.team.id}"> 
+							 !empty user_in_session.user.profile && user_in_session.user.profile.teamId == player.team.id}"> 
 		            <li>
 									<a href="#" onclick="player.editPlayer('${player.id}'); return false;">Modifica Giocatore</a>
 		            </li> 
@@ -364,7 +364,7 @@
 				</sec:authorize> 
 				<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">									
 					<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
-								 !empty user_in_session.user.profiles && user_in_session.user.profiles[0].teamId == player.team.id}">
+								 !empty user_in_session.user.profile && user_in_session.user.profile.teamId == player.team.id}">
 						<td style="text-align: center">
 							<spring:url var="deleteURL" value="/careers/delete.do">
 								<spring:param name="id" value="${careerStatus.id}"></spring:param>

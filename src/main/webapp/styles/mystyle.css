@@ -157,7 +157,7 @@ input[type="text"]:focus, input[type="password"]:focus
 }
 #header-links {
 	position: absolute;
-	top: 20px; right: 30px;	
+	top: 0px; right: 30px;	
 	color: #C6DDEE;
 	font-size: 12px;
 	font-weight: bold;

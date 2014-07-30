@@ -12,10 +12,15 @@
         <intercept-url pattern="/scripts/**" access="permitAll"/>
         <intercept-url pattern="/images/**" access="permitAll"/>
         <intercept-url pattern="/login.jsp" access="permitAll" />
+        <intercept-url pattern="/index.jsp" access="permitAll" />                  
+        <intercept-url pattern="/**" access="permitAll"/>        
+        
+        <!-- 
         <intercept-url pattern="/index.jsp" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'DEVELOPER')" />                  
         <intercept-url pattern="/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'DEVELOPER')"/>
-    
-        <form-login login-page="/login.jsp" default-target-url="/index.jsp" authentication-failure-url="/login.jsp?login_error=1"/>
+     	-->
+     
+        <form-login login-page="/login.jsp" default-target-url="/index.jsp" authentication-failure-url="/teams/list.do?login_error=1"/>
         <logout success-handler-ref="customLogoutSuccessHandler" />
     </http>
 
