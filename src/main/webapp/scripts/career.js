@@ -19,7 +19,26 @@ jQ(function() {
 		dialogClass : "dlg-no-close",
 		buttons : {
 			"Salva" : function() {
-				jQ("#editCareer").submit();
+				jQ( ".validateTips" ).show();
+
+				var bValid = true;
+
+				var squadra = jQ("#squadra");
+				var periodo = jQ("#periodo");
+				var serie = jQ("#serie");
+
+				var allFields = jQ([]).add(squadra).add(periodo).add(serie);
+				
+				allFields.removeClass( "ui-state-error" );
+				
+				bValid = bValid && checkLength(squadra, "Squadra" );
+				bValid = bValid && checkLength(periodo, "Periodo");
+				bValid = bValid && checkLength(serie, "Serie");				
+				
+				if ( bValid ) {
+					jQ( ".validateTips" ).hide();
+					jQ("#editCareer").submit();
+				}				
 			},
 			"Annulla" : function() {
 				jQ(this).dialog("close");
