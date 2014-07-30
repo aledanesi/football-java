@@ -72,6 +72,7 @@
 	        <value>com.jfootball.domain.user.UserBean</value>
 	        <value>com.jfootball.domain.user.UserProfile</value>        
 	        <value>com.jfootball.domain.user.RoleBean</value>
+	        <value>com.jfootball.domain.user.UserLogged</value>
 	      </list>
 	    </property>
 	    <property name="hibernateProperties">
