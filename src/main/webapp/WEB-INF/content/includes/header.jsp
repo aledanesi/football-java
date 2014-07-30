@@ -14,24 +14,25 @@
 <h1 id="logo-text">JCampionato <sup style="font: Verdana, Tahoma, arial, sans-serif;"><small style="font-size: 20px">beta</small></sup></h1>
 <!-- <h2 id="slogan">put your site slogan here...</h2> -->
 
-<spring:url var="loginURL" value="/login.jsp" />
 <s:url id="checkURL" value="j_spring_security_check" />
 <s:url id="logoutURL" value="j_spring_security_logout" />
 
 <div id="header-links">
-	<p><a href="${indexURL}">Home</a> | <a href="#">Contact</a> | <a href="#">Site Map</a>  
+	<p style="text-align: right"><a href="${indexURL}">Home</a> | <a href="#">Contact</a> | <a href="#">Site Map</a>  
 	
+			<c:if test="${empty user_in_session}">
+				| <a href="#" onclick="document.getElementById('loginForm').style.visibility = 'visible';">Login</a>
+			</c:if>	
 			<c:if test="${! empty user_in_session}">
 				| <a href="${logoutURL}">Logout</a>
 			</c:if>	
-		
 	</p>
 	
 	<c:if test="${! empty user_in_session}">
 		<p>Benvenuto: ${user_in_session.username}</p>
 	</c:if>
 	<c:if test="${empty user_in_session}">
-		<form action="../j_spring_security_check" method="post" style="padding-bottom: 5px;">
+		<form id="loginForm" action="../j_spring_security_check" method="post" style="padding-bottom: 5px; visibility: hidden">
 			<table>
 				<tr>
 					<td colspan="5">
