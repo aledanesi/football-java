@@ -33,7 +33,6 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.jfootball.dao.UserDao;
-import com.jfootball.domain.Team;
 import com.jfootball.domain.user.UserBean;
 import com.jfootball.domain.user.UserLogged;
 import com.jfootball.domain.user.UserProfile;
@@ -96,4 +95,87 @@ public class UserDaoImpl extends GenericDao implements UserDao
 		}
 		
 	}
+	
+	/**
+	 * @param idTeam
+	 * @return
+	 */
+	public UserBean getUserByID(Long idUser)
+	{
+		//logger.info("User by id " + idUser);
+
+		UserBean player = hibernateTemplate.get(UserBean.class, idUser);
+		
+		//logger.info("User returned");
+
+		return player;
+	}
+
+	/**
+	 * @param name
+	 * @return
+	 */
+	public UserBean getUserByName(String name)
+	{
+		logger.info("User by name " + name);
+
+		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+		Criteria criteria = session.createCriteria(UserBean.class);
+		UserBean user = (UserBean) criteria.add(Restrictions.eq("username", name)).uniqueResult();
+
+		logger.info("Team returned");
+		return user;		
+	}	
+
+	/**
+	 * @param nationId
+	 * @param divisionId
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<UserBean> listUsers()
+	{
+		logger.info("User list");
+
+		List<UserBean> users = hibernateTemplate.find("from UserBean p order by p.username");
+
+		logger.info("Users returned");
+
+		return users;
+	}	
+
+
+	/**
+	 * Method to save team
+	 * 
+	 * @param team - the team to save
+	 */
+	public void saveOrUpdateUser(UserBean user)
+	{
+		logger.info("Saving user " + user.getUsername() + " " + user.getPassword());
+		
+		if (user.getId() != null)
+		{
+			hibernateTemplate.merge(user);
+		} else
+		{
+			hibernateTemplate.saveOrUpdate(user);
+		}
+
+		logger.info("User saved.");		
+	}	
+
+	/**
+	 * @param idTeam
+	 */
+	public void deleteUser(Long idUser)
+	{
+		logger.info("Delete user " + idUser);
+
+		UserBean user = getUserByID(idUser);
+
+		hibernateTemplate.delete(user);
+
+		logger.info("User deleted");
+	}	
 }

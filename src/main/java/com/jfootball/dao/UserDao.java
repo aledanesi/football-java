@@ -23,7 +23,8 @@
  */
 package com.jfootball.dao;
 
-import com.jfootball.domain.Nation;
+import java.util.List;
+
 import com.jfootball.domain.user.UserBean;
 import com.jfootball.domain.user.UserLogged;
 
@@ -46,4 +47,37 @@ public interface UserDao {
 	 * @param userLogged the user logged to save
 	 */		
 	public void saveOrUpdateUserLogged(UserLogged userLogged);
+	
+	
+	/**
+	 * @param idTeam
+	 * @return
+	 */
+	public UserBean getUserByID(Long idUser);
+
+	/**
+	 * @param name
+	 * @return
+	 */
+	public UserBean getUserByName(String name);
+
+	/**
+	 * @param nationId
+	 * @param divisionId
+	 * @return
+	 */
+	public List<UserBean> listUsers();	
+
+
+	/**
+	 * Method to save team
+	 * 
+	 * @param team - the team to save
+	 */
+	public void saveOrUpdateUser(UserBean user);
+
+	/**
+	 * @param idTeam
+	 */
+	public void deleteUser(Long idUser);
 }
