@@ -25,7 +25,8 @@
 	
 
     <%-- FUNCTION SPECIFIC --%>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/team.js"></script>   
+    <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/team.js"></script> 
+    <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/user.js"></script>  
     
 </head>
 
@@ -58,38 +59,38 @@
 	</form:form>
 	
 	
-<form:form commandName="team" action="${searchTeamURL}" id="wb_seite" name="saison" style="text-align: center"  method="POST">
-	<table class="tabelle_spieler" cellSpacing="1" cellPadding="0" style="width: 600px; text-align: center; margin-left: 65px;" >
-		<tbody><tr>
-			<td style="margin: 0px; padding: 0px 3px; border: 1px solid rgb(187, 187, 187); width: 60px; background-color: rgb(255, 255, 255);" class="ac vm" rowSpan="3">
-				<img class="fl vm" title="Serie A" alt="-" src="${pageContext.request.contextPath}/images/divisions/${team.division.id}.jpg">
-			</td>
-			<td style='background: url("${pageContext.request.contextPath}/images/bg_table_th_gross.jpg") repeat-x rgb(14, 46, 128);' class="blau vm">
-
-			    <h1 style="color: rgb(255, 255, 255);"> <a style="color: rgb(255, 255, 255);" class="s18 tdn" href="#">&nbsp;</a>					
-			        <div style="height: 0px; position: relative;">
-						<div style="margin: -33px 5px 0px 50px; float: left; position: absolute;" class="mcdropdown">
-
-							<sec:authorize access="hasRole('ROLE_ADMIN')">
-								<form:select id="continent_id" path="nation.continent.id" items="${continentList}" itemLabel="name" itemValue="id" />
-							</sec:authorize>
-						
-							<form:select id="nation_id" path="nation.id" items="${nationList}" itemLabel="name" itemValue="id" />
-
-							<form:select id="division_id" path="division.id" items="${divisionList}" itemLabel="name" itemValue="id" />
-						</div>
-			        </div>
-				</h1>
-			</td>			
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-		</tr>
-			</tbody></table>
-</form:form>
+	<form:form commandName="team" action="${searchTeamURL}" id="wb_seite" name="saison" style="text-align: center"  method="POST">
+		<table class="tabelle_spieler" cellSpacing="1" cellPadding="0" style="width: 600px; text-align: center; margin-left: 65px;" >
+			<tbody><tr>
+				<td style="margin: 0px; padding: 0px 3px; border: 1px solid rgb(187, 187, 187); width: 60px; background-color: rgb(255, 255, 255);" class="ac vm" rowSpan="3">
+					<img class="fl vm" title="Serie A" alt="-" src="${pageContext.request.contextPath}/images/divisions/${team.division.id}.jpg">
+				</td>
+				<td style='background: url("${pageContext.request.contextPath}/images/bg_table_th_gross.jpg") repeat-x rgb(14, 46, 128);' class="blau vm">
+	
+				    <h1 style="color: rgb(255, 255, 255);"> <a style="color: rgb(255, 255, 255);" class="s18 tdn" href="#">&nbsp;</a>					
+				        <div style="height: 0px; position: relative;">
+							<div style="margin: -33px 5px 0px 50px; float: left; position: absolute;" class="mcdropdown">
+	
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<form:select id="continent_id" path="nation.continent.id" items="${continentList}" itemLabel="name" itemValue="id" />
+								</sec:authorize>
+							
+								<form:select id="nation_id" path="nation.id" items="${nationList}" itemLabel="name" itemValue="id" />
+	
+								<form:select id="division_id" path="division.id" items="${divisionList}" itemLabel="name" itemValue="id" />
+							</div>
+				        </div>
+					</h1>
+				</td>			
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+				</tbody></table>
+	</form:form>
 	
 	<br />
 	<br />
@@ -111,7 +112,7 @@
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<display:column style="text-align: center; width: 25px">
 					<a href="#" onclick="team.editTeam('${row.id}'); return false;">
-						<img src="${pageContext.request.contextPath}/images/edit.png" alt="<spring:message code="edit"/>" /> 
+						<img src="${pageContext.request.contextPath}/images/edit.png" /> 
 					</a>
 				</display:column>
 				<display:column style="text-align: center; width: 25px">
@@ -121,7 +122,7 @@
 						<spring:param name="division.id" value="${row.division.id}"></spring:param>						
 					</spring:url>
 					<a href="#" onclick="team.confirmDeleteTeam('${deleteURL}'); return false;"> 
-						<img src="${pageContext.request.contextPath}/images/delete.png" <alt="<spring:message code="delete"/>" />
+						<img src="${pageContext.request.contextPath}/images/delete.png" />
 					</a>
 				</display:column>
 			</sec:authorize>
@@ -130,7 +131,9 @@
 
 	<jsp:include page="secure/editTeam.jsp" />
 	
-	<jsp:include page="secure/deleteTeam.jsp" />	
+	<jsp:include page="secure/deleteTeam.jsp" />
+	
+	<jsp:include page="secure/editUser.jsp" />	
 	
 	</body>
 </html>
