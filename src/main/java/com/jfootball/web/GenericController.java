@@ -16,6 +16,7 @@ import com.jfootball.manager.PlayerManager;
 import com.jfootball.manager.PositionManager;
 import com.jfootball.manager.SeasonManager;
 import com.jfootball.manager.TeamManager;
+import com.jfootball.manager.UserManager;
 import com.jfootball.service.UserService;
 
 /**
@@ -51,6 +52,9 @@ public class GenericController
 
 	@Autowired
 	protected ContinentManager continentManager;
+	
+	@Autowired
+	protected UserManager userManager;	
 	
 	
 	protected Logger logger = Logger.getLogger(this.getClass());
@@ -107,6 +111,11 @@ public class GenericController
 	public void setContinentManager(ContinentManager continentManager)
 	{
 		this.continentManager = continentManager;
+	}
+
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
 	}	
+	
 	
 }

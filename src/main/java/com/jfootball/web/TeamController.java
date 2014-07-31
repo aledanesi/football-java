@@ -35,6 +35,7 @@ import com.jfootball.domain.Continent;
 import com.jfootball.domain.Division;
 import com.jfootball.domain.Nation;
 import com.jfootball.domain.Team;
+import com.jfootball.domain.user.UserBean;
 import com.jfootball.service.UserService;
 import com.jfootball.util.ProjectConstant;
 import com.jfootball.web.validator.TeamValidator;
@@ -121,6 +122,9 @@ public class TeamController extends GenericController
 		// [DEFAULT: ITALIA]
 		Team team = new Team(continentId, nationId, divisionId);
 		view.addObject("team", team);
+		
+		UserBean user = new UserBean();
+		view.addObject("user", user);		
 		
 		List<Team> teamList = teamManager.listTeamsByDivision(nationId, divisionId);				
 		view.addObject("teamList", teamList);
