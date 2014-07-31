@@ -17,6 +17,15 @@
 <s:url id="checkURL" value="j_spring_security_check" />
 <s:url id="logoutURL" value="j_spring_security_logout" />
 
+<c:choose>
+	<c:when test="${not empty param.login_error}">
+		<c:set var="visibility" value="visible" />
+	</c:when>
+	<c:otherwise>
+		<c:set var="visibility" value="hidden" />
+	</c:otherwise>
+</c:choose>
+
 <div id="header-links">
 	<p style="text-align: right"><a href="${indexURL}">Home</a> | <a href="#">Contact</a> | <a href="#">Site Map</a>  
 	
@@ -32,10 +41,14 @@
 		<p>Benvenuto: ${user_in_session.username}</p>
 	</c:if>
 	<c:if test="${empty user_in_session}">
-		<form id="loginForm" action="../j_spring_security_check" method="post" style="padding-bottom: 5px; visibility: hidden">
+		<form id="loginForm" action="../j_spring_security_check" method="post" style="padding-bottom: 5px; visibility: ${visibility}">
 			<table>
 				<tr>
 					<td colspan="5">
+						<label style="font-size: 11px; color: black; font-weight: bold">
+							<a href="#" onclick="user.newUser); return false;">Crea un nuovo utente</a>
+						</label>
+						&nbsp;					
 						<c:if test="${not empty param.login_error}">
 							<label style="font-size: 11px; color: red; font-weight: bold">
 								<fmt:message bundle="${label}" key="error.login" />
