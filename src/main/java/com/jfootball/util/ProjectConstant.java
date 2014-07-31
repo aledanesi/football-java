@@ -15,6 +15,7 @@ public interface ProjectConstant
 	public static final String EDIT_TEAM     = "secure/editTeam";
 	public static final String EDIT_CAREER   = "secure/editCareer";
 	public static final String EDIT_DIVISION = "secure/editDivision";
+	public static final String EDIT_USER = "secure/editUser";
 	//public static final String CHANGE_TEAM = "secure/changeTeam";
 	public static final String MOVE_TEAM = "secure/moveTeam";
 	public static final String HANDLE_SEASON   = "secure/handleSeason";
