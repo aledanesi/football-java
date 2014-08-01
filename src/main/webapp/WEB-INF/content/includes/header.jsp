@@ -45,9 +45,9 @@
 			<table>
 				<tr>
 					<td colspan="5">
-						<label style="font-size: 11px; color: black; font-weight: bold">
-							<a href="#" onclick="user.newUser); return false;">Crea un nuovo utente</a>
-						</label>
+						<a href="#" onclick="user.newUser(); return false;" style="font-size: 11px; color: black; font-weight: bold">
+							Crea un nuovo utente
+						</a>
 						&nbsp;					
 						<c:if test="${not empty param.login_error}">
 							<label style="font-size: 11px; color: red; font-weight: bold">
