@@ -446,7 +446,7 @@ function cleanPlayer() {
 	jQ('#editPlayer input[name=weight]').val('?');
 	jQ('#editPlayer input[name=number]').val('');
 	jQ('#editPlayer input[name=value]').val('');
-	jQ('#editPlayer input[name=income]').val('?');
+	jQ('#editPlayer input[name=income]').val('');
 	jQ('#editPlayer input[name=dateContract]').val('?');
 	jQ('#editPlayer input[name=captain]').attr('checked', false);
 
