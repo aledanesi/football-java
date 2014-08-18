@@ -95,8 +95,9 @@ jQ(function() {
 
 				var bValid = true;
 
-				var lastName = jQ("#lastName");
-				var birthDate = jQ("#birthDate");
+				var firstName = jQ('#editPlayer input[id=firstName]');
+				var lastName = jQ('#editPlayer input[id=lastName]');
+				var birthDate = jQ('#editPlayer input[id=birthDate]');
 
 				var allFields = jQ([]).add(lastName).add(birthDate);
 
@@ -107,7 +108,25 @@ jQ(function() {
 
 				if (bValid) {
 					jQ(".validateTips").hide();
-					jQ("#editPlayer").submit();
+					
+					if(jQ('#editPlayer input[id=id]').val() == '' )
+					{
+						playerManager.findPlayerExists(firstName.val(), lastName.val(), birthDate.val(), function (data)
+						{
+							if(data == true)
+							{
+								alert("Attenzione: il giocatore è già presente nel db!");						
+							}
+							else 
+							{
+								jQ("#editPlayer").submit();						
+							}
+						});					
+					}
+					else 
+					{
+						jQ("#editPlayer").submit();
+					}
 				}
 			},
 			"Annulla" : function() {

@@ -140,6 +140,12 @@ public class PlayerManagerImpl implements PlayerManager
 		
 	}
 	
+	@RemoteMethod
+	public boolean findPlayerExists(String firstName, String lastName, String birthDate)
+	{
+		return playerDAO.findPlayerExists(firstName, lastName, birthDate);
+	}
+	
 
 	public HashMap<String, Object> getNextId(Long teamId, Integer rankId)
 	{

@@ -29,6 +29,12 @@
 					<TBODY>
 						<tr>
 							<td>New</td>
+							<td>18/08/2014</td>
+							<td>Player</td>
+							<td>Controllo sulla creazione di un giocatore già inserito</td>
+						</tr>					
+						<tr>
+							<td>New</td>
 							<td>30/07/2014</td>
 							<td>JFootball</td>
 							<td>Inserito il log degli accessi</td>

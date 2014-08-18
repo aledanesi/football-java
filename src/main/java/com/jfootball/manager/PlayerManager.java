@@ -83,7 +83,12 @@ public interface PlayerManager {
 	 */
 	public void deletePlayer(Long idPlayer);
 
-
+	/**
+	 * @param player
+	 * @return
+	 */
+	public boolean findPlayerExists(String firstName, String lastName, String birthDate);
+	
 	/**
 	 * @param teamId
 	 * @param playerId

@@ -88,6 +88,13 @@ public interface PlayerDao
 	 * @return
 	 */
 	public HashMap<String, Object> getNextId(Long teamId, Integer rankId);
+	
+	
+	/**
+	 * @param player
+	 * @return
+	 */
+	public boolean findPlayerExists(String firstName, String lastName, String birthDate);
 		
 	
 	/**

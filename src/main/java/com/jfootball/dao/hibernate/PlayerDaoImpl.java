@@ -306,6 +306,33 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 
 		return map;
 	}
+	
+	/**
+	 * Method to list players
+	 * 
+	 * @return the players found
+	 */
+	@SuppressWarnings("unchecked")
+	public boolean findPlayerExists(String firstName, String lastName, String birthDate)
+	{
+		boolean playerExists = false;
+		
+		List<Player> players = hibernateTemplate.findByNamedParam(""
+				+ "from Player p "
+				+ "where p.firstName = :firstName "
+				+ "and p.lastName = :lastName "
+				+ "and DATE_FORMAT(p.birthDate, '%d/%m/%Y') = :birthDate ", 
+				new String[] { "firstName", "lastName", "birthDate" }, new Object[] { firstName, lastName, birthDate });
+		
+		if (players.size() > 0)
+		{
+			playerExists = true;
+			
+			logger.info("Players exists!");
+		}
+
+		return playerExists;
+	}	
 
 	/**
 	 * 
