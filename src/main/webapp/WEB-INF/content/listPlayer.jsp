@@ -180,12 +180,31 @@
 									</sec:authorize>
 								</tr>
 								<c:set var="counter" value="${0}" />
+								
+								<c:set var="styleGoalkeaper" value="#4384A8" />
+								<c:set var="styleDefender" value="#6DA0BC" />
+								<c:set var="styleMidfielder" value="#ACC9D9" />
+								<c:set var="styleStriker" value="#D5E4EC" />
+								
 								<c:forEach items="${playerList}" var="row">
 
-									<tr class="${counter % 2 == 0 ? 'odd' : 'even'}">
+									<tr style="border: 1px solid #E4E4E4">
 									<c:set var="counter" value="${counter+1}" />
+									
+									<c:if test="${row.position.codRuolo == '01'}">
+										<c:set var="stylePlayer" value="${styleGoalkeaper}" />
+									</c:if>
+									<c:if test="${row.position.codRuolo == '02'}">
+										<c:set var="stylePlayer" value="${styleDefender}" />
+									</c:if>
+									<c:if test="${row.position.codRuolo == '03'}">
+										<c:set var="stylePlayer" value="${styleMidfielder}" />
+									</c:if>
+									<c:if test="${row.position.codRuolo == '04'}">
+										<c:set var="stylePlayer" value="${styleStriker}" />
+									</c:if>									
 
-									<td style="font-size: 11px; font-weight: bold; text-align: center; width: 40px">
+									<td style="font-size: 11px; font-weight: bold; text-align: center; width: 40px; border:1px solid #999;  background-color: ${stylePlayer}">
 										<c:if test="${! empty row.number}">
 											<div class="rn_nummer">
 												${row.number}
@@ -195,7 +214,7 @@
 											-
 										</c:if>
 									</td>
-									<td style="white-space: nowrap; text-align: left; padding: 0px">
+									<td style="white-space: nowrap; text-align: left; padding: 0px; border:1px solid #999;">
 										<table>
 											<tr>
 												<td style="width: 15px !important;" rowSpan="2">
@@ -209,25 +228,21 @@
 													<span style="width: 30px; text-align: right;">
 														<a href="#" class="targetLinkPlayer" data-id="${row.id}">
 															<c:if test="${! empty row.firstName}"> ${row.firstName}</c:if> ${row.lastName}<c:if test="${row.team.id != row.teamOwner.id}">*</c:if>
+															<c:if test="${row.captain != null && row.captain}">
+															  &nbsp;<img src="${pageContext.request.contextPath}/images/captain.gif" title="Capitano" />
+															</c:if>														
 														</a>
 													</span>														
 												</td>
 											</tr>
 											<tr>
 												<td style="padding: 0px">
-														<c:choose>
-															<c:when test="${row.captain != null && row.captain}">
-															  ${row.position.descPosizione} <img src="${pageContext.request.contextPath}/images/captain.gif" title="Capitano" />, ${row.eta} anni
-															</c:when>
-															<c:otherwise>
-															  ${row.position.descPosizione}, ${row.eta} anni
-														  </c:otherwise>
-														</c:choose>
+													${row.position.descPosizione}, ${row.eta} anni
 												</td>
 											</tr>												
 										</table>	
 									</td>
-									<td style="text-align: center">
+									<td style="text-align: center; border:1px solid #999;">
 										<img src="${pageContext.request.contextPath}/images/flags/${row.nation.id}.png" title="${custom:nationalCapitalize(row.nation.name)}" id="flag" />
 										<c:if test="${! empty row.nation2.id}">
 											<br><img src="${pageContext.request.contextPath}/images/flags/${row.nation2.id}.png" title="${custom:nationalCapitalize(row.nation2.name)}" id="flag" />
@@ -236,7 +251,7 @@
 
 									<c:choose>
 											<c:when test="${row.team.id != row.teamOwner.id}">	
-												<td style="text-align: center" class="s10 ac wid10 ch cleague">
+												<td style="text-align: center; border:1px solid #999;" class="s10 ac wid10 ch cleague">
 													<spring:url var="imageOwnerURL" value="/teams/image.do"> 
 													   <spring:param name="id" value="${row.teamOwner.id}"></spring:param> 
 													</spring:url>														
@@ -246,7 +261,7 @@
 												</td>									
 											</c:when>
 											<c:when test="${row.teamPrev.id != row.team.id && !empty row.teamPrev.id }">
-												<td style="text-align: center">
+												<td style="text-align: center; border:1px solid #999;">
 													<spring:url var="imageURL" value="/teams/image.do">
 														<spring:param name="id">${row.teamPrev.id}</spring:param>
 													</spring:url>
@@ -256,26 +271,26 @@
 												</td>									
 											</c:when>
 											<c:otherwise>
-												<td style="text-align: center"></td>
+												<td style="text-align: center; border:1px solid #999;"></td>
 											</c:otherwise>	
 									</c:choose>
 									<c:choose>
 										<c:when test="${row.team.id != row.teamOwner.id}">
-											<td style="text-align: center; white-space:nowrap; padding-left: 10px; padding-right: 10px" class="s10 ac wid10 ch cleague">fine anno</td>
+											<td style="text-align: center; white-space:nowrap; padding-left: 10px; padding-right: 10px; border:1px solid #999;" class="s10 ac wid10 ch cleague">fine anno</td>
 										</c:when>
 										<c:otherwise>
-											<td style="text-align: center; white-space:nowrap; padding-left: 10px; padding-right: 10px"><c:if test="${! empty row.dateContract}">${row.dateContract}</c:if></td>
+											<td style="text-align: center; white-space:nowrap; padding-left: 10px; padding-right: 10px; border:1px solid #999;"><c:if test="${! empty row.dateContract}">${row.dateContract}</c:if></td>
 										</c:otherwise>
 									</c:choose>
-									<td style="text-align: center; white-space:nowrap;"><c:if test="${! empty row.value}">${custom:currencyValue(row.value)}</c:if></td>
+									<td style="text-align: center; white-space:nowrap; border:1px solid #999;"><c:if test="${! empty row.value}">${custom:currencyValue(row.value)}</c:if></td>
 									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">
-										<td style="text-align: center; white-space:nowrap;"><c:if test="${! empty row.income}">${custom:currencyValue(row.income)}</c:if></td>
+										<td style="text-align: center; white-space:nowrap; border:1px solid #999;"><c:if test="${! empty row.income}">${custom:currencyValue(row.income)}</c:if></td>
 									</sec:authorize>
 									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">									
 										<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
 													 !empty user_in_session.user.profile && user_in_session.user.profile.teamId == team.id}">
 									
-											<td style="text-align: center; width: 25px">
+											<td style="text-align: center; width: 25px; border:1px solid #999;">
 														<a href="#" onclick="player.editPlayer('${row.id}'); return false;">
 															<img src="${pageContext.request.contextPath}/images/edit.png" alt="<spring:message code="edit"/>" /> 
 														</a>											
@@ -283,7 +298,7 @@
 										</c:if>											
 									</sec:authorize>									
 									<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-										<td style="text-align: center; width: 25px">
+										<td style="text-align: center; width: 25px; border:1px solid #999;">
 											<spring:url var="deleteURL" value="/players/delete.do">
 												<spring:param name="id" value="${row.id}"></spring:param>
 												<spring:param name="team.id" value="${team.id}"></spring:param>
