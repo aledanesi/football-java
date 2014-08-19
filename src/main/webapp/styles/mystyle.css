@@ -227,6 +227,7 @@ table.standard_tabelle {
 
 .standard_tabelle tr.even {
 	background-color: rgb(230, 230, 230);
+	
 }
 
 .standard_tabelle tr.odd {
@@ -237,6 +238,7 @@ table.standard_tabelle {
 	padding:3px;
 	color:#484747;
 	font-size:7.5pt;
+	
 }
 
 .standard_tabelle td a {
@@ -1640,7 +1642,6 @@ table.standard_tabelle {
 	background-color:#fff;
 	color: #000000;
 	margin-top:2px;
-	border: 1px solid #999;
 	width:100%;
 }
 
@@ -1673,7 +1674,6 @@ table.standard_forum_tabelle {
 	background-color:#fff;
 	color: #000000;
 	margin-top:2px;
-	border: 1px solid #999;
 	width:100%;
 }
 
