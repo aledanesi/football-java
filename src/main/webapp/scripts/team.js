@@ -6,13 +6,13 @@ jQ(function() {
 
 		var continent = jQ("#continent_id").val();
 
-		nationManager.listNationsFromContinent(continent, function(data) {
+		footballManager.getNationsFromContinent(continent, function(data) {
 			jQ( "#nation_id" ).empty();
 			dwr.util.addOptions("nation_id", data, "id", "name");
 
 			var nation = jQ("#nation_id").val();
 			
-			divisionManager.listDivisionsByNation(nation, function(data) {
+			footballManager.getDivisionsByNation(nation, function(data) {
 
 				jQ( "#division_id" ).empty();
 	
@@ -39,7 +39,7 @@ jQ(function() {
 	jQ("#nation_id").change(function() {
 		var nation = jQ("#nation_id").val();
 
-		divisionManager.listDivisionsByNation(nation, function(data) {
+		footballManager.getDivisionsByNation(nation, function(data) {
 
 			jQ( "#division_id" ).empty();
 
@@ -154,7 +154,7 @@ Team.prototype = {
 
 		cleanTeam();
 			
-		teamManager.getTeamByID(teamId, function(data) {
+		footballManager.getTeamByID(teamId, function(data) {
 			var urlImage = jQ('#editTeam input[name=urlImage]').val();
 			jQ('#editTeam img[id=myImage]').attr('src', urlImage + "?id=" + teamId);
 

@@ -86,7 +86,7 @@ User.prototype = {
 
 		cleanTeam();
 			
-		teamManager.getUserByID(userId, function(data) {
+		footballManager.getUserByID(userId, function(data) {
 			setTextByName('editUser', 'id', teamId);
 			setTextByName('editUser', 'user', data.user);
 			setTextByName('editUser', 'password', data.password);

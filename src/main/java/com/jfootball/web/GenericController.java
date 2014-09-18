@@ -8,15 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.jfootball.UserInSession;
-import com.jfootball.manager.CareerManager;
-import com.jfootball.manager.ContinentManager;
-import com.jfootball.manager.DivisionManager;
-import com.jfootball.manager.NationManager;
-import com.jfootball.manager.PlayerManager;
-import com.jfootball.manager.PositionManager;
-import com.jfootball.manager.SeasonManager;
-import com.jfootball.manager.TeamManager;
-import com.jfootball.manager.UserManager;
+import com.jfootball.manager.FootballManager;
 import com.jfootball.service.UserService;
 
 /**
@@ -30,6 +22,9 @@ public class GenericController
 {
 	
 	@Autowired
+	protected FootballManager footballManager;		
+	
+	/*@Autowired
 	protected TeamManager teamManager;
 
 	@Autowired
@@ -54,7 +49,7 @@ public class GenericController
 	protected ContinentManager continentManager;
 	
 	@Autowired
-	protected UserManager userManager;	
+	protected UserManager userManager;	*/
 	
 	
 	protected Logger logger = Logger.getLogger(this.getClass());
@@ -80,7 +75,7 @@ public class GenericController
 	
 	
 
-	public void setTeamManager(TeamManager teamManager) {
+	/*public void setTeamManager(TeamManager teamManager) {
 		this.teamManager = teamManager;
 	}
 
@@ -115,6 +110,10 @@ public class GenericController
 
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
+	}	*/
+	
+	public void setFootballManager(FootballManager footballManager) {
+		this.footballManager = footballManager;
 	}	
 	
 	

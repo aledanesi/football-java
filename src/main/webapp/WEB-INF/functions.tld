@@ -22,9 +22,21 @@
 	</function>
 
 	<function>
+		<name>shortCurrencyValue</name>
+		<function-class>com.jfootball.util.ProjectUtil</function-class>
+		<function-signature>java.lang.String getShortCurrencyValue(java.lang.String)</function-signature>
+	</function>
+
+	<function>
 		<name>currencyValue</name>
 		<function-class>com.jfootball.util.ProjectUtil</function-class>
-		<function-signature>java.lang.String getCurrencyValue(java.lang.String)</function-signature>
+		<function-signature>java.lang.String getCurrencyValue(double)</function-signature>
+	</function>
+
+	<function>
+		<name>symbol</name>
+		<function-class>com.jfootball.util.ProjectUtil</function-class>
+		<function-signature>java.lang.String getSymbol(java.lang.String, java.lang.String)</function-signature>
 	</function>
 
 </taglib>

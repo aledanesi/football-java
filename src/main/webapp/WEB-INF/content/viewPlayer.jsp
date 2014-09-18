@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib prefix="display" uri="http://displaytag.sf.net"%>
@@ -21,14 +21,7 @@
 
 	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/teamManager.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/divisionManager.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/careerManager.js'></script>  
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/seasonManager.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/playerManager.js'></script>	  
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/positionManager.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/divisionManager.js'></script>
-   
+	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/footballManager.js'></script>
 
 	<title><spring:message code="title"/> ${player.firstName} ${player.lastName}</title>
 
@@ -98,7 +91,7 @@
 	<div id="menutop">
 		<ul>
 			<c:choose>		                           
-				<c:when test="${! (player.endCareer || player.withoutTeam )}"> 
+				<c:when test="${! (player.retired || player.unemployed )}"> 
 					<li>
 					    <a href="#" class="targetLinkViewPlayer" data-id="${player.team.id}"><spring:message code="returnListPlayer"/></a>
 		            </li>
@@ -113,23 +106,28 @@
 				<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
 							 !empty user_in_session.user.profile && user_in_session.user.profile.teamId == player.team.id}"> 
 		            <li>
-									<a href="#" onclick="player.editPlayer('${player.id}'); return false;">Modifica Giocatore</a>
+						<a href="#" onclick="player.editPlayer('${player.id}'); return false;">Modifica Giocatore</a>
 		            </li> 
 		            <li>
-									<a href="#" onclick="career.insertCareer('${player.id}'); return false;"><spring:message code="insertCareer"/></a>
+						<a href="#" onclick="career.insertCareer('${player.id}'); return false;"><spring:message code="insertCareer"/></a>
 		            </li> 
-					<c:if test="${! player.endCareer }"> 
+					<c:if test="${! player.retired }"> 
 						<li>
-										<a href="#" onclick="player.movePlayer('${player.id}'); return false;"><spring:message code="changeTeam"/></a>
+							<a href="#" onclick="player.movePlayer('${player.id}'); return false;"><spring:message code="changeTeam"/></a>
 						</li>
 
-						<c:if test="${! player.withoutTeam }"> 
+						<c:if test="${! player.unemployed }"> 
 							<li>
-											<a href="#" onclick="player.goWithoutTeam();">Svincolato</a>
+								<spring:url var="unemployURL" value="/players/withoutTeam.do">
+									<spring:param name="id" value="${player.id}"></spring:param>
+								</spring:url> 								
+								<a href="#" onclick="player.confirmUnEmployPlayer('${unemployURL}'); return false;"> 
+									Svincolato 
+								</a>
 							</li> 
 						</c:if>
 						<li>
-										<a href="#" onclick="player.goEndCareer();">Fine carriera</a>
+							<a href="#" onclick="player.goEndCareer();">Fine carriera</a>
 						</li> 				            
 					</c:if>
 				</c:if>	
@@ -155,29 +153,17 @@
 			<tbody>
 				<tr>
 					<td style="width: 100px;background-color: rgb(241, 241, 241);margin:0px;padding:0 3px;border:1px solid #bbb;" class="ac" rowspan="3">
-						<c:choose>
-							<c:when test="${player.endCareer}">
-								<spring:url var="endCareerURL" value="/images/ritiro.jpg" />
-								<img src="${endCareerURL}">
-							</c:when>
-							<c:when test="${player.withoutTeam}">
-								<spring:url var="withoutTeamURL" value="/images/svincolato.jpg" />
-								<img src="${withoutTeamURL}">
-							</c:when>
-							<c:otherwise>
-								<img src="${imageURL}">
-							</c:otherwise>
-						</c:choose>
+						<img src="${imageURL}">
 					</td>			
 					<td style="background-color: rgb(14, 46, 128)" class="blau"><h1 style="color:#fff;">${player.number} ${player.firstName} ${player.lastName}</h1></td>
 				</tr>
 				<tr >
 					<td class="odd">
 						<c:choose>
-							<c:when test="${player.endCareer}">
+							<c:when test="${player.retired}">
 								Calciatore ritirato
 							</c:when>
-							<c:when test="${player.withoutTeam}">
+							<c:when test="${player.unemployed}">
 								Calciatore svincolato
 							</c:when>
 							<c:otherwise>
@@ -189,8 +175,8 @@
 				<tr>
 					<td style="background-color: rgb(230, 230, 230); font-weight: bold">
 							&nbsp;
-							<c:if test="${! (player.endCareer || player.withoutTeam)}">
-								${custom:nationalDesc(player.national, player.nation.name)}
+							<c:if test="${! (player.retired || player.unemployed)}">
+								${custom:nationalDesc(player.national, player.nationality.name)}
 							</c:if>
 					</td>
 				</tr>
@@ -213,7 +199,7 @@
 
 	</div>
 	<c:if test="${player.team.id != player.teamOwner.id}">
-		<p class="drunter ar">in prestito dal ${custom:nationalCapitalize(player.teamOwner.name)}. Contratto fino al ${player.dateContract}</p>
+		<p class="drunter ar">in prestito dal ${custom:nationalCapitalize(player.teamOwner.name)}. Contratto fino al ${player.contractUntil}</p>
 	</c:if>
 	
 	<p class="hl_startseite mt10">Il profilo di ${player.firstName} ${player.lastName}
@@ -244,15 +230,15 @@
 			</tr>
 			<tr class="even">
 				<td>Data di nascita:</td>
-				<td><fmt:formatDate value="${player.birthDate}" type="both" pattern="dd/MM/yyyy" /></td>
+				<td><fmt:formatDate value="${player.dateOfBirth}" type="both" pattern="dd/MM/yyyy" /></td>
 			</tr>
 			<tr class="odd">
 				<td>Luogo di nascita:</td>
-				<td>${player.birthPlace}</td>
+				<td>${player.placeOfBirth}</td>
 			</tr>
 			<tr class="even">
 				<td>Et&agrave;:</td>
-				<td>${player.eta} anni</td>
+				<td>${player.age} anni</td>
 			</tr>
 			<tr class="odd">
 				<td>Altezza:</td>
@@ -262,13 +248,13 @@
 				<td>Nazionalit&agrave;:</td>
 				<td class="adr">
 					<span class="flaggen_sprite sprite_land_75 vt mt4">
-						<img src="${pageContext.request.contextPath}/images/flags/${player.nation.id}.png" id="flag" style="margin-top: 4px" />
-						<span class="country-name s10">${custom:nationalCapitalize(player.nation.name)}</span>
-							<c:if test="${! empty player.nation2.id}">
-								<br><img src="${pageContext.request.contextPath}/images/flags/${player.nation2.id}.png" alt="${player.nation2.name}" id="flag" style="margin-top: 4px" />
+						<img src="${pageContext.request.contextPath}/images/flags/${player.nationality.id}.png" id="flag" style="margin-top: 4px" />
+						<span class="country-name s10">${custom:nationalCapitalize(player.nationality.name)}</span>
+							<c:if test="${! empty player.nationality2.id}">
+								<br><img src="${pageContext.request.contextPath}/images/flags/${player.nationality2.id}.png" alt="${player.nationality2.name}" id="flag" style="margin-top: 4px" />
 							</c:if>
 						</span>
-						<span class="country-name s10">${custom:nationalCapitalize(player.nation2.name)}</span>
+						<span class="country-name s10">${custom:nationalCapitalize(player.nationality2.name)}</span>
 					</span>
 				</td>
 			</tr>
@@ -280,12 +266,14 @@
 				<td>Piede:</td>
 				<td>${player.foot}</td>
 			</tr>
-			<c:if test="${! (player.endCareer || player.withoutTeam) }"> 
+			<%--
+			<c:if test="${! (player.retired || player.unemployed) }"> 
 				<tr class="odd">
 					<td>Valore di mercato:</td>
 					<td class="note">${custom:currencyValue(player.value)} &euro;</td>
 				</tr>
 			</c:if>
+			--%>
 			</tbody>
 			</table>
 		</td>
@@ -294,7 +282,7 @@
 	</table>
 
 	<!-- ulteriori dati -->
-  <c:if test="${! (player.endCareer || player.withoutTeam) }"> 
+  <c:if test="${! (player.retired || player.unemployed) }"> 
 
 	<p class="hl_startseite mt10">Ulteriori dati di ${player.firstName} ${player.lastName}</p>
 	<table cellspacing="1" cellpadding="2" style="margin-top:0;border:1px solid #999; background-color: rgb(241, 241, 241);" class="standard_tabelle">
@@ -303,13 +291,25 @@
 		<td class="al vt">
 		<table cellspacing="1" cellpadding="0" class="standard_tabelle s10">
 			<tbody>
+			<c:if test="${! empty player.grossWeeklySalary}">
+				<tr class="odd">
+					<td style="width: 150px;">Ingaggio settimanale:</td>
+					<td>
+						${custom:currencyValue(player.grossWeeklySalary)} ${custom:symbol(player.team.nation.language, player.team.nation.country)}
+						&nbsp;(lordo)	
+					</td>
+				</tr>						
+			</c:if>
 			<tr class="odd">
-				<td style="width: 150px;">Ingaggio:</td>
-				<td>${custom:currencyValue(player.income)} &euro;</td>
+				<td style="width: 150px;">Ingaggio annuale:</td>
+				<td>
+					${custom:currencyValue(player.netAnnualSalary)} ${custom:symbol(player.team.nation.language, player.team.nation.country)}
+					&nbsp;(netto)	
+				</td>
 			</tr>							
 			<tr class="even">
 				<td>Scadenza contratto:</td>
-				<td>${player.dateContract}</td>
+				<td>${player.contractUntil}</td>
 			</tr>
 			</tbody>
 			</table>
@@ -466,6 +466,8 @@
 			<jsp:include page="secure/editCareer.jsp" />
 			
 			<jsp:include page="secure/deleteCareer.jsp" />			
+
+			<jsp:include page="secure/unemployPlayer.jsp" />			
 
 	</sec:authorize>	
 

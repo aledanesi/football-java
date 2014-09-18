@@ -66,6 +66,7 @@
 	        <value>com.jfootball.domain.Position</value>
 	        <value>com.jfootball.domain.Team</value>
 	        <value>com.jfootball.domain.Player</value>
+	        <value>com.jfootball.domain.Manager</value>
 	        <value>com.jfootball.domain.Division</value>
 	        <value>com.jfootball.domain.Career</value>
 	        <value>com.jfootball.domain.Season</value>

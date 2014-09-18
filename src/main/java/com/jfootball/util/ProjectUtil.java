@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.Date;
 import java.util.Locale;
 
@@ -114,7 +115,7 @@ public class ProjectUtil {
 		return year1 + "-" + year2;
 	}
 	
-	public static String getCurrencyValue(String value)
+	public static String getShortCurrencyValue(String value)
 	{
 		if ("".equals(value))
 			value = "?";
@@ -136,6 +137,20 @@ public class ProjectUtil {
 
 		return coolFormat(n.longValue(), 0);
 	}
+	
+	public static String getCurrencyValue(double value)
+	{
+		NumberFormat currencyFormat = NumberFormat.getInstance();
+		return currencyFormat.format(value);
+	}	
+	
+	
+	public static String getSymbol(String language, String country)
+	{
+		Locale locale = new Locale(language, country);
+		Currency c  = Currency.getInstance(locale);
+		return c.getSymbol(locale);
+	}	
 	
 	private static String coolFormat(double n, int iteration) {
 		char[] c = new char[]{'K', 'M', 'B', 'T'};

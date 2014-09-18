@@ -57,6 +57,7 @@
 	<bean name="nationManager"    class="com.jfootball.manager.impl.NationManagerImpl" />
 	
 	<bean name="userManager"      class="com.jfootball.manager.impl.UserManagerImpl" />
-	
+
+	<bean name="footballManager"  class="com.jfootball.manager.impl.FootballManagerImpl" />
 
 </beans>

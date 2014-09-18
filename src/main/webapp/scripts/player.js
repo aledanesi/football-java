@@ -5,12 +5,12 @@ jQ(function() {
 	jQ("#owner_nation_id").change(function() {
 		var nation = jQ("#owner_nation_id").val();
 
-		divisionManager.listDivisionsByNation(nation, function(data) {
+		footballManager.getDivisionsByNation(nation, function(data) {
 			jQ( "#owner_division_id" ).empty();
 			dwr.util.addOptions("owner_division_id", data, "id", "name");
 
 			var division = jQ("#owner_division_id").val();
-			teamManager.listTeamsByDivision(nation, division, function(data2) {
+			footballManager.getTeamsByDivision(nation, division, function(data2) {
 				jQ("#owner_team_id").empty();
 				dwr.util.addOptions("owner_team_id", data2, "id", "name");
 			});
@@ -23,7 +23,7 @@ jQ(function() {
 		var nation = jQ("#owner_nation_id").val();
 		var division = jQ("#owner_division_id").val();
 
-		teamManager.listTeamsByDivision(nation, division, function(data2) {
+		footballManager.getTeamsByDivision(nation, division, function(data2) {
 			jQ("#owner_team_id").empty();
 			dwr.util.addOptions("owner_team_id", data2, "id", "name");
 		});
@@ -33,12 +33,12 @@ jQ(function() {
 	jQ("#nation_id").change(function() {
 		var nation = jQ("#nation_id").val();
 
-		divisionManager.listDivisionsByNation(nation, function(data) {
+		footballManager.getDivisionsByNation(nation, function(data) {
 			// jQ( "#division_id" ).empty();
 			// dwr.util.addOptions("division_id", data, "id", "name");
 
 			var division = jQ("#division_id").val();
-			teamManager.listTeamsByDivision(nation, division, function(data2) {
+			footballManager.getTeamsByDivision(nation, division, function(data2) {
 				jQ("#team_id").empty();
 				dwr.util.addOptions("team_id", data2, "id", "name");
 			});
@@ -51,7 +51,7 @@ jQ(function() {
 		var nation = jQ("#nation_id").val();
 		var division = jQ("#division_id").val();
 
-		teamManager.listTeamsByDivision(nation, division, function(data2) {
+		footballManager.getTeamsByDivision(nation, division, function(data2) {
 			jQ("#team_id").empty();
 			dwr.util.addOptions("team_id", data2, "id", "name");
 		});
@@ -97,21 +97,21 @@ jQ(function() {
 
 				var firstName = jQ('#editPlayer input[id=firstName]');
 				var lastName = jQ('#editPlayer input[id=lastName]');
-				var birthDate = jQ('#editPlayer input[id=birthDate]');
+				var dateOfBirth = jQ('#editPlayer input[id=dateOfBirth]');
 
-				var allFields = jQ([]).add(lastName).add(birthDate);
+				var allFields = jQ([]).add(lastName).add(dateOfBirth);
 
 				allFields.removeClass("ui-state-error");
 
 				bValid = bValid && checkLength(lastName, "Cognome");
-				bValid = bValid && checkLength(birthDate, "Data di Nascita");
+				bValid = bValid && checkLength(dateOfBirth, "Data di Nascita");
 
 				if (bValid) {
 					jQ(".validateTips").hide();
 					
 					if(jQ('#editPlayer input[id=id]').val() == '' )
 					{
-						playerManager.findPlayerExists(firstName.val(), lastName.val(), birthDate.val(), function (data)
+						footballManager.findPlayerExists(firstName.val(), lastName.val(), dateOfBirth.val(), function (data)
 						{
 							if(data == true)
 							{
@@ -151,6 +151,21 @@ jQ(function() {
 			}
 		}
 	});
+	
+	jQ("#dUnemployPlayer").dialog({
+		resizable : false,
+		height : 170,
+		modal : true,
+		autoOpen : false,
+		buttons : {
+			"Svincola" : function() {
+				jQ(window.location).attr('href', jQ("#urlUnemployPlayer").val());
+			},
+			"Annulla" : function() {
+				jQ(this).dialog("close");
+			}
+		}
+	});	
 
 	jQ("#dMovePlayer").dialog({
 		title : "Cambia la squadra",
@@ -177,7 +192,7 @@ jQ(function() {
 	jQ("#ruolo_id").change(function() {
 		var codRuolo = jQ("#ruolo_id").val();
 
-		positionManager.listPositions(codRuolo, function(data) {
+		footballManager.getPositions(codRuolo, function(data) {
 			jQ("#position_id").empty();
 			dwr.util.addOptions("position_id", data, "id", "descPosizione");
 			jQ("#position_id").trigger("change");
@@ -234,6 +249,16 @@ Player.prototype = {
 
 		jQ('#dDeletePlayer').dialog('open');
 	},
+	
+	confirmUnEmployPlayer : function(urlUnemploy) {	
+		jQ("#urlUnemployPlayer").val(urlUnemploy);
+
+		jQ('#dUnemployPlayer').dialog('open');
+	},	
+
+	goEndCareer : function() {
+		jQ("#endCareerPlayer").submit(); 
+	},
 
 	newPlayer : function() {
 
@@ -255,7 +280,7 @@ Player.prototype = {
 		});
 		
 		jQ("#owner_nation_id").val(nation);
-		divisionManager.listDivisionsByNation(nation,
+		footballManager.getDivisionsByNation(nation,
 				function(data4) {
 					dwr.util.removeAllOptions("owner_division_id");
 					dwr.util.addOptions("owner_division_id", data4, "id", "name");
@@ -265,7 +290,7 @@ Player.prototype = {
 
 		});	
 
-		teamManager.listTeamsByDivision(
+		footballManager.getTeamsByDivision(
 					nationID,
 					divisionID,
 					function(data3) {
@@ -286,7 +311,7 @@ Player.prototype = {
 
 		cleanPlayer();
 		
-		playerManager.getPlayerByID(playerId,
+		footballManager.getPlayerByID(playerId,
 						function(data) {
 							var urlImage = jQ('#editPlayer input[name=urlImage]').val();
 							jQ('#editPlayer img[id=myImage]').attr('src', urlImage + "?id=" + playerId);
@@ -295,11 +320,11 @@ Player.prototype = {
 							setTextByName('editPlayer', 'firstName', data.firstName);
 							setTextByName('editPlayer', 'lastName', data.lastName);
 							setTextByName('editPlayer', 'completeName',  data.completeName);
-							setTextByName('editPlayer', 'birthDate', dateToYMD(data.birthDate));
-							setTextByName('editPlayer', 'birthPlace', data.birthPlace);
+							setTextByName('editPlayer', 'dateOfBirth', dateToYMD(data.dateOfBirth));
+							setTextByName('editPlayer', 'placeOfBirth', data.placeOfBirth);
 
-							setTextByName('editPlayer', 'endCareer', data.endCareer);
-							setTextByName('editPlayer', 'withoutTeam', data.withoutTeam);
+							setTextByName('editPlayer', 'retired', data.retired);
+							setTextByName('editPlayer', 'unemployed', data.unemployed);
 							
 							if (data.teamPrev != null)
 								setTextByName('editPlayer', 'team_prev_id', data.teamPrev.id);
@@ -314,13 +339,13 @@ Player.prototype = {
 
 							// NATION ID
 							//checkOnSelectByText('editPlayer', 'nation_id', data.nation.name);							
-							jQ("#nation_id").val(data.nation.id);
+							jQ("#nation_id").val(data.nationality.id);
 
 
 							// NATION2 ID
 							if(data.nation2 != null)
 								//checkOnSelectByText('editPlayer', 'nation2_id', data.nation2.name);
-								jQ("#nation2_id").val(data.nation2.id);
+								jQ("#nation2_id").val(data.nationality2.id);
 
 							// RUOLO ID							
 
@@ -339,13 +364,13 @@ Player.prototype = {
 
 							// TEAM CATEGORY
 							//checkOnSelectByVal('editPlayer', 'teamCategory', data.teamCategory);
-							jQ("#teamCategory").val(data.teamCategory);
+							jQ("#teamBranch").val(data.teamBranch);
 
 							// FOOT
 							//checkOnSelectByVal('editPlayer', 'foot', data.foot);
 							jQ("#foot").val(data.foot);
 
-							positionManager.listPositions(jQ("#ruolo_id").val(),
+							footballManager.getPositions(jQ("#ruolo_id").val(),
 											function(data2) {
 												dwr.util.removeAllOptions("position_id");
 												dwr.util.addOptions("position_id", data2, "id", "descPosizione");
@@ -354,23 +379,25 @@ Player.prototype = {
 												jQ("#position_id").val(data.position.id);
 											});
 
-							setTextByName('editPlayer', 'nation', data.nation.id);
+							//setTextByName('editPlayer', 'nationality', data.nationality.id);
 							setTextByName('editPlayer', 'position', data.position.id);
 							setTextByName('editPlayer', 'height', data.height);
 							setTextByName('editPlayer', 'weight', data.weight);
 							setTextByName('editPlayer', 'number', data.number);
 
 							// VALUE
-							checkOnText('editPlayer', 'value', data.value);
+							//checkOnText('editPlayer', 'cost', data.cost);
 
 							// INCOME
-							checkOnText('editPlayer', 'income', data.income);
+							checkOnText('editPlayer', 'grossWeeklySalary', data.grossWeeklySalary);
+							checkOnText('editPlayer', 'netAnnualSalary', data.netAnnualSalary);
 							
-							formatCurrency(jQ("#income"));
-							formatCurrency(jQ("#value"));
+							formatCurrency(jQ("#grossWeeklySalary"));
+							formatCurrency(jQ("#netAnnualSalary"));
+							//formatCurrency(jQ("#cost"));
 
 							// DATE CONTRACT
-							checkOnText('editPlayer', 'dateContract', data.dateContract);
+							checkOnText('editPlayer', 'contractUntil', data.contractUntil);
 
 							// CAPTAIN
 							checkOnCheckBox('editPlayer', 'captain', data.captain);
@@ -382,7 +409,7 @@ Player.prototype = {
 							if(data.teamOwner != null)
 							{
 								jQ("#owner_nation_id").val(data.teamOwner.nation.id);
-								divisionManager.listDivisionsByNation(data.teamOwner.nation.id,
+								footballManager.getDivisionsByNation(data.teamOwner.nation.id,
 										function(data4) {
 											dwr.util.removeAllOptions("owner_division_id");
 											dwr.util.addOptions("owner_division_id", data4, "id", "name");
@@ -392,7 +419,7 @@ Player.prototype = {
 											jQ("#owner_division_id").val(data.teamOwner.division.id);
 								});	
 
-								teamManager.listTeamsByDivision(
+								footballManager.getTeamsByDivision(
 											data.teamOwner.nation.id,
 											data.teamOwner.division.id,
 											function(data3) {
@@ -415,7 +442,7 @@ Player.prototype = {
 
 		jQ('#dMovePlayer').dialog('open');
 
-		teamManager.listTeamsByDivision(jQ("#teamNationId").val(), jQ("#teamDivisionId").val(), function(data) {
+		footballManager.getTeamsByDivision(jQ("#teamNationId").val(), jQ("#teamDivisionId").val(), function(data) {
 			dwr.util.removeAllOptions("team_id");
 			dwr.util.addOptions("team_id", data, "id", "name");
 
@@ -431,14 +458,6 @@ Player.prototype = {
 		jQ("#id").val(playerId);
 		
 		jQ("#viewPlayerPageForm").submit(); 
-	},
-	
-	goWithoutTeam : function() {		
-		jQ("#withoutTeamPlayer").submit(); 
-	},	
-
-	goEndCareer : function() {
-		jQ("#endCareerPlayer").submit(); 
 	}
 
 }
@@ -457,16 +476,16 @@ function cleanPlayer() {
 	jQ('#editPlayer input[name=firstName]').val('');
 	jQ('#editPlayer input[name=lastName]').val('');
 	jQ('#editPlayer input[name=completeName]').val('');
-	jQ('#editPlayer input[name=birthDate]').val('');
-	jQ('#editPlayer input[name=birthPlace]').val('');
-	jQ('#editPlayer input[name=nation]').val('');
+	jQ('#editPlayer input[name=dateOfBirth]').val('');
+	jQ('#editPlayer input[name=placeOfBirth]').val('');
+	jQ('#editPlayer input[name=nationality]').val('');
 	jQ('#editPlayer input[name=position]').val('');
 	jQ('#editPlayer input[name=height]').val('?');
 	jQ('#editPlayer input[name=weight]').val('?');
 	jQ('#editPlayer input[name=number]').val('');
-	jQ('#editPlayer input[name=value]').val('');
-	jQ('#editPlayer input[name=income]').val('');
-	jQ('#editPlayer input[name=dateContract]').val('?');
+	//jQ('#editPlayer input[name=cost]').val('');
+	jQ('#editPlayer input[name=netAnnualSalary]').val('');
+	jQ('#editPlayer input[name=contractUntil]').val('?');
 	jQ('#editPlayer input[name=captain]').attr('checked', false);
 
 	jQ("#editPlayer select[id=ruolo_id] option").each(function() {
@@ -475,7 +494,7 @@ function cleanPlayer() {
 	});
 
 	var codRuolo = jQ("#ruolo_id").val();
-	positionManager.listPositions(codRuolo, function(data) {
+	footballManager.getPositions(codRuolo, function(data) {
 		dwr.util.removeAllOptions("position_id");
 		dwr.util.addOptions("position_id", data, "id", "descPosizione");
 	});

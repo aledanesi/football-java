@@ -132,8 +132,8 @@ public class PlayerManagerImpl implements PlayerManager
 		
 		// fine 
 		player.setNumber(null);
-		player.setEndCareer(null);
-		player.setWithoutTeam(null);		
+		player.setRetired(null);
+		player.setUnemployed(null);		
 		
 		player.setTeam(team);
 		playerDAO.saveOrUpdatePlayer(player);

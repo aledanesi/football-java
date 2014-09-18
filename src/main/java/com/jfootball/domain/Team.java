@@ -74,10 +74,12 @@ public class Team extends ImageObject
 	
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="team", fetch = FetchType.LAZY)
-	@OrderBy("position, value desc")
+	@OrderBy("position, cost desc")
     private Set<Player> players;
 	
 	
+	@OneToOne(optional = true)
+	private Manager manager = new Manager();
 
 	/**
 	 * Default Constructor
@@ -241,6 +243,16 @@ public class Team extends ImageObject
     public void setPlayers(Set<Player> players) {
         this.players = players;
     }  	
+    
+	public Manager getManager()
+	{
+		return manager;
+	}
+
+	public void setManager(Manager manager)
+	{
+		this.manager = manager;
+	}
 
 	@Override
 	public String toString()

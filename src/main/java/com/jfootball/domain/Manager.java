@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -46,11 +47,17 @@ public class Manager extends ImageObject implements Serializable {
 
 	@Column(name = "BIRTH_PLACE")
 	private String birthPlace;
+	
+	@Column(name = "WITHOUT_TEAM")
+	private Boolean withoutTeam;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@Column(name = "END_CAREER")
+	private Boolean endCareer;	
+
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Nation nation = new Nation();
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="team_id", referencedColumnName="id", nullable=true)          
     private Team team;   
     
@@ -113,6 +120,22 @@ public class Manager extends ImageObject implements Serializable {
 	public void setNation(Nation nation) {
 		this.nation = nation;
 	}
+	
+	public Boolean getEndCareer() {
+		return endCareer;
+	}
+
+	public void setEndCareer(Boolean endCareer) {
+		this.endCareer = endCareer;
+	}
+
+	public Boolean getWithoutTeam() {
+		return withoutTeam;
+	}
+
+	public void setWithoutTeam(Boolean withoutTeam) {
+		this.withoutTeam = withoutTeam;
+	}	
 
 	@Override
 	public String toString()
@@ -126,9 +149,9 @@ public class Manager extends ImageObject implements Serializable {
 		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 	
-	@Override
+	/*@Override
 	public int hashCode()
 	{
 		return HashCodeBuilder.reflectionHashCode(this);
-	}
+	}*/
 }

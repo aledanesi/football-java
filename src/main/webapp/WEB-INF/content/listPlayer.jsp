@@ -20,10 +20,7 @@
 
 	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/teamManager.js'></script>	  
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/playerManager.js'></script>	
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/positionManager.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/divisionManager.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/footballManager.js'></script>	  
 
     <%-- FUNCTION SPECIFIC --%>
     <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/player.js"></script>
@@ -165,10 +162,8 @@
 									<th style="width: 50px;">Nazione</th>
 									<th style="width: 50px;">Squadra precedente</th>									
 									<th style="width: 120px; text-align: center">Scadenza contratto</th>
-									<th style="width: 70px; text-align: center">Valore giocatore</th>
-									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">
-										<th style="width: 70px; text-align: center">Ingaggio netto</th>									
-									</sec:authorize>
+									<%--<th style="width: 70px; text-align: center">Valore giocatore</th>--%>
+									<th style="width: 70px; text-align: center">Ingaggio netto</th>									
 									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">									
 										<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
 													 !empty user_in_session.user.profile && user_in_session.user.profile.teamId == team.id}">
@@ -237,15 +232,15 @@
 											</tr>
 											<tr>
 												<td style="padding: 0px">
-													${row.position.descPosizione}, ${row.eta} anni
+													${row.position.descPosizione}, ${row.age} anni
 												</td>
 											</tr>												
 										</table>	
 									</td>
 									<td style="text-align: center; border:1px solid #999;">
-										<img src="${pageContext.request.contextPath}/images/flags/${row.nation.id}.png" title="${custom:nationalCapitalize(row.nation.name)}" id="flag" />
-										<c:if test="${! empty row.nation2.id}">
-											<br><img src="${pageContext.request.contextPath}/images/flags/${row.nation2.id}.png" title="${custom:nationalCapitalize(row.nation2.name)}" id="flag" />
+										<img src="${pageContext.request.contextPath}/images/flags/${row.nationality.id}.png" title="${custom:nationalCapitalize(row.nationality.name)}" id="flag" />
+										<c:if test="${! empty row.nationality2.id}">
+											<br><img src="${pageContext.request.contextPath}/images/flags/${row.nationality2.id}.png" title="${custom:nationalCapitalize(row.nationality2.name)}" id="flag" />
 										</c:if>
 									</td>
 
@@ -279,13 +274,19 @@
 											<td style="text-align: center; white-space:nowrap; padding-left: 10px; padding-right: 10px; border:1px solid #999;" class="s10 ac wid10 ch cleague">fine anno</td>
 										</c:when>
 										<c:otherwise>
-											<td style="text-align: center; white-space:nowrap; padding-left: 10px; padding-right: 10px; border:1px solid #999;"><c:if test="${! empty row.dateContract}">${row.dateContract}</c:if></td>
+											<td style="text-align: center; white-space:nowrap; padding-left: 10px; padding-right: 10px; border:1px solid #999;">
+												<c:if test="${! empty row.contractUntil}">${row.contractUntil}</c:if>
+												<c:if test="${empty row.contractUntil}">?</c:if>
+											</td>
 										</c:otherwise>
 									</c:choose>
-									<td style="text-align: center; white-space:nowrap; border:1px solid #999;"><c:if test="${! empty row.value}">${custom:currencyValue(row.value)}</c:if></td>
-									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">
-										<td style="text-align: center; white-space:nowrap; border:1px solid #999;"><c:if test="${! empty row.income}">${custom:currencyValue(row.income)}</c:if></td>
-									</sec:authorize>
+									<%--<td style="text-align: center; white-space:nowrap; border:1px solid #999;"><c:if test="${! empty row.cost}">${custom:shortCurrencyValue(row.cost)}</c:if></td>--%>
+									<td style="text-align: center; white-space:nowrap; border:1px solid #999;">
+										<c:choose>
+											<c:when test="${! empty row.netAnnualSalary && row.netAnnualSalary != 0}">${custom:shortCurrencyValue(row.netAnnualSalary)}</c:when>
+											<c:otherwise>?</c:otherwise>
+										</c:choose>
+									</td>
 									<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'DEVELOPER')">									
 										<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
 													 !empty user_in_session.user.profile && user_in_session.user.profile.teamId == team.id}">

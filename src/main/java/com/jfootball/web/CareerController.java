@@ -58,7 +58,7 @@ public class CareerController extends GenericController
         else 
         {    	
         	
-    		Player player = playerManager.getPlayerByID(career.getPlayer().getId());
+    		Player player = footballManager.getPlayerByID(career.getPlayer().getId());
     		player.setLastUserModify(getUsername());
     		player.setLastTimeModify(new Timestamp(System.currentTimeMillis()));
     		career.setPlayer(player);
@@ -71,7 +71,7 @@ public class CareerController extends GenericController
     		career.setLastUserModify(getUsername());
     		career.setLastTimeModify(new Timestamp(System.currentTimeMillis()));
     		
-    		careerManager.saveOrUpdateCareer(career);
+    		footballManager.saveCareer(career);
 
     		return loadViewPlayer(player);
         }
@@ -87,9 +87,9 @@ public class CareerController extends GenericController
 			@RequestParam("id") String careerId, 
 			@RequestParam("player.id") String playerId) 
 	{
-		careerManager.deleteCareer(Long.parseLong(careerId));
+		footballManager.deleteCareer(Long.parseLong(careerId));
 		
-		Player player = playerManager.getPlayerByID(Long.parseLong(playerId));
+		Player player = footballManager.getPlayerByID(Long.parseLong(playerId));
 
 		return loadViewPlayer(player);
 	}	
@@ -98,7 +98,7 @@ public class CareerController extends GenericController
 	@RequestMapping(value = "/careers/get_team_list", method = RequestMethod.GET, headers="Accept=*/*")    
 	public @ResponseBody List<String> getTeamList(@RequestParam("term") String query) 
 	{        
-		List<String> teamList = teamManager.listTeamsByName(query);
+		List<String> teamList = footballManager.getTeams(query);
 		
 		return teamList;    
 	}	
@@ -113,9 +113,9 @@ public class CareerController extends GenericController
 	{
 		ModelAndView view = new ModelAndView(ProjectConstant.VIEW_PLAYER);
 		
-		List<Career> careerList = careerManager.listCareer(player.getId());
+		List<Career> careerList = footballManager.getCareers(player.getId());
 		
-		List<Season> seasonYearList = seasonManager.listSeason();
+		List<Season> seasonYearList = footballManager.getSeasons();
 		
 		Career career = new Career();
 		career.setPlayer(player);		

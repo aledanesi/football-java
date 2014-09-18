@@ -29,7 +29,7 @@ public class PlayerTest extends BaseTest
 		Nation nation = new Nation();
 		nation.setId(11L);
 
-		player.setNation(nation);
+		player.setNationality(nation);
 	}
 	
 	@Test

@@ -23,8 +23,8 @@
 			<input type="hidden" id="team_division_id" name="team.division.id" value="${team.division.id}" />		
 			<input type="hidden" id="team_prev_id" name="teamPrev.id" value="${teamPrev.id}" />		
 
-			<input type="hidden" id="endCareer" name="endCareer" value="${endCareer}" />
-			<input type="hidden" id="withoutTeam" name="withoutTeam" value="${withoutTeam}" />						
+			<input type="hidden" id="retired" name="retired" value="${retired}" />
+			<input type="hidden" id="unemployed" name="unemployed" value="${unemployed}" />						
 	
 			
 			<table style="width: 650px;">
@@ -81,22 +81,22 @@
 					<td>				  
 					  <div class="fitem_label"><spring:message code="birthDate" />:</div>
 					  <div class="fitem_span">
-							<fmt:formatDate var="f_BirthDate" value="${player.birthDate}" type="both" pattern="dd/MM/yyyy" />	
-							<form:input path="birthDate" value="${f_BirthDate}" style="width: 80px" maxlength="10" onkeyup="formatDate(this, event)" />
-							<form:errors path="birthDate" />
+							<fmt:formatDate var="f_dateOfBirth" value="${player.dateOfBirth}" type="both" pattern="dd/MM/yyyy" />	
+							<form:input path="dateOfBirth" value="${f_dateOfBirth}" style="width: 80px" maxlength="10" onkeyup="formatDate(this, event)" />
+							<form:errors path="dateOfBirth" />
 					  </div>
 					</td>
 					<td>
 					  <div class="fitem_label"><spring:message code="birthPlace" />:</div>
 					  <div class="fitem_span">
-							<form:input path="birthPlace" />
-							<form:errors path="birthPlace" />
+							<form:input path="placeOfBirth" />
+							<form:errors path="placeOfBirth" />
 					  </div>
 					</td>
 					<td>
 					  <div class="fitem_label">Categoria squadra:</div>
 					  <div class="fitem_span">
-					  		<form:select path="teamCategory">
+					  		<form:select path="teamBranch">
 					  			<form:option label="Prima squadra" value="1" />
 					  			<form:option label="Primavera" value="2" />
 					  			<form:option label="Giovanili" value="3" />
@@ -110,7 +110,7 @@
 					<td>
 					  <div class="fitem_label">Nazionalita 1:</div>
 					  <div class="fitem_span">
-						  <form:select path="nation.id" id="nation_id">
+						  <form:select path="nationality.id" id="nation_id">
 						      <form:option  value="" />
 						      <form:options items="${nationList}" itemValue="id" itemLabel="name"/>
 							</form:select>
@@ -119,7 +119,7 @@
 					<td>				  
 					  <div class="fitem_label">Nazionalita 2:</div>
 					  <div class="fitem_span">
-						  <form:select path="nation2.id" id="nation2_id">
+						  <form:select path="nationality2.id" id="nation2_id">
 						      <form:option  value="" />
 						      <form:options items="${nationList}" itemValue="id" itemLabel="name"/>
 							</form:select>
@@ -167,55 +167,63 @@
 
 				<tr>
 					<td>
-							  <div class="fitem_label"><spring:message code="position" />:</div>
-							  <div class="fitem_span">
-							  		<select id="ruolo_id">
-											<option value="01">Porta</option>
-											<option value="02">Difesa</option>
-											<option value="03">Centrocampo</option>
-											<option value="04">Attacco</option>
-										</select>
-							  </div>
+						  <div class="fitem_label"><spring:message code="position" />:</div>
+						  <div class="fitem_span">
+						  		<select id="ruolo_id">
+										<option value="01">Porta</option>
+										<option value="02">Difesa</option>
+										<option value="03">Centrocampo</option>
+										<option value="04">Attacco</option>
+									</select>
+						  </div>
 					</td>
 					<td>				  
-							  <div class="fitem_label">Posizione:</div>
-							  <div class="fitem_span">
-							  		<form:select path="position.id" id="position_id" />
-							  </div>
+						  <div class="fitem_label">Posizione:</div>
+						  <div class="fitem_span">
+						  		<form:select path="position.id" id="position_id" />
+						  </div>
 					</td>
 					<td>
-							  <div class="fitem_label">Piede:</div>
-							  <div class="fitem_span">
-							  		<form:select path="foot">
-							  			<form:option value="" />
-							  			<form:option value="destro" />
-							  			<form:option value="sinistro" />
-							  			<form:option value="entrambi" />							  				 
-							  		</form:select>	
-							  </div>
+						  <div class="fitem_label">Piede:</div>
+						  <div class="fitem_span">
+						  		<form:select path="foot">
+						  			<form:option value="" />
+						  			<form:option value="destro" />
+						  			<form:option value="sinistro" />
+						  			<form:option value="entrambi" />							  				 
+						  		</form:select>	
+						  </div>
 					</td>
 				</tr>					
 												
 				<tr>
+					<td>
+						<c:choose>
+						<c:when test="${team.nation.id == 13}">
+						  <div class="fitem_label">Ingaggio settimanale (lordo):</div>
+						  <div class="fitem_span">
+								<form:input path="grossWeeklySalary" style="width: 80px" onkeyup="formatCurrency(jQ(this))"  />
+								<form:errors path="grossWeeklySalary" />
+						  </div>
+						</c:when>
+						<c:otherwise>
+							<input type="hidden" id="grossWeeklySalary" name="grossWeeklySalary" value="${player.grossWeeklySalary}" />			
+						</c:otherwise>						
+						</c:choose>
+					</td>
+	
+					<td>
+					  <div class="fitem_label">Ingaggio annuale (netto):</div>
+					  <div class="fitem_span">
+							<form:input path="netAnnualSalary" style="width: 80px" onkeyup="formatCurrency(jQ(this))" />
+							<form:errors path="netAnnualSalary" />
+					  </div>
+					</td>
 					<td>				  
 					  <div class="fitem_label">Scadenza contratto:</div>
 					  <div class="fitem_span">
-							<form:input path="dateContract" style="width: 80px" maxlength="10" onkeyup="formatDate(this, event)" />
-							<form:errors path="dateContract" />
-					  </div>
-					</td>
-					<td>
-					  <div class="fitem_label">Ingaggio:</div>
-					  <div class="fitem_span">
-							<form:input path="income" style="width: 80px" onkeyup="formatCurrency(jQ(this))" />
-							<form:errors path="income" />
-					  </div>
-					</td>
-					<td>
-					  <div class="fitem_label">Valore:</div>
-					  <div class="fitem_span">
-							<form:input path="value" style="width: 80px" onkeyup="formatCurrency(jQ(this))"  />
-							<form:errors path="value" />
+							<form:input path="contractUntil" style="width: 80px" maxlength="10" onkeyup="formatDate(this, event)" />
+							<form:errors path="contractUntil" />
 					  </div>
 					</td>
 				</tr>		

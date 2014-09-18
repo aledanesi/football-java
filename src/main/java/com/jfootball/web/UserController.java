@@ -81,7 +81,7 @@ public class UserController extends GenericController
 		
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_TEAM);
 		
-		List<UserBean> userList = userManager.listUsers();				
+		List<UserBean> userList = footballManager.getUsers();				
 		view.addObject("userList", userList);
 
 		logger.info("view: LIST_USER");
@@ -106,7 +106,7 @@ public class UserController extends GenericController
 
 		logger.info("--------------------- Team Controller : delete --------------------- ");
 
-		userManager.deleteUser(Long.parseLong(userId));
+		footballManager.deleteUser(Long.parseLong(userId));
 
 		logger.info("Team " + userId + "deleted");
 
@@ -153,7 +153,7 @@ public class UserController extends GenericController
     		//user.setLastUserModify(getUsername());
     		//user.setLastTimeModify(new Timestamp(System.currentTimeMillis()));
     		
-    		userManager.saveOrUpdateUser(user);
+        	footballManager.saveUser(user);
     		
     		logger.info("User saved");
     		

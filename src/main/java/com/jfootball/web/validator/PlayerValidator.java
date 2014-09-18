@@ -19,7 +19,7 @@ public class PlayerValidator implements Validator
 	{
 		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "required", "*");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastName", "required", "*");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birthDate", "required", "*");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateOfBirth", "required", "*");
 		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "birthPlace", "required", "*");	
 		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "height", "required", "*");
 		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "weight", "required", "*");	

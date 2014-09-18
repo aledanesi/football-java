@@ -8,7 +8,7 @@
 	<body>
 		<section name="Release Notes">
 			<br />
-			<subsection name="0.10">
+			<subsection name="0.11">
 				<table border="0" width="100%">
 					<THEAD>
 						<tr>
@@ -29,28 +29,10 @@
 					<TBODY>
 						<tr>
 							<td>New</td>
-							<td>18/08/2014</td>
+							<td>04/09/2014</td>
 							<td>Player</td>
-							<td>Controllo sulla creazione di un giocatore già inserito</td>
+							<td>Renaming e aggiunta di campi di ingaggio (netto,lordo,settimanale e annuale) della classe Player</td>
 						</tr>					
-						<tr>
-							<td>New</td>
-							<td>30/07/2014</td>
-							<td>JFootball</td>
-							<td>Inserito il log degli accessi</td>
-						</tr>
-						<tr>
-							<td>New</td>
-							<td>30/07/2014</td>
-							<td>JFootball</td>
-							<td>Creazione nuovo profilo per la gestione di una singola squadra</td>
-						</tr>
-						<tr>
-							<td>Fix</td>
-							<td>30/07/2014</td>
-							<td>JFootball</td>
-							<td>Correzione bug minori</td>
-						</tr>
 					</TBODY>
 				</table>
 			</subsection>
@@ -59,6 +41,53 @@
 
 			<subsection name="OLD RELEASES">
 			
+				<subsection name="0.10">
+					<table border="0" width="100%">
+						<THEAD>
+							<tr>
+								<th>
+									<b>Activity</b>
+								</th>
+								<th>
+									<b>Date</b>
+								</th>
+								<th>
+									<b>Type</b>
+								</th>
+								<th>
+									<b>Note</b>
+								</th>
+							</tr>
+						</THEAD>
+						<TBODY>
+							<tr>
+								<td>New</td>
+								<td>18/08/2014</td>
+								<td>Player</td>
+								<td>Controllo sulla creazione di un giocatore già inserito</td>
+							</tr>					
+							<tr>
+								<td>New</td>
+								<td>30/07/2014</td>
+								<td>JFootball</td>
+								<td>Inserito il log degli accessi</td>
+							</tr>
+							<tr>
+								<td>New</td>
+								<td>30/07/2014</td>
+								<td>JFootball</td>
+								<td>Creazione nuovo profilo per la gestione di una singola squadra</td>
+							</tr>
+							<tr>
+								<td>Fix</td>
+								<td>30/07/2014</td>
+								<td>JFootball</td>
+								<td>Correzione bug minori</td>
+							</tr>
+						</TBODY>
+					</table>
+				</subsection>
+
 				<subsection name="0.9">
 					<table border="0" width="100%">
 						<THEAD>

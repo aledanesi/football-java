@@ -43,7 +43,13 @@ public class Nation implements Serializable
 	
 	@Column(name="VALUE")
 	private String value;
-	
+
+	@Column(name="LANGUAGE")
+	private String language;
+
+	@Column(name="COUNTRY")
+	private String country;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	protected Continent continent = new Continent();		
 
@@ -101,6 +107,26 @@ public class Nation implements Serializable
 		this.value = value;
 	}	
 	
+	public String getLanguage()
+	{
+		return language;
+	}
+
+	public void setLanguage(String language)
+	{
+		this.language = language;
+	}
+
+	public String getCountry()
+	{
+		return country;
+	}
+
+	public void setCountry(String country)
+	{
+		this.country = country;
+	}
+
 	public Continent getContinent()
 	{
 		return continent;

@@ -126,12 +126,12 @@ public class TeamController extends GenericController
 		UserBean user = new UserBean();
 		view.addObject("user", user);		
 		
-		List<Team> teamList = teamManager.listTeamsByDivision(nationId, divisionId);				
+		List<Team> teamList = footballManager.getTeamsByDivision(nationId, divisionId);				
 		view.addObject("teamList", teamList);
 
 		logger.info("Teams loaded: " + teamList.size());
 
-		List<Division> divisionList = divisionManager.listDivisionsByNation(nationId);
+		List<Division> divisionList = footballManager.getDivisionsByNation(nationId);
 		view.addObject("divisionList", divisionList);
 
 		logger.info("view: LIST_TEAM");
@@ -159,7 +159,7 @@ public class TeamController extends GenericController
 
 		logger.info("--------------------- Team Controller : delete --------------------- ");
 
-		teamManager.deleteTeam(Long.parseLong(teamId));
+		footballManager.deleteTeam(Long.parseLong(teamId));
 
 		logger.info("Team " + teamId + "deleted");
 
@@ -190,8 +190,8 @@ public class TeamController extends GenericController
 				
         if (result.hasErrors()) 
         {
-    		List<Division> divisionList = divisionManager.listDivisions();
-    		List<Nation> nationList = nationManager.listNations();
+    		List<Division> divisionList = footballManager.getDivisions();
+    		List<Nation> nationList = footballManager.getNations();
     		
     		request.setAttribute("team", team);
     		request.setAttribute("divisionList", divisionList);
@@ -209,7 +209,7 @@ public class TeamController extends GenericController
         {
     		if (team.getImage().length == 0 && team.getId() != null)
     		{
-    			Team teamDb = teamManager.getTeamByID(team.getId());
+    			Team teamDb = footballManager.getTeamByID(team.getId());
     			if (teamDb != null )
     			{
         			team.setImage(teamDb.getImage());
@@ -252,6 +252,8 @@ public class TeamController extends GenericController
         		}
     		}
     		
+    		team.setManager(null);
+    		
     		team.setLastUserModify(getUsername());
     		team.setLastTimeModify(new Timestamp(System.currentTimeMillis()));    		
     		
@@ -262,7 +264,7 @@ public class TeamController extends GenericController
 
     		if (team.getId() != null)
     		{
-    			teamDB = teamManager.getTeamByID(team.getId());    			
+    			teamDB = footballManager.getTeamByID(team.getId());    			
     			divisionReturn = teamDB.getDivision().getId();
     		}
     		else 
@@ -271,7 +273,7 @@ public class TeamController extends GenericController
     		}
     		// fine modifica (03-05-2014)
     		
-    		teamManager.saveOrUpdateTeam(team);
+    		footballManager.saveTeam(team);
     		
     		logger.info("Team saved");
     		
@@ -305,12 +307,12 @@ public class TeamController extends GenericController
 
 
 			if (listaRuoli.contains(Constant.ADMIN))
-				nationList = nationManager.listNationsFromContinent(continentId);
+				nationList = footballManager.getNationsFromContinent(continentId);
 			else
-				nationList = nationManager.listNationsTournament();			
+				nationList = footballManager.getNationsTournament();			
 		}
 		else
-			nationList = nationManager.listNationsTournament();
+			nationList = footballManager.getNationsTournament();
 
 		
 		return nationList;
@@ -334,7 +336,7 @@ public class TeamController extends GenericController
 			List<GrantedAuthority> listaRuoli = user.getAuthorities();
 
 			if (listaRuoli.contains(Constant.ADMIN))
-				continentList = continentManager.listContinents();
+				continentList = footballManager.getContinents();
 			else
 				continentList = new ArrayList<Continent>();		
 		}		

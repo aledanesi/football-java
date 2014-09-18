@@ -19,9 +19,7 @@
     
 	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
 	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/teamManager.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/divisionManager.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/nationManager.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/footballManager.js'></script>
 	
 
     <%-- FUNCTION SPECIFIC --%>

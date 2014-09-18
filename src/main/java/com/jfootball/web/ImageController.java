@@ -17,19 +17,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jfootball.domain.ImageObject;
 import com.jfootball.domain.Player;
 import com.jfootball.domain.Team;
-import com.jfootball.manager.PlayerManager;
-import com.jfootball.manager.TeamManager;
+import com.jfootball.manager.FootballManager;
 
 @Controller
 public class ImageController extends GenericController
 {
 
-	@Autowired
+	/*@Autowired
 	public ImageController(TeamManager teamManager, PlayerManager playerManager)
 	{
 		this.teamManager = teamManager;
 		this.playerManager = playerManager;
-	}
+	}*/
+	
+	@Autowired
+	public ImageController(FootballManager footballManager)
+	{
+		this.footballManager = footballManager;
+	}	
 
 	/**
 	 * 
@@ -39,7 +44,7 @@ public class ImageController extends GenericController
 	@RequestMapping(value = "/teams/image", method = RequestMethod.GET)
 	public void getImageTeam(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String teamId)
 	{
-		Team team = teamManager.getTeamByID(Long.parseLong(teamId));
+		Team team = footballManager.getTeamByID(Long.parseLong(teamId));
 
 		try
 		{
@@ -59,7 +64,7 @@ public class ImageController extends GenericController
 	@RequestMapping(value = "/players/image", method = RequestMethod.GET)
 	public void getImagePlayer(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String playerId)
 	{
-		Player player = playerManager.getPlayerByID(Long.parseLong(playerId));
+		Player player = footballManager.getPlayerByID(Long.parseLong(playerId));
 
 		try
 		{

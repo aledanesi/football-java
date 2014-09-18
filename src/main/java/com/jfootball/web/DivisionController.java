@@ -31,7 +31,6 @@ import com.jfootball.web.validator.TeamValidator;
 @Controller
 public class DivisionController extends GenericController
 {
-
 	
 	/*_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_
 	 * 
@@ -73,8 +72,8 @@ public class DivisionController extends GenericController
 
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_DIVISION);
 		
-		List<Division> divisionList = divisionManager.listDivisions();
-		List<Nation> nationList = nationManager.listNations();
+		List<Division> divisionList = footballManager.getDivisions();
+		List<Nation> nationList = footballManager.getNations();
 		
 		
 		view.addObject("division", new Division());
@@ -94,7 +93,7 @@ public class DivisionController extends GenericController
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, 
 			@RequestParam("id") String divisionId)
 	{
-		divisionManager.deleteDivision(Long.parseLong(divisionId));
+		footballManager.deleteDivision(Long.parseLong(divisionId));
 				
 		return list(request, response);
 	}
@@ -117,7 +116,7 @@ public class DivisionController extends GenericController
 		new TeamValidator().validate(division, result);
         if (result.hasErrors()) 
         {
-    		List<Division>divisionList = divisionManager.listDivisions();
+    		List<Division>divisionList = footballManager.getDivisions();
 
     		request.setAttribute("divisionList", divisionList);
 
@@ -128,7 +127,7 @@ public class DivisionController extends GenericController
         {
     		if (division.getImage().length == 0 && division.getId() != null)
     		{
-    			Division divisionDb = divisionManager.getDivisionByID(division.getId());
+    			Division divisionDb = footballManager.getDivision(division.getId());
     			if (divisionDb != null )
     			{
     				division.setImage(divisionDb.getImage());
@@ -171,9 +170,9 @@ public class DivisionController extends GenericController
         		}
     		}
     		    		
-    		divisionManager.saveOrUpdateDivision(division);
+    		footballManager.saveDivision(division);
 
-    		List<Division>divisionList = divisionManager.listDivisions();
+    		List<Division>divisionList = footballManager.getDivisions();
 
     		request.setAttribute("divisionList", divisionList);
 
@@ -192,7 +191,7 @@ public class DivisionController extends GenericController
 	protected List<Nation> populateNations(HttpServletRequest request)
 			throws Exception 
 	{
-		List<Nation>nationList = nationManager.listNations();
+		List<Nation>nationList = footballManager.getNations();
 		return nationList;
 	}
 	

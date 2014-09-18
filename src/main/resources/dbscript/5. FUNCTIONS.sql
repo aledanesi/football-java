@@ -75,3 +75,43 @@ BEGIN
 		update progetto.player set team_id = team_owner_id, number = null, on_loan = 0 where on_loan = 1;
 		
 END $$
+
+
+
+DELIMITER $$
+
+CREATE PROCEDURE fixCities()
+
+BEGIN
+
+	DECLARE finished INTEGER DEFAULT 0;
+  	DECLARE cursorCity VARCHAR(255);
+  	
+  	DECLARE cursor_city CURSOR FOR 	select distinct SUBSTRING(birth_place, 1, CHAR_LENGTH(birth_place)-CHAR_LENGTH('(Italia)')) as city 
+									from progetto.player where birth_place like '%(Italia)' order by birth_place;
+
+	-- declare NOT FOUND handler
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET finished = 1;
+
+	TRUNCATE TABLE progetto.city;
+
+	OPEN cursor_city;
+
+	read_loop: LOOP
+
+		FETCH cursor_city INTO cursorCity;
+
+		IF finished = 1 THEN 
+			LEAVE read_loop;
+		END IF;
+				
+		insert into progetto.city (name, nation_id) values (cursorCity, 11);
+		
+
+	END LOOP read_loop;
+
+	CLOSE cursor_city;
+
+END $$
+
+DELIMITER ;

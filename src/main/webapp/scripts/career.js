@@ -71,7 +71,7 @@ Career.prototype = {
 		validateCareer : function()
 		{
 			var seasonName = jQ("#stagione").val();
-			seasonManager.getSeasonYearByName(seasonName, function(data){
+			footballManager.getSeasonYearByName(seasonName, function(data){
 				jQ("#stagioneID").val(data.id);
 			});
 		},	
@@ -89,7 +89,7 @@ Career.prototype = {
 
 			jQ('#dEditCareer').dialog('open');
 
-			careerManager.getCareerByID(careerId, function(data)
+			footballManager.getCareerByID(careerId, function(data)
 			{
 				jQ('#editCareer input[id=id]').val(data.id);
 				

@@ -66,21 +66,45 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 	/**
 	 * Method to save player
 	 * 
-	 * @param career
-	 *            the player to save
+	 * @param career the player to save
 	 */
-	@Transactional
+	 @Transactional
 	public void saveOrUpdatePlayer(Player player)
 	{
 		logger.info("Saving player " + player.getFirstName() + " " + player.getLastName());
+
+		//Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
 		
-		if (player.getId() != null)
+		// org.hibernate.SessionException: Session is closed!
+
+		//try
+		//{
+			//session.beginTransaction();
+			
+			if (player.getId() != null)
+			{
+				hibernateTemplate.merge(player);
+			} else
+			{
+				hibernateTemplate.saveOrUpdate(player);
+			}
+
+			//session.getTransaction().commit();
+
+		/*} 
+		catch (HibernateException e)
 		{
-			hibernateTemplate.merge(player);
-		} else
-		{
-			hibernateTemplate.saveOrUpdate(player);
+			if (session.getTransaction() != null)
+				session.getTransaction().rollback();
+			
+			logger.error("Save player error", e);
+
+			throw e;
 		}
+		finally 
+		{
+			session.close();
+		}*/
 
 		logger.info("Player saved.");
 	}
@@ -110,12 +134,12 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 	 * @return the players found
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Player> listPlayersByTeamAndCategory(Long teamId, String teamCategory)
+	public List<Player> listPlayersByTeamAndCategory(Long teamId, String teamBranch)
 	{
-		logger.info("Player list by team " + teamId + " and category " + teamCategory);
+		logger.info("Player list by team " + teamId + " and category " + teamBranch);
 
-		List<Player> players = hibernateTemplate.findByNamedParam("from Player p where p.team.id = :idTeam and p.teamCategory = :teamCategory "
-				+ "order by p.position, p.value", new String[] { "idTeam", "teamCategory" }, new Object[] { teamId, teamCategory });
+		List<Player> players = hibernateTemplate.findByNamedParam("from Player p where p.team.id = :idTeam and p.teamBranch = :teamBranch "
+				+ "order by p.position, p.number asc", new String[] { "idTeam", "teamBranch" }, new Object[] { teamId, teamBranch });
 
 		logger.info("Players returned");
 
@@ -128,13 +152,13 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 	 * @return the players found
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Player> listPlayersByTeam(Long teamId, String teamCategory)
+	public List<Player> listPlayersByTeam(Long teamId, String teamBranch)
 	{
 
-		logger.info("Player list by team " + teamId + " and category " + teamCategory);
+		logger.info("Player list by team " + teamId + " and category " + teamBranch);
 
-		List<Player> players = hibernateTemplate.findByNamedParam("from Player p where p.team.id = :idTeam and p.teamCategory = :teamCategory "
-				+ "order by p.position, p.value desc", new String[] { "idTeam", "teamCategory" }, new Object[] { teamId, teamCategory });
+		List<Player> players = hibernateTemplate.findByNamedParam("from Player p where p.team.id = :idTeam and p.teamBranch = :teamBranch "
+				+ "order by p.position, p.number asc", new String[] { "idTeam", "teamBranch" }, new Object[] { teamId, teamBranch });
 
 		logger.info("Players returned");
 
@@ -159,15 +183,15 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 		}
 		else if ("END_CAREER".equals(searchType))
 		{
-			sql = "from Player p where p.lastName like :letter and p.endCareer = '1' order by p.lastName";			
+			sql = "from Player p where p.lastName like :letter and p.retired = TRUE order by p.lastName";			
 		}
 		else if ("WITHOUT_TEAM".equals(searchType))
 		{
-			sql = "from Player p where p.lastName like :letter and p.withoutTeam = '1' order by p.lastName";			
+			sql = "from Player p where p.lastName like :letter and p.unemployed = TRUE order by p.lastName";			
 		}
 		else if ("OTHERS".equals(searchType))
 		{
-			sql = "from Player p where p.lastName like :letter and p.endCareer is null and p.withoutTeam is null order by p.lastName";			
+			sql = "from Player p where p.lastName like :letter and p.retired = FALSE order by p.lastName";			
 		}
 		
 		logger.info("sql: "  + sql);
@@ -232,7 +256,7 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 		criteria.add(Restrictions.eq("team.id", teamId));
 		criteria.addOrder(Order.asc("position"));
 		criteria.addOrder(Order.asc("number"));
-		criteria.addOrder(Order.asc("birthDate"));
+		criteria.addOrder(Order.asc("dateOfBirth"));
 
 		criteria.setFirstResult(counter);
 		criteria.setMaxResults(1);
@@ -280,7 +304,7 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 		criteria.add(Restrictions.eq("team.id", teamId));
 		criteria.addOrder(Order.desc("position"));
 		criteria.addOrder(Order.desc("number"));
-		criteria.addOrder(Order.desc("birthDate"));
+		criteria.addOrder(Order.desc("dateOfBirth"));
 
 		criteria.setFirstResult(counter);
 		criteria.setMaxResults(1);
@@ -313,7 +337,7 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 	 * @return the players found
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean findPlayerExists(String firstName, String lastName, String birthDate)
+	public boolean findPlayerExists(String firstName, String lastName, String dateOfBirth)
 	{
 		boolean playerExists = false;
 		
@@ -321,8 +345,8 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 				+ "from Player p "
 				+ "where p.firstName = :firstName "
 				+ "and p.lastName = :lastName "
-				+ "and DATE_FORMAT(p.birthDate, '%d/%m/%Y') = :birthDate ", 
-				new String[] { "firstName", "lastName", "birthDate" }, new Object[] { firstName, lastName, birthDate });
+				+ "and DATE_FORMAT(p.dateOfBirth, '%d/%m/%Y') = :dateOfBirth ", 
+				new String[] { "firstName", "lastName", "dateOfBirth" }, new Object[] { firstName, lastName, dateOfBirth });
 		
 		if (players.size() > 0)
 		{

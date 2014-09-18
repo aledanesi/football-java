@@ -23,7 +23,7 @@ import com.jfootball.util.ProjectUtil;
  * @author Alessandro Danesi
  */
 @Entity
-@Table(name = "PLAYER")
+@Table(name = "PLAYERS")
 @DataTransferObject(type = "hibernate3")
 public class Player extends ImageObject {
 
@@ -33,80 +33,107 @@ public class Player extends ImageObject {
 	 * 
 	 **************************************************************************/
 
-	@Column(name = "FIRST_NAME")
+	// personal data
+	@Column(name = "FIRST_NAME")	
 	private String firstName;
-
-	@Column(name = "LAST_NAME")
+	
+	@Column(name = "LAST_NAME")	
 	private String lastName;
-
-	@Column(name = "COMPLETE_NAME")
+	
+	@Column(name = "COMPLETE_NAME")	
 	private String completeName;
+	
+	@Column(name = "DATE_OF_BIRTH")
+	private Date dateOfBirth;
 
-	@Column(name = "BIRTH_DATE")
-	private Date birthDate;
+	@Column(name = "PLACE_OF_BIRTH")	
+	private String placeOfBirth;
+	
+	
+	
+	// contract data
+	@Column(name = "CONTRACT_UNTIL")
+	private String contractUntil;
+	
+	@Column(name = "NET_WEEKLY_SALARY")
+	private String netWeeklySalary;
+	
+	@Column(name = "NET_ANNUAL_SALARY")	
+	private String netAnnualSalary;
+	
+	@Column(name = "GROSS_WEEKLY_SALARY")
+	private String grossWeeklySalary;
 
-	@Column(name = "BIRTH_PLACE")
-	private String birthPlace;
+	@Column(name = "GROSS_ANNUAL_SALARY")
+	private String grossAnnualSalary;
+	
+	@Column(name = "COST")	
+	private String cost;
+	
+	
 
-	@Column(name = "HEIGHT")
-	private String height;
-
-	@Column(name = "WEIGHT")
-	private String weight;
-
-	@Column(name = "FOOT")
-	private String foot;
-
-	@Column(name = "VALUE")
-	private String value;
-
-	@Column(name = "DATE_CONTRACT")
-	private String dateContract;
-
-	@Column(name = "INCOME")
-	private String income;
-
-	@Column(name = "NUMBER")
-	private Integer number;
-
-	@Column(name = "CAPTAIN")
-	private Boolean captain;
-
-	@Column(name = "NATIONAL")
+	// team data
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "team_id")		
+	private Team team;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "team_owner_id")		
+	private Team teamOwner;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "team_prev_id")	
+	private Team teamPrev;
+	
+	
+	
+	// nation data
+	@Column(name = "NATIONAL")	
 	private String national;
+	
+	@ManyToOne(fetch = FetchType.EAGER)	
+	private Nation nationality = new Nation();
+	
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)	
+	private Nation nationality2 = new Nation();
+	
+	
+	
+	// other data
+	@Column(name = "NUMBER")		
+	private Integer number;
+	
+	@Column(name = "HEIGHT")	
+	private String height;
+	
+	@Column(name = "WEIGHT")	
+	private String weight;
+	
+	@Column(name = "FOOT")
+	private String foot;	
 
-	@Column(name = "ON_LOAN")
+	@Column(name = "TEAM_BRANCH")	
+	private String teamBranch;
+
+	@ManyToOne(fetch = FetchType.EAGER)	
+	private Position position = new Position();
+
+
+
+	// flag data
+	@Column(name = "CAPTAIN")			
+	private Boolean captain;
+	
+	@Column(name = "ON_LOAN")	
 	private Boolean onLoan;
 
-	@Column(name = "WITHOUT_TEAM")
-	private Boolean withoutTeam;
+	@Column(name = "UNEMPLOYED")	
+	private Boolean unemployed;
 
-	@Column(name = "END_CAREER")
-	private Boolean endCareer;
+	@Column(name = "RETIRED")	
+	private Boolean retired;
 
-	@Column(name = "TEAM_CATEGORY")
-	private String teamCategory;
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "team_id")
-	private Team team;
-
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "team_owner_id")
-	private Team teamOwner;
-
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "team_prev_id")
-	private Team teamPrev;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Nation nation = new Nation();
-
-	@ManyToOne(fetch = FetchType.EAGER, optional = true)
-	private Nation nation2 = new Nation();
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Position position = new Position();
 
 	/***************************************************************************
 	 * 
@@ -114,6 +141,106 @@ public class Player extends ImageObject {
 	 * 
 	 **************************************************************************/
 
+	// ********************************************************** //
+	// 						personal data						  //
+	// ********************************************************** //
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getCompleteName() {
+		return completeName;
+	}
+
+	public void setCompleteName(String completeName) {
+		this.completeName = completeName;
+	}
+
+	public Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getPlaceOfBirth() {
+		return placeOfBirth;
+	}
+
+	public void setPlaceOfBirth(String placeOfBirth) {
+		this.placeOfBirth = placeOfBirth;
+	}
+	
+	
+	// ********************************************************** //
+	// 						contract data						  //
+	// ********************************************************** //
+	public String getContractUntil() {
+		return contractUntil;
+	}
+
+	public void setContractUntil(String contractUntil) {
+		this.contractUntil = contractUntil;
+	}
+	
+	public String getNetWeeklySalary() {
+		return netWeeklySalary;
+	}
+
+	public void setNetWeeklySalary(String netWeeklySalary) {
+		this.netWeeklySalary = netWeeklySalary;
+	}
+	
+	public String getNetAnnualSalary() {
+		return netAnnualSalary;
+	}
+
+	public void setNetAnnualSalary(String netAnnualSalary) {
+		this.netAnnualSalary = netAnnualSalary;
+	}	
+
+	public String getGrossWeeklySalary() {
+		return grossWeeklySalary;
+	}
+
+	public void setGrossWeeklySalary(String grossWeeklySalary) {
+		this.grossWeeklySalary = grossWeeklySalary;
+	}
+
+	public String getGrossAnnualSalary() {
+		return grossAnnualSalary;
+	}
+
+	public void setGrossAnnualSalary(String grossAnnualSalary) {
+		this.grossAnnualSalary = grossAnnualSalary;
+	}
+
+	public String getCost() {
+		return cost;
+	}
+
+	public void setCost(String cost) {
+		this.cost = cost;
+	}
+
+	
+	
+	// ********************************************************** //
+	// 						team data						  	  //
+	// ********************************************************** //	
 	public Team getTeam() {
 		return team;
 	}
@@ -138,62 +265,50 @@ public class Player extends ImageObject {
 		this.teamPrev = teamPrev;
 	}
 
-	public String getFirstName() {
-		return firstName;
+
+	
+	// ********************************************************** //
+	// 						nation data						  	  //
+	// ********************************************************** //		
+	public String getNational() {
+		return national;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setNational(String national) {
+		this.national = national;
+	}
+	
+	public Nation getNationality() {
+		return nationality;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public void setNationality(Nation nationality) {
+		this.nationality = nationality;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public Nation getNationality2() {
+		return nationality2;
 	}
 
-	public Date getBirthDate() {
-		return birthDate;
+	public void setNationality2(Nation nationality2) {
+		this.nationality2 = nationality2;
 	}
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
+	
+	
+	
+	// ********************************************************** //
+	// 						other data						  	  //
+	// ********************************************************** //		
+	public Integer getNumber() {
+		return number;
 	}
 
-	public String getBirthPlace() {
-		return birthPlace;
+	public void setNumber(Integer number) {
+		this.number = number;
 	}
 
-	public void setBirthPlace(String birthPlace) {
-		this.birthPlace = birthPlace;
-	}
-
-	public Nation getNation() {
-		return nation;
-	}
-
-	public void setNation(Nation nation) {
-		this.nation = nation;
-	}
-
-	public Nation getNation2() {
-		return nation2;
-	}
-
-	public void setNation2(Nation nation2) {
-		this.nation2 = nation2;
-	}
-
-	public Position getPosition() {
-		return position;
-	}
-
-	public void setPosition(Position position) {
-		this.position = position;
-	}
-
+	
 	public String getHeight() {
 		return height;
 	}
@@ -209,39 +324,7 @@ public class Player extends ImageObject {
 	public void setWeight(String weight) {
 		this.weight = weight;
 	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
-
-	public Boolean getCaptain() {
-		return captain;
-	}
-
-	public void setCaptain(Boolean captain) {
-		this.captain = captain;
-	}
-
-	public Boolean getEndCareer() {
-		return endCareer;
-	}
-
-	public void setEndCareer(Boolean endCareer) {
-		this.endCareer = endCareer;
-	}
-
-	public Boolean getWithoutTeam() {
-		return withoutTeam;
-	}
-
-	public void setWithoutTeam(Boolean withoutTeam) {
-		this.withoutTeam = withoutTeam;
-	}
-
+	
 	public String getFoot() {
 		return foot;
 	}
@@ -250,44 +333,33 @@ public class Player extends ImageObject {
 		this.foot = foot;
 	}
 
-	public String getNational() {
-		return national;
+	public String getTeamBranch() {
+		return teamBranch;
 	}
 
-	public void setNational(String national) {
-		this.national = national;
+	public void setTeamBranch(String teamBranch) {
+		this.teamBranch = teamBranch;
 	}
 
-	public String getValue() {
-		return value;
+	public Position getPosition() {
+		return position;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 
-	public String getIncome() {
-		return income;
+
+	// ********************************************************** //
+	// 						flag data						  	  //
+	// ********************************************************** //		
+
+	public Boolean getCaptain() {
+		return captain;
 	}
 
-	public void setIncome(String income) {
-		this.income = income;
-	}
-
-	public String getCompleteName() {
-		return completeName;
-	}
-
-	public void setCompleteName(String completeName) {
-		this.completeName = completeName;
-	}
-
-	public String getDateContract() {
-		return dateContract;
-	}
-
-	public void setDateContract(String dateContract) {
-		this.dateContract = dateContract;
+	public void setCaptain(Boolean captain) {
+		this.captain = captain;
 	}
 
 	public Boolean getOnLoan() {
@@ -298,16 +370,29 @@ public class Player extends ImageObject {
 		this.onLoan = onLoan;
 	}
 
-	public String getTeamCategory() {
-		return teamCategory;
+	public Boolean getRetired() {
+		return retired;
 	}
 
-	public void setTeamCategory(String teamCategory) {
-		this.teamCategory = teamCategory;
+	public void setRetired(Boolean retired) {
+		this.retired = retired;
 	}
 
-	public String getEta() {
-		return ProjectUtil.getAge(this.birthDate);
+	public Boolean getUnemployed() {
+		return unemployed;
+	}
+
+	public void setUnemployed(Boolean unemployed) {
+		this.unemployed = unemployed;
+	}
+
+
+
+
+
+
+	public String getAge() {
+		return ProjectUtil.getAge(this.dateOfBirth);
 	}
 
 	@Override

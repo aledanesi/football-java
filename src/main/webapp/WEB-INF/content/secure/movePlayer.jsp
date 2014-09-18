@@ -36,7 +36,7 @@ jQ(window).load(function() {
 
 	var nation = jQ("#nation_id_move").val();
 	
-	divisionManager.listDivisionsByNation(nation, function(data) {
+	footballManager.getDivisionsByNation(nation, function(data) {
 
 		jQ( "#division_id_move" ).empty();
 
@@ -44,7 +44,7 @@ jQ(window).load(function() {
 
 		var division = jQ("#division_id_move").val();
 
-		teamManager.listTeamsByDivision(nation, division, function(data2) {
+		footballManager.getTeamsByDivision(nation, division, function(data2) {
 			jQ("#team_id_move").empty();
 			dwr.util.addOptions("team_id_move", data2, "id", "name");
 		});				
@@ -58,7 +58,7 @@ jQ(window).load(function() {
 		jQ("#nation_id_move").change(function() {
 			var nation = jQ("#nation_id_move").val();
 			
-			divisionManager.listDivisionsByNation(nation, function(data) {
+			footballManager.getDivisionsByNation(nation, function(data) {
 	
 				jQ( "#division_id_move" ).empty();
 	
@@ -66,7 +66,7 @@ jQ(window).load(function() {
 	
 				var division = jQ("#division_id_move").val();
 	
-				teamManager.listTeamsByDivision(nation, division, function(data2) {
+				footballManager.getTeamsByDivision(nation, division, function(data2) {
 					jQ("#team_id_move").empty();
 					dwr.util.addOptions("team_id_move", data2, "id", "name");
 				});				
@@ -78,7 +78,7 @@ jQ(window).load(function() {
 			var nation = jQ("#nation_id_move").val();
 			var division = jQ("#division_id_move").val();
 	
-			teamManager.listTeamsByDivision(nation, division, function(data2) {
+			footballManager.getTeamsByDivision(nation, division, function(data2) {
 				jQ("#team_id_move").empty();
 				dwr.util.addOptions("team_id_move", data2, "id", "name");
 			});

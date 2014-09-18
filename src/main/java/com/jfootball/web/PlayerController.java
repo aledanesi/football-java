@@ -93,7 +93,7 @@ public class PlayerController extends GenericController
 
 		Long idPlayer = Long.parseLong(playerId);
 
-		Player player = playerManager.getPlayerByID(idPlayer);
+		Player player = footballManager.getPlayerByID(idPlayer);
 
 		// questo metodo, diversamente dal suo gemello, carica solo alcune informazioni in memoria e non tutto l'albero per problemi di performance.
 		List<Team> teamList = new ArrayList<Team>();
@@ -101,16 +101,20 @@ public class PlayerController extends GenericController
 		
 		if (player.getTeam() != null)
 		{
-			teamList = teamManager.listTeamsByDivisionForView(player.getTeam().getNation().getId(), player.getTeam().getDivision().getId());
+			teamList = footballManager.getTeamsByDivisionForView(player.getTeam().getNation().getId(), player.getTeam().getDivision().getId());
 			
-			playerList = playerManager.listPlayersByTeam(player.getTeam().getId(), player.getTeamCategory());			
+			playerList = footballManager.getPlayers(player.getTeam().getId(), player.getTeamBranch());			
 		}
 
-		List<Career> careerList = careerManager.listCareer(idPlayer);
+		List<Career> careerList = footballManager.getCareers(idPlayer);
 
 		Career career = new Career();
 		career.setPlayer(player);		
+		
+		Team team = footballManager.getTeamByID(player.getTeam().getId());
 
+		view.addObject("team", team);
+				
 		view.addObject("career", career);
 
 		view.addObject("player", player);
@@ -121,15 +125,15 @@ public class PlayerController extends GenericController
 		
 		view.addObject("careerList", careerList);
 		
-		List<Division> divisionList = divisionManager.listDivisionsByNation(new Long(Constant.DEFAULT_NATION));
+		List<Division> divisionList = footballManager.getDivisionsByNation(new Long(Constant.DEFAULT_NATION));
 		view.addObject("divisionList", divisionList);
 		
 		
 		if (player.getTeam() != null) {
-			int counter = Integer.parseInt(playerManager.getRank(player.getTeam().getId(), idPlayer));
+			int counter = Integer.parseInt(footballManager.getPlayerRank(player.getTeam().getId(), idPlayer));
 
-			HashMap<String, Object> hashSetNext = playerManager.getNextId(player.getTeam().getId(), counter);
-			HashMap<String, Object> hashSetPrev = playerManager.getNextId(player.getTeam().getId(), counter - 2);
+			HashMap<String, Object> hashSetNext = footballManager.getNextId(player.getTeam().getId(), counter);
+			HashMap<String, Object> hashSetPrev = footballManager.getNextId(player.getTeam().getId(), counter - 2);
 
 			view.addObject("nextCounter", hashSetNext.get("counter"));
 			view.addObject("nextId", hashSetNext.get("id"));
@@ -162,9 +166,9 @@ public class PlayerController extends GenericController
 
 		if (!StringUtils.isEmpty(teamId)) {
 			Long idTeam = new Long(teamId);
-			Team team = teamManager.getTeamByID(idTeam);
+			Team team = footballManager.getTeamByID(idTeam);
 			Player player = new Player();
-			List<Player> players = playerManager.listPlayersByTeam(idTeam, teamCategory);
+			List<Player> players = footballManager.getPlayers(idTeam, teamCategory);
 
 			view.addObject("team", team);
 			view.addObject("player", player);
@@ -194,7 +198,7 @@ public class PlayerController extends GenericController
 
 		Player player = new Player();
 
-		List<Player> playerList = playerManager.listPlayers();
+		List<Player> playerList = footballManager.getPlayers();
 
 		view.addObject("player", player);
 		view.addObject("playerList", playerList);
@@ -219,13 +223,13 @@ public class PlayerController extends GenericController
 		
 		logger.info("--------------------- Player Controller : delete --------------------- ");
 
-		Player player = playerManager.getPlayerByID(Long.parseLong(playerId));
+		Player player = footballManager.getPlayerByID(Long.parseLong(playerId));
 		
-		playerManager.deletePlayer(Long.parseLong(playerId));
+		footballManager.deletePlayer(Long.parseLong(playerId));
 		
 		logger.info("Player " + playerId + "deleted");
 
-		return listByTeam(request, response, teamId, player.getTeamCategory());
+		return listByTeam(request, response, teamId, player.getTeamBranch());
 	}
 
 	/**
@@ -264,7 +268,7 @@ public class PlayerController extends GenericController
 		
 		if (!StringUtils.isEmpty(iniziale)) 
 		{
-			List<Player> playerList = playerManager.listPlayersByLetter(iniziale, searchType);
+			List<Player> playerList = footballManager.getPlayers(iniziale, searchType);
 
 			view.addObject("playerList", playerList);
 		}
@@ -310,7 +314,7 @@ public class PlayerController extends GenericController
 		
 		if (!StringUtils.isEmpty(iniziale)) 
 		{
-			List<Player> playerList = playerManager.listPlayersByLetter(iniziale, searchType);
+			List<Player> playerList = footballManager.getPlayers(iniziale, searchType);
 
 			view.addObject("playerList", playerList);
 		}
@@ -326,7 +330,7 @@ public class PlayerController extends GenericController
 	 * 
 	 */
 	@RequestMapping(value = "/players/save", method = RequestMethod.POST)
-	protected ModelAndView processSubmit(@ModelAttribute("player") Player player, BindingResult result, SessionStatus status, HttpServletRequest request, HttpServletResponse response) 
+	protected ModelAndView processSave(@ModelAttribute("player") Player player, BindingResult result, SessionStatus status, HttpServletRequest request, HttpServletResponse response) 
 			throws Exception 
 	{
 		logger.info("--------------------- Player Controller : processSubmit --------------------- ");
@@ -351,37 +355,56 @@ public class PlayerController extends GenericController
 			Team team = null;
 			if (player.getTeam().getId() != null)
 			{
-				team = teamManager.getTeamByID(player.getTeam().getId());
+				team = footballManager.getTeamByID(player.getTeam().getId());
 				team.setLastUserModify(getUsername());
 				team.setLastTimeModify(new Timestamp(System.currentTimeMillis()));				
 			}
 			
 			Team teamOwner = null;
-			if (player.getTeamOwner().getId() != null)
-				teamOwner = teamManager.getTeamByID(player.getTeamOwner().getId());
+			if (player.getTeamOwner() != null)
+				teamOwner = footballManager.getTeamByID(player.getTeamOwner().getId());
 
 
-			Position position = positionManager.getPositionByID(player.getPosition().getId());
-			Nation nation = nationManager.getNationByID(player.getNation().getId());
+			Position position = footballManager.getPosition(player.getPosition().getId());
+			Nation nationality = footballManager.getNation(player.getNationality().getId());
 			
-			Nation nation2 =  null;
-			if (player.getNation2().getId() != null)
-				nation2 = nationManager.getNationByID(player.getNation2().getId());
+			Nation nationality2 =  null;
+			if (player.getNationality2().getId() != null)
+				nationality2 = footballManager.getNation(player.getNationality2().getId());
 
 			player.setPosition(position);
 			player.setTeam(team);
 			player.setTeamOwner(teamOwner);
-			player.setNation(nation);
-			player.setNation2(nation2);
+			player.setNationality(nationality);
+			player.setNationality2(nationality2);
 			
 			// solo nel caso di primo inserimento
 			if (player.getId() == null || player.getTeamPrev().getId() == null ) 
 				player.setTeamPrev(team);	
 
 
+			player.setLastUserModify(getUsername());
+			player.setLastTimeModify(new Timestamp(System.currentTimeMillis()));
+
+			
+			// togliere i punti di separazione delle migliaia - 24/07/2014
+			formatGrossWeeklySalary(player);
+			
+			formatNetAnnualSalary(player);
+			
+			/*
+			 * if (userImage != null) { byte[] image = getFileBytes();
+			 * player.setImage(image); }
+			 */
+
+			footballManager.savePlayer(player);
+
+    		logger.info("Player saved");
+
+    		// GESTIONE IMMAGINE
 			if (player.getImage().length == 0 && player.getId() != null) 
 			{
-				Player playerDb = playerManager.getPlayerByID(player.getId());
+				Player playerDb = footballManager.getPlayerByID(player.getId());
 
 				if (playerDb != null) {
 					player.setImage(playerDb.getImage());
@@ -418,36 +441,14 @@ public class PlayerController extends GenericController
 					}
 				}
 			}
-
-			player.setLastUserModify(getUsername());
-			player.setLastTimeModify(new Timestamp(System.currentTimeMillis()));
-
-			
-			// togliere i punti di separazione delle migliaia - 24/07/2014
-			if (player.getValue() != null && ! "".equals(player.getValue().trim()))
-				player.setValue(player.getValue().replace(".", ""));
-			else if ("".equals(player.getValue().trim()))
-				player.setValue(null);
-
-			if (player.getIncome() != null && ! "".equals(player.getIncome().trim()))
-				player.setIncome(player.getIncome().replace(".", ""));
-			else if ("".equals(player.getIncome().trim()))
-				player.setIncome(null);
-			
-			/*
-			 * if (userImage != null) { byte[] image = getFileBytes();
-			 * player.setImage(image); }
-			 */
-
-			playerManager.saveOrUpdatePlayer(player);
-
-    		logger.info("Player saved");
+    		
+    		
     		
 			Long teamId = 0L;
     		if (team != null)
     		{
     			teamId = player.getTeam().getId();    			
-    			return listByTeam(request, response, teamId.toString(), player.getTeamCategory());
+    			return listByTeam(request, response, teamId.toString(), player.getTeamBranch());
     		}
     		else 
     		{
@@ -458,12 +459,38 @@ public class PlayerController extends GenericController
 	}
 
 	/**
+	 * @param player
+	 */
+	private void formatGrossWeeklySalary(Player player)
+	{
+		String str = null;
+		
+		if (player.getGrossWeeklySalary() != null && !"".equals(player.getGrossWeeklySalary().trim()))
+			str = player.getGrossWeeklySalary().replace(".", "");
+		
+		player.setGrossWeeklySalary(str);
+	}
+	
+	/**
+	 * @param player
+	 */
+	private void formatNetAnnualSalary(Player player)
+	{
+		String str = null;
+		
+		if (player.getNetAnnualSalary() != null && !"".equals(player.getNetAnnualSalary().trim()))
+			str = player.getNetAnnualSalary().replace(".", "");
+		
+		player.setNetAnnualSalary(str);
+	}	
+
+	/**
 	 * 
 	 * ----------------onSubmit()----------------
 	 * 
 	 */
 	@RequestMapping(value = "/players/movePlayer", method = RequestMethod.POST)
-	protected ModelAndView processSubmitMovePlayer(
+	protected ModelAndView processMovePlayer(
 			@ModelAttribute("player") Player player, BindingResult result,
 			SessionStatus status, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
@@ -472,7 +499,7 @@ public class PlayerController extends GenericController
 
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_PLAYER);
 
-		Player playerDb = playerManager.getPlayerByID(player.getId());
+		Player playerDb = footballManager.getPlayerByID(player.getId());
 
 		Long teamId = 0L;
 		
@@ -483,31 +510,37 @@ public class PlayerController extends GenericController
 			teamId = player.getTeam().getId();						
 
 		
-		String teamCategory = playerDb.getTeamCategory();
+		String teamBranch = playerDb.getTeamBranch();
 
-		playerDb.setTeam(teamManager.getTeamByID(player.getTeam().getId()));
+		playerDb.setTeam(footballManager.getTeamByID(player.getTeam().getId()));
 
 		// gestione per il trasferimento in prestito 
 		
 		if (player.getOnLoan())
-			playerDb.setTeamOwner(teamManager.getTeamByID(player.getTeamOwner().getId()));			
+			playerDb.setTeamOwner(footballManager.getTeamByID(player.getTeamOwner().getId()));			
 		
 		else 
-			playerDb.setTeamOwner(teamManager.getTeamByID(player.getTeam().getId()));		
+			playerDb.setTeamOwner(footballManager.getTeamByID(player.getTeam().getId()));		
 		
 		// fine 
 		playerDb.setNumber(null);
-		playerDb.setEndCareer(null);
-		playerDb.setWithoutTeam(null);
+		playerDb.setRetired(null);
+		playerDb.setUnemployed(null);
+		playerDb.setCaptain(null);
 		
-		playerManager.saveOrUpdatePlayer(playerDb);
+		playerDb.setNetWeeklySalary(null);
+		playerDb.setNetAnnualSalary(null);
+		playerDb.setGrossWeeklySalary(null);
+		playerDb.setGrossAnnualSalary(null);
+		
+		footballManager.savePlayer(playerDb);
 
 		logger.info("Player changed team.");
 
 		if (teamId != null)
 		{
-			List<Player> playerList = playerManager.listPlayersByTeam(teamId, teamCategory);
-			Team teamPrec = teamManager.getTeamByID(teamId);
+			List<Player> playerList = footballManager.getPlayers(teamId, teamBranch);
+			Team teamPrec = footballManager.getTeamByID(teamId);
 
 			view.addObject("playerList", playerList);
 			view.addObject("team", teamPrec);
@@ -528,7 +561,7 @@ public class PlayerController extends GenericController
 	 * ----------------onSubmit()----------------
 	 * 
 	 */
-	@RequestMapping(value = "/players/withoutTeam", method = RequestMethod.POST)
+	@RequestMapping(value = "/players/withoutTeam")
 	protected ModelAndView processWithoutTeam(
 			@ModelAttribute("player") Player player, BindingResult result,
 			SessionStatus status, HttpServletRequest request,
@@ -538,7 +571,7 @@ public class PlayerController extends GenericController
 
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_PLAYER);
 
-		Player playerDb = playerManager.getPlayerByID(player.getId());
+		Player playerDb = footballManager.getPlayerByID(player.getId());
 
 		Long teamId = 0L;
 		
@@ -549,24 +582,29 @@ public class PlayerController extends GenericController
 			teamId = player.getTeam().getId();						
 
 		
-		String teamCategory = playerDb.getTeamCategory();
+		String teamBranch = playerDb.getTeamBranch();
 
-		playerDb.setWithoutTeam(true);
-		playerDb.setCaptain(null);
-		playerDb.setDateContract(null);
-		playerDb.setIncome(null);
+		playerDb.setUnemployed(true);
+		playerDb.setCaptain(false);
+		playerDb.setContractUntil(null);
+
+		playerDb.setNetWeeklySalary(null);
+		playerDb.setNetAnnualSalary(null);
+		playerDb.setGrossWeeklySalary(null);
+		playerDb.setGrossAnnualSalary(null);
+
 		playerDb.setNumber(null);
-		playerDb.setValue(null);
-		playerDb.setOnLoan(null);		
+		playerDb.setCost(null);
+		playerDb.setOnLoan(false);		
 		playerDb.setTeam(null);
 		playerDb.setTeamOwner(null);
 
-		playerManager.saveOrUpdatePlayer(playerDb);
+		footballManager.savePlayer(playerDb);
 
 		logger.info("Player changed team.");
 
-		List<Player> playerList = playerManager.listPlayersByTeam(teamId, teamCategory);
-		Team teamPrec = teamManager.getTeamByID(teamId);
+		List<Player> playerList = footballManager.getPlayers(teamId, teamBranch);
+		Team teamPrec = footballManager.getTeamByID(teamId);
 
 		view.addObject("playerList", playerList);
 		view.addObject("team", teamPrec);
@@ -592,7 +630,7 @@ public class PlayerController extends GenericController
 
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_PLAYER);
 
-		Player playerDb = playerManager.getPlayerByID(player.getId());
+		Player playerDb = footballManager.getPlayerByID(player.getId());
 
 		Long teamId = 0L;
 		
@@ -603,27 +641,32 @@ public class PlayerController extends GenericController
 			teamId = player.getTeam().getId();						
 
 		
-		String teamCategory = playerDb.getTeamCategory();
+		String teamBranch = playerDb.getTeamBranch();
 
 		// gestione fine carriera
-		playerDb.setEndCareer(true);
-		playerDb.setWithoutTeam(false);		
-		playerDb.setCaptain(null);
-		playerDb.setDateContract(null);
-		playerDb.setIncome(null);
+		playerDb.setRetired(true);
+		playerDb.setUnemployed(false);		
+		playerDb.setCaptain(false);
+		playerDb.setContractUntil(null);
+
+		playerDb.setNetWeeklySalary(null);
+		playerDb.setNetAnnualSalary(null);
+		playerDb.setGrossWeeklySalary(null);
+		playerDb.setGrossAnnualSalary(null);
+		
 		playerDb.setNumber(null);
-		playerDb.setValue(null);
-		playerDb.setOnLoan(null);		
+		playerDb.setCost(null);
+		playerDb.setOnLoan(false);		
 		playerDb.setTeam(null);
 		playerDb.setTeamOwner(null);
 		playerDb.setTeamPrev(null);		
 		
-		playerManager.saveOrUpdatePlayer(playerDb);
+		footballManager.savePlayer(playerDb);
 
 		logger.info("Player changed team.");
 
-		List<Player> playerList = playerManager.listPlayersByTeam(teamId, teamCategory);
-		Team teamPrec = teamManager.getTeamByID(teamId);
+		List<Player> playerList = footballManager.getPlayers(teamId, teamBranch);
+		Team teamPrec = footballManager.getTeamByID(teamId);
 
 		view.addObject("playerList", playerList);
 		view.addObject("team", teamPrec);
@@ -644,7 +687,7 @@ public class PlayerController extends GenericController
 	@ModelAttribute("nationList")
 	protected List<Nation> populateNations(HttpServletRequest request)
 			throws Exception {
-		List<Nation> nationList = nationManager.listNations();
+		List<Nation> nationList = footballManager.getNations();
 		return nationList;
 	}
 
@@ -689,7 +732,7 @@ public class PlayerController extends GenericController
 	@ModelAttribute("seasonYearList")
 	protected List<Season> populateSeasons(HttpServletRequest request) throws Exception 
 	{
-		List<Season> seasonYearList = seasonManager.listSeason();
+		List<Season> seasonYearList = footballManager.getSeasons();
 		return seasonYearList;
 	}	
 
