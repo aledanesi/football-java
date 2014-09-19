@@ -3,15 +3,15 @@
 	<groupId>com.jfootball.app</groupId>
 	<artifactId>JFootball</artifactId>
 	<packaging>war</packaging>
-	<version>0.10</version>
+	<version>0.11-SNAPSHOT</version>
 	<name>JFootball Webapp</name>
 	<url>http://maven.apache.org</url>
 	<description>Statistiche Calciatori</description>
 
 	<scm>
-		<connection>scm:svn:https://football-java.googlecode.com/svn/tags/JFootball-0.10</connection>
-		<developerConnection>scm:svn:https://football-java.googlecode.com/svn/tags/JFootball-0.10</developerConnection>
-		<url>http://code.google.com/p/football-java/source/browse/tags/JFootball-0.10</url>
+		<connection>scm:svn:https://football-java.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:https://football-java.googlecode.com/svn/trunk</developerConnection>
+		<url>http://code.google.com/p/football-java/source/browse/trunk</url>
 	</scm>
 
 	<developers>
@@ -208,7 +208,7 @@
 		<dependency>
 			<groupId>org.directwebremoting</groupId>
 			<artifactId>dwr</artifactId>
-			<version>3.0.0-rc3-SNAPSHOT</version>
+			<version>3.0.0-rc3</version>
 		</dependency>
 
 
