@@ -26,6 +26,7 @@ public class TeamTest extends BaseTest
 	{
 		team = new Team();
 		team.setName("XXX");
+		team.setManager(null);
 
 		Division division = new Division();
 		division.setId(new Long(Constant.DEFAULT_DIVISION));

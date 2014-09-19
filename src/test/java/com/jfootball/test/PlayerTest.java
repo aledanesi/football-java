@@ -25,6 +25,7 @@ public class PlayerTest extends BaseTest
 		player = new Player();
 		player.setFirstName("XXX");
 		player.setLastName("XXX");
+		player.setCaptain(false);
 
 		Nation nation = new Nation();
 		nation.setId(11L);

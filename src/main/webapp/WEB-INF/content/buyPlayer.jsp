@@ -153,7 +153,7 @@
 								
 							  <td class="bg2 alle">
 								   <a href="#" class="targetLinkPlayer" data-id="${playerStatus.id}">${playerStatus.lastName} ${playerStatus.firstName}</a>               
-								   (${playerStatus.position.descPosizione}<c:if test="${!empty playerStatus.team.name}"> - ${custom:nationalCapitalize(playerStatus.team.name)}</c:if>) nato il <fmt:formatDate value="${playerStatus.birthDate}" type="both" pattern="dd/MM/yyyy" /> a ${playerStatus.birthPlace}              
+								   (${playerStatus.position.descPosizione}<c:if test="${!empty playerStatus.team.name}"> - ${custom:nationalCapitalize(playerStatus.team.name)}</c:if>) nato il <fmt:formatDate value="${playerStatus.dateOfBirth}" type="both" pattern="dd/MM/yyyy" /> a ${playerStatus.placeOfBirth}              
 							  </td>
 							  <td class="bg2 alle" style="text-align: center">
 								<c:if test="${playerStatus.team.id != player.teamId}">
