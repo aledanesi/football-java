@@ -1,18 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jfootball.app</groupId>
 	<artifactId>JFootball</artifactId>
 	<packaging>war</packaging>
-	<version>0.10-SNAPSHOT</version>
+	<version>0.10</version>
 	<name>JFootball Webapp</name>
 	<url>http://maven.apache.org</url>
 	<description>Statistiche Calciatori</description>
 
 	<scm>
-		<connection>scm:svn:https://football-java.googlecode.com/svn/trunk</connection>
-		<developerConnection>scm:svn:https://football-java.googlecode.com/svn/trunk</developerConnection>
-		<url>http://code.google.com/p/football-java/source/browse/trunk</url>
+		<connection>scm:svn:https://football-java.googlecode.com/svn/tags/JFootball-0.10</connection>
+		<developerConnection>scm:svn:https://football-java.googlecode.com/svn/tags/JFootball-0.10</developerConnection>
+		<url>http://code.google.com/p/football-java/source/browse/tags/JFootball-0.10</url>
 	</scm>
 
 	<developers>
@@ -209,7 +208,7 @@
 		<dependency>
 			<groupId>org.directwebremoting</groupId>
 			<artifactId>dwr</artifactId>
-			<version>${dwr-version}</version>
+			<version>3.0.0-rc3-SNAPSHOT</version>
 		</dependency>
 
 
