@@ -21,7 +21,7 @@ import org.directwebremoting.annotations.DataTransferObject;
  * @author Alessandro Danesi
  */
 @Entity
-@Table(name="NATION")
+@Table(name="NATIONS")
 @DataTransferObject(type = "hibernate3")
 public class Nation implements Serializable 
 {

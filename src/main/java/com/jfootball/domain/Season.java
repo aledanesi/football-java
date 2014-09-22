@@ -42,7 +42,7 @@ import org.directwebremoting.annotations.DataTransferObject;
  * @author Alessandro Danesi
  */
 @Entity
-@Table(name = "SEASON_YEAR")
+@Table(name = "SEASON_YEARS")
 @DataTransferObject(type = "hibernate3")
 public class Season implements Serializable
 {

@@ -15,7 +15,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
 @Entity
-@Table(name = "USER_LOGGED")
+@Table(name = "USERS_LOGGED")
 public class UserLogged implements Serializable
 {
 	@Id

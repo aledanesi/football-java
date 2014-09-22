@@ -45,7 +45,7 @@ import org.hibernate.validator.NotEmpty;
  * 
  */
 @Entity
-@Table(name = "CAREER")
+@Table(name = "CAREERS")
 @DataTransferObject(type = "hibernate3")
 public class Career extends BaseEntity
 {

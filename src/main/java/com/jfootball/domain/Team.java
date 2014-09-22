@@ -26,7 +26,7 @@ import com.jfootball.util.ProjectUtil;
  * @author Alessandro Danesi
  */
 @Entity
-@Table(name = "TEAM")
+@Table(name = "TEAMS")
 @DataTransferObject(type = "hibernate3")
 public class Team extends ImageObject
 {

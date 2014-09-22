@@ -21,7 +21,7 @@ import org.directwebremoting.annotations.DataTransferObject;
  * @author Alessandro Danesi
  */
 @Entity
-@Table(name = "DIVISION")
+@Table(name = "DIVISIONS")
 @DataTransferObject(type = "hibernate3")
 public class Division implements Serializable
 {

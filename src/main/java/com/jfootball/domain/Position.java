@@ -19,7 +19,7 @@ import org.directwebremoting.annotations.DataTransferObject;
  * @author Alessandro Danesi
  */
 @Entity
-@Table(name="POSITION")
+@Table(name="POSITIONS")
 @DataTransferObject(type = "hibernate3")
 public class Position implements Serializable 
 {

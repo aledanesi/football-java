@@ -45,7 +45,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 
  */
 @Entity
-@Table(name = "ROLE")
+@Table(name = "ROLES")
 public class RoleBean implements Serializable
 {
 

@@ -28,7 +28,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "USERS")
 public class UserBean implements Serializable
 {
 

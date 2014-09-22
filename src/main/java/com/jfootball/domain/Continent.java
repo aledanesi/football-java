@@ -20,7 +20,7 @@ import org.directwebremoting.annotations.DataTransferObject;
  * 01/lug/2014 22:31:25
  */
 @Entity
-@Table(name = "CONTINENT")
+@Table(name = "CONTINENTS")
 @DataTransferObject(type = "hibernate3")
 public class Continent implements Serializable
 {

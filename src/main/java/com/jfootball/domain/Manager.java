@@ -3,7 +3,6 @@ package com.jfootball.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +12,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -23,7 +21,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * @author Alessandro Danesi
  */
 @Entity
-@Table(name = "MANAGER")
+@Table(name = "MANAGERS")
 public class Manager extends ImageObject implements Serializable {
 
 	/***************************************************************************
