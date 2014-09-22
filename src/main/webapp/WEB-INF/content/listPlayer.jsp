@@ -75,7 +75,11 @@
 					</c:if>				
 					<c:if test="${user_in_session.user.roles[0].name == 'ROLE_ADMIN' || 
 					             !empty user_in_session.user.profile && user_in_session.user.profile.teamId == team.id}">
-						 <li> <a href="${buyPlayerURL}">Acquista un giocatore</a></li>
+						 <li> 
+						 	<%-- <a href="${buyPlayerURL}">Acquista un giocatore</a> --%>
+						 	<a href="#" onclick="player.buyPlayer()">Acquista un giocatore</a>
+						 
+						 </li>
 					</c:if>
 				</sec:authorize>
 			</ul>
@@ -320,6 +324,8 @@
 	</table>
 	
 	<jsp:include page="secure/editPlayer.jsp" />	
+	
+	<jsp:include page="secure/buyPlayer.jsp" />
 	
 	<jsp:include page="includes/deletePlayer.jsp" />
 	
