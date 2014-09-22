@@ -129,7 +129,7 @@
 
 	<jsp:include page="secure/editTeam.jsp" />
 	
-	<jsp:include page="secure/deleteTeam.jsp" />
+	<jsp:include page="includes/deleteTeam.jsp" />
 	
 	<jsp:include page="secure/editUser.jsp" />	
 	

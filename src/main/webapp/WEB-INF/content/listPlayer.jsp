@@ -321,7 +321,7 @@
 	
 	<jsp:include page="secure/editPlayer.jsp" />	
 	
-	<jsp:include page="secure/deletePlayer.jsp" />
+	<jsp:include page="includes/deletePlayer.jsp" />
 	
 
 </body>

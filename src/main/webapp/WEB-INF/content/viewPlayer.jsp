@@ -74,19 +74,6 @@
 	<input type="hidden" name="id" id="id" value="${player.id}" />
 </form:form>
 
-<spring:url var="withoutTeamURL" value="/players/withoutTeam.do" /> 
-
-<form:form action="${withoutTeamURL}" id="withoutTeamPlayer" method="POST" commandName="player">
-		<form:hidden path="id" />
-</form:form>
-
-<spring:url var="endCareerURL" value="/players/endCareer.do" /> 
-
-<form:form action="${endCareerURL}" id="endCareerPlayer" method="POST" commandName="player">
-		<form:hidden path="id" />
-</form:form>
-
-
 <div id="header2">
 	<div id="menutop">
 		<ul>
@@ -127,7 +114,12 @@
 							</li> 
 						</c:if>
 						<li>
-							<a href="#" onclick="player.goEndCareer();">Fine carriera</a>
+							<spring:url var="retireURL" value="/players/endCareer.do">
+								<spring:param name="id" value="${player.id}"></spring:param>
+							</spring:url> 								
+							<a href="#" onclick="player.confirmRetirePlayer('${retireURL}'); return false;"> 
+								Fine carriera 
+							</a>
 						</li> 				            
 					</c:if>
 				</c:if>	
@@ -465,9 +457,13 @@
 				
 			<jsp:include page="secure/editCareer.jsp" />
 			
-			<jsp:include page="secure/deleteCareer.jsp" />			
+			<jsp:include page="includes/deleteCareer.jsp" />			
 
-			<jsp:include page="secure/unemployPlayer.jsp" />			
+			<jsp:include page="includes/unemployPlayer.jsp" />		
+			
+			<jsp:include page="includes/retirePlayer.jsp" />		
+			
+			<jsp:include page="includes/transferPlayer.jsp" />
 
 	</sec:authorize>	
 
