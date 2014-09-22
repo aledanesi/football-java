@@ -175,6 +175,10 @@ public class PlayerController extends GenericController
 			view.addObject("teamCategory", teamCategory);
 			view.addObject("playerList", players);
 
+			SearchPlayer buyPlayer = new SearchPlayer();
+			buyPlayer.setTeamId(idTeam);
+			view.addObject("buyPlayer", buyPlayer);			
+
 			logger.info("Players loaded: " + players.size());
 		}
 
