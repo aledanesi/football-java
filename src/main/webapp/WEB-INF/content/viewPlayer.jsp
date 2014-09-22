@@ -287,16 +287,20 @@
 				<tr class="odd">
 					<td style="width: 150px;">Ingaggio settimanale:</td>
 					<td>
-						${custom:currencyValue(player.grossWeeklySalary)} ${custom:symbol(player.team.nation.language, player.team.nation.country)}
-						&nbsp;(lordo)	
+						<c:if test="${! empty player.grossWeeklySalary}">
+							${custom:currencyValue(player.grossWeeklySalary)} ${custom:symbol(player.team.nation.language, player.team.nation.country)}
+							&nbsp;(lordo)	
+						</c:if>
 					</td>
 				</tr>						
 			</c:if>
 			<tr class="odd">
 				<td style="width: 150px;">Ingaggio annuale:</td>
 				<td>
-					${custom:currencyValue(player.netAnnualSalary)} ${custom:symbol(player.team.nation.language, player.team.nation.country)}
-					&nbsp;(netto)	
+					<c:if test="${! empty player.netAnnualSalary}">
+						${custom:currencyValue(player.netAnnualSalary)} ${custom:symbol(player.team.nation.language, player.team.nation.country)}
+						&nbsp;(netto)	
+					</c:if>
 				</td>
 			</tr>							
 			<tr class="even">
