@@ -136,6 +136,24 @@ jQ(function() {
 			}
 		}
 	});
+	
+	jQ("#dBuyPlayer").dialog({
+		title : "Acquista Giocatore",
+		width : 800,
+		height : 550,
+		autoOpen : false,
+		modal : true,
+		resizable : true,
+		autoResize : true,
+		dialogClass : "dlg-no-close",
+		buttons : {
+			"Annulla" : function() {
+				cleanPlayer();
+
+				jQ(this).dialog("close");
+			}
+		}
+	});	
 
 	jQ("#dDeletePlayer").dialog({
 		resizable : false,
@@ -479,6 +497,15 @@ Player.prototype = {
 
 						});					
 						
+	},
+	
+	buyPlayer : function() {
+		
+		jQ("#iniziale").val("");
+		jQ("#buyPlayerResults").hide();	
+		
+		jQ('#dBuyPlayer').dialog('open');
+	
 	},
 
 	movePlayer : function() {
