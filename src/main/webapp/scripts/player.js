@@ -166,6 +166,39 @@ jQ(function() {
 			}
 		}
 	});	
+	
+	jQ("#dRetirePlayer").dialog({
+		resizable : false,
+		height : 170,
+		modal : true,
+		autoOpen : false,
+		buttons : {
+			"Ritira" : function() {
+				jQ(window.location).attr('href', jQ("#urlRetirePlayer").val());
+			},
+			"Annulla" : function() {
+				jQ(this).dialog("close");
+			}
+		}
+	});	
+	
+	jQ("#dTransferPlayer").dialog({
+		resizable : false,
+		height : 170,
+		modal : true,
+		autoOpen : false,
+		buttons : {
+			"Trasferisci" : function() {
+				if (jQ('input[name=onLoan]').is(':checked')) {
+					jQ("#teamOwnerId").val(jQ("#teamBeforeChange").val());
+				}
+				jQ("#movePlayer").submit();
+			},
+			"Annulla" : function() {
+				jQ(this).dialog("close");
+			}
+		}
+	});		
 
 	jQ("#dMovePlayer").dialog({
 		title : "Cambia la squadra",
@@ -178,10 +211,9 @@ jQ(function() {
 		dialogClass : "dlg-no-close",
 		buttons : {
 			"Salva" : function() {
-				if (jQ('input[name=onLoan]').is(':checked')) {
-					jQ("#teamOwnerId").val(jQ("#teamBeforeChange").val());
-				}
-				jQ("#movePlayer").submit();
+
+				player.confirmTransferPlayer();
+				
 			},
 			"Annulla" : function() {
 				jQ(this).dialog("close");
@@ -256,6 +288,17 @@ Player.prototype = {
 		jQ('#dUnemployPlayer').dialog('open');
 	},	
 
+	confirmRetirePlayer : function(urlRetire) {	
+		jQ("#urlRetirePlayer").val(urlRetire);
+
+		jQ('#dRetirePlayer').dialog('open');
+	},
+	
+	confirmTransferPlayer : function() {	
+
+		jQ('#dTransferPlayer').dialog('open');
+	},	
+	
 	goEndCareer : function() {
 		jQ("#endCareerPlayer").submit(); 
 	},
