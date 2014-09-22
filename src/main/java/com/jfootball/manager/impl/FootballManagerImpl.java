@@ -307,6 +307,7 @@ public class FootballManagerImpl extends GenericManager implements FootballManag
 	 * @param letter
 	 * @return
 	 */
+	@RemoteMethod
 	public List<Player> getPlayers(String letter, String searchType)
 	{
 		return playerManager.listPlayersByLetter(letter, searchType);

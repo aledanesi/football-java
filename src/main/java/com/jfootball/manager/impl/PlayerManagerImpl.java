@@ -79,7 +79,7 @@ public class PlayerManagerImpl implements PlayerManager
 		return playerDAO.listPlayersByTeam(idTeam, teamCategory);
 	}
 	
-
+	@RemoteMethod
 	public List<Player> listPlayersByLetter(String letter, String searchType)
 	{
 		return playerDAO.listPlayersByLetter(letter, searchType);
