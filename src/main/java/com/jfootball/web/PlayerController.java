@@ -103,7 +103,24 @@ public class PlayerController extends GenericController
 		{
 			teamList = footballManager.getTeamsByDivisionForView(player.getTeam().getNation().getId(), player.getTeam().getDivision().getId());
 			
-			playerList = footballManager.getPlayers(player.getTeam().getId(), player.getTeamBranch());			
+			playerList = footballManager.getPlayers(player.getTeam().getId(), player.getTeamBranch());		
+			
+			Team team = footballManager.getTeamByID(player.getTeam().getId());
+
+			view.addObject("team", team);	
+			
+			int counter = Integer.parseInt(footballManager.getPlayerRank(player.getTeam().getId(), idPlayer));
+
+			HashMap<String, Object> hashSetNext = footballManager.getNextId(player.getTeam().getId(), counter);
+			HashMap<String, Object> hashSetPrev = footballManager.getNextId(player.getTeam().getId(), counter - 2);
+
+			view.addObject("nextCounter", hashSetNext.get("counter"));
+			view.addObject("nextId", hashSetNext.get("id"));
+			view.addObject("nextPlayer", hashSetNext.get("player"));
+
+			view.addObject("prevCounter", hashSetPrev.get("counter"));
+			view.addObject("prevId", hashSetPrev.get("id"));
+			view.addObject("prevPlayer", hashSetPrev.get("player"));			
 		}
 
 		List<Career> careerList = footballManager.getCareers(idPlayer);
@@ -111,10 +128,6 @@ public class PlayerController extends GenericController
 		Career career = new Career();
 		career.setPlayer(player);		
 		
-		Team team = footballManager.getTeamByID(player.getTeam().getId());
-
-		view.addObject("team", team);
-				
 		view.addObject("career", career);
 
 		view.addObject("player", player);
@@ -127,22 +140,6 @@ public class PlayerController extends GenericController
 		
 		List<Division> divisionList = footballManager.getDivisionsByNation(new Long(Constant.DEFAULT_NATION));
 		view.addObject("divisionList", divisionList);
-		
-		
-		if (player.getTeam() != null) {
-			int counter = Integer.parseInt(footballManager.getPlayerRank(player.getTeam().getId(), idPlayer));
-
-			HashMap<String, Object> hashSetNext = footballManager.getNextId(player.getTeam().getId(), counter);
-			HashMap<String, Object> hashSetPrev = footballManager.getNextId(player.getTeam().getId(), counter - 2);
-
-			view.addObject("nextCounter", hashSetNext.get("counter"));
-			view.addObject("nextId", hashSetNext.get("id"));
-			view.addObject("nextPlayer", hashSetNext.get("player"));
-
-			view.addObject("prevCounter", hashSetPrev.get("counter"));
-			view.addObject("prevId", hashSetPrev.get("id"));
-			view.addObject("prevPlayer", hashSetPrev.get("player"));
-		}
 		
 		logger.info("view: VIEW_PLAYER");
 
