@@ -77,8 +77,10 @@ public class TeamServiceImpl implements BusinessService
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void saveEntity(Team team)
+	public void saveEntity(Serializable obj)
 	{
+		Team team = (Team) obj;
+		
 		if (team.getImage() == null && team.getId() != null)
 		{
 			team.setImage(getEntityByID(team.getId()).getImage());
@@ -145,9 +147,6 @@ public class TeamServiceImpl implements BusinessService
 		return null;
 	}
 
-	@Override
-	public void saveEntity(Serializable entity) {
-	}
 
 	@Override
 	public void updateEntityByParams(Object... params) {

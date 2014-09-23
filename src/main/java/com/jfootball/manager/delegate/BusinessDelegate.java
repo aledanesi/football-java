@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.directwebremoting.annotations.RemoteProxy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,7 +19,9 @@ import org.springframework.stereotype.Service;
 @RemoteProxy(name = "businessDelegate")
 public class BusinessDelegate
 {
-	private BusinessLookUp lookupService = new BusinessLookUp();
+	
+	@Autowired
+	private BusinessLookUp lookupService;
 	
 	/**
 	 * @param idCareer
@@ -59,6 +62,16 @@ public class BusinessDelegate
 		BusinessService delegate =  lookupService.getBusinessService(serviceType);
 		return delegate.getEntitiesByID(id);
 	}
+	
+	/**
+	 * @param idCareer
+	 * @return
+	 */	
+	public List<? extends Serializable> getEntitiesBySecondID(Long id, String serviceType)
+	{
+		BusinessService delegate =  lookupService.getBusinessService(serviceType);
+		return delegate.getEntitiesBySecondID(id);		
+	}	
 	
 	/**
 	 * @param idCareer
@@ -151,5 +164,13 @@ public class BusinessDelegate
 		BusinessService delegate =  lookupService.getBusinessService(serviceType);
 		delegate.doSecondJob();			
 	}
+
+	public void setLookupService(BusinessLookUp lookupService)
+	{
+		this.lookupService = lookupService;
+	}
+	
+	
+	
 	
 }
