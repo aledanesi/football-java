@@ -18,6 +18,7 @@
 
 	<!-- Scans for application @Service to deploy -->
 	<context:component-scan base-package="com.jfootball.manager.impl" />
+	<context:component-scan base-package="com.jfootball.manager.delegate.impl" />
 
 	<!-- enables scanning for @Transactional annotations -->
 	<tx:annotation-driven />
@@ -61,7 +62,32 @@
 	<bean name="continentManager" class="com.jfootball.manager.impl.ContinentManagerImpl" />
 
 	<bean name="footballManager"  class="com.jfootball.manager.impl.FootballManagerImpl" />
+
+
+
+	<bean name="divisionService"  class="com.jfootball.manager.delegate.impl.DivisionServiceImpl" />
+
+	<bean name="teamService"      class="com.jfootball.manager.delegate.impl.TeamServiceImpl" />
+
+	<bean name="playerService"    class="com.jfootball.manager.delegate.impl.PlayerServiceImpl" />
+
+	<bean name="positionService"  class="com.jfootball.manager.delegate.impl.PositionServiceImpl" />
+
+	<bean name="careerService"    class="com.jfootball.manager.delegate.impl.CareerServiceImpl" />
+
+	<bean name="seasonService"    class="com.jfootball.manager.delegate.impl.SeasonServiceImpl" />
 	
-	<bean name="businessDelegate"  class="com.jfootball.manager.delegate.BusinessDelegate" />
+	<bean name="nationService"    class="com.jfootball.manager.delegate.impl.NationServiceImpl" />
+	
+	<bean name="userService"      class="com.jfootball.manager.delegate.impl.UserServiceImpl" />
+	
+	<bean name="continentService" class="com.jfootball.manager.delegate.impl.ContinentServiceImpl" />
+
+
+	
+	<bean name="lookupService"    class="com.jfootball.manager.delegate.BusinessLookUp" />
+	
+	<bean name="businessDelegate" class="com.jfootball.manager.delegate.BusinessDelegate" />
+	
 
 </beans>
