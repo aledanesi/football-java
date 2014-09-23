@@ -127,7 +127,7 @@ public class PlayerController extends GenericController
 
 		Career career = new Career();
 		career.setPlayer(player);		
-		
+
 		view.addObject("career", career);
 
 		view.addObject("player", player);

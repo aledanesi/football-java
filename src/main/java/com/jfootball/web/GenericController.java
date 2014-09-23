@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import com.jfootball.UserInSession;
 import com.jfootball.manager.FootballManager;
+import com.jfootball.manager.delegate.BusinessDelegate;
 import com.jfootball.service.UserService;
 
 /**
@@ -24,6 +25,9 @@ public class GenericController
 	@Autowired
 	protected FootballManager footballManager;		
 	
+	@Autowired
+	protected BusinessDelegate businessDelegate;		
+
 	
 	protected Logger logger = Logger.getLogger(this.getClass());
 
@@ -47,7 +51,11 @@ public class GenericController
 	
 	public void setFootballManager(FootballManager footballManager) {
 		this.footballManager = footballManager;
+	}
+
+	public void setBusinessDelegate(BusinessDelegate businessDelegate)
+	{
+		this.businessDelegate = businessDelegate;
 	}	
-	
 	
 }

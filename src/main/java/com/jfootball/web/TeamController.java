@@ -89,6 +89,7 @@ public class TeamController extends GenericController
 	 * @param divisionId
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/teams/list")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam(value="nation.continent.id", required=false, defaultValue=Constant.DEFAULT_CONTINENT) Long continentId,
@@ -126,12 +127,12 @@ public class TeamController extends GenericController
 		UserBean user = new UserBean();
 		view.addObject("user", user);		
 		
-		List<Team> teamList = footballManager.getTeamsByDivision(nationId, divisionId);				
+		List<Team> teamList = (List<Team>)businessDelegate.getEntitiesByIDs(nationId, divisionId, "TEAM");				
 		view.addObject("teamList", teamList);
 
 		logger.info("Teams loaded: " + teamList.size());
 
-		List<Division> divisionList = footballManager.getDivisionsByNation(nationId);
+		List<Division> divisionList = (List<Division>)businessDelegate.getEntitiesBySecondID(nationId, "DIVISION");
 		view.addObject("divisionList", divisionList);
 
 		logger.info("view: LIST_TEAM");
@@ -159,7 +160,7 @@ public class TeamController extends GenericController
 
 		logger.info("--------------------- Team Controller : delete --------------------- ");
 
-		footballManager.deleteTeam(Long.parseLong(teamId));
+		businessDelegate.deleteEntity(Long.parseLong(teamId), "TEAM");
 
 		logger.info("Team " + teamId + "deleted");
 
@@ -177,6 +178,7 @@ public class TeamController extends GenericController
 	 * @return
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")	
 	@RequestMapping(value = "/teams/save", method = RequestMethod.POST)
 	protected ModelAndView processSubmit(@ModelAttribute("team") Team team, 
 											BindingResult result, 
@@ -190,8 +192,8 @@ public class TeamController extends GenericController
 				
         if (result.hasErrors()) 
         {
-    		List<Division> divisionList = footballManager.getDivisions();
-    		List<Nation> nationList = footballManager.getNations();
+    		List<Division> divisionList = (List<Division>)businessDelegate.getEntities("DIVISION");
+    		List<Nation> nationList = (List<Nation>)businessDelegate.getEntities("NATION");
     		
     		request.setAttribute("team", team);
     		request.setAttribute("divisionList", divisionList);
@@ -209,7 +211,7 @@ public class TeamController extends GenericController
         {
     		if (team.getImage().length == 0 && team.getId() != null)
     		{
-    			Team teamDb = footballManager.getTeamByID(team.getId());
+    			Team teamDb = (Team)businessDelegate.getEntityByID(team.getId(), "TEAM");
     			if (teamDb != null )
     			{
         			team.setImage(teamDb.getImage());
@@ -264,7 +266,7 @@ public class TeamController extends GenericController
 
     		if (team.getId() != null)
     		{
-    			teamDB = footballManager.getTeamByID(team.getId());    			
+    			teamDB = (Team)businessDelegate.getEntityByID(team.getId(), "TEAM");  			
     			divisionReturn = teamDB.getDivision().getId();
     		}
     		else 
@@ -273,7 +275,7 @@ public class TeamController extends GenericController
     		}
     		// fine modifica (03-05-2014)
     		
-    		footballManager.saveTeam(team);
+    		businessDelegate.saveEntity(team, "TEAM");
     		
     		logger.info("Team saved");
     		
@@ -288,6 +290,7 @@ public class TeamController extends GenericController
 	 * ----------------referenceData()----------------
 	 * 
 	 */	
+	@SuppressWarnings("unchecked")		
 	@ModelAttribute("nationList")
 	protected List<Nation> populateNations(HttpServletRequest request)
 			throws Exception 
@@ -305,14 +308,13 @@ public class TeamController extends GenericController
 		{
 			List<GrantedAuthority> listaRuoli = user.getAuthorities();
 
-
 			if (listaRuoli.contains(Constant.ADMIN))
-				nationList = footballManager.getNationsFromContinent(continentId);
+				nationList = (List<Nation>)businessDelegate.getEntitiesBySecondID(continentId, "NATION");
 			else
-				nationList = footballManager.getNationsTournament();			
+				nationList = (List<Nation>)businessDelegate.getOtherEntities("NATION");
 		}
 		else
-			nationList = footballManager.getNationsTournament();
+			nationList = (List<Nation>)businessDelegate.getOtherEntities("NATION");
 
 		
 		return nationList;
@@ -323,6 +325,7 @@ public class TeamController extends GenericController
 	 * ----------------referenceData()----------------
 	 * 
 	 */	
+	@SuppressWarnings("unchecked")		
 	@ModelAttribute("continentList")
 	protected List<Continent> populateContinents(HttpServletRequest request)
 			throws Exception 
@@ -336,7 +339,7 @@ public class TeamController extends GenericController
 			List<GrantedAuthority> listaRuoli = user.getAuthorities();
 
 			if (listaRuoli.contains(Constant.ADMIN))
-				continentList = footballManager.getContinents();
+				continentList = (List<Continent>)businessDelegate.getEntities("CONTINENT");
 			else
 				continentList = new ArrayList<Continent>();		
 		}		
