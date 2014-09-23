@@ -220,7 +220,7 @@
 													<spring:url var="imageURL" value="/players/image.do">
 													   <spring:param name="id" value="${row.id}" />
 													</spring:url>													
-													<img width="33" height="37" class="minifoto" src="${imageURL}"/>
+													<img width="31" height="38" class="minifoto" src="${imageURL}"/>
 												</td>												
 												<td style="padding: 0px; font-weight: bold">
 													<spring:url var="viewURL" value="/players/view.do" />
