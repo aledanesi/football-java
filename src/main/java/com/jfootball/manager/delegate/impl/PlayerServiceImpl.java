@@ -21,8 +21,9 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.impl;
+package com.jfootball.manager.delegate.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,33 +36,33 @@ import com.jfootball.dao.PlayerDao;
 import com.jfootball.dao.TeamDao;
 import com.jfootball.domain.Player;
 import com.jfootball.domain.Team;
-import com.jfootball.manager.PlayerManager;
+import com.jfootball.manager.delegate.BusinessService;
 
 /**
  * @author C_ICTDNS
  *
  */
 @Transactional(readOnly = true)
-public class PlayerManagerImpl implements PlayerManager
+public class PlayerServiceImpl implements BusinessService
 {
 	private PlayerDao playerDAO;
 	private TeamDao teamDAO;	
 	
 	
 	@Autowired
-	public PlayerManagerImpl(PlayerDao playerDAO, TeamDao teamDAO) 
+	public PlayerServiceImpl(PlayerDao playerDAO, TeamDao teamDAO) 
 	{
 		this.playerDAO = playerDAO;
 		this.teamDAO = teamDAO;
 	}		
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void saveOrUpdatePlayer(Player player)
+	public void saveEntity(Player player)
 	{
 		if (player.getImage() == null && player.getId() != null)
 		{
 			Long id = player.getId();
-			Player p = getPlayerByID(id);
+			Player p = getEntityByID(id);
 			byte[] image = p.getImage();
 			player.setImage(image);
 		}	
@@ -69,20 +70,20 @@ public class PlayerManagerImpl implements PlayerManager
 	}
 
 	
-	public List<Player> listPlayersByTeam(Long idTeam, String teamCategory)
+	public List<Player> getEntitiesByIDAndDesc(Long idTeam, String teamCategory)
 	{
 		return playerDAO.listPlayersByTeam(idTeam, teamCategory);
 	}
 	
-	public List<Player> listPlayersByLetter(String letter, String searchType)
+	public List<Player> getEntitiesByParams(String... params)
 	{
-		return playerDAO.listPlayersByLetter(letter, searchType);
+		return playerDAO.listPlayersByLetter(params[0], params[1]);
 	}	
 	
 
-	public List<Player> listPlayersByDivision(Long idDivision)
+	public List<Player> getEntitiesBySecondID(Long idDivision)
 	{
-		List<Player> listaOrig = listPlayers();
+		List<Player> listaOrig = getEntities();
 		List<Player> listaNew = new ArrayList<Player>();
 		for (Player player : listaOrig)
 		{
@@ -95,31 +96,31 @@ public class PlayerManagerImpl implements PlayerManager
 	}	
 	
 
-	public List<Player> listPlayers()
+	public List<Player> getEntities()
 	{
 		return playerDAO.listPlayers();
 	}
 
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void deletePlayer(Long idPlayer)
+	public void deleteEntity(Long idPlayer)
 	{
 		playerDAO.deletePlayer(idPlayer);
 	}
 
-	public Player getPlayerByID(Long idPlayer)
+	public Player getEntityByID(Long idPlayer)
 	{
 		Player p = playerDAO.getPlayerById(idPlayer);
 		return p;
 	}
 	
 	@Transactional(readOnly = false)
-	public void updateTeam(Long idPlayer, Long idTeam, Boolean isLoan)
+	public void updateEntityByParams(Object... params)
 	{
-		Player player = getPlayerByID(idPlayer);
-		Team team = teamDAO.getTeamByID(idTeam);
+		Player player = getEntityByID((Long)params[0]);
+		Team team = teamDAO.getTeamByID((Long)params[1]);
 		
-		if (! isLoan)
+		if (! (Boolean)params[2])
 			player.setTeamOwner(team);
 		
 		// fine 
@@ -149,16 +150,62 @@ public class PlayerManagerImpl implements PlayerManager
 		return playerDAO.getRank(teamId, playerId);		
 	}
 	
-	public void endSeasonJob()
+	public void doFirstJob()
 	{
 		playerDAO.endSeasonJob();		
 	}
 	
 	
-	public void careerPlayerJob()
+	public void doSecondJob()
 	{
 		playerDAO.careerPlayerJob();
 	}
+
 	
+	
+	
+	
+	
+	
+	/** ************************************************************************************************************
+	 * 
+	 * // Auto-generated method stub
+	 * 
+	 * 
+	 * *************************************************************************************************************/
+	
+	@Override
+	public Serializable getEntityBySecondId(Long id) {
+		return null;
+	}
+
+	@Override
+	public Serializable getEntityByDesc(String desc) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesByID(Long id) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDs(Long id1, Long id2) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDsNew(Long id1, Long id2) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getOtherEntities() {
+		return null;
+	}
+
+	@Override
+	public void saveEntity(Serializable entity) {
+	}
 	
 }

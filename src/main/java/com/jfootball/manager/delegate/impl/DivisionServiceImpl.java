@@ -21,8 +21,9 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.impl;
+package com.jfootball.manager.delegate.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,37 +33,37 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jfootball.dao.DivisionDao;
 import com.jfootball.domain.Division;
-import com.jfootball.manager.DivisionManager;
+import com.jfootball.manager.delegate.BusinessService;
 
 /**
  * @author C_ICTDNS
  *
  */
 @Transactional(readOnly = true)
-public class DivisionManagerImpl extends GenericManager implements DivisionManager 
+public class DivisionServiceImpl implements BusinessService
 {
 	
 	private final DivisionDao divisionDAO;
 
 
 	@Autowired
-	public DivisionManagerImpl(DivisionDao divisionDAO) 
+	public DivisionServiceImpl(DivisionDao divisionDAO) 
 	{
 		this.divisionDAO = divisionDAO;
 	}	
 	
 	
-	public List<Division> listDivisions() {
+	public List<Division> getEntities() {
 		return divisionDAO.listDivisions();
 	}
 
 
-	public Division getDivisionByID(Long divisionId) {
+	public Division getEntityByID(Long divisionId) {
 		return divisionDAO.getDivisionByID(divisionId);
 	}
 
 
-	public List<Division> listDivisionsByNation(Long nationId) 
+	public List<Division> getEntitiesBySecondID(Long nationId) 
 	{
 		//return divisionDAO.listDivisionsByNation(nationId);
 		List<Division> lista = divisionDAO.listDivisionsByNation(nationId);
@@ -89,15 +90,93 @@ public class DivisionManagerImpl extends GenericManager implements DivisionManag
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void saveOrUpdateDivision(Division division) 
+	public void saveEntity(Division division) 
 	{
 		divisionDAO.saveOrUpdateDivision(division);
 	}
 	
-	public void deleteDivision(Long idDivision)
+	public void deleteEntity(Long idDivision)
 	{
 		divisionDAO.deleteDivision(idDivision);		
 	}
 
+	
+	
+	
+	
+	
+	/** ************************************************************************************************************
+	 * 
+	 * // Auto-generated method stub
+	 * 
+	 * 
+	 * *************************************************************************************************************/
 
+	@Override
+	public Serializable getEntityBySecondId(Long id) {
+		return null;
+	}
+
+
+	@Override
+	public Serializable getEntityByDesc(String desc) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getEntitiesByID(Long id) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDs(Long id1, Long id2) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDsNew(Long id1, Long id2) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDAndDesc(Long id, String desc) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getEntitiesByParams(String... params) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getOtherEntities() {
+		return null;
+	}
+
+
+	@Override
+	public void saveEntity(Serializable entity) {
+	}
+
+
+	@Override
+	public void updateEntityByParams(Object... params) {
+	}
+
+
+	@Override
+	public void doFirstJob() {
+	}
+
+
+	@Override
+	public void doSecondJob() {
+	}
+	
 }

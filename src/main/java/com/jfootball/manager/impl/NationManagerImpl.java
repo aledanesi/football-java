@@ -25,9 +25,7 @@ package com.jfootball.manager.impl;
 
 import java.util.List;
 
-import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jfootball.dao.NationDao;
@@ -38,9 +36,7 @@ import com.jfootball.manager.NationManager;
  * @author C_ICTDNS
  *
  */
-@Service("nationManager")
 @Transactional(readOnly = true)
-@RemoteProxy(name = "nationManager")
 public class NationManagerImpl extends GenericManager implements NationManager
 {
 	

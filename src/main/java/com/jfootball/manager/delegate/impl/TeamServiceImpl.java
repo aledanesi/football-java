@@ -21,8 +21,9 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.impl;
+package com.jfootball.manager.delegate.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,70 +32,133 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jfootball.dao.TeamDao;
 import com.jfootball.domain.Team;
-import com.jfootball.manager.TeamManager;
+import com.jfootball.manager.delegate.BusinessService;
 
 /**
  * @author Alessandro Danesi
  * 
  */
 @Transactional(readOnly = true)
-public class TeamManagerImpl extends GenericManager implements TeamManager
+public class TeamServiceImpl implements BusinessService
 {
 
 	private TeamDao teamDAO;
 
 	@Autowired
-	public TeamManagerImpl(TeamDao teamDAO)
+	public TeamServiceImpl(TeamDao teamDAO)
 	{
 		this.teamDAO = teamDAO;
 	}
 
-	public Team getTeamByID(Long idTeam)
+	public Team getEntityByID(Long idTeam)
 	{
 		Team team = teamDAO.getTeamByID(idTeam);
 		return team;
 	}
 
-	public Team getTeamByName(String name)
+	public Team getEntityByDesc(String name)
 	{
 		return teamDAO.getTeamByName(name);
 	}
 
-	public List<Team> listTeamsByDivision(Long nationId, Long divisionId)
+	public List<Team> getEntitiesByIDs(Long nationId, Long divisionId)
 	{
 		return teamDAO.listTeamsByDivision(nationId, divisionId);
 	}
 
-	public List<Team> listTeamsByDivisionForView(Long nationId, Long divisionId)
+	public List<Team> getEntitiesByIDsNew(Long nationId, Long divisionId)
 	{
 		return teamDAO.listTeamsByDivisionForView(nationId, divisionId);
 	}
 
-	public List<String> listTeamsByName(String term)
+	public List<String> getEntitiesByParams(String... params)
 	{
-		return teamDAO.listTeamsByName(term);
+		return teamDAO.listTeamsByName(params[0]);
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void saveOrUpdateTeam(Team team)
+	public void saveEntity(Team team)
 	{
 		if (team.getImage() == null && team.getId() != null)
 		{
-			team.setImage(getTeamByID(team.getId()).getImage());
+			team.setImage(getEntityByID(team.getId()).getImage());
 		}
 		try
 		{
 			teamDAO.saveOrUpdateTeam(team);
 		} catch (Exception e)
 		{
-			logger.error(e);
+			//logger.error(e);
 		}
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void deleteTeam(Long idTeam)
+	public void deleteEntity(Long idTeam)
 	{
 		teamDAO.deleteTeam(idTeam);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/** ************************************************************************************************************
+	 * 
+	 * // Auto-generated method stub
+	 * 
+	 * 
+	 * *************************************************************************************************************/
+		
 
+	@Override
+	public Serializable getEntityBySecondId(Long id) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesByID(Long id) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesBySecondID(Long id) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDAndDesc(Long id, String desc) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntities() {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getOtherEntities() {
+		return null;
+	}
+
+	@Override
+	public void saveEntity(Serializable entity) {
+	}
+
+	@Override
+	public void updateEntityByParams(Object... params) {
+	}
+
+	@Override
+	public void doFirstJob() {
+	}
+
+	@Override
+	public void doSecondJob() {
+	}
+	
 }

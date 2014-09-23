@@ -21,8 +21,9 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.impl;
+package com.jfootball.manager.delegate.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,20 +32,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jfootball.dao.SeasonDao;
 import com.jfootball.domain.Season;
-import com.jfootball.manager.SeasonManager;
+import com.jfootball.manager.delegate.BusinessService;
 
 /**
  * @author C_ICTDNS
  * 
  */
 @Transactional(readOnly = true)
-public class SeasonManagerImpl extends GenericManager implements SeasonManager 
+public class SeasonServiceImpl implements BusinessService
 {
 	
 	private SeasonDao seasonDao;
 	
 	@Autowired
-	public SeasonManagerImpl(SeasonDao seasonDao) 
+	public SeasonServiceImpl(SeasonDao seasonDao) 
 	{
 		this.seasonDao = seasonDao;
 	}	
@@ -52,31 +53,101 @@ public class SeasonManagerImpl extends GenericManager implements SeasonManager
 
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void saveOrUpdateSeason(Season season) {
+	public void saveEntity(Season season) {
 		seasonDao.saveOrUpdateSeason(season);
 	}
 
 
-	public List<Season> listSeason() {
+	public List<Season> getEntities() {
 		return seasonDao.listSeason();
 	}
 
 
-	public Season getSeasonYearByName(String nameSeason)
+	public Season getEntityByDesc(String nameSeason)
 	{
 		return seasonDao.getSeasonYearByName(nameSeason);
 	}
 	
 
-	public Season getSeasonYearById(Long seasonYearID) {
+	public Season getEntityByID(Long seasonYearID) {
 		return seasonDao.getSeasonYearById(seasonYearID);
 	}
 
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void deleteById(Long yearID) {
+	public void deleteEntity(Long yearID) {
 
 		seasonDao.deleteById(yearID);
 	}
 
+
+	
+	
+	
+	
+	
+	/** ************************************************************************************************************
+	 * 
+	 * // Auto-generated method stub
+	 * 
+	 * 
+	 * *************************************************************************************************************/
+	
+
+	@Override
+	public Serializable getEntityBySecondId(Long id) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesByID(Long id) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesBySecondID(Long id) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDs(Long id1, Long id2) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDsNew(Long id1, Long id2) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDAndDesc(Long id, String desc) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesByParams(String... params) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getOtherEntities() {
+		return null;
+	}
+
+	@Override
+	public void saveEntity(Serializable entity) {
+	}
+
+	@Override
+	public void updateEntityByParams(Object... params) {
+	}
+
+	@Override
+	public void doFirstJob() {
+	}
+
+	@Override
+	public void doSecondJob() {
+	}
+	
 }

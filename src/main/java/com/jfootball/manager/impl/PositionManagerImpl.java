@@ -29,6 +29,7 @@ import org.directwebremoting.annotations.RemoteMethod;
 import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jfootball.dao.PositionDao;
 import com.jfootball.domain.Position;
@@ -38,8 +39,7 @@ import com.jfootball.manager.PositionManager;
  * @author C_ICTDNS
  *
  */
-@Service("positionManager")
-@RemoteProxy(name = "positionManager")
+@Transactional(readOnly = true)
 public class PositionManagerImpl extends GenericManager implements PositionManager
 {
 	private PositionDao positionDAO;
@@ -56,7 +56,6 @@ public class PositionManagerImpl extends GenericManager implements PositionManag
 		positionDAO.saveOrUpdatePosition(position);
 	}
 	
-	@RemoteMethod
 	public List<Position> listPositions(String codRuolo)
 	{
 		return positionDAO.listPositions(codRuolo);

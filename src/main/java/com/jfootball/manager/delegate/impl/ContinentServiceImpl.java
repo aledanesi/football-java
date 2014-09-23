@@ -21,8 +21,9 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.impl;
+package com.jfootball.manager.delegate.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +31,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jfootball.dao.ContinentDao;
 import com.jfootball.domain.Continent;
-import com.jfootball.manager.ContinentManager;
+import com.jfootball.manager.delegate.BusinessService;
 
 /**
  * @author C_ICTDNS
  * 
  */
 @Transactional(readOnly = true)
-public class ContinentManagerImpl extends GenericManager implements ContinentManager
+public class ContinentServiceImpl implements BusinessService
 {
 
 	private final ContinentDao continentDao;
 		
 	
 	@Autowired
-	public ContinentManagerImpl(ContinentDao continentDao) 
+	public ContinentServiceImpl(ContinentDao continentDao) 
 	{
 		this.continentDao = continentDao;
 	}		
@@ -55,7 +56,7 @@ public class ContinentManagerImpl extends GenericManager implements ContinentMan
 	 * 
 	 * @param nation the nation to save
 	 */	
-	public void saveOrUpdateContinent(Continent continent)
+	public void saveEntity(Continent continent)
 	{
 		continentDao.saveOrUpdateContinent(continent);
 	}
@@ -65,7 +66,7 @@ public class ContinentManagerImpl extends GenericManager implements ContinentMan
 	 * 
 	 * @return the nations found
 	 */
-	public List<Continent> listContinents()
+	public List<Continent> getEntities()
 	{
 		return continentDao.listContinents();
 	}
@@ -76,7 +77,7 @@ public class ContinentManagerImpl extends GenericManager implements ContinentMan
 	 * @param nationId the nation id
 	 * @return the nation found
 	 */	
-	public Continent getContinentByID(Long continentId)
+	public Continent getEntityByID(Long continentId)
 	{
 		return continentDao.getContinentByID(continentId);		
 	}
@@ -86,9 +87,95 @@ public class ContinentManagerImpl extends GenericManager implements ContinentMan
 	 * 
 	 * @param nationId the nation id
 	 */	
-	public void deleteContinent(Long continentId)
+	public void deleteEntity(Long continentId)
 	{
 		continentDao.deleteContinent(continentId);
+	}
+
+
+
+	
+	
+	
+	
+	/** ************************************************************************************************************
+	 * 
+	 * // Auto-generated method stub
+	 * 
+	 * 
+	 * *************************************************************************************************************/
+	
+	@Override
+	public Serializable getEntityBySecondId(Long id) {
+		return null;
+	}
+
+
+	@Override
+	public Serializable getEntityByDesc(String desc) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getEntitiesByID(Long id) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getEntitiesBySecondID(Long id) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDs(Long id1, Long id2) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDsNew(Long id1, Long id2) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDAndDesc(Long id, String desc) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getEntitiesByParams(String... params) {
+		return null;
+	}
+
+
+	@Override
+	public List<? extends Serializable> getOtherEntities() {
+		return null;
+	}
+
+
+	@Override
+	public void saveEntity(Serializable entity) {
+	}
+
+
+	@Override
+	public void updateEntityByParams(Object... params) {
+	}
+
+
+	@Override
+	public void doFirstJob() {
+	}
+
+
+	@Override
+	public void doSecondJob() {
 	}
 	
 }

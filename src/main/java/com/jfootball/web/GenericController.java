@@ -24,33 +24,6 @@ public class GenericController
 	@Autowired
 	protected FootballManager footballManager;		
 	
-	/*@Autowired
-	protected TeamManager teamManager;
-
-	@Autowired
-	protected PlayerManager playerManager;
-
-	@Autowired
-	protected CareerManager careerManager;
-
-	@Autowired
-	protected SeasonManager seasonManager;
-	
-	@Autowired
-	protected DivisionManager divisionManager;
-
-	@Autowired
-	protected NationManager nationManager;
-	
-	@Autowired
-	protected PositionManager positionManager;
-
-	@Autowired
-	protected ContinentManager continentManager;
-	
-	@Autowired
-	protected UserManager userManager;	*/
-	
 	
 	protected Logger logger = Logger.getLogger(this.getClass());
 
@@ -71,46 +44,6 @@ public class GenericController
 		return userInSession.getUsername();
 	}
 	
-	
-	
-	
-
-	/*public void setTeamManager(TeamManager teamManager) {
-		this.teamManager = teamManager;
-	}
-
-	public void setPlayerManager(PlayerManager playerManager) {
-		this.playerManager = playerManager;
-	}
-
-	public void setCareerManager(CareerManager careerManager) {
-		this.careerManager = careerManager;
-	}
-
-	public void setSeasonManager(SeasonManager seasonManager) {
-		this.seasonManager = seasonManager;
-	}
-
-	public void setDivisionManager(DivisionManager divisionManager) {
-		this.divisionManager = divisionManager;
-	}	
-	
-	public void setNationManager(NationManager nationManager) {
-		this.nationManager = nationManager;
-	}
-
-	public void setPositionManager(PositionManager positionManager) {
-		this.positionManager = positionManager;
-	}
-
-	public void setContinentManager(ContinentManager continentManager)
-	{
-		this.continentManager = continentManager;
-	}
-
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
-	}	*/
 	
 	public void setFootballManager(FootballManager footballManager) {
 		this.footballManager = footballManager;
