@@ -45,6 +45,10 @@
 					if (data[i].team != null){
 						str += " - " + data[i].team.name.capitalize() + ") ";
 					}
+					else 
+					{
+						str += ") ";
+					}					
 					
 					str += "nato il " + jQ.datepicker.formatDate("dd/mm/yy", data[i].dateOfBirth) + " a " + data[i].placeOfBirth;
 					str += "</td>";
