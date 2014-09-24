@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
+import org.directwebremoting.annotations.RemoteMethod;
 import org.directwebremoting.annotations.RemoteProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class BusinessDelegate
 	 * @param idCareer
 	 * @return
 	 */
+	@RemoteMethod
 	public Serializable getEntityByID(Long id, String serviceType)
 	{
 		BusinessService delegate =  lookupService.getBusinessService(serviceType);
@@ -79,6 +81,7 @@ public class BusinessDelegate
 	 * @param idCareer
 	 * @return
 	 */	
+	@RemoteMethod
 	public List<? extends Serializable> getEntitiesBySecondID(Long id, String serviceType)
 	{
 		BusinessService delegate =  lookupService.getBusinessService(serviceType);
@@ -109,6 +112,7 @@ public class BusinessDelegate
 	 * @param idCareer
 	 * @return
 	 */
+	@RemoteMethod
 	public List<? extends Serializable> getEntitiesByParams(String params, String serviceType)
 	{
 		BusinessService delegate =  lookupService.getBusinessService(serviceType);
@@ -144,6 +148,16 @@ public class BusinessDelegate
 		delegate.saveEntity(entity);
 	}
 	
+	/**
+	 * @param career
+	 */
+	@RemoteMethod
+	public void updateEntityByParams(Object... params)
+	{
+		BusinessService delegate =  lookupService.getBusinessService((String)params[1]);
+		delegate.updateEntityByParams(params[0]);
+	}	
+	
 	
 	/**
 	 * @param idCareer
@@ -153,6 +167,16 @@ public class BusinessDelegate
 		BusinessService delegate =  lookupService.getBusinessService(serviceType);
 		delegate.deleteEntity(id);		
 	}
+	
+	/**
+	 * @param idCareer
+	 */	
+	@RemoteMethod
+	public boolean findEntityExists(String... params)
+	{
+		BusinessService delegate =  lookupService.getBusinessService(params[3]);
+		return delegate.findEntityExists(params[0], params[1], params[2]);
+	}	
 	
 	/**
 	 * @param idCareer

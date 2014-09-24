@@ -90,6 +90,11 @@ public interface BusinessService {
 	
 	/**
 	 * @param idCareer
+	 */
+	public boolean findEntityExists(String... params);
+	
+	/**
+	 * @param idCareer
 	 */	
 	public HashMap<String, Object> getHashMap(Long param1, Integer param2);
 	

@@ -134,9 +134,9 @@ public class PlayerServiceImpl implements BusinessService
 		
 	}
 	
-	public boolean findPlayerExists(String firstName, String lastName, String birthDate)
+	public boolean findEntityExists(String... params)
 	{
-		return playerDAO.findPlayerExists(firstName, lastName, birthDate);
+		return playerDAO.findPlayerExists(params[0], params[1], params[2]);
 	}
 	
 

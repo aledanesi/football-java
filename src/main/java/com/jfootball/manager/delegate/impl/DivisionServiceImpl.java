@@ -167,14 +167,18 @@ public class DivisionServiceImpl implements BusinessService
 	}
 	
 	@Override
+	public boolean findEntityExists(String... params) {
+		return false;
+	}
+
+
+	@Override
 	public HashMap<String, Object> getHashMap(Long param1, Integer param2) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getString(Long teamId, Long playerId) {
-		// TODO Auto-generated method stub
 		return null;
 	}		
 
