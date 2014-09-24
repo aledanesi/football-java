@@ -24,6 +24,7 @@
 package com.jfootball.manager.delegate.impl;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,9 @@ public class PositionServiceImpl implements BusinessService
 	}	
 	
 
-	public void saveEntity(Position position)
+	public void saveEntity(Serializable obj)
 	{
+		Position position = (Position)obj;
 		positionDAO.saveOrUpdatePosition(position);
 	}
 	
@@ -141,14 +143,20 @@ public class PositionServiceImpl implements BusinessService
 
 
 	@Override
-	public void saveEntity(Serializable entity) {
-	}
-
-
-	@Override
 	public void updateEntityByParams(Object... params) {
 	}
 
+	@Override
+	public HashMap<String, Object> getHashMap(Long param1, Integer param2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getString(Long teamId, Long playerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}	
 
 	@Override
 	public void doFirstJob() {

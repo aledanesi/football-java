@@ -66,14 +66,15 @@ public class DivisionController extends GenericController
 	 * ----------------formBackingObject()----------------
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/divisions/list")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response)
 	{
 
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_DIVISION);
 		
-		List<Division> divisionList = footballManager.getDivisions();
-		List<Nation> nationList = footballManager.getNations();
+		List<Division> divisionList = (List<Division>)businessDelegate.getEntities("DIVISION");
+		List<Nation> nationList = (List<Nation>)businessDelegate.getEntities("NATION");
 		
 		
 		view.addObject("division", new Division());
@@ -93,7 +94,7 @@ public class DivisionController extends GenericController
 	public ModelAndView delete(HttpServletRequest request, HttpServletResponse response, 
 			@RequestParam("id") String divisionId)
 	{
-		footballManager.deleteDivision(Long.parseLong(divisionId));
+		businessDelegate.deleteEntity(Long.parseLong(divisionId), "DIVISION");
 				
 		return list(request, response);
 	}
@@ -106,6 +107,7 @@ public class DivisionController extends GenericController
 	 * ----------------onSubmit()----------------
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/divisions/save", method = RequestMethod.POST)
 	protected ModelAndView processSubmit(@ModelAttribute("division") Division division, 
 											BindingResult result, 
@@ -116,7 +118,7 @@ public class DivisionController extends GenericController
 		new TeamValidator().validate(division, result);
         if (result.hasErrors()) 
         {
-    		List<Division>divisionList = footballManager.getDivisions();
+    		List<Division> divisionList = (List<Division>)businessDelegate.getEntities("DIVISION");
 
     		request.setAttribute("divisionList", divisionList);
 
@@ -127,7 +129,7 @@ public class DivisionController extends GenericController
         {
     		if (division.getImage().length == 0 && division.getId() != null)
     		{
-    			Division divisionDb = footballManager.getDivision(division.getId());
+    			Division divisionDb = (Division)businessDelegate.getEntityByID(division.getId(), "DIVISION");
     			if (divisionDb != null )
     			{
     				division.setImage(divisionDb.getImage());
@@ -170,9 +172,9 @@ public class DivisionController extends GenericController
         		}
     		}
     		    		
-    		footballManager.saveDivision(division);
+    		businessDelegate.saveEntity(division, "DIVISION");
 
-    		List<Division>divisionList = footballManager.getDivisions();
+    		List<Division> divisionList = (List<Division>)businessDelegate.getEntities("DIVISION");
 
     		request.setAttribute("divisionList", divisionList);
 
@@ -187,11 +189,12 @@ public class DivisionController extends GenericController
 	 * ----------------referenceData()----------------
 	 * 
 	 */	
+	@SuppressWarnings("unchecked")
 	@ModelAttribute("nationList")
 	protected List<Nation> populateNations(HttpServletRequest request)
 			throws Exception 
 	{
-		List<Nation>nationList = footballManager.getNations();
+		List<Nation>nationList = (List<Nation>)businessDelegate.getEntities("NATION");
 		return nationList;
 	}
 	

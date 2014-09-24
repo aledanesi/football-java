@@ -24,6 +24,7 @@
 package com.jfootball.manager.delegate.impl;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +58,9 @@ public class CareerServiceImpl implements BusinessService
 	}	
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void saveEntity(Career career)
+	public void saveEntity(Serializable obj)
 	{
+		Career career = (Career)obj;
 		careerDAO.saveOrUpdateCareer(career);
 	}
 	
@@ -132,12 +134,21 @@ public class CareerServiceImpl implements BusinessService
 	}
 
 	@Override
-	public void saveEntity(Serializable entity) {
+	public void updateEntityByParams(Object... params) {
+	}
+	
+	@Override
+	public HashMap<String, Object> getHashMap(Long param1, Integer param2) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public void updateEntityByParams(Object... params) {
-	}
+	public String getString(Long teamId, Long playerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}	
+	
 
 	@Override
 	public void doFirstJob() {
@@ -146,5 +157,7 @@ public class CareerServiceImpl implements BusinessService
 	@Override
 	public void doSecondJob() {
 	}
+
+	
 	
 }

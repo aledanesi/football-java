@@ -73,6 +73,7 @@ public class UserController extends GenericController
 	 * @param divisionId
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/users/list")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response)
 	{
@@ -81,7 +82,7 @@ public class UserController extends GenericController
 		
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_TEAM);
 		
-		List<UserBean> userList = footballManager.getUsers();				
+		List<UserBean> userList = (List<UserBean>)businessDelegate.getEntities("USER");				
 		view.addObject("userList", userList);
 
 		logger.info("view: LIST_USER");
@@ -106,7 +107,7 @@ public class UserController extends GenericController
 
 		logger.info("--------------------- Team Controller : delete --------------------- ");
 
-		footballManager.deleteUser(Long.parseLong(userId));
+		businessDelegate.deleteEntity(Long.parseLong(userId), "USER");
 
 		logger.info("Team " + userId + "deleted");
 
@@ -153,7 +154,7 @@ public class UserController extends GenericController
     		//user.setLastUserModify(getUsername());
     		//user.setLastTimeModify(new Timestamp(System.currentTimeMillis()));
     		
-        	footballManager.saveUser(user);
+        	businessDelegate.saveEntity(user, "USER");
     		
     		logger.info("User saved");
     		

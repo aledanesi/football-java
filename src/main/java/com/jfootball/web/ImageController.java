@@ -8,7 +8,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,24 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.jfootball.domain.ImageObject;
 import com.jfootball.domain.Player;
 import com.jfootball.domain.Team;
-import com.jfootball.manager.FootballManager;
 
 @Controller
 public class ImageController extends GenericController
 {
-
-	/*@Autowired
-	public ImageController(TeamManager teamManager, PlayerManager playerManager)
-	{
-		this.teamManager = teamManager;
-		this.playerManager = playerManager;
-	}*/
-	
-	@Autowired
-	public ImageController(FootballManager footballManager)
-	{
-		this.footballManager = footballManager;
-	}	
 
 	/**
 	 * 
@@ -44,7 +29,7 @@ public class ImageController extends GenericController
 	@RequestMapping(value = "/teams/image", method = RequestMethod.GET)
 	public void getImageTeam(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String teamId)
 	{
-		Team team = footballManager.getTeamByID(Long.parseLong(teamId));
+		Team team = (Team)businessDelegate.getEntityByID(Long.parseLong(teamId), "TEAM");
 
 		try
 		{
@@ -64,7 +49,7 @@ public class ImageController extends GenericController
 	@RequestMapping(value = "/players/image", method = RequestMethod.GET)
 	public void getImagePlayer(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String playerId)
 	{
-		Player player = footballManager.getPlayerByID(Long.parseLong(playerId));
+		Player player = (Player)businessDelegate.getEntityByID(Long.parseLong(playerId), "PLAYER");
 
 		try
 		{

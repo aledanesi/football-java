@@ -1,6 +1,7 @@
 package com.jfootball.manager.delegate;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 public interface BusinessService {
@@ -82,10 +83,20 @@ public interface BusinessService {
 	 */
 	public void updateEntityByParams(Object... params);
 
-		/**
+	/**
 	 * @param idCareer
 	 */
 	public void deleteEntity(Long id);
+	
+	/**
+	 * @param idCareer
+	 */	
+	public HashMap<String, Object> getHashMap(Long param1, Integer param2);
+	
+	/**
+	 * @param idCareer
+	 */	
+	public String getString(Long teamId, Long playerId);
 	
 	
 	/**

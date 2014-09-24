@@ -4,6 +4,7 @@
 package com.jfootball.manager.delegate;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 import org.directwebremoting.annotations.RemoteProxy;
@@ -62,6 +63,17 @@ public class BusinessDelegate
 		BusinessService delegate =  lookupService.getBusinessService(serviceType);
 		return delegate.getEntitiesByID(id);
 	}
+	
+	
+	/**
+	 * @param idCareer
+	 * @return
+	 */
+	public List<? extends Serializable> getEntitiesByIDAndDesc(Long id, String desc, String serviceType)
+	{
+		BusinessService delegate =  lookupService.getBusinessService(serviceType);
+		return delegate.getEntitiesByIDAndDesc(id, desc);
+	}	
 	
 	/**
 	 * @param idCareer
@@ -141,6 +153,24 @@ public class BusinessDelegate
 		BusinessService delegate =  lookupService.getBusinessService(serviceType);
 		delegate.deleteEntity(id);		
 	}
+	
+	/**
+	 * @param idCareer
+	 */
+	public HashMap<String, Object> getHashMap(Long param1, Integer param2, String serviceType)
+	{
+		BusinessService delegate =  lookupService.getBusinessService(serviceType);
+		return delegate.getHashMap(param1, param2);		
+	}
+	
+	/**
+	 * @param idCareer
+	 */
+	public String getString(Long teamId, Long playerId, String serviceType)
+	{
+		BusinessService delegate =  lookupService.getBusinessService(serviceType);
+		return delegate.getString(teamId, playerId);		
+	}	
 	
 	
 	/**

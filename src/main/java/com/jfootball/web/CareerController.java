@@ -58,7 +58,7 @@ public class CareerController extends GenericController
         else 
         {    	
         	
-    		Player player = footballManager.getPlayerByID(career.getPlayer().getId());
+    		Player player = (Player)businessDelegate.getEntityByID(career.getPlayer().getId(), "PLAYER");
     		player.setLastUserModify(getUsername());
     		player.setLastTimeModify(new Timestamp(System.currentTimeMillis()));
     		career.setPlayer(player);
@@ -71,7 +71,7 @@ public class CareerController extends GenericController
     		career.setLastUserModify(getUsername());
     		career.setLastTimeModify(new Timestamp(System.currentTimeMillis()));
     		
-    		footballManager.saveCareer(career);
+    		businessDelegate.saveEntity(career, "CAREER");
 
     		return loadViewPlayer(player);
         }
@@ -87,18 +87,19 @@ public class CareerController extends GenericController
 			@RequestParam("id") String careerId, 
 			@RequestParam("player.id") String playerId) 
 	{
-		footballManager.deleteCareer(Long.parseLong(careerId));
+		businessDelegate.deleteEntity(Long.parseLong(careerId), "CAREER");
 		
-		Player player = footballManager.getPlayerByID(Long.parseLong(playerId));
+		Player player = (Player)businessDelegate.getEntityByID(Long.parseLong(playerId), "PLAYER");
 
 		return loadViewPlayer(player);
 	}	
 	
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/careers/get_team_list", method = RequestMethod.GET, headers="Accept=*/*")    
 	public @ResponseBody List<String> getTeamList(@RequestParam("term") String query) 
 	{        
-		List<String> teamList = footballManager.getTeams(query);
+		List<String> teamList = (List<String>)businessDelegate.getEntitiesByParams(query, "TEAM");
 		
 		return teamList;    
 	}	
@@ -109,13 +110,14 @@ public class CareerController extends GenericController
 	 * @param player
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	private ModelAndView loadViewPlayer(Player player) 
 	{
 		ModelAndView view = new ModelAndView(ProjectConstant.VIEW_PLAYER);
 		
-		List<Career> careerList = footballManager.getCareers(player.getId());
+		List<Career> careerList = (List<Career>)businessDelegate.getEntitiesByID(player.getId(), "CAREER");
 		
-		List<Season> seasonYearList = footballManager.getSeasons();
+		List<Season> seasonYearList = (List<Season>)businessDelegate.getEntities("SEASON");
 		
 		Career career = new Career();
 		career.setPlayer(player);		

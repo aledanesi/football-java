@@ -84,6 +84,7 @@ public class PlayerController extends GenericController
 	 * ----------------formBackingObject()----------------
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/players/view",  method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView view(HttpServletRequest request,HttpServletResponse response, @RequestParam("id") String playerId) 
 	{
@@ -93,26 +94,28 @@ public class PlayerController extends GenericController
 
 		Long idPlayer = Long.parseLong(playerId);
 
-		Player player = footballManager.getPlayerByID(idPlayer);
+		Player player = (Player)businessDelegate.getEntityByID(idPlayer, "PLAYER");
 
 		// questo metodo, diversamente dal suo gemello, carica solo alcune informazioni in memoria e non tutto l'albero per problemi di performance.
 		List<Team> teamList = new ArrayList<Team>();
-		List<Player> playerList = new ArrayList<Player>();		
+		List<Player> playerList = new ArrayList<Player>();	
+		
+		Team team = player.getTeam();
 		
 		if (player.getTeam() != null)
 		{
-			teamList = footballManager.getTeamsByDivisionForView(player.getTeam().getNation().getId(), player.getTeam().getDivision().getId());
+			teamList = (List<Team>)businessDelegate.getEntitiesByIDsNew(team.getNation().getId(), team.getDivision().getId(), "TEAM");
 			
-			playerList = footballManager.getPlayers(player.getTeam().getId(), player.getTeamBranch());		
+			playerList = (List<Player>)businessDelegate.getEntitiesByIDAndDesc(team.getId(), player.getTeamBranch(), "PLAYER");
 			
-			Team team = footballManager.getTeamByID(player.getTeam().getId());
+			team = (Team)businessDelegate.getEntityByID(team.getId(), "TEAM");
 
 			view.addObject("team", team);	
 			
-			int counter = Integer.parseInt(footballManager.getPlayerRank(player.getTeam().getId(), idPlayer));
+			int counter = Integer.parseInt(businessDelegate.getString(team.getId(), idPlayer, "PLAYER"));
 
-			HashMap<String, Object> hashSetNext = footballManager.getNextId(player.getTeam().getId(), counter);
-			HashMap<String, Object> hashSetPrev = footballManager.getNextId(player.getTeam().getId(), counter - 2);
+			HashMap<String, Object> hashSetNext = businessDelegate.getHashMap(team.getId(), counter, "PLAYER");
+			HashMap<String, Object> hashSetPrev = businessDelegate.getHashMap(team.getId(), counter - 2, "PLAYER");
 
 			view.addObject("nextCounter", hashSetNext.get("counter"));
 			view.addObject("nextId", hashSetNext.get("id"));
@@ -123,7 +126,7 @@ public class PlayerController extends GenericController
 			view.addObject("prevPlayer", hashSetPrev.get("player"));			
 		}
 
-		List<Career> careerList = footballManager.getCareers(idPlayer);
+		List<Career> careerList = (List<Career>)businessDelegate.getEntitiesByID(idPlayer, "CAREER");
 
 		Career career = new Career();
 		career.setPlayer(player);		
@@ -138,7 +141,7 @@ public class PlayerController extends GenericController
 		
 		view.addObject("careerList", careerList);
 		
-		List<Division> divisionList = footballManager.getDivisionsByNation(new Long(Constant.DEFAULT_NATION));
+		List<Division> divisionList = (List<Division>)businessDelegate.getEntitiesBySecondID(new Long(Constant.DEFAULT_NATION), "DIVISION");
 		view.addObject("divisionList", divisionList);
 		
 		logger.info("view: VIEW_PLAYER");
@@ -151,6 +154,7 @@ public class PlayerController extends GenericController
 	 * ----------------formBackingObject()----------------
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/players/listByTeam", method = {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView listByTeam(HttpServletRequest request,HttpServletResponse response, 
 			@RequestParam("team.id") String teamId, 
@@ -163,18 +167,20 @@ public class PlayerController extends GenericController
 
 		if (!StringUtils.isEmpty(teamId)) {
 			Long idTeam = new Long(teamId);
-			Team team = footballManager.getTeamByID(idTeam);
+			Team team = (Team)businessDelegate.getEntityByID(idTeam, "TEAM");
 			Player player = new Player();
-			List<Player> players = footballManager.getPlayers(idTeam, teamCategory);
+			List<Player> players = (List<Player>)businessDelegate.getEntitiesByIDAndDesc(idTeam, teamCategory, "PLAYER");
 
 			view.addObject("team", team);
 			view.addObject("player", player);
 			view.addObject("teamCategory", teamCategory);
 			view.addObject("playerList", players);
 
+			/// SERVE ANCORA??? SI PUO' TOGLIERE??
 			SearchPlayer buyPlayer = new SearchPlayer();
 			buyPlayer.setTeamId(idTeam);
-			view.addObject("buyPlayer", buyPlayer);			
+			view.addObject("buyPlayer", buyPlayer);		
+			///////////
 
 			logger.info("Players loaded: " + players.size());
 		}
@@ -189,6 +195,7 @@ public class PlayerController extends GenericController
 	 * ----------------formBackingObject()----------------
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/players/list", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest request,HttpServletResponse response) 
 	{
@@ -199,7 +206,7 @@ public class PlayerController extends GenericController
 
 		Player player = new Player();
 
-		List<Player> playerList = footballManager.getPlayers();
+		List<Player> playerList = (List<Player>)businessDelegate.getEntities("PLAYER");
 
 		view.addObject("player", player);
 		view.addObject("playerList", playerList);
@@ -224,9 +231,9 @@ public class PlayerController extends GenericController
 		
 		logger.info("--------------------- Player Controller : delete --------------------- ");
 
-		Player player = footballManager.getPlayerByID(Long.parseLong(playerId));
+		Player player = (Player)businessDelegate.getEntityByID(Long.parseLong(playerId), "PLAYER");
 		
-		footballManager.deletePlayer(Long.parseLong(playerId));
+		businessDelegate.deleteEntity(Long.parseLong(playerId), "PLAYER");
 		
 		logger.info("Player " + playerId + "deleted");
 
@@ -238,6 +245,7 @@ public class PlayerController extends GenericController
 	 * ----------------formBackingObject()----------------
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/players/search")
 	public ModelAndView search(HttpServletRequest request, HttpServletResponse response, 
 			@ModelAttribute("player") SearchPlayer searchPlayer, BindingResult result) 
@@ -269,7 +277,7 @@ public class PlayerController extends GenericController
 		
 		if (!StringUtils.isEmpty(iniziale)) 
 		{
-			List<Player> playerList = footballManager.getPlayers(iniziale, searchType);
+			List<Player> playerList = (List<Player>)businessDelegate.getEntitiesByParams(iniziale, searchType);
 
 			view.addObject("playerList", playerList);
 		}
@@ -287,7 +295,8 @@ public class PlayerController extends GenericController
 	 * 
 	 */
 	@RequestMapping(value = "/players/save", method = RequestMethod.POST)
-	protected ModelAndView processSave(@ModelAttribute("player") Player player, BindingResult result, SessionStatus status, HttpServletRequest request, HttpServletResponse response) 
+	protected ModelAndView processSave(@ModelAttribute("player") Player player, BindingResult result, 
+			SessionStatus status, HttpServletRequest request, HttpServletResponse response) 
 			throws Exception 
 	{
 		logger.info("--------------------- Player Controller : processSubmit --------------------- ");
@@ -312,22 +321,22 @@ public class PlayerController extends GenericController
 			Team team = null;
 			if (player.getTeam().getId() != null)
 			{
-				team = footballManager.getTeamByID(player.getTeam().getId());
+				team =  (Team)businessDelegate.getEntityByID(player.getTeam().getId(), "TEAM");
 				team.setLastUserModify(getUsername());
 				team.setLastTimeModify(new Timestamp(System.currentTimeMillis()));				
 			}
 			
 			Team teamOwner = null;
 			if (player.getTeamOwner() != null)
-				teamOwner = footballManager.getTeamByID(player.getTeamOwner().getId());
+				teamOwner = (Team)businessDelegate.getEntityByID(player.getTeamOwner().getId(), "TEAM");
 
 
-			Position position = footballManager.getPosition(player.getPosition().getId());
-			Nation nationality = footballManager.getNation(player.getNationality().getId());
+			Position position = (Position)businessDelegate.getEntityByID(player.getPosition().getId(), "POSITION");			
+			Nation nationality = (Nation)businessDelegate.getEntityByID(player.getNationality().getId(), "NATION");
 			
 			Nation nationality2 =  null;
 			if (player.getNationality2().getId() != null)
-				nationality2 = footballManager.getNation(player.getNationality2().getId());
+				nationality2 = (Nation)businessDelegate.getEntityByID(player.getNationality2().getId(), "NATION");
 
 			player.setPosition(position);
 			player.setTeam(team);
@@ -354,14 +363,14 @@ public class PlayerController extends GenericController
 			 * player.setImage(image); }
 			 */
 
-			footballManager.savePlayer(player);
+			businessDelegate.saveEntity(player, "PLAYER");
 
     		logger.info("Player saved");
 
     		// GESTIONE IMMAGINE
 			if (player.getImage().length == 0 && player.getId() != null) 
 			{
-				Player playerDb = footballManager.getPlayerByID(player.getId());
+				Player playerDb = (Player)businessDelegate.getEntityByID(player.getId(), "PLAYER");
 
 				if (playerDb != null) {
 					player.setImage(playerDb.getImage());
@@ -398,7 +407,6 @@ public class PlayerController extends GenericController
 					}
 				}
 			}
-    		
     		
     		
 			Long teamId = 0L;
@@ -446,6 +454,7 @@ public class PlayerController extends GenericController
 	 * ----------------onSubmit()----------------
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/players/movePlayer", method = RequestMethod.POST)
 	protected ModelAndView processMovePlayer(
 			@ModelAttribute("player") Player player, BindingResult result,
@@ -456,7 +465,7 @@ public class PlayerController extends GenericController
 
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_PLAYER);
 
-		Player playerDb = footballManager.getPlayerByID(player.getId());
+		Player playerDb = (Player)businessDelegate.getEntityByID(player.getId(), "PLAYER");
 
 		Long teamId = 0L;
 		
@@ -469,15 +478,15 @@ public class PlayerController extends GenericController
 		
 		String teamBranch = playerDb.getTeamBranch();
 
-		playerDb.setTeam(footballManager.getTeamByID(player.getTeam().getId()));
+		playerDb.setTeam((Team)businessDelegate.getEntityByID(player.getTeam().getId(), "TEAM"));
 
 		// gestione per il trasferimento in prestito 
 		
 		if (player.getOnLoan())
-			playerDb.setTeamOwner(footballManager.getTeamByID(player.getTeamOwner().getId()));			
+			playerDb.setTeamOwner((Team)businessDelegate.getEntityByID(player.getTeamOwner().getId(), "TEAM"));			
 		
 		else 
-			playerDb.setTeamOwner(footballManager.getTeamByID(player.getTeam().getId()));		
+			playerDb.setTeamOwner((Team)businessDelegate.getEntityByID(player.getTeam().getId(), "TEAM"));		
 		
 		// fine 
 		playerDb.setNumber(null);
@@ -490,14 +499,14 @@ public class PlayerController extends GenericController
 		playerDb.setGrossWeeklySalary(null);
 		playerDb.setGrossAnnualSalary(null);
 		
-		footballManager.savePlayer(playerDb);
+		businessDelegate.saveEntity(playerDb, "PLAYER");
 
 		logger.info("Player changed team.");
 
 		if (teamId != null)
 		{
-			List<Player> playerList = footballManager.getPlayers(teamId, teamBranch);
-			Team teamPrec = footballManager.getTeamByID(teamId);
+			List<Player> playerList = (List<Player>)businessDelegate.getEntitiesByIDAndDesc(teamId, teamBranch, "PLAYER");
+			Team teamPrec = (Team)businessDelegate.getEntityByID(teamId, "TEAM");
 
 			view.addObject("playerList", playerList);
 			view.addObject("team", teamPrec);
@@ -510,7 +519,6 @@ public class PlayerController extends GenericController
 		{
 			return view(request, response, ""+player.getId());    			
 		}	
-
 	}
 	
 	/**
@@ -518,6 +526,7 @@ public class PlayerController extends GenericController
 	 * ----------------onSubmit()----------------
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/players/withoutTeam")
 	protected ModelAndView processWithoutTeam(
 			@ModelAttribute("player") Player player, BindingResult result,
@@ -528,7 +537,7 @@ public class PlayerController extends GenericController
 
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_PLAYER);
 
-		Player playerDb = footballManager.getPlayerByID(player.getId());
+		Player playerDb = (Player)businessDelegate.getEntityByID(player.getId(), "PLAYER");
 
 		Long teamId = 0L;
 		
@@ -556,12 +565,12 @@ public class PlayerController extends GenericController
 		playerDb.setTeam(null);
 		playerDb.setTeamOwner(null);
 
-		footballManager.savePlayer(playerDb);
+		businessDelegate.saveEntity(playerDb, "PLAYER");
 
 		logger.info("Player changed team.");
 
-		List<Player> playerList = footballManager.getPlayers(teamId, teamBranch);
-		Team teamPrec = footballManager.getTeamByID(teamId);
+		List<Player> playerList = (List<Player>)businessDelegate.getEntitiesByIDAndDesc(teamId, teamBranch, "PLAYER");
+		Team teamPrec = (Team)businessDelegate.getEntityByID(teamId, "TEAM");
 
 		view.addObject("playerList", playerList);
 		view.addObject("team", teamPrec);
@@ -577,6 +586,7 @@ public class PlayerController extends GenericController
 	 * ----------------onSubmit()----------------
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/players/endCareer", method = RequestMethod.POST)
 	protected ModelAndView processEndCareer(
 			@ModelAttribute("player") Player player, BindingResult result,
@@ -587,7 +597,7 @@ public class PlayerController extends GenericController
 
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_PLAYER);
 
-		Player playerDb = footballManager.getPlayerByID(player.getId());
+		Player playerDb = (Player)businessDelegate.getEntityByID(player.getId(), "PLAYER");
 
 		Long teamId = 0L;
 		
@@ -618,12 +628,12 @@ public class PlayerController extends GenericController
 		playerDb.setTeamOwner(null);
 		playerDb.setTeamPrev(null);		
 		
-		footballManager.savePlayer(playerDb);
+		businessDelegate.saveEntity(playerDb, "PLAYER");
 
 		logger.info("Player changed team.");
 
-		List<Player> playerList = footballManager.getPlayers(teamId, teamBranch);
-		Team teamPrec = footballManager.getTeamByID(teamId);
+		List<Player> playerList = (List<Player>)businessDelegate.getEntitiesByIDAndDesc(teamId, teamBranch, "PLAYER");
+		Team teamPrec = (Team)businessDelegate.getEntityByID(teamId, "TEAM");
 
 		view.addObject("playerList", playerList);
 		view.addObject("team", teamPrec);
@@ -641,10 +651,13 @@ public class PlayerController extends GenericController
 	 * ----------------referenceData()----------------
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@ModelAttribute("nationList")
 	protected List<Nation> populateNations(HttpServletRequest request)
-			throws Exception {
-		List<Nation> nationList = footballManager.getNations();
+			throws Exception 
+	{
+	
+		List<Nation> nationList = (List<Nation>)businessDelegate.getEntities("NATION");
 		return nationList;
 	}
 
@@ -686,10 +699,11 @@ public class PlayerController extends GenericController
 	 * ----------------referenceData()----------------
 	 * 
 	 */
+	@SuppressWarnings("unchecked")
 	@ModelAttribute("seasonYearList")
 	protected List<Season> populateSeasons(HttpServletRequest request) throws Exception 
 	{
-		List<Season> seasonYearList = footballManager.getSeasons();
+		List<Season> seasonYearList = (List<Season>)businessDelegate.getEntities("SEASON");
 		return seasonYearList;
 	}	
 

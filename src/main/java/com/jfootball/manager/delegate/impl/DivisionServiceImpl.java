@@ -25,6 +25,7 @@ package com.jfootball.manager.delegate.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,6 @@ public class DivisionServiceImpl implements BusinessService
 
 	public List<Division> getEntitiesBySecondID(Long nationId) 
 	{
-		//return divisionDAO.listDivisionsByNation(nationId);
 		List<Division> lista = divisionDAO.listDivisionsByNation(nationId);
 		
 		// codice temporaneo da cancellare quando saranno sistemati tutti i nomi dei campionati non ancora inseriti
@@ -90,8 +90,10 @@ public class DivisionServiceImpl implements BusinessService
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void saveEntity(Division division) 
+	public void saveEntity(Serializable obj) 
 	{
+		Division division = (Division)obj;
+		
 		divisionDAO.saveOrUpdateDivision(division);
 	}
 	
@@ -161,13 +163,20 @@ public class DivisionServiceImpl implements BusinessService
 
 
 	@Override
-	public void saveEntity(Serializable entity) {
-	}
-
-
-	@Override
 	public void updateEntityByParams(Object... params) {
 	}
+	
+	@Override
+	public HashMap<String, Object> getHashMap(Long param1, Integer param2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getString(Long teamId, Long playerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}		
 
 
 	@Override

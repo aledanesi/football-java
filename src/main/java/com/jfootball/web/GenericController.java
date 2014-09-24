@@ -22,8 +22,8 @@ import com.jfootball.service.UserService;
 public class GenericController 
 {
 	
-	@Autowired
-	protected FootballManager footballManager;		
+	//@Autowired
+	//protected FootballManager footballManager;		
 	
 	@Autowired
 	protected BusinessDelegate businessDelegate;		
@@ -49,9 +49,9 @@ public class GenericController
 	}
 	
 	
-	public void setFootballManager(FootballManager footballManager) {
+	/*public void setFootballManager(FootballManager footballManager) {
 		this.footballManager = footballManager;
-	}
+	}*/
 
 	public void setBusinessDelegate(BusinessDelegate businessDelegate)
 	{

@@ -24,6 +24,7 @@
 package com.jfootball.manager.delegate.impl;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class UserServiceImpl implements BusinessService
 	 * @param idTeam
 	 * @return
 	 */
-	public UserBean getUserByID(Long idUser)
+	public UserBean getEntityByID(Long idUser)
 	{
 		return userDAO.getUserByID(idUser);
 	}
@@ -62,7 +63,7 @@ public class UserServiceImpl implements BusinessService
 	 * @param name
 	 * @return
 	 */
-	public UserBean getUserByName(String name)
+	public UserBean getEntityByDesc(String name)
 	{
 		return userDAO.getUserByName(name);
 	}	
@@ -72,7 +73,7 @@ public class UserServiceImpl implements BusinessService
 	 * @param divisionId
 	 * @return
 	 */
-	public List<UserBean> listUsers()
+	public List<? extends Serializable> getEntities() 
 	{
 		return userDAO.listUsers();
 	}
@@ -82,21 +83,21 @@ public class UserServiceImpl implements BusinessService
 	 * 
 	 * @param team - the team to save
 	 */
-	public void saveOrUpdateUser(UserBean user)
+	public void saveEntity(Serializable obj)
 	{
+		UserBean user = (UserBean)obj;
+		
 		userDAO.saveOrUpdateUser(user);
 	}	
 
 	/**
 	 * @param idTeam
 	 */
-	public void deleteUser(Long idUser)
+	public void deleteEntity(Long idUser)
 	{
 		userDAO.deleteUser(idUser);
 	}
 
-	
-	
 	
 	
 	
@@ -109,18 +110,9 @@ public class UserServiceImpl implements BusinessService
 	 * 
 	 * *************************************************************************************************************/
 	
-	@Override
-	public Serializable getEntityByID(Long id) {
-		return null;
-	}
 
 	@Override
 	public Serializable getEntityBySecondId(Long id) {
-		return null;
-	}
-
-	@Override
-	public Serializable getEntityByDesc(String desc) {
 		return null;
 	}
 
@@ -155,26 +147,25 @@ public class UserServiceImpl implements BusinessService
 	}
 
 	@Override
-	public List<? extends Serializable> getEntities() {
-		return null;
-	}
-
-	@Override
 	public List<? extends Serializable> getOtherEntities() {
 		return null;
 	}
 
 	@Override
-	public void saveEntity(Serializable entity) {
-	}
-
-	@Override
 	public void updateEntityByParams(Object... params) {
 	}
+	
+	@Override
+	public HashMap<String, Object> getHashMap(Long param1, Integer param2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
-	public void deleteEntity(Long id) {
-	}
+	public String getString(Long teamId, Long playerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}		
 
 	@Override
 	public void doFirstJob() {

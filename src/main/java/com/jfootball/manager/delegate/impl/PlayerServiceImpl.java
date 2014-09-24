@@ -57,8 +57,9 @@ public class PlayerServiceImpl implements BusinessService
 	}		
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void saveEntity(Player player)
+	public void saveEntity(Serializable obj)
 	{
+		Player player = (Player)obj;
 		if (player.getImage() == null && player.getId() != null)
 		{
 			Long id = player.getId();
@@ -139,13 +140,13 @@ public class PlayerServiceImpl implements BusinessService
 	}
 	
 
-	public HashMap<String, Object> getNextId(Long teamId, Integer rankId)
+	public HashMap<String, Object> getHashMap(Long teamId, Integer rankId)
 	{
 		return playerDAO.getNextId(teamId, rankId);
 	}
 	
 
-	public String getRank(Long teamId, Long playerId) 
+	public String getString(Long teamId, Long playerId) 
 	{
 		return playerDAO.getRank(teamId, playerId);		
 	}
@@ -204,8 +205,4 @@ public class PlayerServiceImpl implements BusinessService
 		return null;
 	}
 
-	@Override
-	public void saveEntity(Serializable entity) {
-	}
-	
 }

@@ -121,6 +121,7 @@ public class TeamController extends GenericController
 		
 		// imposto la nazione nella ricerca per la lista dei team 
 		// [DEFAULT: ITALIA]
+		
 		Team team = new Team(continentId, nationId, divisionId);
 		view.addObject("team", team);
 		
@@ -279,7 +280,9 @@ public class TeamController extends GenericController
     		
     		logger.info("Team saved");
     		
-    		return list(request, response, team.getNation().getContinent().getId(), team.getNation().getId(), divisionReturn);
+			Nation nation = (Nation)businessDelegate.getEntityByID(team.getNation().getId(), "NATION");
+    		
+    		return list(request, response, nation.getContinent().getId(), nation.getId(), divisionReturn);
 
         }		
 		
