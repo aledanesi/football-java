@@ -161,7 +161,7 @@ jQ(function() {
 		modal : true,
 		autoOpen : false,
 		buttons : {
-			"Elimina" : function() {
+			"Conferma" : function() {
 				jQ(window.location).attr('href', jQ("#urlDeletePlayer").val());
 			},
 			"Annulla" : function() {
@@ -176,7 +176,7 @@ jQ(function() {
 		modal : true,
 		autoOpen : false,
 		buttons : {
-			"Svincola" : function() {
+			"Conferma" : function() {
 				jQ(window.location).attr('href', jQ("#urlUnemployPlayer").val());
 			},
 			"Annulla" : function() {
@@ -191,7 +191,7 @@ jQ(function() {
 		modal : true,
 		autoOpen : false,
 		buttons : {
-			"Ritira" : function() {
+			"Conferma" : function() {
 				jQ(window.location).attr('href', jQ("#urlRetirePlayer").val());
 			},
 			"Annulla" : function() {
@@ -206,7 +206,7 @@ jQ(function() {
 		modal : true,
 		autoOpen : false,
 		buttons : {
-			"Trasferisci" : function() {
+			"Conferma" : function() {
 				if (jQ('input[name=onLoan]').is(':checked')) {
 					jQ("#teamOwnerId").val(jQ("#teamBeforeChange").val());
 				}
@@ -228,7 +228,7 @@ jQ(function() {
 		autoResize : true,
 		dialogClass : "dlg-no-close",
 		buttons : {
-			"Salva" : function() {
+			"Conferma" : function() {
 
 				player.confirmTransferPlayer();
 				
