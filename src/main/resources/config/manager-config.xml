@@ -39,55 +39,34 @@
 	<dwr:configuration />
 	<dwr:annotation-config id="dwrAnnotationConfig" />
 	<dwr:annotation-scan base-package="com.jfootball.manager.impl" scanRemoteProxy="true" />
+	<dwr:annotation-scan base-package="com.jfootball.business.impl" scanRemoteProxy="true" />
 	<dwr:annotation-scan base-package="com.jfootball.domain" scanDataTransferObject="true" />
 
 	<!-- ========================= MANAGERs ========================= -->
 
-	<bean name="divisionManager"  class="com.jfootball.manager.impl.DivisionManagerImpl" />
+	<bean name="divisionService"  class="com.jfootball.business.impl.DivisionServiceImpl" />
 
-	<bean name="teamManager"      class="com.jfootball.manager.impl.TeamManagerImpl" />
+	<bean name="teamService"      class="com.jfootball.business.impl.TeamServiceImpl" />
 
-	<bean name="playerManager"    class="com.jfootball.manager.impl.PlayerManagerImpl" />
+	<bean name="playerService"    class="com.jfootball.business.impl.PlayerServiceImpl" />
 
-	<bean name="positionManager"  class="com.jfootball.manager.impl.PositionManagerImpl" />
+	<bean name="positionService"  class="com.jfootball.business.impl.PositionServiceImpl" />
 
-	<bean name="careerManager"    class="com.jfootball.manager.impl.CareerManagerImpl" />
+	<bean name="careerService"    class="com.jfootball.business.impl.CareerServiceImpl" />
 
-	<bean name="seasonManager"    class="com.jfootball.manager.impl.SeasonManagerImpl" />
+	<bean name="seasonService"    class="com.jfootball.business.impl.SeasonServiceImpl" />
 	
-	<bean name="nationManager"    class="com.jfootball.manager.impl.NationManagerImpl" />
+	<bean name="nationService"    class="com.jfootball.business.impl.NationServiceImpl" />
 	
-	<bean name="userManager"      class="com.jfootball.manager.impl.UserManagerImpl" />
+	<bean name="userService"      class="com.jfootball.business.impl.UserServiceImpl" />
 	
-	<bean name="continentManager" class="com.jfootball.manager.impl.ContinentManagerImpl" />
-
-	<bean name="footballManager"  class="com.jfootball.manager.impl.FootballManagerImpl" />
-
-
-
-	<bean name="divisionService"  class="com.jfootball.manager.delegate.impl.DivisionServiceImpl" />
-
-	<bean name="teamService"      class="com.jfootball.manager.delegate.impl.TeamServiceImpl" />
-
-	<bean name="playerService"    class="com.jfootball.manager.delegate.impl.PlayerServiceImpl" />
-
-	<bean name="positionService"  class="com.jfootball.manager.delegate.impl.PositionServiceImpl" />
-
-	<bean name="careerService"    class="com.jfootball.manager.delegate.impl.CareerServiceImpl" />
-
-	<bean name="seasonService"    class="com.jfootball.manager.delegate.impl.SeasonServiceImpl" />
-	
-	<bean name="nationService"    class="com.jfootball.manager.delegate.impl.NationServiceImpl" />
-	
-	<bean name="userService"      class="com.jfootball.manager.delegate.impl.UserServiceImpl" />
-	
-	<bean name="continentService" class="com.jfootball.manager.delegate.impl.ContinentServiceImpl" />
+	<bean name="continentService" class="com.jfootball.business.impl.ContinentServiceImpl" />
 
 
 	
-	<bean name="lookupService"    class="com.jfootball.manager.delegate.BusinessLookUp" />
+	<bean name="lookupService"    class="com.jfootball.business.BusinessLookUp" />
 	
-	<bean name="businessDelegate" class="com.jfootball.manager.delegate.BusinessDelegate" />
+	<bean name="businessDelegate" class="com.jfootball.business.BusinessDelegate" />
 	
 
 </beans>

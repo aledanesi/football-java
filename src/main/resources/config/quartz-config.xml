@@ -6,16 +6,24 @@
 
 	<bean id="endSeasonJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 	 
-		<property name="targetObject" ref="playerManager" />
-		<property name="targetMethod" value="endSeasonJob" />
-	 
+		<property name="targetObject" ref="businessDelegate" />
+		<property name="targetMethod" value="doFirstJob" />
+		<property name="arguments">
+	     <list>
+	       <value>PLAYER</value>
+	     </list>
+	   </property>	
 	</bean>	
    
 	<bean id="fixPlayersJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 	 
-		<property name="targetObject" ref="playerManager" />
-		<property name="targetMethod" value="careerPlayerJob" />
-	 
+		<property name="targetObject" ref="businessDelegate" />
+		<property name="targetMethod" value="doSecondJob" />
+		<property name="arguments">
+	     <list>
+	       <value>PLAYER</value>
+	     </list>
+	   </property>	
 	</bean>	
 	
 	<!-- Cron Trigger, fire every July 1st at 06:00am. -->
