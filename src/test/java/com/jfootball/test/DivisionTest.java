@@ -7,14 +7,14 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jfootball.Constant;
+import com.jfootball.business.impl.DivisionServiceImpl;
 import com.jfootball.domain.Division;
-import com.jfootball.manager.DivisionManager;
 
 public class DivisionTest extends BaseTest 
 {
 
 	@Autowired
-	protected DivisionManager divisionManager;
+	protected DivisionServiceImpl divisionManager;
 
 	private Division division;
 
@@ -35,7 +35,7 @@ public class DivisionTest extends BaseTest
 
 		Long divisionId = new Long(Constant.DEFAULT_DIVISION);
 
-		Division division = divisionManager.getDivisionByID(divisionId);
+		Division division = divisionManager.getEntityByID(divisionId);
 		Assert.assertNotNull(division);			
 
 		prLine("Getting the division by ID...", "test ok");
@@ -44,7 +44,7 @@ public class DivisionTest extends BaseTest
 	@Test
 	public void getListDivision() 
 	{
-		List<Division> divisionList =  divisionManager.listDivisions();
+		List<Division> divisionList =  divisionManager.getEntities();
 		Assert.assertNotNull("Division list is null.", divisionList);
 
 		prLine("Getting the division list...", "test ok");
@@ -54,7 +54,7 @@ public class DivisionTest extends BaseTest
 	@Test
 	public void createDivision() {		
 
-		divisionManager.saveOrUpdateDivision(division);
+		divisionManager.saveEntity(division);
 
 		prLine("Creating division...", "test ok");		
 	}
@@ -62,10 +62,10 @@ public class DivisionTest extends BaseTest
 	@Test
 	public void deleteDivision() {		
 		
-		List<Division> divisionList =  divisionManager.listDivisions();
+		List<Division> divisionList =  divisionManager.getEntities();
 		Division obj = divisionList.get(0);
 
-		divisionManager.deleteDivision(obj.getId());
+		divisionManager.deleteEntity(obj.getId());
 
 		prLine("Deleting division...", "test ok");
 	}	

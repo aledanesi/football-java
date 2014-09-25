@@ -8,16 +8,16 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jfootball.Constant;
+import com.jfootball.business.impl.TeamServiceImpl;
 import com.jfootball.domain.Division;
 import com.jfootball.domain.Nation;
 import com.jfootball.domain.Team;
-import com.jfootball.manager.TeamManager;
 
 public class TeamTest extends BaseTest 
 {
 
 	@Autowired
-	protected TeamManager teamManager;
+	protected TeamServiceImpl teamManager;
 
 	private Team team;
 	
@@ -44,7 +44,7 @@ public class TeamTest extends BaseTest
 		Long nationId = new Long(Constant.DEFAULT_NATION);
 		Long divisionId = new Long(Constant.DEFAULT_DIVISION);
 		
-		List<Team> teamList =  teamManager.listTeamsByDivision(nationId, divisionId);
+		List<Team> teamList =  teamManager.getEntitiesByIDs(nationId, divisionId);
 		Assert.assertNotNull("Team list is null.", teamList);
 
 		prLine("Getting the team list...", "test ok");
@@ -56,13 +56,13 @@ public class TeamTest extends BaseTest
 		// team NULL
 		Long teamID = new Long(10);
 		
-		Team team = teamManager.getTeamByID(teamID);
+		Team team = teamManager.getEntityByID(teamID);
 		Assert.assertNull("Team is not null.", team);
 
 		// team ROMA
 		teamID = new Long(212);
 		
-		team = teamManager.getTeamByID(teamID);
+		team = teamManager.getEntityByID(teamID);
 		Assert.assertNotNull("Team is null.", team);
 
 		prLine("Getting team by ID...", "test ok");
@@ -74,13 +74,13 @@ public class TeamTest extends BaseTest
 		// team NULL
 		String teamName = "POMEZIA";
 		
-		Team team = teamManager.getTeamByName(teamName);
+		Team team = teamManager.getEntityByDesc(teamName);
 		Assert.assertNull("Team is not null.", team);
 
 		// team NAPOLI
 		teamName = "NAPOLI";
 		
-		team = teamManager.getTeamByName(teamName);
+		team = teamManager.getEntityByDesc(teamName);
 		Assert.assertNotNull("Team is null.", team);
 
 		prLine("Getting team by Name...", "test ok");
@@ -90,9 +90,9 @@ public class TeamTest extends BaseTest
 	public void saveTeam() 
 	{
 		
-		teamManager.saveOrUpdateTeam(team);
+		teamManager.saveEntity(team);
 		
-		Team obj = teamManager.getTeamByName("XXX");
+		Team obj = teamManager.getEntityByDesc("XXX");
 		Assert.assertNotNull("Team is null.", obj);
 
 		prLine("Saving team...", "test ok");
@@ -102,12 +102,12 @@ public class TeamTest extends BaseTest
 	@Test
 	public void deleteTeam() 
 	{		
-		teamManager.saveOrUpdateTeam(team);
+		teamManager.saveEntity(team);
 
-		Team obj = teamManager.getTeamByName("XXX");
+		Team obj = teamManager.getEntityByDesc("XXX");
 		Assert.assertNotNull("Team is null.", obj);
 		
-		teamManager.deleteTeam(obj.getId());
+		teamManager.deleteEntity(obj.getId());
 
 		prLine("Deleting team...", "test ok");
 	}	

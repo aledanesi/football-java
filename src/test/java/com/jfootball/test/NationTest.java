@@ -7,14 +7,14 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jfootball.Constant;
+import com.jfootball.business.impl.NationServiceImpl;
 import com.jfootball.domain.Nation;
-import com.jfootball.manager.NationManager;
 
 public class NationTest extends BaseTest 
 {
 
 	@Autowired
-	protected NationManager nationManager;
+	protected NationServiceImpl nationManager;
 
 	private Nation nation;
 
@@ -32,7 +32,7 @@ public class NationTest extends BaseTest
 	public void getNationByID() {		
 		Long nationId = new Long(Constant.DEFAULT_NATION);
 
-		Nation nation = nationManager.getNationByID(nationId);
+		Nation nation = nationManager.getEntityByID(nationId);
 		Assert.assertNotNull(nation);			
 
 		prLine("Getting the nation by ID...", "test ok");
@@ -41,7 +41,7 @@ public class NationTest extends BaseTest
 	@Test
 	public void getListNation() 
 	{
-		List<Nation> nationList =  nationManager.listNations();
+		List<Nation> nationList =  nationManager.getEntities();
 		Assert.assertNotNull("Nation list is null.", nationList);
 
 		prLine("Getting the nation list...", "test ok");
@@ -50,7 +50,7 @@ public class NationTest extends BaseTest
 	@Test
 	public void createNation() 
 	{		
-		nationManager.saveOrUpdateNation(nation);
+		nationManager.saveEntity(nation);
 
 		prLine("Creating nation...", "test ok");
 	}
@@ -58,10 +58,10 @@ public class NationTest extends BaseTest
 	@Test
 	public void deleteNation() {		
 		
-		List<Nation> nationList =  nationManager.listNations();
+		List<Nation> nationList =  nationManager.getEntities();
 		Nation obj = nationList.get(0);
 
-		nationManager.deleteNation(obj.getId());
+		nationManager.deleteEntity(obj.getId());
 
 		prLine("Deleting nation...", "test ok");
 	}

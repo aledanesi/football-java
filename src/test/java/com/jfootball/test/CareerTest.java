@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.jfootball.business.impl.CareerServiceImpl;
 import com.jfootball.domain.Career;
-import com.jfootball.manager.CareerManager;
 
 public class CareerTest extends BaseTest 
 {
 	@Autowired
-	protected CareerManager careerManager;
+	protected CareerServiceImpl careerManager;
 
 	private Career career;
 
@@ -29,7 +29,7 @@ public class CareerTest extends BaseTest
 		System.out.println("Creating a new career");
 
 		try {
-			careerManager.saveOrUpdateCareer(career);
+			careerManager.saveEntity(career);
 			System.out.println("Career created.");
 		} catch (Exception e) {
 			logger.error("Career creation has launched an error.");

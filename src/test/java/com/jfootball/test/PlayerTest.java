@@ -8,15 +8,15 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jfootball.Constant;
+import com.jfootball.business.impl.PlayerServiceImpl;
 import com.jfootball.domain.Nation;
 import com.jfootball.domain.Player;
-import com.jfootball.manager.PlayerManager;
 
 public class PlayerTest extends BaseTest
 {
 
 	@Autowired
-	protected PlayerManager playerManager;
+	protected PlayerServiceImpl playerManager;
 
 	private Player player;
 
@@ -38,7 +38,7 @@ public class PlayerTest extends BaseTest
 		// TOTTI
 		Long playerId = 467L;
 
-		Player player = playerManager.getPlayerByID(playerId);
+		Player player = playerManager.getEntityByID(playerId);
 		Assert.assertNotNull(player);			
 
 		prLine("Getting the player by ID...", "test ok");
@@ -48,7 +48,7 @@ public class PlayerTest extends BaseTest
 	public void getListPlayerByTeam() 
 	{
 
-		List<Player> listPlayer = playerManager.listPlayersByTeam(212L, Constant.FIRST_TEAM);
+		List<Player> listPlayer = playerManager.getEntitiesByIDAndDesc(212L, Constant.FIRST_TEAM);
 		Assert.assertNotNull(listPlayer);			
 
 		prLine("Getting the player list by Team...", "test ok");
@@ -57,7 +57,7 @@ public class PlayerTest extends BaseTest
 	@Test
 	public void createPlayer() 
 	{	
-		playerManager.saveOrUpdatePlayer(player);
+		playerManager.saveEntity(player);
 
 		prLine("Creating player...", "test ok");
 	}
@@ -65,12 +65,12 @@ public class PlayerTest extends BaseTest
 	@Test
 	public void deletePlayer() 
 	{		
-		List<Player> listPlayer = playerManager.listPlayersByTeam(212L, Constant.FIRST_TEAM);
+		List<Player> listPlayer = playerManager.getEntitiesByIDAndDesc(212L, Constant.FIRST_TEAM);
 
 		Player obj = listPlayer.get(listPlayer.size()-1);
 		//Assert.assertNotNull("Player is null.", obj);
 		
-		playerManager.deletePlayer(obj.getId());
+		playerManager.deleteEntity(obj.getId());
 
 		prLine("Deleting player...", "test ok");
 	}		
