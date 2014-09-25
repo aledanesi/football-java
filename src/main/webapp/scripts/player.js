@@ -5,12 +5,12 @@ jQ(function() {
 	jQ("#owner_nation_id").change(function() {
 		var nation = jQ("#owner_nation_id").val();
 
-		footballManager.getDivisionsByNation(nation, function(data) {
+		businessDelegate.getEntitiesBySecondID(nation, "DIVISION", function(data) {
 			jQ( "#owner_division_id" ).empty();
 			dwr.util.addOptions("owner_division_id", data, "id", "name");
 
 			var division = jQ("#owner_division_id").val();
-			footballManager.getTeamsByDivision(nation, division, function(data2) {
+			businessDelegate.getEntitiesByIDs(nation, division, "TEAM", function(data2) {
 				jQ("#owner_team_id").empty();
 				dwr.util.addOptions("owner_team_id", data2, "id", "name");
 			});
@@ -23,7 +23,7 @@ jQ(function() {
 		var nation = jQ("#owner_nation_id").val();
 		var division = jQ("#owner_division_id").val();
 
-		footballManager.getTeamsByDivision(nation, division, function(data2) {
+		businessDelegate.getEntitiesByIDs(nation, division, "TEAM", function(data2) {
 			jQ("#owner_team_id").empty();
 			dwr.util.addOptions("owner_team_id", data2, "id", "name");
 		});
@@ -33,12 +33,12 @@ jQ(function() {
 	jQ("#nation_id").change(function() {
 		var nation = jQ("#nation_id").val();
 
-		footballManager.getDivisionsByNation(nation, function(data) {
+		businessDelegate.getEntitiesBySecondID(nation, "DIVISION", function(data) {
 			// jQ( "#division_id" ).empty();
 			// dwr.util.addOptions("division_id", data, "id", "name");
 
 			var division = jQ("#division_id").val();
-			footballManager.getTeamsByDivision(nation, division, function(data2) {
+			businessDelegate.getEntitiesByIDs(nation, division, "TEAM", function(data2) {
 				jQ("#team_id").empty();
 				dwr.util.addOptions("team_id", data2, "id", "name");
 			});
@@ -51,7 +51,7 @@ jQ(function() {
 		var nation = jQ("#nation_id").val();
 		var division = jQ("#division_id").val();
 
-		footballManager.getTeamsByDivision(nation, division, function(data2) {
+		businessDelegate.getEntitiesByIDs(nation, division, "TEAM", function(data2) {
 			jQ("#team_id").empty();
 			dwr.util.addOptions("team_id", data2, "id", "name");
 		});
@@ -111,7 +111,7 @@ jQ(function() {
 					
 					if(jQ('#editPlayer input[id=id]').val() == '' )
 					{
-						footballManager.findPlayerExists(firstName.val(), lastName.val(), dateOfBirth.val(), function (data)
+						businessDelegate.findEntityExists(firstName.val(), lastName.val(), dateOfBirth.val(), "PLAYER", function (data)
 						{
 							if(data == true)
 							{
@@ -242,7 +242,7 @@ jQ(function() {
 	jQ("#ruolo_id").change(function() {
 		var codRuolo = jQ("#ruolo_id").val();
 
-		footballManager.getPositions(codRuolo, function(data) {
+		businessDelegate.getEntitiesByParams(codRuolo, "POSITION", function(data) {
 			jQ("#position_id").empty();
 			dwr.util.addOptions("position_id", data, "id", "descPosizione");
 			jQ("#position_id").trigger("change");
@@ -341,7 +341,7 @@ Player.prototype = {
 		});
 		
 		jQ("#owner_nation_id").val(nation);
-		footballManager.getDivisionsByNation(nation,
+		businessDelegate.getEntitiesBySecondID(nation, "DIVISION",
 				function(data4) {
 					dwr.util.removeAllOptions("owner_division_id");
 					dwr.util.addOptions("owner_division_id", data4, "id", "name");
@@ -351,9 +351,10 @@ Player.prototype = {
 
 		});	
 
-		footballManager.getTeamsByDivision(
+		businessDelegate.getEntitiesByIDs(
 					nationID,
 					divisionID,
+					"TEAM",
 					function(data3) {
 						dwr.util.removeAllOptions("owner_team_id");
 						dwr.util.addOptions("owner_team_id", data3, "id", "name");
@@ -372,7 +373,7 @@ Player.prototype = {
 
 		cleanPlayer();
 		
-		footballManager.getPlayerByID(playerId,
+		businessDelegate.getEntityByID(playerId, "PLAYER",
 						function(data) {
 							var urlImage = jQ('#editPlayer input[name=urlImage]').val();
 							jQ('#editPlayer img[id=myImage]').attr('src', urlImage + "?id=" + playerId);
@@ -431,7 +432,7 @@ Player.prototype = {
 							//checkOnSelectByVal('editPlayer', 'foot', data.foot);
 							jQ("#foot").val(data.foot);
 
-							footballManager.getPositions(jQ("#ruolo_id").val(),
+							businessDelegate.getEntitiesByParams(jQ("#ruolo_id").val(), "POSITION",
 											function(data2) {
 												dwr.util.removeAllOptions("position_id");
 												dwr.util.addOptions("position_id", data2, "id", "descPosizione");
@@ -470,7 +471,7 @@ Player.prototype = {
 							if(data.teamOwner != null)
 							{
 								jQ("#owner_nation_id").val(data.teamOwner.nation.id);
-								footballManager.getDivisionsByNation(data.teamOwner.nation.id,
+								businessDelegate.getEntitiesBySecondID(data.teamOwner.nation.id, "DIVISION",
 										function(data4) {
 											dwr.util.removeAllOptions("owner_division_id");
 											dwr.util.addOptions("owner_division_id", data4, "id", "name");
@@ -480,9 +481,10 @@ Player.prototype = {
 											jQ("#owner_division_id").val(data.teamOwner.division.id);
 								});	
 
-								footballManager.getTeamsByDivision(
+								businessDelegate.getEntitiesByIDs(
 											data.teamOwner.nation.id,
 											data.teamOwner.division.id,
+											"TEAM",
 											function(data3) {
 												dwr.util.removeAllOptions("owner_team_id");
 												dwr.util.addOptions("owner_team_id", data3, "id", "name");
@@ -512,7 +514,7 @@ Player.prototype = {
 
 		jQ('#dMovePlayer').dialog('open');
 
-		footballManager.getTeamsByDivision(jQ("#teamNationId").val(), jQ("#teamDivisionId").val(), function(data) {
+		businessDelegate.getEntitiesByIDs(jQ("#teamNationId").val(), jQ("#teamDivisionId").val(), "TEAM", function(data) {
 			dwr.util.removeAllOptions("team_id");
 			dwr.util.addOptions("team_id", data, "id", "name");
 
@@ -564,7 +566,7 @@ function cleanPlayer() {
 	});
 
 	var codRuolo = jQ("#ruolo_id").val();
-	footballManager.getPositions(codRuolo, function(data) {
+	businessDelegate.getEntitiesByParams(codRuolo, "POSITION", function(data) {
 		dwr.util.removeAllOptions("position_id");
 		dwr.util.addOptions("position_id", data, "id", "descPosizione");
 	});

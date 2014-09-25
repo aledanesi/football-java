@@ -18,7 +18,7 @@ jQ(function() {
 		autoResize : true,
 		dialogClass : "dlg-no-close",
 		buttons : {
-			"Salva" : function() {
+			"Conferma" : function() {
 				jQ( ".validateTips" ).show();
 
 				var bValid = true;
@@ -52,7 +52,7 @@ jQ(function() {
 		modal : true,
 		autoOpen : false,
 		buttons : {
-			"Elimina" : function() {
+			"Conferma" : function() {
 				jQ(window.location).attr('href', jQ("#urlDeleteCareer").val());
 			},
 			"Annulla" : function() {
@@ -71,7 +71,7 @@ Career.prototype = {
 		validateCareer : function()
 		{
 			var seasonName = jQ("#stagione").val();
-			footballManager.getSeasonYearByName(seasonName, function(data){
+			businessDelegate.getEntityByDesc(seasonName, "SEASON", function(data){
 				jQ("#stagioneID").val(data.id);
 			});
 		},	
@@ -89,7 +89,7 @@ Career.prototype = {
 
 			jQ('#dEditCareer').dialog('open');
 
-			footballManager.getCareerByID(careerId, function(data)
+			businessDelegate.getEntityByID(careerId, "CAREER", function(data)
 			{
 				jQ('#editCareer input[id=id]').val(data.id);
 				
