@@ -14,51 +14,34 @@
 
 
 <script>
-/*
 
-$(document).ready(function() {
-
-      alert("document ready occurred!");
-
-});
-
-$(window).load(function() {
-
-      alert("window load occurred!");
-
-});
-
-*/
-
-
-
-jQ(window).load(function() {
-
-	var nation = jQ("#nation_id_move").val();
+	jQ(window).load(function() {
 	
-	footballManager.getDivisionsByNation(nation, function(data) {
-
-		jQ( "#division_id_move" ).empty();
-
-		dwr.util.addOptions("division_id_move", data, "id", "name");
-
-		var division = jQ("#division_id_move").val();
-
-		footballManager.getTeamsByDivision(nation, division, function(data2) {
-			jQ("#team_id_move").empty();
-			dwr.util.addOptions("team_id_move", data2, "id", "name");
-		});				
-
+		var nation = jQ("#nation_id_move").val();
+		
+		businessDelegate.getEntitiesBySecondID(nation, "DIVISION", function(data) {
+	
+			jQ( "#division_id_move" ).empty();
+	
+			dwr.util.addOptions("division_id_move", data, "id", "name");
+	
+			var division = jQ("#division_id_move").val();
+	
+			businessDelegate.getEntitiesByIDs(nation, division, "TEAM", function(data2) {
+				jQ("#team_id_move").empty();
+				dwr.util.addOptions("team_id_move", data2, "id", "name");
+			});				
+	
+		});	
+	
 	});	
-
-});	
 	
 	jQ(function() {	
 
 		jQ("#nation_id_move").change(function() {
 			var nation = jQ("#nation_id_move").val();
 			
-			footballManager.getDivisionsByNation(nation, function(data) {
+			businessDelegate.getEntitiesBySecondID(nation, "DIVISION", function(data) {
 	
 				jQ( "#division_id_move" ).empty();
 	
@@ -66,7 +49,7 @@ jQ(window).load(function() {
 	
 				var division = jQ("#division_id_move").val();
 	
-				footballManager.getTeamsByDivision(nation, division, function(data2) {
+				businessDelegate.getEntitiesByIDs(nation, division, "TEAM", function(data2) {
 					jQ("#team_id_move").empty();
 					dwr.util.addOptions("team_id_move", data2, "id", "name");
 				});				
@@ -78,7 +61,7 @@ jQ(window).load(function() {
 			var nation = jQ("#nation_id_move").val();
 			var division = jQ("#division_id_move").val();
 	
-			footballManager.getTeamsByDivision(nation, division, function(data2) {
+			businessDelegate.getEntitiesByIDs(nation, division, "TEAM", function(data2) {
 				jQ("#team_id_move").empty();
 				dwr.util.addOptions("team_id_move", data2, "id", "name");
 			});

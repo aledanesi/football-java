@@ -27,7 +27,7 @@
 		if (letteraRicerca != '')
 		{
 
-			footballManager.getPlayers(letteraRicerca, "ALL", function (data)
+			businessDelegate.getEntitiesByParams(letteraRicerca, "ALL", "PLAYER", function (data)
 			{	
 			
 				var str = "<table class=\"standard_tabelle\" style=\"width: 730px\"><tr><th colspan=\"3\">Risultati ottenuti:</th></tr><tr><th colspan=\"3\">Clicca su un nome per acquistare il giocatore:</th></tr>";
