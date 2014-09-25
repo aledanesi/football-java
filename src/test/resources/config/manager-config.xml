@@ -40,5 +40,6 @@
   <bean name="careerManager" class="com.jfootball.manager.impl.CareerManagerImpl" />
 
   <bean name="seasonManager" class="com.jfootball.manager.impl.SeasonManagerImpl" />
+  
 
 </beans>
