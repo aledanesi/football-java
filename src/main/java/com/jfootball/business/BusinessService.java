@@ -1,4 +1,4 @@
-package com.jfootball.manager.delegate;
+package com.jfootball.business;
 
 import java.io.Serializable;
 import java.util.HashMap;

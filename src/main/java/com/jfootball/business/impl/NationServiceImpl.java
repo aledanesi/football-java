@@ -21,7 +21,7 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.delegate.impl;
+package com.jfootball.business.impl;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -30,51 +30,62 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jfootball.dao.PositionDao;
-import com.jfootball.domain.Position;
-import com.jfootball.manager.delegate.BusinessService;
+import com.jfootball.business.BusinessService;
+import com.jfootball.dao.NationDao;
+import com.jfootball.domain.Nation;
 
 /**
  * @author C_ICTDNS
  *
  */
 @Transactional(readOnly = true)
-public class PositionServiceImpl implements BusinessService
+public class NationServiceImpl implements BusinessService
 {
-	private PositionDao positionDAO;
 	
+	private final NationDao nationDAO;
+
 	@Autowired
-	public PositionServiceImpl(PositionDao positionDAO) 
+	public NationServiceImpl(NationDao nationDAO) 
 	{
-		this.positionDAO = positionDAO;
+		this.nationDAO = nationDAO;
 	}	
 	
 
 	public void saveEntity(Serializable obj)
 	{
-		Position position = (Position)obj;
-		positionDAO.saveOrUpdatePosition(position);
+		Nation nation = (Nation)obj;
+		nationDAO.saveOrUpdateNation(nation);
 	}
 	
-	public List<Position> getEntitiesByParams(String... params)
+
+	public List<Nation> getEntities()
 	{
-		return positionDAO.listPositions(params[0]);
+		return nationDAO.listNations();
 	}
 	
-
-	public Position getEntityByID(Long positionId)
+	public List<Nation> getEntitiesBySecondID(Long continentId)
 	{
-		return positionDAO.getPositionByID(positionId);
+		return nationDAO.listNationsFromContinent(continentId);		
 	}
 	
-
-	public void deleteEntity(Long positionId)
+	public List<Nation> getOtherEntities()
 	{
-		positionDAO.deletePosition(positionId);
+		return nationDAO.listNationsTournament();
+	}	
+	
+
+	public Nation getEntityByID(Long nationId)
+	{
+		return nationDAO.getNationByID(nationId);
+	}
+	
+
+	public void deleteEntity(Long nationId)
+	{
+		nationDAO.deleteNation(nationId);
 	}
 
 
-	
 	
 	
 	
@@ -107,12 +118,6 @@ public class PositionServiceImpl implements BusinessService
 
 
 	@Override
-	public List<? extends Serializable> getEntitiesBySecondID(Long id) {
-		return null;
-	}
-
-
-	@Override
 	public List<? extends Serializable> getEntitiesByIDs(Long id1, Long id2) {
 		return null;
 	}
@@ -131,13 +136,7 @@ public class PositionServiceImpl implements BusinessService
 
 
 	@Override
-	public List<? extends Serializable> getEntities() {
-		return null;
-	}
-
-
-	@Override
-	public List<? extends Serializable> getOtherEntities() {
+	public List<? extends Serializable> getEntitiesByParams(String... params) {
 		return null;
 	}
 
@@ -145,7 +144,12 @@ public class PositionServiceImpl implements BusinessService
 	@Override
 	public void updateEntityByParams(Object... params) {
 	}
-
+	
+	@Override
+	public HashMap<String, Object> getHashMap(Long param1, Integer param2) {
+		return null;
+	}
+	
 	@Override
 	public boolean findEntityExists(String... params) {
 		return false;
@@ -153,14 +157,10 @@ public class PositionServiceImpl implements BusinessService
 
 
 	@Override
-	public HashMap<String, Object> getHashMap(Long param1, Integer param2) {
-		return null;
-	}
-
-	@Override
 	public String getString(Long teamId, Long playerId) {
 		return null;
-	}	
+	}		
+
 
 	@Override
 	public void doFirstJob() {
@@ -170,5 +170,6 @@ public class PositionServiceImpl implements BusinessService
 	@Override
 	public void doSecondJob() {
 	}
-
+	
+	
 }

@@ -21,10 +21,9 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.delegate.impl;
+package com.jfootball.business.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,76 +31,80 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jfootball.dao.DivisionDao;
-import com.jfootball.domain.Division;
-import com.jfootball.manager.delegate.BusinessService;
+import com.jfootball.business.BusinessService;
+import com.jfootball.dao.TeamDao;
+import com.jfootball.domain.Team;
 
 /**
- * @author C_ICTDNS
- *
+ * @author Alessandro Danesi
+ * 
  */
 @Transactional(readOnly = true)
-public class DivisionServiceImpl implements BusinessService
+public class TeamServiceImpl implements BusinessService
 {
-	
-	private final DivisionDao divisionDAO;
 
+	private TeamDao teamDAO;
 
 	@Autowired
-	public DivisionServiceImpl(DivisionDao divisionDAO) 
+	public TeamServiceImpl(TeamDao teamDAO)
 	{
-		this.divisionDAO = divisionDAO;
-	}	
-	
-	
-	public List<Division> getEntities() {
-		return divisionDAO.listDivisions();
+		this.teamDAO = teamDAO;
 	}
 
-
-	public Division getEntityByID(Long divisionId) {
-		return divisionDAO.getDivisionByID(divisionId);
+	public Team getEntityByID(Long idTeam)
+	{
+		Team team = teamDAO.getTeamByID(idTeam);
+		return team;
 	}
 
-
-	public List<Division> getEntitiesBySecondID(Long nationId) 
+	public Team getEntityByDesc(String name)
 	{
-		List<Division> lista = divisionDAO.listDivisionsByNation(nationId);
-		
-		// codice temporaneo da cancellare quando saranno sistemati tutti i nomi dei campionati non ancora inseriti
-		if (lista.size() == 0)
-		{
-			lista = new ArrayList<Division>();
-			
-			Division d1 = new Division();
-			d1.setId(1L);
-			d1.setLevel(1L);
-			d1.setName("SERIE A");
-			
-			Division d2 = new Division();
-			d2.setId(2L);
-			d2.setLevel(2L);
-			d2.setName("SERIE B");
-			
-			lista.add(d1);
-			lista.add(d2);
-		}
-		return lista;
+		return teamDAO.getTeamByName(name);
+	}
+
+	public List<Team> getEntitiesByIDs(Long nationId, Long divisionId)
+	{
+		return teamDAO.listTeamsByDivision(nationId, divisionId);
+	}
+
+	public List<Team> getEntitiesByIDsNew(Long nationId, Long divisionId)
+	{
+		return teamDAO.listTeamsByDivisionForView(nationId, divisionId);
+	}
+
+	public List<String> getEntitiesByParams(String... params)
+	{
+		return teamDAO.listTeamsByName(params[0]);
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void saveEntity(Serializable obj) 
+	public void saveEntity(Serializable obj)
 	{
-		Division division = (Division)obj;
+		Team team = (Team) obj;
 		
-		divisionDAO.saveOrUpdateDivision(division);
-	}
-	
-	public void deleteEntity(Long idDivision)
-	{
-		divisionDAO.deleteDivision(idDivision);		
+		if (team.getImage() == null && team.getId() != null)
+		{
+			team.setImage(getEntityByID(team.getId()).getImage());
+		}
+		try
+		{
+			teamDAO.saveOrUpdateTeam(team);
+		} catch (Exception e)
+		{
+			//logger.error(e);
+		}
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public void deleteEntity(Long idTeam)
+	{
+		teamDAO.deleteTeam(idTeam);
+	}
+	
+	
+	
+	
+	
 	
 	
 	
@@ -113,64 +116,42 @@ public class DivisionServiceImpl implements BusinessService
 	 * 
 	 * 
 	 * *************************************************************************************************************/
+		
 
 	@Override
 	public Serializable getEntityBySecondId(Long id) {
 		return null;
 	}
 
-
-	@Override
-	public Serializable getEntityByDesc(String desc) {
-		return null;
-	}
-
-
 	@Override
 	public List<? extends Serializable> getEntitiesByID(Long id) {
 		return null;
 	}
 
-
 	@Override
-	public List<? extends Serializable> getEntitiesByIDs(Long id1, Long id2) {
+	public List<? extends Serializable> getEntitiesBySecondID(Long id) {
 		return null;
 	}
-
-
-	@Override
-	public List<? extends Serializable> getEntitiesByIDsNew(Long id1, Long id2) {
-		return null;
-	}
-
 
 	@Override
 	public List<? extends Serializable> getEntitiesByIDAndDesc(Long id, String desc) {
 		return null;
 	}
 
-
 	@Override
-	public List<? extends Serializable> getEntitiesByParams(String... params) {
+	public List<? extends Serializable> getEntities() {
 		return null;
 	}
-
 
 	@Override
 	public List<? extends Serializable> getOtherEntities() {
 		return null;
-	}
-
-
-	@Override
-	public void updateEntityByParams(Object... params) {
 	}
 	
 	@Override
 	public boolean findEntityExists(String... params) {
 		return false;
 	}
-
 
 	@Override
 	public HashMap<String, Object> getHashMap(Long param1, Integer param2) {
@@ -180,13 +161,16 @@ public class DivisionServiceImpl implements BusinessService
 	@Override
 	public String getString(Long teamId, Long playerId) {
 		return null;
-	}		
+	}	
 
+
+	@Override
+	public void updateEntityByParams(Object... params) {
+	}
 
 	@Override
 	public void doFirstJob() {
 	}
-
 
 	@Override
 	public void doSecondJob() {

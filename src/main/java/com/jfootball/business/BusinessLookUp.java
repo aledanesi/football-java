@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.jfootball.manager.delegate;
+package com.jfootball.business;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

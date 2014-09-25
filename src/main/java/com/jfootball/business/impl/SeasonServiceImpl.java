@@ -21,7 +21,7 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.delegate.impl;
+package com.jfootball.business.impl;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -31,51 +31,59 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jfootball.dao.CareerDao;
-import com.jfootball.domain.Career;
-import com.jfootball.manager.delegate.BusinessService;
+import com.jfootball.business.BusinessService;
+import com.jfootball.dao.SeasonDao;
+import com.jfootball.domain.Season;
 
 /**
- * @author C_ICTDNS 
- *
+ * @author C_ICTDNS
+ * 
  */
 @Transactional(readOnly = true)
-public class CareerServiceImpl implements BusinessService
+public class SeasonServiceImpl implements BusinessService
 {
-
-	private final CareerDao careerDAO;
-		
+	
+	private SeasonDao seasonDao;
 	
 	@Autowired
-	public CareerServiceImpl(CareerDao careerDAO) 
+	public SeasonServiceImpl(SeasonDao seasonDao) 
 	{
-		this.careerDAO = careerDAO;
-	}		
-
-	public Serializable getEntityByID(Long idCareer)
-	{
-		return careerDAO.getCareerByID(idCareer);
+		this.seasonDao = seasonDao;
 	}	
+	
 
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void saveEntity(Serializable obj)
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public void saveEntity(Serializable obj) 
 	{
-		Career career = (Career)obj;
-		careerDAO.saveOrUpdateCareer(career);
-	}
-	
-	public List<Career> getEntitiesByID(Long idPlayer)
-	{
-		return careerDAO.listCareer(idPlayer);
-	}
-	
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)	
-	public void deleteEntity(Long idCareer)
-	{
-		careerDAO.deleteCareer(idCareer);
+		Season season = (Season)obj;
+		seasonDao.saveOrUpdateSeason(season);
 	}
 
+
+	public List<Season> getEntities() {
+		return seasonDao.listSeason();
+	}
+
+
+	public Season getEntityByDesc(String nameSeason)
+	{
+		return seasonDao.getSeasonYearByName(nameSeason);
+	}
 	
+
+	public Season getEntityByID(Long seasonYearID) {
+		return seasonDao.getSeasonYearById(seasonYearID);
+	}
+
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public void deleteEntity(Long yearID) {
+
+		seasonDao.deleteById(yearID);
+	}
+
+
 	
 	
 	
@@ -88,13 +96,14 @@ public class CareerServiceImpl implements BusinessService
 	 * 
 	 * *************************************************************************************************************/
 	
+
 	@Override
 	public Serializable getEntityBySecondId(Long id) {
 		return null;
 	}
 
 	@Override
-	public Serializable getEntityByDesc(String desc) {
+	public List<? extends Serializable> getEntitiesByID(Long id) {
 		return null;
 	}
 
@@ -122,11 +131,6 @@ public class CareerServiceImpl implements BusinessService
 	public List<? extends Serializable> getEntitiesByParams(String... params) {
 		return null;
 	}
-	
-	@Override
-	public List<? extends Serializable> getEntities() {
-		return null;
-	}
 
 	@Override
 	public List<? extends Serializable> getOtherEntities() {
@@ -138,6 +142,11 @@ public class CareerServiceImpl implements BusinessService
 	}
 	
 	@Override
+	public boolean findEntityExists(String... params) {
+		return false;
+	}
+
+	@Override
 	public HashMap<String, Object> getHashMap(Long param1, Integer param2) {
 		return null;
 	}
@@ -146,11 +155,6 @@ public class CareerServiceImpl implements BusinessService
 	public String getString(Long teamId, Long playerId) {
 		return null;
 	}	
-	
-	@Override
-	public boolean findEntityExists(String... params) {
-		return false;
-	}
 
 	@Override
 	public void doFirstJob() {
@@ -159,7 +163,5 @@ public class CareerServiceImpl implements BusinessService
 	@Override
 	public void doSecondJob() {
 	}
-
-	
 	
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.jfootball.manager.delegate;
+package com.jfootball.business;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -92,6 +92,7 @@ public class BusinessDelegate
 	 * @param idCareer
 	 * @return
 	 */
+	@RemoteMethod
 	public List<? extends Serializable> getEntitiesByIDs(Long id1, Long id2, String serviceType)	
 	{
 		BusinessService delegate =  lookupService.getBusinessService(serviceType);
@@ -113,10 +114,19 @@ public class BusinessDelegate
 	 * @return
 	 */
 	@RemoteMethod
-	public List<? extends Serializable> getEntitiesByParams(String params, String serviceType)
+	public List<? extends Serializable> getEntitiesByParams(String... params)
 	{
-		BusinessService delegate =  lookupService.getBusinessService(serviceType);
-		return delegate.getEntitiesByParams(params);
+		if (params.length == 3)
+		{
+			BusinessService delegate =  lookupService.getBusinessService(params[2]);
+			return delegate.getEntitiesByParams(params[0], params[1]);
+			
+		}
+		else 
+		{
+			BusinessService delegate =  lookupService.getBusinessService(params[1]);
+			return delegate.getEntitiesByParams(params[0]);			
+		}
 	}
 	
 	/**

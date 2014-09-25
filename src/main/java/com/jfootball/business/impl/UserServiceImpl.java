@@ -21,68 +21,82 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.delegate.impl;
+package com.jfootball.business.impl;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jfootball.dao.SeasonDao;
-import com.jfootball.domain.Season;
-import com.jfootball.manager.delegate.BusinessService;
+import com.jfootball.business.BusinessService;
+import com.jfootball.dao.UserDao;
+import com.jfootball.domain.user.UserBean;
 
 /**
- * @author C_ICTDNS
+ * @author Alessandro Danesi
  * 
  */
 @Transactional(readOnly = true)
-public class SeasonServiceImpl implements BusinessService
+public class UserServiceImpl implements BusinessService
 {
 	
-	private SeasonDao seasonDao;
+	private final UserDao userDAO;
 	
 	@Autowired
-	public SeasonServiceImpl(SeasonDao seasonDao) 
+	public UserServiceImpl(UserDao userDAO) 
 	{
-		this.seasonDao = seasonDao;
+		this.userDAO = userDAO;
+	}
+	
+	/**
+	 * @param idTeam
+	 * @return
+	 */
+	public UserBean getEntityByID(Long idUser)
+	{
+		return userDAO.getUserByID(idUser);
+	}
+
+	/**
+	 * @param name
+	 * @return
+	 */
+	public UserBean getEntityByDesc(String name)
+	{
+		return userDAO.getUserByName(name);
 	}	
-	
 
-
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void saveEntity(Serializable obj) 
+	/**
+	 * @param nationId
+	 * @param divisionId
+	 * @return
+	 */
+	public List<? extends Serializable> getEntities() 
 	{
-		Season season = (Season)obj;
-		seasonDao.saveOrUpdateSeason(season);
+		return userDAO.listUsers();
 	}
 
-
-	public List<Season> getEntities() {
-		return seasonDao.listSeason();
-	}
-
-
-	public Season getEntityByDesc(String nameSeason)
+	/**
+	 * Method to save team
+	 * 
+	 * @param team - the team to save
+	 */
+	public void saveEntity(Serializable obj)
 	{
-		return seasonDao.getSeasonYearByName(nameSeason);
+		UserBean user = (UserBean)obj;
+		
+		userDAO.saveOrUpdateUser(user);
+	}	
+
+	/**
+	 * @param idTeam
+	 */
+	public void deleteEntity(Long idUser)
+	{
+		userDAO.deleteUser(idUser);
 	}
-	
-
-	public Season getEntityByID(Long seasonYearID) {
-		return seasonDao.getSeasonYearById(seasonYearID);
-	}
-
-
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void deleteEntity(Long yearID) {
-
-		seasonDao.deleteById(yearID);
-	}
-
 
 	
 	
@@ -154,7 +168,7 @@ public class SeasonServiceImpl implements BusinessService
 	@Override
 	public String getString(Long teamId, Long playerId) {
 		return null;
-	}	
+	}		
 
 	@Override
 	public void doFirstJob() {
@@ -162,6 +176,7 @@ public class SeasonServiceImpl implements BusinessService
 
 	@Override
 	public void doSecondJob() {
-	}
+	}	
 	
+
 }

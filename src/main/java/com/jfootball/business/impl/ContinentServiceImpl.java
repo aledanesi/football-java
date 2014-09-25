@@ -21,7 +21,7 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.delegate.impl;
+package com.jfootball.business.impl;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -30,75 +30,72 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jfootball.dao.UserDao;
-import com.jfootball.domain.user.UserBean;
-import com.jfootball.manager.delegate.BusinessService;
+import com.jfootball.business.BusinessService;
+import com.jfootball.dao.ContinentDao;
+import com.jfootball.domain.Continent;
 
 /**
- * @author Alessandro Danesi
+ * @author C_ICTDNS
  * 
  */
 @Transactional(readOnly = true)
-public class UserServiceImpl implements BusinessService
+public class ContinentServiceImpl implements BusinessService
 {
-	
-	private final UserDao userDAO;
+
+	private final ContinentDao continentDao;
+		
 	
 	@Autowired
-	public UserServiceImpl(UserDao userDAO) 
+	public ContinentServiceImpl(ContinentDao continentDao) 
 	{
-		this.userDAO = userDAO;
-	}
+		this.continentDao = continentDao;
+	}		
+
 	
 	/**
-	 * @param idTeam
-	 * @return
-	 */
-	public UserBean getEntityByID(Long idUser)
-	{
-		return userDAO.getUserByID(idUser);
-	}
-
-	/**
-	 * @param name
-	 * @return
-	 */
-	public UserBean getEntityByDesc(String name)
-	{
-		return userDAO.getUserByName(name);
-	}	
-
-	/**
-	 * @param nationId
-	 * @param divisionId
-	 * @return
-	 */
-	public List<? extends Serializable> getEntities() 
-	{
-		return userDAO.listUsers();
-	}
-
-	/**
-	 * Method to save team
+	 * Method to save nation
 	 * 
-	 * @param team - the team to save
-	 */
+	 * @param nation the nation to save
+	 */	
 	public void saveEntity(Serializable obj)
 	{
-		UserBean user = (UserBean)obj;
-		
-		userDAO.saveOrUpdateUser(user);
-	}	
-
-	/**
-	 * @param idTeam
-	 */
-	public void deleteEntity(Long idUser)
-	{
-		userDAO.deleteUser(idUser);
+		Continent continent = (Continent)obj;
+		continentDao.saveOrUpdateContinent(continent);
 	}
 
-	
+	/**
+	 * Method to list nations
+	 * 
+	 * @return the nations found
+	 */
+	public List<Continent> getEntities()
+	{
+		return continentDao.listContinents();
+	}
+
+	/**
+	 * Method to get a nation 
+	 * 
+	 * @param nationId the nation id
+	 * @return the nation found
+	 */	
+	public Continent getEntityByID(Long continentId)
+	{
+		return continentDao.getContinentByID(continentId);		
+	}
+
+	/**
+	 * Method to delete a nation
+	 * 
+	 * @param nationId the nation id
+	 */	
+	public void deleteEntity(Long continentId)
+	{
+		continentDao.deleteContinent(continentId);
+	}
+
+
+
 	
 	
 	
@@ -110,54 +107,57 @@ public class UserServiceImpl implements BusinessService
 	 * 
 	 * *************************************************************************************************************/
 	
-
 	@Override
 	public Serializable getEntityBySecondId(Long id) {
 		return null;
 	}
+
+
+	@Override
+	public Serializable getEntityByDesc(String desc) {
+		return null;
+	}
+
 
 	@Override
 	public List<? extends Serializable> getEntitiesByID(Long id) {
 		return null;
 	}
 
+
 	@Override
 	public List<? extends Serializable> getEntitiesBySecondID(Long id) {
 		return null;
 	}
+
 
 	@Override
 	public List<? extends Serializable> getEntitiesByIDs(Long id1, Long id2) {
 		return null;
 	}
 
+
 	@Override
 	public List<? extends Serializable> getEntitiesByIDsNew(Long id1, Long id2) {
 		return null;
 	}
+
 
 	@Override
 	public List<? extends Serializable> getEntitiesByIDAndDesc(Long id, String desc) {
 		return null;
 	}
 
+
 	@Override
 	public List<? extends Serializable> getEntitiesByParams(String... params) {
 		return null;
 	}
 
+
 	@Override
 	public List<? extends Serializable> getOtherEntities() {
 		return null;
-	}
-
-	@Override
-	public void updateEntityByParams(Object... params) {
-	}
-	
-	@Override
-	public boolean findEntityExists(String... params) {
-		return false;
 	}
 
 	@Override
@@ -168,15 +168,26 @@ public class UserServiceImpl implements BusinessService
 	@Override
 	public String getString(Long teamId, Long playerId) {
 		return null;
-	}		
+	}	
+	
+	@Override
+	public boolean findEntityExists(String... params) {
+		return false;
+	}
+
+
+	@Override
+	public void updateEntityByParams(Object... params) {
+	}
+
 
 	@Override
 	public void doFirstJob() {
 	}
 
+
 	@Override
 	public void doSecondJob() {
-	}	
+	}
 	
-
 }

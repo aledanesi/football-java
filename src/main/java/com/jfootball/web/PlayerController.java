@@ -277,7 +277,7 @@ public class PlayerController extends GenericController
 		
 		if (!StringUtils.isEmpty(iniziale)) 
 		{
-			List<Player> playerList = (List<Player>)businessDelegate.getEntitiesByParams(iniziale, searchType);
+			List<Player> playerList = (List<Player>)businessDelegate.getEntitiesByParams(iniziale, searchType, "PLAYER");
 
 			view.addObject("playerList", playerList);
 		}
@@ -490,9 +490,9 @@ public class PlayerController extends GenericController
 		
 		// fine 
 		playerDb.setNumber(null);
-		playerDb.setRetired(null);
-		playerDb.setUnemployed(null);
-		playerDb.setCaptain(null);
+		playerDb.setRetired(false);
+		playerDb.setUnemployed(false);
+		playerDb.setCaptain(false);
 		
 		playerDb.setNetWeeklySalary(null);
 		playerDb.setNetAnnualSalary(null);

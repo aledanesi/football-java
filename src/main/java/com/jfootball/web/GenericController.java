@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.jfootball.UserInSession;
-import com.jfootball.manager.FootballManager;
-import com.jfootball.manager.delegate.BusinessDelegate;
+import com.jfootball.business.BusinessDelegate;
 import com.jfootball.service.UserService;
 
 /**

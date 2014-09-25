@@ -21,7 +21,7 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.delegate.impl;
+package com.jfootball.business.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,11 +32,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jfootball.business.BusinessService;
 import com.jfootball.dao.PlayerDao;
 import com.jfootball.dao.TeamDao;
 import com.jfootball.domain.Player;
 import com.jfootball.domain.Team;
-import com.jfootball.manager.delegate.BusinessService;
 
 /**
  * @author C_ICTDNS
@@ -126,8 +126,8 @@ public class PlayerServiceImpl implements BusinessService
 		
 		// fine 
 		player.setNumber(null);
-		player.setRetired(null);
-		player.setUnemployed(null);		
+		player.setRetired(false);
+		player.setUnemployed(false);		
 		
 		player.setTeam(team);
 		playerDAO.saveOrUpdatePlayer(player);

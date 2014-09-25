@@ -21,7 +21,7 @@
  * 51 Rattazzi Street, Fifth Floor
  * Pomezia, RM  00040  Italy
  */
-package com.jfootball.manager.delegate.impl;
+package com.jfootball.business.impl;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -31,79 +31,50 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jfootball.dao.TeamDao;
-import com.jfootball.domain.Team;
-import com.jfootball.manager.delegate.BusinessService;
+import com.jfootball.business.BusinessService;
+import com.jfootball.dao.CareerDao;
+import com.jfootball.domain.Career;
 
 /**
- * @author Alessandro Danesi
- * 
+ * @author C_ICTDNS 
+ *
  */
 @Transactional(readOnly = true)
-public class TeamServiceImpl implements BusinessService
+public class CareerServiceImpl implements BusinessService
 {
 
-	private TeamDao teamDAO;
-
+	private final CareerDao careerDAO;
+		
+	
 	@Autowired
-	public TeamServiceImpl(TeamDao teamDAO)
+	public CareerServiceImpl(CareerDao careerDAO) 
 	{
-		this.teamDAO = teamDAO;
-	}
+		this.careerDAO = careerDAO;
+	}		
 
-	public Team getEntityByID(Long idTeam)
+	public Serializable getEntityByID(Long idCareer)
 	{
-		Team team = teamDAO.getTeamByID(idTeam);
-		return team;
-	}
-
-	public Team getEntityByDesc(String name)
-	{
-		return teamDAO.getTeamByName(name);
-	}
-
-	public List<Team> getEntitiesByIDs(Long nationId, Long divisionId)
-	{
-		return teamDAO.listTeamsByDivision(nationId, divisionId);
-	}
-
-	public List<Team> getEntitiesByIDsNew(Long nationId, Long divisionId)
-	{
-		return teamDAO.listTeamsByDivisionForView(nationId, divisionId);
-	}
-
-	public List<String> getEntitiesByParams(String... params)
-	{
-		return teamDAO.listTeamsByName(params[0]);
-	}
+		return careerDAO.getCareerByID(idCareer);
+	}	
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void saveEntity(Serializable obj)
 	{
-		Team team = (Team) obj;
-		
-		if (team.getImage() == null && team.getId() != null)
-		{
-			team.setImage(getEntityByID(team.getId()).getImage());
-		}
-		try
-		{
-			teamDAO.saveOrUpdateTeam(team);
-		} catch (Exception e)
-		{
-			//logger.error(e);
-		}
+		Career career = (Career)obj;
+		careerDAO.saveOrUpdateCareer(career);
+	}
+	
+	public List<Career> getEntitiesByID(Long idPlayer)
+	{
+		return careerDAO.listCareer(idPlayer);
+	}
+	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)	
+	public void deleteEntity(Long idCareer)
+	{
+		careerDAO.deleteCareer(idCareer);
 	}
 
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-	public void deleteEntity(Long idTeam)
-	{
-		teamDAO.deleteTeam(idTeam);
-	}
-	
-	
-	
-	
 	
 	
 	
@@ -116,15 +87,14 @@ public class TeamServiceImpl implements BusinessService
 	 * 
 	 * 
 	 * *************************************************************************************************************/
-		
-
+	
 	@Override
 	public Serializable getEntityBySecondId(Long id) {
 		return null;
 	}
 
 	@Override
-	public List<? extends Serializable> getEntitiesByID(Long id) {
+	public Serializable getEntityByDesc(String desc) {
 		return null;
 	}
 
@@ -134,10 +104,25 @@ public class TeamServiceImpl implements BusinessService
 	}
 
 	@Override
+	public List<? extends Serializable> getEntitiesByIDs(Long id1, Long id2) {
+		return null;
+	}
+
+	@Override
+	public List<? extends Serializable> getEntitiesByIDsNew(Long id1, Long id2) {
+		return null;
+	}
+
+	@Override
 	public List<? extends Serializable> getEntitiesByIDAndDesc(Long id, String desc) {
 		return null;
 	}
 
+	@Override
+	public List<? extends Serializable> getEntitiesByParams(String... params) {
+		return null;
+	}
+	
 	@Override
 	public List<? extends Serializable> getEntities() {
 		return null;
@@ -147,12 +132,11 @@ public class TeamServiceImpl implements BusinessService
 	public List<? extends Serializable> getOtherEntities() {
 		return null;
 	}
-	
-	@Override
-	public boolean findEntityExists(String... params) {
-		return false;
-	}
 
+	@Override
+	public void updateEntityByParams(Object... params) {
+	}
+	
 	@Override
 	public HashMap<String, Object> getHashMap(Long param1, Integer param2) {
 		return null;
@@ -162,10 +146,10 @@ public class TeamServiceImpl implements BusinessService
 	public String getString(Long teamId, Long playerId) {
 		return null;
 	}	
-
-
+	
 	@Override
-	public void updateEntityByParams(Object... params) {
+	public boolean findEntityExists(String... params) {
+		return false;
 	}
 
 	@Override
@@ -175,5 +159,7 @@ public class TeamServiceImpl implements BusinessService
 	@Override
 	public void doSecondJob() {
 	}
+
+	
 	
 }
