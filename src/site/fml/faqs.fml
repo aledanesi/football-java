@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<faqs title="About the JCampionato application">
+
+  <part id="about">
+    <faq id="faq1">
+      <question>This is a very frequent question</question>
+      <answer>
+        <p>
+          Thank you for asking that question, here is the answer...
+        </p>
+      </answer>
+    </faq>
+
+    <faq id="faq2">
+      <question>Here is another question?</question>
+      <answer>
+        <p>
+          This is the answer to this question...
+        </p>
+      </answer>
+    </faq>
+  </part>
+</faqs>

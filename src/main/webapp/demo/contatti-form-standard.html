@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" ><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" ><!--<![endif]-->
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML.it - Guida Bootstrap 3 - Demo - Contatti</title>
+<!-- Fogli di stile -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,400italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap-glyphicons.css">
+<link rel="stylesheet" href="assets/plugins/fancybox/jquery.fancybox.css">
+<link rel="stylesheet" href="assets/plugins/flexslider/flexslider.css">
+<link rel="stylesheet" href="assets/css/stili-custom.css">
+<!-- Modernizr -->
+<script src="assets/js/modernizr.custom.js"></script>
+<!-- respond.js per IE8 -->
+<!--[if lt IE 9]>
+<script src="assets/js/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<!-- Header e barra di navigazione -->
+<header>
+<nav class="navbar navbar-default">
+<div class="container">
+ <div class="navbar-header">
+  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+   <span class="icon-bar"></span>
+   <span class="icon-bar"></span>
+   <span class="icon-bar"></span>
+  </button>
+  <a class="navbar-brand" href="#">HTML.it</a>
+ </div> 
+ <div class="collapse navbar-collapse navbar-responsive-collapse">
+   <ul class="nav navbar-nav">
+    <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Progetti <span class="caret"></span></a>
+     <ul class="dropdown-menu">
+      <li><a href="#">Menu Item 1</a></li>
+      <li><a href="#">Menu Item 2</a></li>
+      <li><a href="#">Menu Item 3</a></li>
+      <li><a href="#">Menu Item 4</a></li>
+      <li><a href="#">Menu Item 5</a></li>
+      <li><a href="#">Menu Item 6</a></li>
+     </ul>
+    </li>
+    <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servizi <span class="caret"></span></a>
+     <ul class="dropdown-menu">
+      <li><a href="#">Menu Item 1</a></li>
+      <li><a href="#">Menu Item 2</a></li>
+      <li><a href="#">Menu Item 3</a></li>
+      <li><a href="#">Menu Item 4</a></li>
+      <li><a href="#">Menu Item 5</a></li>
+      <li><a href="#">Menu Item 6</a></li>
+     </ul>
+    </li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="contatti.html">Contatti</a></li>
+   </ul>
+ </div><!-- /.nav-collapse -->
+</div>
+</nav><!-- /.navbar -->
+</header><!-- /header -->
+<!-- Barra testata di pagina -->
+<div class="header-portfolio clearfix">
+ <h2 class="pull-left">Contatti</h2>
+ <ul class="breadcrumb pull-right">
+  <li><a href="home.html">Home</a></li>
+  <li class="active">Contatti</li>
+</ul>
+</div><!-- /header-portfolio -->
+<!-- Contenuti (griglia) -->
+<div class="container">
+<div class="row">
+ <div class="col-sm-6 col-sm-push-6">
+ <section id="info-contatto" class="margine-bottom">
+  <h3 class="contatti-titoli">Dove siamo</h3>
+  <img class="thumbnail img-responsive" src="assets/img/mappa.png">
+  <h3 class="contatti-titoli">Recapiti</h3>
+  <address>
+   <strong>FakeBoot, Inc.</strong><br>
+   Via dei Cavalieri, 600<br>
+   Roma, 00100, Italy<br>
+   Telefono/fax: 123 456-7890
+  </address>
+  <address>
+   <strong>E-mail</strong><br>
+   <a href="mailto:#">info@fakeboot.com</a>
+  </address>
+ </section>
+ </div><!-- /col-lg-6 -->
+ <div class="col-sm-6 col-sm-pull-6">
+ <section id="modulo-di-contatto" class="margine-bottom">
+  <h3 class="contatti-titoli">Modulo di contatto</h3>
+  <form id="contatti-form" class="form-horizontal">
+  <div class="form-group">
+   <label for="inputNome" class="control-label">Nome</label>
+    <input class="form-control" type="text" id="inputNome" name="inputNome" placeholder="Nome e cognome" class="input-with-feedback">
+  </div>
+  <div class="form-group">  
+   <label for="inputEmail" class="control-label">Email</label>
+    <input class="form-control" type="text" id="inputEmail" name="inputEmail" placeholder="Indirizzo e-mail" class="input-with-feedback">
+  </div>
+  <div class="form-group"> 
+   <label for="textMessaggio" class="control-label">Messaggio</label>
+    <textarea class="form-control" id="textMessaggio" name="textMessaggio" rows="6" placeholder="Inserisci qui il tuo messaggio..."   class="input-with-feedback"></textarea>
+    <br>
+    <button type="submit" class="btn btn-success btn-block">Invia</button>
+  </div>
+   </form>
+ </section>
+ <section id="faq" class="margine-bottom">
+  <h3 class="contatti-titoli">Domande frequenti</h3>
+  <div class="panel-group" id="accordion-faq">
+   <div class="panel panel-default">
+    <div class="panel-heading">
+     <h4 class="panel-title">
+     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-faq" href="#faq-pannello-1">
+Come posso pagare se acquisto un pacchetto?</a>
+     </h4>
+    </div>
+    <div id="faq-pannello-1" class="panel-collapse collapse in">
+     <div class="panel-body">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+     </div>
+    </div>
+   </div>
+   <div class="panel panel-default">
+    <div class="panel-heading">
+     <h4 class="panel-title">
+     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-faq" href="#faq-pannello-2">
+Posso provare i prodotti prima di acquistarli?</a>
+     </h4>
+    </div>
+    <div id="faq-pannello-2" class="panel-collapse collapse">
+     <div class="panel-body">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+     </div>
+    </div>
+   </div>
+   <div class="panel panel-default">
+    <div class="panel-heading">
+     <h4 class="panel-title">
+     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-faq" href="#faq-pannello-3">
+Cosa faccio se non ricevo il codice di attivazione?</a>
+     </h4>
+    </div>
+    <div id="faq-pannello-3" class="panel-collapse collapse">
+     <div class="panel-body">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+     </div>
+    </div>
+   </div>
+  </div>
+ </section> 
+ </div><!-- /col-lg-6 -->
+</div><!-- /row -->
+</div><!-- /.container -->
+<!-- Footer -->
+<footer>
+<section id="footer-navigazione">
+<div class="row">
+<div class="col-sm-4 col-lg-4">
+ <h3>Lorem ipsum</h3>
+ <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine. Fusce dapibus, comodo egetine metuss gorp.</p>
+ <h3>Newsletter</h3>
+ <div class="input-group col col-lg-10">
+  <input type="text" class="form-control">
+  <span class="input-group-btn">
+   <button class="btn btn-success" type="button">Iscriviti!</button>
+  </span>
+ </div>
+</div>
+<div class="col-sm-4 col-lg-4">
+ <h3>Ultimi post</h3>
+ <ul class="media-list">
+  <li class="media">
+   <img class="media-object pull-left" src="assets/img/post-thumb-1.jpg">
+   <div class="media-body">
+   <h5 class="media-heading">Titolo post</h5>
+   <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>    
+   </div>
+  </li>
+  <li class="media">
+   <img class="media-object pull-left" src="assets/img/post-thumb-2.jpg">
+   <div class="media-body">
+   <h5 class="media-heading">Titolo post</h5>
+   <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>    
+   </div>
+  </li>
+  <li class="media">
+   <img class="media-object pull-left" src="assets/img/post-thumb-3.jpg">
+   <div class="media-body">
+   <h5 class="media-heading">Titolo post</h5>
+   <p>Donec id elit non mi porta gravida at eget metus id elit mi egetine.</p>    
+   </div>
+  </li>
+ </ul>
+</div>
+<div class="col-sm-4 col-lg-4">
+ <h3>Contatti</h3>
+ <address>
+  <strong>FakeBoot, Inc.</strong><br>
+  Via dei Cavalieri, 600<br>
+  Roma, 00100, Italy<br>
+  Telefono/fax: 123 456-7890
+ </address>
+ <address>
+  <strong>E-mail</strong><br>
+  <a href="mailto:#">info@fakeboot.com</a>
+ </address>
+</div>
+</div>
+</section>
+<section id="footer-copy">
+<div class="row">
+<div class="col-lg-12">
+ <p class="right">&copy; 2013 HTML.it. &middot; <a href="#">Privacy</a></p>
+</div>
+</div>
+</section>
+</footer>
+<!-- jQuery e plugin JavaScript  -->
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/plugins/flexslider/jquery.flexslider.js"></script>
+<script src="assets/plugins/fancybox/jquery.fancybox.pack.js"></script>
+<script src="assets/plugins/validation/jquery.validate.js"></script>
+<script src="assets/js/scripts.js"></script>
+</body>
+</html>
