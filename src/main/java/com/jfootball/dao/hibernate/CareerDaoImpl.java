@@ -61,36 +61,10 @@ public class CareerDaoImpl extends GenericDao implements CareerDao
 		if (career.getId() != null)
 		{
 			hibernateTemplate.merge(career);
-		} else
+		} 
+		else
 		{
-			if (career.getStagioni() == null || "".equals(career.getStagioni()) || !(StringUtils.isNumeric(career.getStagioni())))
-				career.setStagioni("1");
-
-			int stagioni = Integer.parseInt(career.getStagioni());
-
-			if ("1".equals(stagioni))
-			{
-				hibernateTemplate.saveOrUpdate(career);
-			} else
-			{
-				for (int i = 0; i < stagioni; i++)
-				{
-					Career bean = new Career();
-					bean.setId(null);
-					bean.setPlayer(career.getPlayer());
-					bean.setSquadra(career.getSquadra());
-					bean.setStagioni(career.getStagioni());
-					bean.setPeriodo(career.getPeriodo());
-					bean.setSerie(career.getSerie());
-					bean.setPresenze("?");
-					bean.setReti("?");
-
-					hibernateTemplate.saveOrUpdate(bean);
-
-					career.setPeriodo(ProjectUtil.getNextSeason(career.getPeriodo()));
-				}
-			}
-
+			hibernateTemplate.saveOrUpdate(career);
 		}
 		logger.info("Career saved.");
 

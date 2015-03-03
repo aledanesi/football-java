@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="Maven">
+
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-stylus-skin</artifactId>
+		<version>1.5</version>
+	</skin>
+
 	<bannerLeft>
 		<name>${project.artifactId}-${project.version}</name>
-		<src>http://maven.apache.org/images/apache-maven-project.png</src>
+		<src>http://maven.apache.org/images/apache-maven-project-2.png</src>
 		<href>http://maven.apache.org/</href>
 	</bannerLeft>
 
-	<publishDate position="left" format="dd/MM/yyyy"/>
-	
+	<bannerRight>
+		<src>http://maven.apache.org/images/maven-logo-2.gif</src>
+		<href>http://maven.apache.org/</href>
+	</bannerRight>
+
+	<publishDate position="left" format="dd/MM/yyyy" />
+
 	<body>
 
 		<menu name="JFootball">
@@ -17,7 +29,10 @@
 			<item name="Project Info" href="project-info.html" />
 			<item name="Project Summary" href="project-summary.html" />
 			<item name="Team List" href="team-list.html" />
+			<item name="FAQs" href="/faqs.html" />
 		</menu>
 
 	</body>
+
+
 </project>

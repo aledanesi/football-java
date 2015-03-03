@@ -1,7 +1,5 @@
 package com.jfootball.domain;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,8 +13,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.directwebremoting.annotations.DataTransferObject;
 
-import com.jfootball.util.ProjectUtil;
-
 /**
  * Player class. The class describe the player.
  * 
@@ -25,7 +21,7 @@ import com.jfootball.util.ProjectUtil;
 @Entity
 @Table(name = "PLAYERS")
 @DataTransferObject(type = "hibernate3")
-public class Player extends ImageObject {
+public class Player extends BasePerson {
 
 	/***************************************************************************
 	 * 
@@ -34,38 +30,10 @@ public class Player extends ImageObject {
 	 **************************************************************************/
 
 	// personal data
-	@Column(name = "FIRST_NAME")	
-	private String firstName;
-	
-	@Column(name = "LAST_NAME")	
-	private String lastName;
 	
 	@Column(name = "COMPLETE_NAME")	
 	private String completeName;
 	
-	@Column(name = "DATE_OF_BIRTH")
-	private Date dateOfBirth;
-
-	@Column(name = "PLACE_OF_BIRTH")	
-	private String placeOfBirth;
-	
-	
-	
-	// contract data
-	@Column(name = "CONTRACT_UNTIL")
-	private String contractUntil;
-	
-	@Column(name = "NET_WEEKLY_SALARY")
-	private String netWeeklySalary;
-	
-	@Column(name = "NET_ANNUAL_SALARY")	
-	private String netAnnualSalary;
-	
-	@Column(name = "GROSS_WEEKLY_SALARY")
-	private String grossWeeklySalary;
-
-	@Column(name = "GROSS_ANNUAL_SALARY")
-	private String grossAnnualSalary;
 	
 	@Column(name = "COST")	
 	private String cost;
@@ -73,10 +41,6 @@ public class Player extends ImageObject {
 	
 
 	// team data
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "team_id")		
-	private Team team;
-	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "team_owner_id")		
 	private Team teamOwner;
@@ -91,13 +55,6 @@ public class Player extends ImageObject {
 	@Column(name = "NATIONAL")	
 	private String national;
 	
-	@ManyToOne(fetch = FetchType.EAGER)	
-	private Nation nationality = new Nation();
-	
-	@ManyToOne(fetch = FetchType.EAGER, optional = true)	
-	private Nation nationality2 = new Nation();
-	
-	
 	
 	// other data
 	@Column(name = "NUMBER")		
@@ -111,6 +68,9 @@ public class Player extends ImageObject {
 	
 	@Column(name = "FOOT")
 	private String foot;	
+	
+	@Column(name = "STATUS")
+	private String status;		
 
 	@Column(name = "TEAM_BRANCH")	
 	private String teamBranch;
@@ -127,14 +87,6 @@ public class Player extends ImageObject {
 	@Column(name = "ON_LOAN")	
 	private Boolean onLoan;
 
-	@Column(name = "UNEMPLOYED")	
-	private Boolean unemployed;
-
-	@Column(name = "RETIRED")	
-	private Boolean retired;
-
-
-
 	/***************************************************************************
 	 * 
 	 * METHODS
@@ -144,21 +96,6 @@ public class Player extends ImageObject {
 	// ********************************************************** //
 	// 						personal data						  //
 	// ********************************************************** //
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
 
 	public String getCompleteName() {
 		return completeName;
@@ -168,65 +105,7 @@ public class Player extends ImageObject {
 		this.completeName = completeName;
 	}
 
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public String getPlaceOfBirth() {
-		return placeOfBirth;
-	}
-
-	public void setPlaceOfBirth(String placeOfBirth) {
-		this.placeOfBirth = placeOfBirth;
-	}
 	
-	
-	// ********************************************************** //
-	// 						contract data						  //
-	// ********************************************************** //
-	public String getContractUntil() {
-		return contractUntil;
-	}
-
-	public void setContractUntil(String contractUntil) {
-		this.contractUntil = contractUntil;
-	}
-	
-	public String getNetWeeklySalary() {
-		return netWeeklySalary;
-	}
-
-	public void setNetWeeklySalary(String netWeeklySalary) {
-		this.netWeeklySalary = netWeeklySalary;
-	}
-	
-	public String getNetAnnualSalary() {
-		return netAnnualSalary;
-	}
-
-	public void setNetAnnualSalary(String netAnnualSalary) {
-		this.netAnnualSalary = netAnnualSalary;
-	}	
-
-	public String getGrossWeeklySalary() {
-		return grossWeeklySalary;
-	}
-
-	public void setGrossWeeklySalary(String grossWeeklySalary) {
-		this.grossWeeklySalary = grossWeeklySalary;
-	}
-
-	public String getGrossAnnualSalary() {
-		return grossAnnualSalary;
-	}
-
-	public void setGrossAnnualSalary(String grossAnnualSalary) {
-		this.grossAnnualSalary = grossAnnualSalary;
-	}
 
 	public String getCost() {
 		return cost;
@@ -241,13 +120,6 @@ public class Player extends ImageObject {
 	// ********************************************************** //
 	// 						team data						  	  //
 	// ********************************************************** //	
-	public Team getTeam() {
-		return team;
-	}
-
-	public void setTeam(Team team) {
-		this.team = team;
-	}
 
 	public Team getTeamOwner() {
 		return teamOwner;
@@ -277,23 +149,6 @@ public class Player extends ImageObject {
 	public void setNational(String national) {
 		this.national = national;
 	}
-	
-	public Nation getNationality() {
-		return nationality;
-	}
-
-	public void setNationality(Nation nationality) {
-		this.nationality = nationality;
-	}
-
-	public Nation getNationality2() {
-		return nationality2;
-	}
-
-	public void setNationality2(Nation nationality2) {
-		this.nationality2 = nationality2;
-	}
-
 	
 	
 	
@@ -331,6 +186,16 @@ public class Player extends ImageObject {
 
 	public void setFoot(String foot) {
 		this.foot = foot;
+	}
+	
+	public String getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(String status)
+	{
+		this.status = status;
 	}
 
 	public String getTeamBranch() {
@@ -370,30 +235,7 @@ public class Player extends ImageObject {
 		this.onLoan = onLoan;
 	}
 
-	public Boolean getRetired() {
-		return retired;
-	}
 
-	public void setRetired(Boolean retired) {
-		this.retired = retired;
-	}
-
-	public Boolean getUnemployed() {
-		return unemployed;
-	}
-
-	public void setUnemployed(Boolean unemployed) {
-		this.unemployed = unemployed;
-	}
-
-
-
-
-
-
-	public String getAge() {
-		return ProjectUtil.getAge(this.dateOfBirth);
-	}
 
 	@Override
 	public String toString() {

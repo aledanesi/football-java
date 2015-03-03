@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -48,6 +50,9 @@ import com.jfootball.web.validator.TeamValidator;
 @Controller
 public class TeamController extends GenericController
 {
+	
+	@Autowired
+	private MessageSource messageSource;
 
 
 	/*_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_
@@ -100,6 +105,8 @@ public class TeamController extends GenericController
 		logger.info("--------------------- Team Controller : list --------------------- ");
 		
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_TEAM);
+		
+		creaAlfabetoPerRicerca(view);		
 
 		HttpSession session = request.getSession();		
 		
@@ -130,6 +137,9 @@ public class TeamController extends GenericController
 		
 		List<Team> teamList = (List<Team>)businessDelegate.getEntitiesByIDs(nationId, divisionId, "TEAM");				
 		view.addObject("teamList", teamList);
+		
+		Long playersCount = businessDelegate.getIntegerByTwoParams(nationId, divisionId, "TEAM");	
+		view.addObject("playersCount", playersCount);
 
 		logger.info("Teams loaded: " + teamList.size());
 
@@ -140,6 +150,7 @@ public class TeamController extends GenericController
 
 		return view;
 	}
+
 
 
 	/**
@@ -248,6 +259,12 @@ public class TeamController extends GenericController
         			if (bytesFile.length > 0) {
         				
         				String tomcat_home = System.getProperty("catalina.base") + "\\webapps\\images\\team\\";
+        				
+						File file = new File(tomcat_home);
+						
+						if (! file.exists())
+							file.mkdir();        				
+        				
         				outputStream = new FileOutputStream(tomcat_home + team.getId() + ".png");
     					outputStream.write(bytesFile);
     					outputStream.close();
@@ -351,6 +368,10 @@ public class TeamController extends GenericController
 			continentList = new ArrayList<Continent>();	
 		
 		return continentList;
+	}	
+	
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
 	}	
 	
 

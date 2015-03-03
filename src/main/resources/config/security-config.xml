@@ -13,6 +13,7 @@
         <intercept-url pattern="/images/**" access="permitAll"/>
         <intercept-url pattern="/login.jsp" access="permitAll" />
         <intercept-url pattern="/index.jsp" access="permitAll" />                  
+        <intercept-url pattern="/loading.jsp" access="permitAll" />                  
         <intercept-url pattern="/**" access="permitAll"/>        
         
         <!-- 
@@ -20,7 +21,7 @@
         <intercept-url pattern="/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'DEVELOPER')"/>
      	-->
      
-        <form-login login-page="/login.jsp" default-target-url="/index.jsp" authentication-failure-url="/teams/list.do?login_error=1"/>
+        <form-login login-page="/login.jsp" default-target-url="/logged.jsp" authentication-failure-url="/teams/list.do?login_error=1"/>
         <logout success-handler-ref="customLogoutSuccessHandler" />
     </http>
 
@@ -28,6 +29,8 @@
         <authentication-provider user-service-ref="userDetailsService" />
     </authentication-manager>  
     
-    <beans:bean id="customLogoutSuccessHandler" class="com.jfootball.service.CustomLogoutSuccessHandler" />  
+    <beans:bean id="customLogoutSuccessHandler" class="com.jfootball.service.CustomLogoutSuccessHandler">
+    	<beans:property name="successLogoutUrl" value="/teams/list.do" />
+    </beans:bean>  
 
 </beans:beans>

@@ -19,21 +19,31 @@ import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuc
  * 
  *         31/mag/2014 20:00:04
  */
-public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
-	
+public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler
+{
+
 	protected Logger log = Logger.getLogger(this.getClass());
-	
-	
+
+	private String successLogoutUrl;
+
 	@Override
-	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
-			throws IOException, ServletException {
-		
+	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
+	{
+
 		log.info("--------------------- User Logout --------------------- ");
 
 		String refererUrl = request.getHeader("Referer");
 		log.info("Logout from: " + refererUrl);
 		log.info("User logout: " + authentication.getName());
-		
+
+		super.setDefaultTargetUrl(this.successLogoutUrl);
+
 		super.onLogoutSuccess(request, response, authentication);
 	}
+
+	public void setSuccessLogoutUrl(String successLogoutUrl)
+	{
+		this.successLogoutUrl = successLogoutUrl;
+	}
+
 }

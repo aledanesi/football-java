@@ -53,51 +53,6 @@ public class ProjectUtil {
 		return posti;
 	}	
 	
-	public static String getNationalDesc(String code, String nation)
-	{
-		nation = getNationCapitalize(nation);
-		
-		String description = "Attualmente in nazionale";
-		
-		Integer codice = Integer.parseInt(code);
-		
-		switch (codice.intValue()) {
-
-			case 0:
-				description = "Attualmente non fa parte di una nazionale";				
-				break;
-	
-			case 1:
-				description += " U18: " + nation;
-				break;
-
-			case 2:
-				description += " U19: " + nation;
-				break;
-				
-			case 3:
-				description += " U20: " + nation;
-				break;
-
-			case 4:
-				description += " U21: " + nation;
-				break;
-				
-			case 5:
-				description += ": " + nation;				
-				break;
-
-			case 6:
-				description = "Ritirato dalla nazionale";				
-				break;
-
-			default:
-				description = "";				
-				break;
-		}
-		return description;
-	}
-	
 	public static String getNationCapitalize(String nation)
 	{
 		if (nation == null || nation.length() == 0)

@@ -23,14 +23,12 @@
  */
 package com.jfootball.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -61,9 +59,6 @@ public class Career extends BaseEntity
 	@Column(name = "SQUADRA")
 	@NotEmpty
 	private String squadra;
-
-	@Transient
-	private String stagioni;
 
 	@Column(name = "PERIODO")
 	private String periodo;
@@ -107,14 +102,6 @@ public class Career extends BaseEntity
 
 	public void setSquadra(String squadra) {
 		this.squadra = squadra;
-	}
-
-	public String getStagioni() {
-		return stagioni;
-	}
-
-	public void setStagioni(String stagioni) {
-		this.stagioni = stagioni;
 	}
 
 	public String getPeriodo() {

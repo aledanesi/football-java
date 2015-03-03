@@ -26,8 +26,10 @@ package com.jfootball.business.impl;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jfootball.business.BusinessService;
@@ -42,6 +44,8 @@ import com.jfootball.domain.Position;
 public class PositionServiceImpl implements BusinessService
 {
 	private PositionDao positionDAO;
+	
+	private MessageSource messageSource;
 	
 	@Autowired
 	public PositionServiceImpl(PositionDao positionDAO) 
@@ -58,7 +62,15 @@ public class PositionServiceImpl implements BusinessService
 	
 	public List<Position> getEntitiesByParams(String... params)
 	{
-		return positionDAO.listPositions(params[0]);
+		List<Position> positions = positionDAO.listPositions(params[0]);
+		String locale = params[1];
+		
+		for (Position position : positions)
+		{
+			position.setDescPosizione(messageSource.getMessage(position.getDescPosizione(), null, new Locale(locale)));
+		}
+		
+		return positions;
 	}
 	
 
@@ -73,13 +85,13 @@ public class PositionServiceImpl implements BusinessService
 		positionDAO.deletePosition(positionId);
 	}
 
+	
+	@Autowired
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
+	}
 
-	
-	
-	
-	
-	
-	
+
 	/** ************************************************************************************************************
 	 * 
 	 * // Auto-generated method stub
@@ -143,7 +155,7 @@ public class PositionServiceImpl implements BusinessService
 
 
 	@Override
-	public void updateEntityByParams(Object... params) {
+	public void updateEntityByParams(String... params) {
 	}
 
 	@Override
@@ -170,5 +182,13 @@ public class PositionServiceImpl implements BusinessService
 	@Override
 	public void doSecondJob() {
 	}
+
+
+	@Override
+	public Long getIntegerByTwoParams(Long id1, Long id2) {
+		return null;
+	}
+	
+	
 
 }

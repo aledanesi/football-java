@@ -10,12 +10,6 @@
 	<uri>http://jfooball.it/functions</uri>
 
 	<function>
-		<name>nationalDesc</name>
-		<function-class>com.jfootball.util.ProjectUtil</function-class>
-		<function-signature>java.lang.String getNationalDesc(java.lang.String, java.lang.String)</function-signature>
-	</function>
-
-	<function>
 		<name>nationalCapitalize</name>
 		<function-class>com.jfootball.util.ProjectUtil</function-class>
 		<function-signature>java.lang.String getNationCapitalize(java.lang.String)</function-signature>

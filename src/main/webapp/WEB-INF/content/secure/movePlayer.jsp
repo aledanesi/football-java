@@ -73,7 +73,7 @@
 </script>	
 
 <!-- edit player -->
-<div id="dMovePlayer">
+<div id="dMovePlayer" style="display: none">
 	
 	<p class="validateTips"></p>
 

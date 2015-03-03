@@ -34,12 +34,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.jfootball.Constant;
 import com.jfootball.domain.Career;
 import com.jfootball.domain.Division;
+import com.jfootball.domain.Staff;
 import com.jfootball.domain.Nation;
 import com.jfootball.domain.Player;
 import com.jfootball.domain.Position;
 import com.jfootball.domain.SearchPlayer;
 import com.jfootball.domain.Season;
 import com.jfootball.domain.Team;
+import com.jfootball.domain.type.FootType;
 import com.jfootball.util.ProjectConstant;
 import com.jfootball.web.validator.PlayerValidator;
 
@@ -91,6 +93,8 @@ public class PlayerController extends GenericController
 		logger.info("--------------------- Player Controller : view --------------------- ");
 
 		ModelAndView view = new ModelAndView(ProjectConstant.VIEW_PLAYER);
+		
+		creaAlfabetoPerRicerca(view);
 
 		Long idPlayer = Long.parseLong(playerId);
 
@@ -168,13 +172,21 @@ public class PlayerController extends GenericController
 		if (!StringUtils.isEmpty(teamId)) {
 			Long idTeam = new Long(teamId);
 			Team team = (Team)businessDelegate.getEntityByID(idTeam, "TEAM");
-			Player player = new Player();
-			List<Player> players = (List<Player>)businessDelegate.getEntitiesByIDAndDesc(idTeam, teamCategory, "PLAYER");
 
+			Player player = new Player();
+			
+			List<Player> players = (List<Player>)businessDelegate.getEntitiesByIDAndDesc(idTeam, teamCategory, "PLAYER");
+			
+			List<Staff> staffList = (List<Staff>)businessDelegate.getEntitiesByIDAndDesc(idTeam, teamCategory, "STAFF");
+			
 			view.addObject("team", team);
 			view.addObject("player", player);
+			view.addObject("staff", new Staff());
+			view.addObject("staffList", staffList);
 			view.addObject("teamCategory", teamCategory);
 			view.addObject("playerList", players);
+			
+			view.addObject("footTypeList", FootType.values());
 
 			/// SERVE ANCORA??? SI PUO' TOGLIERE??
 			SearchPlayer buyPlayer = new SearchPlayer();
@@ -195,7 +207,7 @@ public class PlayerController extends GenericController
 	 * ----------------formBackingObject()----------------
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/players/list", method = RequestMethod.GET)
 	public ModelAndView list(HttpServletRequest request,HttpServletResponse response) 
 	{
@@ -204,17 +216,19 @@ public class PlayerController extends GenericController
 
 		ModelAndView view = new ModelAndView(ProjectConstant.LIST_PLAYER);
 
+		Staff manager = new Staff();
 		Player player = new Player();
 
 		List<Player> playerList = (List<Player>)businessDelegate.getEntities("PLAYER");
 
+		view.addObject("manager", manager);
 		view.addObject("player", player);
 		view.addObject("playerList", playerList);
 
 		logger.info("view: LIST_PLAYER");
 
 		return view;
-	}
+	}*/
 	
 
 
@@ -245,7 +259,7 @@ public class PlayerController extends GenericController
 	 * ----------------formBackingObject()----------------
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	@RequestMapping("/players/search")
 	public ModelAndView search(HttpServletRequest request, HttpServletResponse response, 
 			@ModelAttribute("player") SearchPlayer searchPlayer, BindingResult result) 
@@ -287,7 +301,7 @@ public class PlayerController extends GenericController
 		logger.info("view: SEARCH_PLAYER");
 
 		return view;
-	}
+	}*/
 	
 	/**
 	 * 
@@ -401,6 +415,12 @@ public class PlayerController extends GenericController
 					if (bytesFile.length > 0) {
 
 						String tomcat_home = System.getProperty("catalina.base") + "\\webapps\\images\\player\\";
+						
+						File file = new File(tomcat_home);
+						
+						if (! file.exists())
+							file.mkdir();
+						
 						outputStream = new FileOutputStream(tomcat_home + player.getId() + ".png");
 						outputStream.write(bytesFile);
 						outputStream.close();
@@ -494,31 +514,18 @@ public class PlayerController extends GenericController
 		playerDb.setUnemployed(false);
 		playerDb.setCaptain(false);
 		
-		playerDb.setNetWeeklySalary(null);
 		playerDb.setNetAnnualSalary(null);
 		playerDb.setGrossWeeklySalary(null);
-		playerDb.setGrossAnnualSalary(null);
 		
 		businessDelegate.saveEntity(playerDb, "PLAYER");
 
 		logger.info("Player changed team.");
 
 		if (teamId != null)
-		{
-			List<Player> playerList = (List<Player>)businessDelegate.getEntitiesByIDAndDesc(teamId, teamBranch, "PLAYER");
-			Team teamPrec = (Team)businessDelegate.getEntityByID(teamId, "TEAM");
-
-			view.addObject("playerList", playerList);
-			view.addObject("team", teamPrec);
-			
-			logger.info("view: LIST_PLAYER");
-
-			return view;
-		}
+			return view = listByTeam(request, response, ""+teamId, teamBranch);
 		else 
-		{
 			return view(request, response, ""+player.getId());    			
-		}	
+
 	}
 	
 	/**
@@ -554,10 +561,8 @@ public class PlayerController extends GenericController
 		playerDb.setCaptain(false);
 		playerDb.setContractUntil(null);
 
-		playerDb.setNetWeeklySalary(null);
 		playerDb.setNetAnnualSalary(null);
 		playerDb.setGrossWeeklySalary(null);
-		playerDb.setGrossAnnualSalary(null);
 
 		playerDb.setNumber(null);
 		playerDb.setCost(null);
@@ -569,16 +574,9 @@ public class PlayerController extends GenericController
 
 		logger.info("Player changed team.");
 
-		List<Player> playerList = (List<Player>)businessDelegate.getEntitiesByIDAndDesc(teamId, teamBranch, "PLAYER");
-		Team teamPrec = (Team)businessDelegate.getEntityByID(teamId, "TEAM");
-
-		view.addObject("playerList", playerList);
-		view.addObject("team", teamPrec);
-		
 		logger.info("view: LIST_PLAYER");
 
-		return view;
-
+		return view = listByTeam(request, response, ""+teamId, teamBranch);
 	}	
 
 	/**
@@ -587,7 +585,7 @@ public class PlayerController extends GenericController
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/players/endCareer", method = RequestMethod.POST)
+	@RequestMapping(value = "/players/endCareer", method = {RequestMethod.POST, RequestMethod.GET})
 	protected ModelAndView processEndCareer(
 			@ModelAttribute("player") Player player, BindingResult result,
 			SessionStatus status, HttpServletRequest request,
@@ -595,17 +593,19 @@ public class PlayerController extends GenericController
 		
 		logger.info("--------------------- Player Controller : processWithoutTeam --------------------- ");
 
-		ModelAndView view = new ModelAndView(ProjectConstant.LIST_PLAYER);
+		ModelAndView view = null;
 
 		Player playerDb = (Player)businessDelegate.getEntityByID(player.getId(), "PLAYER");
-
+		
 		Long teamId = 0L;
 		
 		if (playerDb.getTeam() != null)
 			teamId = playerDb.getTeam().getId();			
 
 		else if (player.getTeam() != null)
-			teamId = player.getTeam().getId();						
+			teamId = player.getTeam().getId();	
+		
+		boolean isUnemployed = playerDb.getUnemployed();
 
 		
 		String teamBranch = playerDb.getTeamBranch();
@@ -616,10 +616,8 @@ public class PlayerController extends GenericController
 		playerDb.setCaptain(false);
 		playerDb.setContractUntil(null);
 
-		playerDb.setNetWeeklySalary(null);
 		playerDb.setNetAnnualSalary(null);
 		playerDb.setGrossWeeklySalary(null);
-		playerDb.setGrossAnnualSalary(null);
 		
 		playerDb.setNumber(null);
 		playerDb.setCost(null);
@@ -632,14 +630,18 @@ public class PlayerController extends GenericController
 
 		logger.info("Player changed team.");
 
-		List<Player> playerList = (List<Player>)businessDelegate.getEntitiesByIDAndDesc(teamId, teamBranch, "PLAYER");
+		/*List<Player> playerList = (List<Player>)businessDelegate.getEntitiesByIDAndDesc(teamId, teamBranch, "PLAYER");
 		Team teamPrec = (Team)businessDelegate.getEntityByID(teamId, "TEAM");
 
 		view.addObject("playerList", playerList);
 		view.addObject("team", teamPrec);
+		view.addObject("staff", new Staff());*/
 		
-		logger.info("view: LIST_PLAYER");
-
+		/*if (isUnemployed)
+			view = search(request, response, null, result);
+		else */
+			view = listByTeam(request, response, ""+teamId, teamBranch);
+		
 		return view;
 
 	}	

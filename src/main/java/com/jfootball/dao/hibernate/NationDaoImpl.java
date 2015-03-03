@@ -96,7 +96,7 @@ public class NationDaoImpl extends GenericDao implements NationDao
 	@SuppressWarnings("unchecked")
 	public List<Nation> listNationsTournament() {
 		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
-		Query query = session.createQuery("SELECT new Nation(n.id, n.name, n.value) FROM Team t, Nation n where t.nation.id = n.id GROUP BY t.nation.id HAVING id in (5, 11, 13, 45) order by n.name");
+		Query query = session.createQuery("SELECT new Nation(n.id, n.name, n.value) FROM Team t, Nation n where t.nation.id = n.id GROUP BY t.nation.id HAVING id in (5, 7, 11, 13, 45) order by n.name");
 		List<Nation> result = query.list();
 		return result;	
 	}	

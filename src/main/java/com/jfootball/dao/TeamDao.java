@@ -57,6 +57,15 @@ public interface TeamDao {
 	 *            the division id
 	 * @return the teams found
 	 */
+	public Long getPlayersCountByDivision(Long nationId, Long divisionId);	
+	
+	/**
+	 * Method to get a team list by a division
+	 * 
+	 * @param divisionId
+	 *            the division id
+	 * @return the teams found
+	 */
 	public List<Team> listTeamsByDivisionForView(Long nationId, Long divisionId);
 
 

@@ -163,7 +163,7 @@ public class DivisionServiceImpl implements BusinessService
 
 
 	@Override
-	public void updateEntityByParams(Object... params) {
+	public void updateEntityByParams(String... params) {
 	}
 	
 	@Override
@@ -191,5 +191,13 @@ public class DivisionServiceImpl implements BusinessService
 	@Override
 	public void doSecondJob() {
 	}
+
+
+	@Override
+	public Long getIntegerByTwoParams(Long id1, Long id2) {
+		return null;
+	}
+	
+	
 	
 }

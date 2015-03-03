@@ -3,7 +3,9 @@
         <pattern>/styles/*</pattern>
         <pattern>/scripts/*</pattern>
         <pattern>/images/*</pattern>
+        <pattern>/site/*</pattern>
         <pattern>/index.jsp</pattern>
+		<pattern>/loading.jsp</pattern>
     </excludes>
 
     <decorator name="layout" page="layout.jsp">

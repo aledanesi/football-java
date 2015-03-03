@@ -42,9 +42,13 @@
 		
 	
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">   
-    	<property name="basename" value="classpath:messages"/>   
+    	<property name="basename" value="classpath:messages"/>
+    	<property name="defaultEncoding" value="UTF-8" />
   	</bean>
-
+  	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="it" />
+	</bean>
 	 
 	 <!-- ========================= ANNOTATION CONTROLLERS ========================= -->
 	 
@@ -84,6 +88,10 @@
 			<mvc:mapping path="/players/edit"/>
 			<bean id="signonInterceptor3" class="com.jfootball.web.interceptor.SignonInterceptor"/>
 		</mvc:interceptor>
+
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">            
+			<property name="paramName" value="locale" />        
+		</bean>    
 	</mvc:interceptors>
 
 </beans>

@@ -34,6 +34,9 @@
 	<filter-mapping>
 		<filter-name>sitemesh</filter-name>
 		<url-pattern>/*</url-pattern>
+	    <dispatcher>REQUEST</dispatcher>
+	    <dispatcher>FORWARD</dispatcher>
+	    <dispatcher>ERROR</dispatcher>		
 	</filter-mapping>
 
     <!--
@@ -113,4 +116,27 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	
+	
+	<error-page>
+	    <!-- Missing login -->
+	    <error-code>401</error-code>
+	    <location>/error.jsp</location>
+	</error-page>
+	<error-page>
+	    <!-- Forbidden directory listing -->
+	    <error-code>403</error-code>
+	    <location>/error.jsp</location>
+	</error-page>
+	<error-page>
+	    <!-- Uncaught exception -->
+	    <error-code>500</error-code>
+	    <location>/error.jsp</location>
+	</error-page>
+	<error-page>
+	    <!-- Unsupported servlet method -->
+	    <error-code>503</error-code>
+	    <location>/error.jsp</location>
+	</error-page>	
+	
 </web-app>

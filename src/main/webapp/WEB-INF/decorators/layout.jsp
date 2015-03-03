@@ -1,25 +1,24 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 
-<%@page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html>
 <head>
+    
     <title><decorator:title default="JCampionato - Beta"/></title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     
     <%-- CSS --%>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/mystyle.css" rel="stylesheet" />
-
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 
     <%-- JQUERY --%>
-    <link type="text/css" href="${pageContext.request.contextPath}/scripts/jquery/themes/base/jquery.ui.all.css" rel="stylesheet">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery/jquery-1.10.2.js"></script>
-	  <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery/ui/jquery-ui.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery/jquery.validate.js"></script>
-
+    <link type="text/css" href="${pageContext.request.contextPath}/scripts/jquery-ui-1.11.3/jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.11.2/jquery.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.11.2/jquery.validate.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-ui-1.11.3/jquery-ui.js"></script>
 	
     <%-- APPLICATION SPECIFIC --%>
     <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/script.js"></script>

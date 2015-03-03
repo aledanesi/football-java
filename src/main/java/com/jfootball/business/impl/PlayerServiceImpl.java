@@ -116,18 +116,19 @@ public class PlayerServiceImpl implements BusinessService
 	}
 	
 	@Transactional(readOnly = false)
-	public void updateEntityByParams(Object... params)
+	public void updateEntityByParams(String... params)
 	{
-		Player player = getEntityByID((Long)params[0]);
-		Team team = teamDAO.getTeamByID((Long)params[1]);
+		Player player = getEntityByID(new Long(params[0]));
+		Team team = teamDAO.getTeamByID(new Long(params[1]));
 		
-		if (! (Boolean)params[2])
+		if (! new Boolean(params[2]))
 			player.setTeamOwner(team);
 		
 		// fine 
 		player.setNumber(null);
 		player.setRetired(false);
-		player.setUnemployed(false);		
+		player.setUnemployed(false);
+		player.setStatus(params[3]);
 		
 		player.setTeam(team);
 		playerDAO.saveOrUpdatePlayer(player);
@@ -205,4 +206,10 @@ public class PlayerServiceImpl implements BusinessService
 		return null;
 	}
 
+	@Override
+	public Long getIntegerByTwoParams(Long id1, Long id2) {
+		return null;
+	}
+
+	
 }

@@ -46,6 +46,12 @@ public interface BusinessService {
 	 * @param idCareer
 	 * @return
 	 */
+	public Long getIntegerByTwoParams(Long id1, Long id2);		
+	
+	/**
+	 * @param idCareer
+	 * @return
+	 */
 	public List<? extends Serializable> getEntitiesByIDsNew(Long id1, Long id2);
 	
 	/**
@@ -81,7 +87,7 @@ public interface BusinessService {
 	/**
 	 * @param career
 	 */
-	public void updateEntityByParams(Object... params);
+	public void updateEntityByParams(String... params);
 
 	/**
 	 * @param idCareer

@@ -6,7 +6,7 @@ CREATE FUNCTION getRank(p1 BIGINT(20), p2 BIGINT(20)) RETURNS int(11)
 
 BEGIN    
 
-	RETURN (SELECT rank FROM ( select @rownum:=@rownum+1 as rank, id from player, (SELECT @rownum:=0) r where team_id = p1 order by position_id, number, birth_date) q where id = p2); 
+	RETURN (SELECT rank FROM ( select @rownum:=@rownum+1 as rank, id from players, (SELECT @rownum:=0) r where team_id = p1 order by position_id, number, birth_date) q where id = p2); 
 	  
 END $$
 

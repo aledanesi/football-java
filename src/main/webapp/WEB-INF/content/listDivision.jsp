@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib prefix="display" uri="http://displaytag.sf.net"%>
@@ -14,13 +14,7 @@
 
 <html>
 <head>
-
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
-	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/businessDelegate.js'></script>
-
+	<title></title>    
 </head>
 
 <body>
@@ -56,5 +50,11 @@
 
 	<jsp:include page="secure/editDivision.jsp" />
 	
-	</body>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/util.js'></script>
+	<script type='text/javascript' src='${pageContext.request.contextPath}/dwr/interface/businessDelegate.js'></script>
+	
+	
+</body>
+
 </html>

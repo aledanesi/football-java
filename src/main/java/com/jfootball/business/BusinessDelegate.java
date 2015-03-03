@@ -103,6 +103,16 @@ public class BusinessDelegate
 	 * @param idCareer
 	 * @return
 	 */
+	public Long getIntegerByTwoParams(Long id1, Long id2, String serviceType)	
+	{
+		BusinessService delegate =  lookupService.getBusinessService(serviceType);
+		return delegate.getIntegerByTwoParams(id1, id2);
+	}	
+	
+	/**
+	 * @param idCareer
+	 * @return
+	 */
 	public List<? extends Serializable> getEntitiesByIDsNew(Long id1, Long id2, String serviceType)	
 	{
 		BusinessService delegate =  lookupService.getBusinessService(serviceType);
@@ -162,10 +172,13 @@ public class BusinessDelegate
 	 * @param career
 	 */
 	@RemoteMethod
-	public void updateEntityByParams(Object... params)
+	public void updateEntityByParams(String... params)
 	{
-		BusinessService delegate =  lookupService.getBusinessService((String)params[1]);
-		delegate.updateEntityByParams(params[0]);
+		int length = params.length;
+		
+		BusinessService delegate =  lookupService.getBusinessService((String)params[length-1]);
+		
+		delegate.updateEntityByParams(params);
 	}	
 	
 	
@@ -232,6 +245,11 @@ public class BusinessDelegate
 	public void setLookupService(BusinessLookUp lookupService)
 	{
 		this.lookupService = lookupService;
+	}
+	
+	public BusinessLookUp getLookupService()
+	{
+		return lookupService;
 	}
 	
 	

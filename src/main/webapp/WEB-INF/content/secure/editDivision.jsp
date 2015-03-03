@@ -8,7 +8,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 	<!-- edit team -->
-	<div id="dEditTeam">
+	<div id="dEditTeam" style="display: none">
 		
 		<p class="validateTips"></p>
 

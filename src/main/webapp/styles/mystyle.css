@@ -14,7 +14,7 @@ body
 
 form 
 {
-	margin:10px; padding: 0 5px;
+	margin:10px;
 	background-color: #FAFAFA; 
 }
 
@@ -30,6 +30,7 @@ img {
 }
 
 a:link, a:visited, a:hover, a:active {color:#0e2e7f;text-decoration:none;}
+a.accordion-toggle:link, a.accordion-toggle:visited, a.accordion-toggle:active  {color:#fff;text-decoration:none;}
 
 p 
 {
@@ -103,7 +104,6 @@ input[type="text"]:focus, input[type="password"]:focus
 #wrap {
 	width: 900px;
 	background-color: #ffffff;
-	text-align: left;
 	padding: 20px;
 	margin-top: 15px; 
 	margin-left: 250px; 
@@ -122,7 +122,7 @@ input[type="text"]:focus, input[type="password"]:focus
 
 #header {
 	background-color: rgb(14, 46, 128);
-	width: 900px;
+	width: 850px;
 	position: relative;
 	height: 100px;
 	color: #FFF;
@@ -132,7 +132,7 @@ input[type="text"]:focus, input[type="password"]:focus
 
 #footer {
 	background-color: rgb(14, 46, 128);
-	width: 900px;
+	width: 850px;
 	height: 50px;
 	text-align: center;	
 	font-size: 92%;	
@@ -202,6 +202,7 @@ input[type="text"]:focus, input[type="password"]:focus
 
 #menutop a {
     color: #FFF;
+	font-size: 18px;
 }
 
 #menutop li {
@@ -216,13 +217,72 @@ input[type="text"]:focus, input[type="password"]:focus
 }
 
 
+.divTable
+{
+    display:  table;
+    width: 850px;
+    border-spacing:5px;
+}
+
+.divRow
+{
+   display:table-row;
+   width:auto;
+}
+
+.divCell
+{
+	background-color:#f1f1f1;
+	border:1px solid #999;
+	float:left;/*fix for  buggy browsers*/
+	display:table-column;
+	width:500px;
+	padding: 1px;
+	margin: 3px;
+}
+.divCell2
+{
+	background-color:#f1f1f1;
+	border:1px solid #999;
+	float:left;
+	display:table-column;
+	width:275px;
+	padding: 1px;
+	margin: 3px;
+}
+
+.accordion-container {
+	width: 100%;
+	margin: 0 0 20px;
+	clear: both;
+}
+
+.accordion-toggle {
+	text-decoration: none;
+	color: #ffffff;
+}
+
+.accordion-toggle.open {
+	background: #333;
+	color: #fff;
+}
+
+.accordion-content {
+	display: none;
+	overflow: auto;
+}	
+
+.overflow {
+	max-height: 175px;
+}
+
 /* Standard Tabelle */
 table.standard_tabelle {
 	background-color:#fff;
 	color: #000000;
 	margin-top:2px;
-	border: 1px solid #999;
 	width:100%;
+	border: 1px solid #999;
 }
 
 .standard_tabelle tr.even {
@@ -246,18 +306,18 @@ table.standard_tabelle {
 }
 
 
+
 .standard_tabelle th {
 	background-color: #0e2e80;
 	color: #FFFFFF;
 	font-weight: bold;
 	padding:2px 4px;
-	background-image:url(../img/bg_table_th.gif);
-	background-repeat:repeat-x;
 }
 
 .standard_tabelle th a {
 	color:#FFFFFF;
 }
+
 
 .circle {
 	width: 18px;
@@ -278,9 +338,6 @@ table.standard_tabelle {
 	padding: 2px;
 }
 
-
-a:link, a:visited, a:hover, a:active {color:#0e2e7f;text-decoration:none;}
-a:hover, a:active {text-decoration:underline;}
 .newskopf {margin:10px 0; background-color:#e6e6e6; }
 ul li {margin:0;padding:0;}
 
@@ -1461,7 +1518,7 @@ a.weiter2:link, a.weiter2:visited, a.weiter2:hover, a.weiter2:active {
 	color:#fff;
 	text-transform:uppercase;
 	font-weight:bold;
-	padding:3px 0 4px 17px;
+	padding:6px 0px 10px 15px;
 	background:#0e2e80 url(../img/dott.gif) no-repeat left;
 	background-position:2px 49%;
 }
@@ -1637,37 +1694,7 @@ span.browse {
 .startpost_text ul li a:hover, #right ul li a:active {
 	text-decoration:underline;
 }
-/* Standard Tabelle */
-table.standard_tabelle {
-	background-color:#fff;
-	color: #000000;
-	margin-top:2px;
-	width:100%;
-}
 
-.standard_tabelle td {
-	padding:3px;
-	color:#484747;
-	font-size:7.5pt;
-}
-
-.standard_tabelle td a {
-	font-size:7.5pt;
-}
-
-
-.standard_tabelle th {
-	background-color: #0e2e80;
-	color: #FFFFFF;
-	font-weight: bold;
-	padding:2px 4px;
-	background-image:url(../img/bg_table_th.gif);
-	background-repeat:repeat-x;
-}
-
-.standard_tabelle th a {
-	color:#FFFFFF;
-}
 
 /* Standard Tabelle fuer Forum */
 table.standard_forum_tabelle {
@@ -3680,40 +3707,7 @@ a.navipoint_sub2_first:hover,a.navipoint_sub2_first:active {
 	margin: 3px 0;
 }
 */
-/* Standard Tabelle im Spielerprofil */
-table.tabelle_spieler {
-	background-color:#fff;
-	color: #000;
-	margin:0;
-	border: 1px solid #e6e6e6;
-	width:100%;
-	line-height:1.7;
-}
 
-.tabelle_spieler td {
-	padding:0 4px;
-	margin:0;
-	color:#484747;
-	background-color:#f1f1f1;
-	font-size:7.5pt;
-}
-
-.tabelle_spieler td a {
-	font-size:7.5pt;
-}
-
-.tabelle_spieler th img{
-	margin-right: 5px;
-}
-
-.tabelle_spieler th {
-	background-color: #0e2e80;
-	color: #fff;
-	font-weight: bold;
-	padding:2px 4px;
-	background-image:url(../img/bg_table_th.gif);
-	line-height:1.3;
-}
 
 /* Tabelle ohne BG */
 table.tabelle_transparent {
@@ -4995,14 +4989,20 @@ fieldset.access_ma p {
 	width:35px;
 }
 
-.neuzugang {
-	background-image:url('http://www.transfermarkt.de/bilder/neuzugang_4.png');
+.acquisto {
+	background-image:url('../images/acquisto.png');
 	background-repeat:no-repeat;
 	background-position:98% 50%;
 }
 
-.neuzugang_de {
-	background-image:url('http://www.transfermarkt.de/bilder/neuzugang_4.png');
+.inverno {
+	background-image:url('../images/inverno.png');
+	background-repeat:no-repeat;
+	background-position:98% 50%;
+}
+
+.ritorno{
+	background-image:url('../images/ritorno.png');
 	background-repeat:no-repeat;
 	background-position:98% 50%;
 }
@@ -6813,4 +6813,217 @@ table .rn_nummer {
     padding-top: 4px;
     text-align: center;
     width: 24px;
+}
+
+.formListTeam
+{
+	width: 620px; 
+}
+
+.div_top_space
+{
+	margin-top: 50px;
+	width: 600px;
+}
+
+
+/* Standard Tabelle im Spielerprofil */
+table.tabelle_spieler {
+	background-color:#fff;
+	color: #000;
+	margin:0;
+	border: 1px solid #e6e6e6;
+	width:100%;
+	line-height:1.7;
+}
+
+.tabelle_spieler td {
+	padding:0 4px;
+	margin:0;
+	color:#484747;
+	background-color:#f1f1f1;
+	font-size:7.5pt;
+}
+
+.tabelle_spieler td a {
+	font-size:7.5pt;
+}
+
+.tabelle_spieler th img{
+	margin-right: 5px;
+}
+
+.tabelle_spieler th {
+	background-color: #0e2e80;
+	color: #fff;
+	font-weight: bold;
+	padding:2px 4px;
+	line-height:1.3;
+}
+
+
+/* Standard Tabelle im Spielerprofil */
+table.table_filter_team {
+	background-color:#fff;
+	color: #000;
+	margin:0;
+	border: 1px solid #999;
+	width:100%;
+	line-height:1.7;
+	empty-cells: show;
+	text-align: left;
+}
+
+.table_filter_logo
+{
+	margin: 0px; 
+	padding: 0px 3px; 
+	border: 1px solid rgb(187, 187, 187); 
+	width: 60px; 
+	background-color: rgb(255, 255, 255);
+}
+
+.table_filter_team td {
+	padding:0 4px;
+	margin:0;
+	color:#484747;
+	background-color:#f1f1f1;
+	font-size:7.5pt;
+	height: 20px;
+}
+
+.table_filter_team td a {
+	font-size:7.5pt;
+}
+
+.table_filter_team th img{
+	margin-right: 5px;
+}
+
+.table_filter_team th {
+	background-color: #0e2e80;
+	color: #fff;
+	font-weight: bold;
+	padding:2px 4px;
+	background: repeat-x rgb(14, 46, 128);
+}
+
+/* Standard Tabelle im Spielerprofil */
+table.table_team {
+	background-color:#fff;
+	color: #000;
+	margin:0;
+	border: 1px solid #999;
+	width:100%;
+	line-height:1.7;
+	text-align: center;
+}
+
+.table_team td {
+	padding:3px;
+	margin:0;
+	color:#484747;
+	font-size:7.5pt;
+}
+
+.table_team tr.even {
+	background-color: rgb(230, 230, 230);
+	
+}
+
+.table_team tr.odd {
+	background-color: rgb(241, 241, 241);
+}
+
+.table_team td a {
+	font-size:7.5pt;
+}
+
+.table_team th img{
+	margin-right: 5px;
+}
+
+.table_team th {
+	background-color: #0e2e80;
+	color: #fff;
+	font-weight: bold;
+	padding:2px 4px;
+	line-height:1.3;
+}
+
+.table_team tr.even {
+	background-color: rgb(230, 230, 230);
+	
+}
+
+.table_team tr.odd {
+	background-color: rgb(241, 241, 241);
+}
+
+
+/* Standard Tabelle im Spielerprofil */
+table.table_player {
+	background-color:#fff;
+	color: #000;
+	margin:0;
+	border: 1px solid #e6e6e6;
+	width:100%;
+	line-height:1.7;
+}
+
+.table_player td {
+	padding:0 4px;
+	margin:0;
+	color:#484747;
+	background-color:#f1f1f1;
+	font-size:7.5pt;
+}
+
+.table_player td a {
+	font-size:7.5pt;
+}
+
+.table_player th img{
+	margin-right: 5px;
+}
+
+.table_player th {
+	background-color: #0e2e80;
+	color: #fff;
+	font-weight: bold;
+	padding:2px 4px;
+	background-image:url(../img/bg_table_th.gif);
+	line-height:1.3;
+}
+
+.fitem_label 
+{
+	font-weight: bold;
+}
+
+.foitem_label 
+{
+	color: red;
+	font-weight: bold;
+}
+
+h3
+{
+	font-size: 24px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	color: #ffffff;
+}
+.label{
+	border:1px solid #000;
+	padding: 0.2em 0.6em 0.3em;
+	font-size: 75%;
+}
+
+.label-primary{
+	background-color:#337ab7;
+}
+
+.label-success{
+	background-color: rgb(92, 184, 92);
 }

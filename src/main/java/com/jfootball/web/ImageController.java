@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jfootball.domain.ImageObject;
+import com.jfootball.domain.Staff;
 import com.jfootball.domain.Player;
 import com.jfootball.domain.Team;
 
@@ -59,6 +60,25 @@ public class ImageController extends GenericController
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 
+	 * ----------------formBackingObject()----------------
+	 * 
+	 */
+	@RequestMapping(value = "/staffs/image", method = RequestMethod.GET)
+	public void getImageStaff(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") String playerId)
+	{
+		Staff manager = (Staff)businessDelegate.getEntityByID(Long.parseLong(playerId), "STAFF");
+
+		try
+		{
+			getImage(request, response, manager, "staff");
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}	
 
 	private void getImage(HttpServletRequest request, HttpServletResponse response, ImageObject imageObject, String typeImage) throws Exception
 	{

@@ -366,17 +366,22 @@ public class PlayerDaoImpl extends GenericDao implements PlayerDao
 	 * */
 	public String getRank(Long teamId, Long playerId)
 	{
-		logger.info("Get Rank team" + teamId + " playerId " + playerId);
+		logger.info("Get Rank team " + teamId + " playerId " + playerId);
 
 		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
 
-		SQLQuery query = session.createSQLQuery("select getRank(?, ?)");
+		//SQLQuery query = session.createSQLQuery("select getRank(?, ?)");
+		// codice aggiunto perchè è stato sostituito momentaneamente la chiamata alla funzione mysql
+		SQLQuery query = session.createSQLQuery("SELECT rank FROM ( select @rownum/*'*/:=/*'*/@rownum+1 as rank, id from players, (SELECT @rownum/*'*/:=/*'*/0) r where team_id = ? order by position_id, number, date_of_birth) q where id = ?");
 		query.setParameter(0, teamId);
 		query.setParameter(1, playerId);
 		
 		String rank = query.uniqueResult().toString();
 		
-		logger.info("Rank returned");		
+		logger.info("Rank returned: " + rank);	
+		
+		// parte aggiunta per far funzionare il risultato di rank che torna un numero decimale invece del suo intero ('1.0' invece di 1) 
+		rank = ""+new Double(rank).intValue();
 
 		return rank;
 	}

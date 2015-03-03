@@ -1,13 +1,10 @@
+/*******************************************************************
+					common javascript file 
+*******************************************************************/
+
+/* var jQ = $.noConflict(); */
 var jQ = jQuery.noConflict();
 
-jQ(function() {	
-	
-	jQ("#prestito").click(function()
-	{
-		controlloPrestito();
-	});	
-
-});
 
 function Progetto() {
 }
@@ -41,97 +38,57 @@ function sleep(milliseconds) {
 }
 
 
-function checkOnCheckBox(form, field, isTrue)
-{
-		if (isTrue)
-			jQ('#' + form + ' input[id=' + field + ']').prop("checked", true);
-		else
-			jQ('#' + form + ' input[id=' + field + ']').prop("checked", false);
+function checkOnCheckBox(form, field, isTrue) {
+	if (isTrue)
+		jQ('#' + form + ' input[id=' + field + ']').prop('checked', true);
+	else
+		jQ('#' + form + ' input[id=' + field + ']').prop('checked', false);
 }
 
-function checkOnText(form, field, value)
-{
-		if (value != null)
-			jQ('#' + form + ' input[id=' + field + ']').val(value);
-		else
-			jQ('#' + form + ' input[id=' + field + ']').val('?');
+function checkOnText(form, field, value) {
+	if (value != null)
+		jQ('#' + form + ' input[id=' + field + ']').val(value);
+	else
+		jQ('#' + form + ' input[id=' + field + ']').val('?');
 }
 
-function checkOnSelectByVal(form, field, value)
-{
-		jQ('#' + form + ' select[id='+ field + '] option').each(function() {
-			if (jQ(this).val() == value)
-			{
-					jQ(this).attr("selected", "selected");				
-			}
-		});
+function checkOnSelectByVal(form, field, value) {
+	jQ('#' + form + ' select[id='+ field + '] option').each(function() {
+		if (jQ(this).val() == value)
+		{
+			jQ(this).attr('selected', 'selected');				
+		}
+	});
 }
 
-function checkOnSelectByText(form, field, value)
-{			
-
-		jQ('#' + form + ' select[id='+ field + '] option').each(function() {
-			
-			if (jQ(this).text() == value )
-			{
-				
-				//jQ('#' + form + ' select[id='+ field + '] option:first').removeAttr("selected");			
-
-				jQ(this).attr("selected", true);	
-								
-			}
-
-		});
+function checkOnSelectByText(form, field, value) {			
+	jQ('#' + form + ' select[id='+ field + '] option').each(function() {
+		if (jQ(this).text() == value ) {				
+			//jQ('#' + form + ' select[id='+ field + '] option:first').removeAttr('selected');			
+			jQ(this).attr('selected', true);						
+		}
+	});
 }
 
-function setTextByName(form, field, value)
-{
-		jQ('#' + form + ' input[id=' + field +']').val(value);
+function setTextByName(form, field, value) {
+	jQ('#' + form + ' input[id=' + field +']').val(value);
 }
 
-function cleanTextByName(form, field)
-{
-		jQ('#' + form + ' input[id=' + field +']').val('');
+function cleanTextByName(form, field) {
+	jQ('#' + form + ' input[id=' + field +']').val('');
 }
 
 
-function controlloPrestito()
-{
-	if(jQ('input[id=prestito]').is(':checked'))
-	{
-		jQ("#trPrestito").show();	
+function bloccoListe(obj) {
+	if (obj.prop('checked')) {
+		jQ('#nation_id').attr('disabled', 'true');
+		jQ('#division_id').attr('disabled', 'true');
+		jQ('#team_id').attr('disabled', 'true');
 	}
-	else 
-	{
-		jQ("#trPrestito").hide();	
-	}
-}
-
-function bloccoListe(obj)
-{
-	if (obj.prop('checked'))
-	{
-		jQ("#nation_id").attr("disabled", "true");
-		jQ("#division_id").attr("disabled", "true");
-		jQ("#team_id").attr("disabled", "true");
-	}
-	else 
-	{
-		jQ("#nation_id").removeAttr("disabled");		
-		jQ("#division_id").removeAttr("disabled");		
-		jQ("#team_id").removeAttr("disabled");		
-	}
-}
-
-function controlloPrestito()
-{
-	if(jQ('input[id=prestito]').is(':checked'))
-	{
-		jQ("#trPrestito").show();
-	}					
-	else 
-	{
-		jQ("#trPrestito").hide();		
+	else {
+		jQ('#nation_id').removeAttr('disabled');		
+		jQ('#division_id').removeAttr('disabled');		
+		jQ('#team_id').removeAttr('disabled');		
 	}
 }
 
@@ -150,19 +107,19 @@ function formatDate(d, e) {
 }
 
 function formatCurrency(obj) {
-	var numero = "positivo";
-	if (obj.val().substr(0,1)=="-") 
-		numero = "negativo";
+	var numero = 'positivo';
+	if (obj.val().substr(0,1) == '-') 
+		numero = 'negativo';
 	var valore = obj.val().replace(/[^\d]/g,'').replace(/^0+/g,'');
 	var nuovovalore='';
 	while(valore.length>3){
 		nuovovalore='.'+valore.substr(valore.length-3)+nuovovalore;
 		valore = valore.substr(0,valore.length-3);
 	}
-	if (numero=="negativo")
-		obj.val("-"+valore+nuovovalore);
+	if (numero=='negativo')
+		obj.val('-' + valore + nuovovalore);
 	else 
-		obj.val(valore+nuovovalore);
+		obj.val(valore + nuovovalore);
 }
 
 
@@ -172,19 +129,21 @@ function caps(element){
 
 // usate per la validazione javascript
 function updateTips( text ) {
-	var tips = jQ( ".validateTips" );
-	tips.text( text ).addClass( "ui-state-highlight" );
+	var tips = jQ('.validateTips');
+	tips.text( text ).addClass('ui-state-highlight');
 	setTimeout(function() {
-		tips.removeClass( "ui-state-highlight", 1500 );
+		tips.removeClass('ui-state-highlight', 1500 );
 	}, 500 );
 }
 
 function checkLength( o, field ) {
 	if ( o.val().length == 0 ) {
-		o.addClass( "ui-state-error" );
-		updateTips( "Campo '" + field + "' obbligatorio." );
+		console.warn('Campo ' + field + ' obbligatorio.');
+		o.addClass('ui-state-error');
+		updateTips('Campo ' + field + ' obbligatorio.');
 		return false;
-	} else {
+	} 
+	else {
 		return true;
 	}
 }

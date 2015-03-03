@@ -66,6 +66,11 @@ public class TeamServiceImpl implements BusinessService
 	{
 		return teamDAO.listTeamsByDivision(nationId, divisionId);
 	}
+	
+	public Long getIntegerByTwoParams(Long nationId, Long divisionId)
+	{
+		return teamDAO.getPlayersCountByDivision(nationId, divisionId);
+	}
 
 	public List<Team> getEntitiesByIDsNew(Long nationId, Long divisionId)
 	{
@@ -100,13 +105,6 @@ public class TeamServiceImpl implements BusinessService
 	{
 		teamDAO.deleteTeam(idTeam);
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -165,7 +163,7 @@ public class TeamServiceImpl implements BusinessService
 
 
 	@Override
-	public void updateEntityByParams(Object... params) {
+	public void updateEntityByParams(String... params) {
 	}
 
 	@Override

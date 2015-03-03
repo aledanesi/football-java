@@ -29,6 +29,9 @@ public class BusinessLookUp
 	private BusinessService playerService;
 	
 	@Autowired
+	private BusinessService staffService;	
+	
+	@Autowired
 	private BusinessService positionService;
 
 	@Autowired
@@ -64,6 +67,10 @@ public class BusinessLookUp
 		{
 			return playerService;
 		} 
+		else if (serviceType.equalsIgnoreCase("STAFF")) 
+		{
+			return staffService;
+		} 		
 		else if (serviceType.equalsIgnoreCase("POSITION")) 
 		{
 			return positionService;
@@ -139,6 +146,11 @@ public class BusinessLookUp
 	public void setTeamService(BusinessService teamService) {
 		this.teamService = teamService;
 	}
+	
+	
+	public void setStaffService(BusinessService staffService) {
+		this.staffService = staffService;
+	}	
 
 
 

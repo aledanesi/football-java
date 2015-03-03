@@ -20,43 +20,9 @@
 	<spring:param name="id" value="${career.player.id}" />
 </spring:url>    
 
-<script>
-	function abilita()
-	{
-		if (jQ('#checkStagioni').is(':checked'))
-		{
-			jQ("#stagioni").removeAttr("readonly");
-			jQ("#stagioni").css('background-color', "#ffffff");			
-
-			jQ("#serie").attr("readonly", "true");
-			jQ("#serie").css('background-color', "gray");						
-			jQ("#serie").val("?");
-			jQ("#presenze").attr("readonly", "true");
-			jQ("#presenze").css('background-color', "gray");						
-			jQ("#presenze").val("?");
-			jQ("#reti").attr("readonly", "true");
-			jQ("#reti").css('background-color', "gray");						
-			jQ("#reti").val("?");
-		}
-		else 
-		{
-			jQ("#stagioni").attr("readonly", "true");
-			jQ("#stagioni").css('background-color', "gray");						
-
-			jQ("#serie").removeAttr("readonly");
-			jQ("#serie").css('background-color', "#ffffff");			
-			jQ("#presenze").removeAttr("readonly");
-			jQ("#presenze").css('background-color', "#ffffff");			
-			jQ("#reti").removeAttr("readonly");
-			jQ("#reti").css('background-color', "#ffffff");			
-		}
-		
-	}
-</script>
-	
 
 	<!-- edit career -->
-	<div id="dEditCareer">
+	<div id="dEditCareer" style="display: none">
 		
 		<p class="validateTips"></p> 
 	
@@ -83,19 +49,6 @@
 									<form:errors path="squadra" />
 								</td>
 							</tr>	
-							<tr>
-								<td colspan="2">&nbsp;</td>
-							</tr>								
-							<tr>
-								<td>
-									Stagioni:
-								</td>
-								<td>
-									<input type="checkbox" id="checkStagioni" onclick="abilita()"> 									
-									<form:input id="stagioni" path="stagioni" maxlength="2" style="width: 30px; background-color: gray" readonly="true" />
-									<form:errors path="stagioni" />
-								</td>
-							</tr>								
 							<tr>
 								<td colspan="2">&nbsp;</td>
 							</tr>								

@@ -11,6 +11,11 @@ public interface ProjectConstant
 	public static final String VIEW_CAREER   = "viewCareer";	
 	public static final String VIEW_PLAYER   = "viewPlayer";	
 
+	public static final String SEARCH_STAFF = "searchStaff";
+	public static final String BUY_STAFF = "buyStaff";
+	public static final String VIEW_STAFF = "viewStaff";	
+
+	public static final String EDIT_STAFF   = "secure/editStaff";
 	public static final String EDIT_PLAYER   = "secure/editPlayer";
 	public static final String EDIT_TEAM     = "secure/editTeam";
 	public static final String EDIT_CAREER   = "secure/editCareer";

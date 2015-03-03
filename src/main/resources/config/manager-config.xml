@@ -17,13 +17,16 @@
 	<context:annotation-config />
 
 	<!-- Scans for application @Service to deploy -->
-	<context:component-scan base-package="com.jfootball.manager.impl" />
-	<context:component-scan base-package="com.jfootball.manager.delegate.impl" />
+	<context:component-scan base-package="com.jfootball.business.impl" />
 
 	<!-- enables scanning for @Transactional annotations -->
 	<tx:annotation-driven />
 
-
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">   
+    	<property name="basename" value="classpath:messages"/>
+    	<property name="defaultEncoding" value="UTF-8" />
+  	</bean>
+  	
 	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
 
 	<bean id="viewMappings" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -38,8 +41,7 @@
 	<dwr:controller id="dwrController" debug="true" />
 	<dwr:configuration />
 	<dwr:annotation-config id="dwrAnnotationConfig" />
-	<dwr:annotation-scan base-package="com.jfootball.manager.impl" scanRemoteProxy="true" />
-	<dwr:annotation-scan base-package="com.jfootball.business.impl" scanRemoteProxy="true" />
+	<dwr:annotation-scan base-package="com.jfootball.business" scanRemoteProxy="true" />
 	<dwr:annotation-scan base-package="com.jfootball.domain" scanDataTransferObject="true" />
 
 	<!-- ========================= MANAGERs ========================= -->
@@ -49,6 +51,8 @@
 	<bean name="teamService"      class="com.jfootball.business.impl.TeamServiceImpl" />
 
 	<bean name="playerService"    class="com.jfootball.business.impl.PlayerServiceImpl" />
+
+	<bean name="staffService"    class="com.jfootball.business.impl.StaffServiceImpl" />
 
 	<bean name="positionService"  class="com.jfootball.business.impl.PositionServiceImpl" />
 
