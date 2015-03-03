@@ -1,32 +1,35 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.jfootball.app</groupId>
-	<artifactId>JFootball</artifactId>
-	<packaging>war</packaging>
-	<version>0.11-SNAPSHOT</version>
+
+	<!-- ### Project Information ### -->
 	<name>JFootball Webapp</name>
-	<url>http://maven.apache.org</url>
 	<description>Statistiche Calciatori</description>
-
-	<scm>
-		<connection>scm:svn:https://football-java.googlecode.com/svn/trunk</connection>
-		<developerConnection>scm:svn:https://football-java.googlecode.com/svn/trunk</developerConnection>
-		<url>http://code.google.com/p/football-java/source/browse/trunk</url>
-	</scm>
-
+	<url>http://www.jcampionato.it</url>
+	<inceptionYear>2012</inceptionYear>
 	<developers>
 		<developer>
 			<id>alexdan</id>
 			<name>Alessandro Danesi</name>
 			<email>danesiale@gmail.com</email>
 			<roles>
-				<role>architect</role>
-				<role>developer</role>
+				<role>project manager</role>
+				<role>senior architect</role>
+				<role>senior developer</role>
 			</roles>
 			<timezone>+1</timezone>
 		</developer>
 	</developers>
+	<!-- 
+	<licenses>...</licenses>
+	<organization>...</organization>
+	<contributors>...</contributors> 
+	-->
 
+
+
+	<!-- ### Build Settings ### -->
 	<properties>
 		<java-version>1.6</java-version>
 		<servlet-api-version>2.5</servlet-api-version>
@@ -47,15 +50,112 @@
 		<displaytag-version>1.2</displaytag-version>
 		<junit-version>4.5</junit-version>
 		<quartz-version>1.7.2</quartz-version>
-		<dwr-version>3.0.0-rc3-SNAPSHOT</dwr-version>
+		<dwr-version>3.0.0-rc3</dwr-version>
 		<sitemesh-version>2.4.2</sitemesh-version>
-
 		<jackson.version>1.9.10</jackson.version>
 		<org.aspectj-version>1.6.8</org.aspectj-version>
 	</properties>
+	<build>
+		<finalName>JFootball</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<locales>it</locales>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<providerImplementations>
+						<svn>javasvn</svn>
+					</providerImplementations>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.google.code.maven-scm-provider-svnjava</groupId>
+						<artifactId>maven-scm-provider-svnjava</artifactId>
+						<version>2.0.3</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<packagingExcludes>
+						WEB-INF/lib/*.jar
+					</packagingExcludes>
+				</configuration>
+			</plugin>
+			<!-- 
+			<plugin>
+			    <groupId>org.apache.tomcat.maven</groupId>
+			    <artifactId>tomcat7-maven-plugin</artifactId>
+			    <version>2.1</version>
+			    <configuration>
+			        <url>http://localhost:8080/manager/text</url>
+			        <server>TomcatServer</server>
+			        <path>/JFootball</path>
+			        <username>tomcat</username>
+			        <password>tomcat</password>
+			    </configuration>
+			</plugin>			
+ 			-->
+		</plugins>
+	</build>
+	<!-- 
+	<reporting>...</reporting> 
+	-->
+
+
+
+	<!-- ### Build Environment ### -->
+	<!-- Environment Information -->
+	<scm>
+		<connection>scm:svn:https://football-java.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:https://football-java.googlecode.com/svn/trunk</developerConnection>
+		<tag>trunk</tag>
+		<url>https://football-java.googlecode.com/svn/trunk</url>
+	</scm>
+	<!-- 
+	<issueManagement>...</issueManagement>
+	<ciManagement>...</ciManagement> 
+	<mailingLists>...</mailingLists> 
+	-->
+
+
+
+	<!-- ### Maven Environment ### -->
+	<distributionManagement>
+		<repository>
+			<id>repo</id>
+			<url>https://football-java.googlecode.com/svn/tags</url>
+		</repository>
+	</distributionManagement>
+
+	<prerequisites>
+		<maven>2.0.6</maven>
+	</prerequisites>
+	<!-- 
+	<repositories>...</repositories>
+	<pluginRepositories>...</pluginRepositories> 
+	<profiles>...</profiles> 
+	-->
+		
+		
+	<!-- ### POM Relationships ### -->
+	<groupId>com.jfootball.app</groupId>
+	<artifactId>JFootball</artifactId>
+	<version>0.12-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<dependencies>
-
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -83,7 +183,6 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -100,7 +199,6 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework.security-version}</version>
 		</dependency>
-
 
 		<!-- Hibernate -->
 		<dependency>
@@ -132,7 +230,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector-java-version}</version>
 		</dependency>
-
 
 		<!-- Servlet -->
 		<dependency>
@@ -208,7 +305,7 @@
 		<dependency>
 			<groupId>org.directwebremoting</groupId>
 			<artifactId>dwr</artifactId>
-			<version>3.0.0-rc3</version>
+			<version>${dwr-version}</version>
 		</dependency>
 
 
@@ -218,55 +315,12 @@
 			<artifactId>sitemesh</artifactId>
 			<version>${sitemesh-version}</version>
 		</dependency>
-
 	</dependencies>
-
-	<repositories>
-		<repository>
-			<!-- Please consider setting up your own on-site repository proxy such 
-				as with Nexus and pointing the url element below at that instead -->
-			<id>oss-sonatype-snapshots</id>
-			<name>OSS Sonatype Snapshots Repository</name>
-			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<build>
-		<finalName>JFootball</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.2</version>
-				<configuration>
-					<locales>it</locales>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.4.2</version>
-				<configuration>
-					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<providerImplementations>
-						<svn>javasvn</svn>
-					</providerImplementations>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>com.google.code.maven-scm-provider-svnjava</groupId>
-						<artifactId>maven-scm-provider-svnjava</artifactId>
-						<version>2.0.3</version>
-					</dependency>
-				</dependencies>
-			</plugin>			
-		</plugins>
-	</build>
-
+	<!-- 
+		<parent>...</parent>
+		<dependencyManagement>...</dependencyManagement> 
+		<modules>...</modules> 
+	-->		
+		
+		
 </project>
